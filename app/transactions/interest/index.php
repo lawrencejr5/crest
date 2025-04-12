@@ -27,7 +27,7 @@
   </div>
   <div class="page-wrapper">
     <!-- header-section start  -->
-    <?php include "../../master/head.php" ?>
+    <?php include "../../master/nav.php" ?>
 
     <!-- header-section end  -->
 

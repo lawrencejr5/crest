@@ -1,4 +1,3 @@
-<!-- meta tags and other links -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,30 +11,25 @@
 
     <!-- account section start -->
     <div class="account-section bg_img" data-background="black">
-
-
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-5 col-lg-7">
             <div class="account-card">
               <div class="account-card__header bg_img overlay--one" data-background="black">
-
-
                 <img src="/crest/assets/images/logoIcon/crest2-nobg.png" alt="image">
-
                 <h2 class="section-title">Create a <span class="base--color">Free Account</span></h2>
-                <!--<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus distinctio deserunt impedit similique debitis voluptatum enim.</p>-->
               </div>
               <div class="account-card__body">
-                <form action="/crest/register" class="mt-4" onsubmit="return submitUserForm();" method="post">
+                <!-- Added id "registerForm" to the form for AJAX submission -->
+                <form id="registerForm" method="post">
                   <input type="hidden" name="_token" value="0DI0kMOBNY3bUeI2Pt0ohYKyAlF44jwPb8z1eQjf">
                   <div class="form-group">
                     <label>First Name</label>
-                    <input type="text" class="form-control" name="firstname" value="" placeholder="First Name" required>
+                    <input type="text" class="form-control" name="firstname" placeholder="First Name" required>
                   </div>
                   <div class="form-group">
                     <label>Last Name</label>
-                    <input type="text" class="form-control" name="lastname" value="" placeholder="Last Name" required>
+                    <input type="text" class="form-control" name="lastname" placeholder="Last Name" required>
                   </div>
                   <div class="form-group">
                     <label>Country</label>
@@ -286,23 +280,17 @@
                   </div>
                   <div class="form-group">
                     <label>Mobile</label>
-                    <div class="input-group ">
+                    <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text mobile-code">
-
-                        </span>
+                        <span class="input-group-text mobile-code"></span>
                         <input type="hidden" name="mobile_code">
                       </div>
-                      <input type="text" name="mobile" class="form-control" value="" placeholder="Your Phone Number" required>
+                      <input type="text" name="mobile" class="form-control" placeholder="Your Phone Number">
                     </div>
                   </div>
                   <div class="form-group">
                     <label>Email Address</label>
-                    <input type="email" name="email" class="form-control" value="" placeholder="Enter email address" required>
-                  </div>
-                  <div class="form-group">
-                    <label>User Name</label>
-                    <input type="text" name="username" class="form-control" value="" placeholder="User Name" required>
+                    <input type="email" name="email" class="form-control" placeholder="Enter email address" required>
                   </div>
                   <div class="form-group">
                     <label>Password</label>
@@ -312,24 +300,17 @@
                     <label>Confirm Password</label>
                     <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
                   </div>
-                  <div class="form-group d-flex justify-content-center">
-                  </div>
-
-
-
                   <div class="form-row mt-2">
                     <div class="col-md-12">
-                      <input type="checkbox" name="terms" required> <span class="f-size-14 ml-2">I agree with
-                        <a class="base--color" href="/crest/links/privacy-amp-policy/180"> Privacy &amp; Policy</a>
-                        ,
-                        <a class="base--color" href="/crest/links/terms-amp-condition/181"> Terms &amp; Condition</a>
-                        ,
-                        <a class="base--color" href="/crest/links/cookie-policy/226"> Cookie Policy</a>
+                      <input type="checkbox" name="terms" required> <span class="f-size-14 ml-2">
+                        I agree with <a class="base--color" href="/crest/links/privacy-amp-policy/180">Privacy &amp; Policy</a>,
+                        <a class="base--color" href="/crest/links/terms-amp-condition/181">Terms &amp; Condition</a>,
+                        <a class="base--color" href="/crest/links/cookie-policy/226">Cookie Policy</a>
                       </span>
                     </div>
                   </div>
-                  <div class="mt-3">
-                    <center><button type="submit" class="cmn-btn">SignUp Now</button></center>
+                  <div class="mt-3 text-center">
+                    <button type="submit" class="cmn-btn">SignUp Now</button>
                   </div>
                   <div class="form-row mt-2">
                     <div class="col-sm-6">
@@ -345,28 +326,23 @@
     </div>
     <!-- account section end -->
 
-
-
     <!-- footer section start -->
     <?php include "../master/footer.php" ?>
     <!-- footer section end -->
   </div> <!-- page-wrapper end -->
 
   <!-- jQuery library -->
-  <script src="./assets/templates/bit_gold//js/vendor/jquery-3.5.1.min.js"></script>
+  <script src="./assets/templates/bit_gold/js/vendor/jquery-3.5.1.min.js"></script>
   <!-- bootstrap js -->
-  <script src="./assets/templates/bit_gold//js/vendor/bootstrap.bundle.min.js"></script>
-
+  <script src="./assets/templates/bit_gold/js/vendor/bootstrap.bundle.min.js"></script>
   <!-- slick slider js -->
-  <script src="./assets/templates/bit_gold//js/vendor/slick.min.js"></script>
-  <script src="./assets/templates/bit_gold//js/vendor/wow.min.js"></script>
+  <script src="./assets/templates/bit_gold/js/vendor/slick.min.js"></script>
+  <script src="./assets/templates/bit_gold/js/vendor/wow.min.js"></script>
   <!-- dashboard custom js -->
-  <script src="./assets/templates/bit_gold//js/app.js"></script>
-
+  <script src="./assets/templates/bit_gold/js/app.js"></script>
 
   <link rel="stylesheet" href="./assets/templates/bit_gold/css/iziToast.min.css">
   <script src="./assets/templates/bit_gold/js/iziToast.min.js"></script>
-
 
   <script>
     "use strict";
@@ -378,6 +354,72 @@
       });
     }
   </script>
+
+  <script>
+    $(document).ready(function() {
+      // Pre-select code based on selected country
+      $('select[name=country]').change(function() {
+        var mobileCode = $('select[name=country] :selected').data('mobile_code');
+        $('input[name=mobile_code]').val(mobileCode);
+        $('.mobile-code').text('+' + mobileCode);
+      });
+      var initialMobileCode = $('select[name=country] :selected').data('mobile_code');
+      $('input[name=mobile_code]').val(initialMobileCode);
+      $('.mobile-code').text('+' + initialMobileCode);
+
+      // AJAX submission for register form
+      $("#registerForm").submit(function(e) {
+        e.preventDefault();
+
+        // Change button text to "Signing up..." and disable it
+        const submitButton = $("#registerForm button[type='submit']");
+        submitButton.prop('disabled', true).text("Signing up...");
+
+        // Create variables for each input
+        const firstname = $("input[name='firstname']").val();
+        const lastname = $("input[name='lastname']").val();
+        const country = $("select[name='country']").val();
+        const mobile_code = $("input[name='mobile_code']").val();
+        const phone = $("input[name='mobile']").val();
+        const email = $("input[name='email']").val();
+        const password = $("input[name='password']").val();
+        const password_confirmation = $("input[name='password_confirmation']").val();
+
+        $.ajax({
+          type: "POST",
+          url: "../app/backend/actions/register.php", // URL to your register processing file
+          dataType: "json",
+          data: {
+            fname: firstname,
+            lname: lastname,
+            country: country,
+            phone: mobile_code + phone,
+            email: email,
+            password: password
+          },
+          success: function(res) {
+            // Process the response here and show messages via notify()
+            if (res.status === "error") {
+              notify("error", res.message);
+            } else if (res.status === "success") {
+              notify("success", res.message);
+              window.location.href = "../login"; // Redirect to the success page
+            }
+            // Reset the form
+            $("#registerForm")[0].reset();
+            submitButton.prop('disabled', false).text("SignUp Now");
+          },
+          error: function(xhr, status, error) {
+            notify("error", "Error: " + error);
+            console.log(error)
+            submitButton.prop('disabled', false).text("SignUp Now");
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- Other scripts like Tawk.to & Smartsupp -->
   <script>
     var Tawk_API = Tawk_API || {},
       Tawk_LoadStart = new Date();
@@ -391,56 +433,6 @@
       s0.parentNode.insertBefore(s1, s0);
     })();
   </script>
-  <script>
-    "use strict";
-    $(`option[data-code=NG]`).attr('selected', '');
-
-    $('select[name=country]').change(function() {
-      $('input[name=mobile_code]').val($('select[name=country] :selected').data('mobile_code'));
-      $('.mobile-code').text('+' + $('select[name=country] :selected').data('mobile_code'));
-    });
-    $('input[name=mobile_code]').val($('select[name=country] :selected').data('mobile_code'));
-    $('.mobile-code').text('+' + $('select[name=country] :selected').data('mobile_code'));
-
-    function submitUserForm() {
-      var response = grecaptcha.getResponse();
-      if (response.length == 0) {
-        document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">Captcha field is required.</span>';
-        return false;
-      }
-      return true;
-    }
-
-    function verifyCaptcha() {
-      document.getElementById('g-recaptcha-error').innerHTML = '';
-    }
-  </script>
-
-
-
-
-
-
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
 
   <script>
     (function() {
@@ -465,9 +457,6 @@
       });
     })();
   </script>
-
-
-
 </body>
 
 </html>
