@@ -208,8 +208,7 @@
               <span aria-hidden="true">&times;</span>
             </a>
           </div>
-          <form action="https://assetbase-trading.com/user/deposit/insert" method="post" class="register">
-            <input type="hidden" name="_token" value="v0QlAVhKtAuRzkedf8cRKcXDWi5QXYEAoRmRB7FZ">
+          <form action="" method="post" class="register">
             <div class="modal-body">
               <div class="form-group">
                 <input type="hidden" name="currency" class="edit-currency" value="">
@@ -314,21 +313,7 @@
     }
   </script>
 
-
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
-  <script>
+  <!-- <script>
     $(document).ready(function() {
       "use strict";
       $('.deposit').on('click', function() {
@@ -351,7 +336,7 @@
         $('.edit-method-code').val(result.method_code);
       });
     });
-  </script>
+  </script> -->
 
   <script>
     (function() {

@@ -9,11 +9,11 @@ class Modules extends Connection
     private $stmt;
 
     // Function to get user data based on user_id
-    public function getUserData($user_id)
+    public function getUserData($uid)
     {
-        $this->sql = "SELECT * FROM users WHERE user_id = :user_id LIMIT 1";
+        $this->sql = "SELECT * FROM users WHERE id = :id LIMIT 1";
         $this->stmt = $this->conn->prepare($this->sql);
-        $this->stmt->bindParam(':user_id', $user_id);
+        $this->stmt->bindParam(':id', $uid);
         if ($this->stmt->execute()) {
             return $this->stmt->fetch(PDO::FETCH_ASSOC);
         }

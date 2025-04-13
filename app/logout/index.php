@@ -1,8 +1,6 @@
 <?php
-function redirectToHomepage()
-{
-    header("Location: /crest/login"); // Adjust the path according to your homepage route
-    exit();
-}
 
-redirectToHomepage();
+session_start();
+session_destroy();
+header('location: ../../login');
+exit();

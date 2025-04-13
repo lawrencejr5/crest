@@ -3,6 +3,7 @@
 <html lang="en">
 
 <?php include "../master/head.php" ?>
+<?php include "../backend/udata.php" ?>
 
 <body>
 
@@ -36,22 +37,6 @@
     }
   </style>
   <script data-cfasync="false" src="#"></script>
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = 'https://embed.tawk.to/60ad4117a4114e480ad0ddf2/1f6icci3b';
-      s1.charset = 'UTF-8';
-      s1.setAttribute('crossorigin', '*');
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
-  <!--End of Tawk.to Script-->
-
 
   <style type="text/css">
     #copyBoard {
@@ -96,7 +81,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
-            <h2 class="page-title">Welcome Back!</h2>
+            <h2 class="page-title">Welcome Back, <?= $user['fname'] ?>!</h2>
             <ul class="page-breadcrumb">
               <li><a href="https://assetbase-trading.com">User</a></li>
               <li>Dashboard</li>
@@ -109,126 +94,6 @@
 
 
     <div class="pt-90 pb-40">
-
-      <div class="container mb-3">
-        <div class="row justify-content-center">
-          <div class="col-lg-12 pl-lg-5 mt-lg-0 my-5">
-            <div class="row mb-none-30">
-              <div class="col-md-12">
-
-                <div class="card">
-                  <h5 class="card-header">How it works</h5>
-                  <div class="card-body">
-                    <h5 class="card-title">This is how to invest on Assetbase Trading</h5>
-                    <div class="row">
-                      <div class="col-md-4 text-center mb-2">
-                        <span class="fa fa-money-bill fa-3x text-white"></span>
-                        <p>1) Fund you account using one of our deposit method(cryptocurrency is preferable).</p>
-                      </div>
-                      <div class="col-md-4 text-center mb-2">
-                        <span class="fa fa-list fa-3x text-white"></span>
-                        <p>2) Choose a package/plan of your choice from our plan menu and activate(you will get a mail once your plans is active.)</p>
-                      </div>
-                      <div class="col-md-4 text-center mb-2">
-                        <span class="fa fa-desktop fa-3x text-white"></span>
-                        <p>3) Monitor your earning from your dashboard;once a plan expires you can request for a withdrawal.</p>
-                      </div>
-                      <div class="col-md-4 text-center mb-2">
-                        <span class="fa fa-circle-info fa-3x text-white"></span>
-                        <p>4) Compunding of profits is allowed;profits can be compounded up to 6 Months.</p>
-                      </div>
-                      <div class="col-md-4 text-center mb-2">
-                        <span class="fa fa-headset fa-3x text-white"></span>
-                        <p>5) If you face any issues or need any information our live support is always available to help you; click on the chat bubble located at them footer.</p>
-                      </div>
-                    </div>
-                    <p class="text-center mt-3">
-                      <center>assetbase-trading.com</center>
-                      <a href="/plan" class="btn btn-success">Choose Plan</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="container my-3">
-        <div class="row justify-content-center">
-          <div class="col-lg-12 pl-lg-5 mt-lg-0 mt-5">
-            <div class="row mb-none-30">
-              <div class="col-md-12 mb-4">
-                <div class="alert alert-info" role="alert">
-                  <h4 class="alert-heading">*Affiliate Program</h4>
-                  <p>Copy the link below, share with people and earn 10% on every deposit the make.</p>
-                  <div class="input-group">
-                    <input type="text" name="text" class="form-control" id="referralURL"
-                      value="https://assetbase-trading.com/register/beansndgarri" readonly>
-                    <div class="input-group-append">
-                      <span class="input-group-text copytext copyBoard" id="copyBoard"> <i class="fa fa-copy"></i>
-                      </span>
-                    </div>
-                  </div>
-                  <hr>
-                  <p class="mb-0">Your current Referral earning : </p>
-                  <h4 class="currency-amount" style="color:#fbc013">
-                    $0</h4>
-                  <!--<button type="button" class="btn btn-primary">
-                  Total Referrals <span class="badge bg-secondary">4</span>
-                </button>-->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container mb-4">
-        <div class="row justify-content-center">
-          <div class="col-lg-12 pl-lg-5 mt-lg-0 mt-5">
-            <div class="row mb-none-30">
-              <div class="col-md-12 mb-4">
-
-                <div class="card">
-                  <h5 class="card-header">BECOME A SHAREHOLDER</h5>
-                  <div class="card-body">
-                    <p class="card-title">
-                      We actually made it possible for our investors to own a share in the company and also earn their shares percentage
-                      like the masterminds behind asset trading. Becoming a SHAREHOLDER will earn you percentage commission when deposit
-                      is been made by any single user in our platform.
-                      <br />
-                      The SHAREHOLDER'S PLAN gives you multiple packages below,you can become a shareholder by minimum deposit of 35,000$ and
-                      enjoy more features as a shareholder.
-                    </p>
-
-                    <h3 class="my-3">SHAREHOLDER PLAN: </h3>
-
-                    <div class="row">
-                      <div class="col-md-4 mb-3">
-                        <h3>$35,000</h3>
-                        <p>2% Profit Return Everyday</p>
-                      </div>
-                      <div class="col-md-4 mb-3">
-                        <h3>$50,000</h3>
-                        <p>3.5% Profit Return Everyday</p>
-                      </div>
-                      <div class="col-md-4 mb-3">
-                        <h3>$70,000</h3>
-                        <p>5% Profit Return Everyday</p>
-                      </div>
-                    </div>
-
-                    <p class="text-bold">Duration: LIFE TIME (no limit)you are more like an owner.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
 
       <div class="pt-40 pb-50">
         <div class="container">
@@ -244,7 +109,7 @@
                       <h4 class="currency-amount">$2</h4><br>
                       <hr>
                       <h6>Total Deposits: $0</h6>
-                      <br><a href="/user/deposit" class="btn btn-success">Deposit</a>
+                      <br><a href="../deposit" class="btn btn-success">Deposit</a>
                     </div>
                     <div class="col-4">
                       <div class="icon ml-auto">
@@ -261,7 +126,7 @@
                       <br>
                       <hr>
                       <h6>Total Withdrawal: $0
-                      </h6><br><a href="/user/withdraw" class="btn btn-success">Withdraw</a>
+                      </h6><br><a href="../withdraw" class="btn btn-success">Withdraw</a>
                     </div>
                     <div class="col-4">
                       <div class="icon ml-auto">
@@ -277,8 +142,14 @@
                       <h4 class="currency-amount">
                         $0</h4><br>
                       <hr>
-                      <h5>Promo Offer: $0 <br><small
-                          style="color:green">Promo Percentage:__</small></h5><br>
+                      <h5>Promo Offer: $0
+                        <!-- <br> -->
+                        <!-- <small
+                          style="color:green">
+                          Promo Percentage:__
+                        </small> -->
+                      </h5>
+                      <br>
                       <a href="/promo-offer" class="btn btn-success">Claim Offer</a>
                     </div>
                     <div class="col-4">
@@ -331,6 +202,130 @@
           </div>
         </div>
       </div>
+
+
+      <div class="container my-3">
+        <div class="row justify-content-center">
+          <div class="col-lg-12 pl-lg-5 mt-lg-0 mt-5">
+            <div class="row mb-none-30">
+              <div class="col-md-12 mb-4">
+                <div class="alert alert-info" role="alert">
+                  <h4 class="alert-heading">*Affiliate Program</h4>
+                  <p>Copy the link below, share with people and earn 10% on every deposit the make.</p>
+                  <div class="input-group">
+                    <input type="text" name="text" class="form-control" id="referralURL"
+                      value="https://assetbase-trading.com/register/beansndgarri" readonly>
+                    <div class="input-group-append">
+                      <span class="input-group-text copytext copyBoard" id="copyBoard"> <i class="fa fa-copy"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <hr>
+                  <p class="mb-0">Your current Referral earning : </p>
+                  <h4 class="currency-amount" style="color:#fbc013">
+                    $0</h4>
+                  <!--<button type="button" class="btn btn-primary">
+                  Total Referrals <span class="badge bg-secondary">4</span>
+                </button>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mb-3">
+        <div class="row justify-content-center">
+          <div class="col-lg-12 pl-lg-5 mt-lg-0 my-5">
+            <div class="row mb-none-30">
+              <div class="col-md-12">
+
+                <div class="card">
+                  <h5 class="card-header">How it works</h5>
+                  <div class="card-body">
+                    <h5 class="card-title">This is how to invest on Assetbase Trading</h5>
+                    <div class="row">
+                      <div class="col-md-4 text-center mb-2">
+                        <span class="fa fa-money-bill fa-3x text-white"></span>
+                        <p>1) Fund you account using one of our deposit method(cryptocurrency is preferable).</p>
+                      </div>
+                      <div class="col-md-4 text-center mb-2">
+                        <span class="fa fa-list fa-3x text-white"></span>
+                        <p>2) Choose a package/plan of your choice from our plan menu and activate(you will get a mail once your plans is active.)</p>
+                      </div>
+                      <div class="col-md-4 text-center mb-2">
+                        <span class="fa fa-desktop fa-3x text-white"></span>
+                        <p>3) Monitor your earning from your dashboard;once a plan expires you can request for a withdrawal.</p>
+                      </div>
+                      <div class="col-md-4 text-center mb-2">
+                        <span class="fa fa-circle-info fa-3x text-white"></span>
+                        <p>4) Compunding of profits is allowed;profits can be compounded up to 6 Months.</p>
+                      </div>
+                      <div class="col-md-4 text-center mb-2">
+                        <span class="fa fa-headset fa-3x text-white"></span>
+                        <p>5) If you face any issues or need any information our live support is always available to help you; click on the chat bubble located at them footer.</p>
+                      </div>
+                    </div>
+                    <p class="text-center mt-3">
+                      <center>assetbase-trading.com</center>
+                      <a href="/plan" class="btn btn-success">Choose Plan</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="container mb-4">
+        <div class="row justify-content-center">
+          <div class="col-lg-12 pl-lg-5 mt-lg-0 mt-5">
+            <div class="row mb-none-30">
+              <div class="col-md-12 mb-4">
+
+                <div class="card">
+                  <h5 class="card-header">BECOME A SHAREHOLDER</h5>
+                  <div class="card-body">
+                    <p class="card-title">
+                      We actually made it possible for our investors to own a share in the company and also earn their shares percentage
+                      like the masterminds behind asset trading. Becoming a SHAREHOLDER will earn you percentage commission when deposit
+                      is been made by any single user in our platform.
+                      <br />
+                      The SHAREHOLDER'S PLAN gives you multiple packages below,you can become a shareholder by minimum deposit of 35,000$ and
+                      enjoy more features as a shareholder.
+                    </p>
+
+                    <h3 class="my-3">SHAREHOLDER PLAN: </h3>
+
+                    <div class="row">
+                      <div class="col-md-4 mb-3">
+                        <h3>$35,000</h3>
+                        <p>2% Profit Return Everyday</p>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <h3>$50,000</h3>
+                        <p>3.5% Profit Return Everyday</p>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <h3>$70,000</h3>
+                        <p>5% Profit Return Everyday</p>
+                      </div>
+                    </div>
+
+                    <p class="text-bold">Duration: LIFE TIME (no limit)you are more like an owner.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
 
 
 
@@ -412,19 +407,7 @@
     </script>
 
 
-    <script>
-      var Tawk_API = Tawk_API || {},
-        Tawk_LoadStart = new Date();
-      (function() {
-        var s1 = document.createElement("script"),
-          s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-        s1.charset = "UTF-8";
-        s1.setAttribute("crossorigin", "*");
-        s0.parentNode.insertBefore(s1, s0);
-      })();
-    </script>
+
     <script>
       $('.copyBoard').click(function() {
         "use strict";
