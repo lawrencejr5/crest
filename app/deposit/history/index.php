@@ -3,6 +3,7 @@
 <html lang="en">
 
 <?php include "../../master/head.php" ?>
+<?php include "../../backend/udata.php" ?>
 
 
 <body>
@@ -41,7 +42,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Welcome Back!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="https://assetbase-trading.com">User</a></li>
+              <li><a href="../dashboard">User</a></li>
               <li>Deposit History</li>
             </ul>
           </div>
@@ -56,7 +57,7 @@
 
           <div class="col-md-12">
             <div class="right float-right mb-5">
-              <a href="https://assetbase-trading.com/user/deposit" class="btn cmn-btn">
+              <a href="../" class="btn cmn-btn">
                 Deposit Now
               </a>
             </div>
@@ -77,9 +78,27 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td colspan="6"> No history found.</td>
-                  </tr>
+                  <?php if (isset($user_deposits) && count($user_deposits) > 0): ?>
+                    <?php foreach ($user_deposits as $deposit): ?>
+                      <tr>
+                        <td>#<?php echo htmlspecialchars($deposit['id']); ?></td>
+                        <td><?php echo htmlspecialchars($deposit['currency']); ?></td>
+                        <td>
+                          <?php
+                          echo htmlspecialchars($deposit['dol_val']); ?> USD (<?php echo htmlspecialchars($deposit['amount']); ?>)
+                        </td>
+                        <td><?php echo ucfirst(htmlspecialchars($deposit['status'])); ?></td>
+                        <td><?php echo isset($deposit['created_at']) ? htmlspecialchars($deposit['created_at']) : 'N/A'; ?></td>
+                        <td>
+                          <a href="details.php?id=<?php echo htmlspecialchars($deposit['id']); ?>" class="btn btn-sm btn-info">View</a>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <td colspan="6">No history found.</td>
+                    </tr>
+                  <?php endif; ?>
                 </tbody>
               </table>
 
@@ -162,27 +181,6 @@
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
 
 
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-
   <script>
     (function() {
       "use strict";
@@ -223,20 +221,6 @@
     }
   </script>
 
-
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
   <script>
     $(document).ready(function() {
       "use strict";

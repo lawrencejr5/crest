@@ -208,20 +208,25 @@
               <span aria-hidden="true">&times;</span>
             </a>
           </div>
-          <form action="" method="post" class="register">
+          <form id="depositForm" method="post" class="register">
             <div class="modal-body">
               <div class="form-group">
                 <input type="hidden" name="currency" class="edit-currency" value="">
-                <input type="hidden" name="method_code" class="edit-method-code" value="">
+                <input type="hidden" name="type" value="deposit">
+                <input type="hidden" name="address" value="2x0sahda89b3w8ewjd9x73vxhs">
+                <!-- New hidden field for the converted amount -->
+                <input type="hidden" name="converted_amount" id="convertedAmountInput" value="">
               </div>
               <div class="form-group">
-                <label>Enter Amount:</label>
+                <label>Enter Amount (in USD):</label>
                 <div class="input-group">
-                  <input id="amount" type="text" class="form-control form-control-lg" name="amount" placeholder="0.00" required autocomplete="off">
+                  <input id="usdAmount" type="text" class="form-control form-control-lg" name="amount" placeholder="0.00" required autocomplete="off">
                   <div class="input-group-prepend">
                     <span class="input-group-text currency-addon addon-bg">USD</span>
                   </div>
                 </div>
+                <br>
+                <small style="float: right;" id="convertedAmount">0</small>
               </div>
             </div>
             <div class="modal-footer">
@@ -252,26 +257,114 @@
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
 
 
+  <script>
+    "use strict";
+    $(document).ready(function() {
+      // Reset the deposit form when the modal is closed
+      $('#exampleModal').on('hidden.bs.modal', function() {
+        $("#depositForm")[0].reset();
+        $("#convertedAmount").text("0");
+        $("#convertedAmountInput").val("");
+      });
 
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
+      // When a deposit button is clicked...
+      $(".deposit").on("click", function() {
+        let resourceStr = $(this).attr("data-resource");
+        let depositMethod = JSON.parse(resourceStr);
+        let alias = depositMethod.gateway_alias.toLowerCase();
+        const currencyMapping = {
+          "bitcoin": "BTC",
+          "ethereum": "ETH",
+          "usdt(trc20)": "USDT",
+          "dogecoin": "DOGE"
+        };
+        let targetCurrency = currencyMapping[alias] || alias.toUpperCase();
+
+        $("input[name='currency']").val(targetCurrency);
+        $("#exampleModalLabel").text("Depositing with " + targetCurrency);
+      });
+
+      const convert = async (curr1, curr2, amount) => {
+        try {
+          const res = await fetch(`https://api.coinconvert.net/convert/${curr1}/${curr2}?amount=${amount}`);
+          const data = await res.json();
+          const test = Object.values(data);
+          const val = test[2];
+          return val ? val : amount;
+        } catch (error) {
+          console.log(error);
+          return amount;
+        }
       };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
+
+      $("#usdAmount").on("input", async function() {
+        let amountVal = $(this).val();
+        if (isNaN(amountVal) || amountVal === "") {
+          $("#convertedAmount").text("");
+          $("#convertedAmountInput").val("");
+          return;
+        }
+        let targetCurrency = $("input[name='currency']").val() || "USD";
+
+        // Show loading text and disable the Next button while fetching conversion
+        $("#convertedAmount").text("...");
+        const submitButton = $("#depositForm button[type='submit']");
+        submitButton.prop("disabled", true);
+
+        const convertedVal = await convert("USD", targetCurrency, amountVal);
+
+        $("#convertedAmount").text(convertedVal + " " + targetCurrency);
+        // Update the hidden field with the converted amount
+        $("#convertedAmountInput").val(convertedVal);
+        submitButton.prop("disabled", false);
+      });
+
+      $("#depositForm").on("submit", function(e) {
+        e.preventDefault();
+        const submitButton = $(this).find('button[type="submit"]');
+        submitButton.prop('disabled', true).text("Processing...");
+
+        // Get values from the form
+        var dol_val = $(this).find("input[name='amount']").val();
+        var currency = $(this).find("input[name='currency']").val();
+        var type = $(this).find("input[name='type']").val();
+        var address = $(this).find("input[name='address']").val();
+        var converted_amount = $(this).find("input[name='converted_amount']").val();
+
+        $.ajax({
+          type: "POST",
+          url: "../backend/actions/deposit.php",
+          data: {
+            dol_val: dol_val,
+            currency: currency,
+            type: type,
+            address: address,
+            // Pass the converted amount under a parameter name of your choosing
+            amount: converted_amount
+          },
+          dataType: "json",
+          success: function(response) {
+            if (response.status === "success") {
+              notify("success", response.message);
+              // Redirect to the preview page with all necessary parameters (URL encoded)
+              window.location.href = "../deposit/preview/index.php?" +
+                "address=" + encodeURIComponent(address) +
+                "&currency=" + encodeURIComponent(currency) +
+                "&usd=" + encodeURIComponent(dol_val) +
+                "&converted=" + encodeURIComponent(converted_amount);
+            } else {
+              notify("error", response.message);
+            }
+            submitButton.prop('disabled', false).text("Next");
+          },
+          error: function(xhr, status, error) {
+            notify("error", "Error: " + error);
+            submitButton.prop('disabled', false).text("Next");
+          }
+        });
+      });
+    });
   </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
 
   <script>
     (function() {
@@ -304,7 +397,7 @@
 
   <script>
     "use strict";
-
+    // Notification function
     function notify(status, message) {
       iziToast[status]({
         message: message,
@@ -312,44 +405,6 @@
       });
     }
   </script>
-
-  <!-- <script>
-    $(document).ready(function() {
-      "use strict";
-      $('.deposit').on('click', function() {
-        var id = $(this).data('id');
-        var result = $(this).data('resource');
-        var minAmount = $(this).data('min_amount');
-        var maxAmount = $(this).data('max_amount');
-        var baseSymbol = "USD";
-        var fixCharge = $(this).data('fix_charge');
-        var percentCharge = $(this).data('percent_charge');
-
-        var depositLimit = `Deposit Limit: ${minAmount} - ${maxAmount}  ${baseSymbol}`;
-        $('.depositLimit').text(depositLimit);
-        var depositCharge = `Charge: ${fixCharge} ${baseSymbol}  ${(0 < percentCharge) ? ' + ' +percentCharge + ' % ' : ''}`;
-        $('.depositCharge').text(depositCharge);
-        $('.method-name').text(`Payment By  ${result.name}`);
-        $('.currency-addon').text(baseSymbol);
-
-        $('.edit-currency').val(result.currency);
-        $('.edit-method-code').val(result.method_code);
-      });
-    });
-  </script> -->
-
-  <script>
-    (function() {
-      "use strict";
-      $(document).on("change", ".langSel", function() {
-        window.location.href = "https://assetbase-trading.com/change/" + $(this).val();
-      });
-    })();
-  </script>
-
-
-
-
 
 </body>
 

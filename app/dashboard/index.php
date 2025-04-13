@@ -83,7 +83,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Welcome Back, <?= $user['fname'] ?>!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="https://assetbase-trading.com">User</a></li>
+              <li><a href="/">User</a></li>
               <li>Dashboard</li>
             </ul>
           </div>
@@ -213,8 +213,8 @@
                   <h4 class="alert-heading">*Affiliate Program</h4>
                   <p>Copy the link below, share with people and earn 10% on every deposit the make.</p>
                   <div class="input-group">
-                    <input type="text" name="text" class="form-control" id="referralURL"
-                      value="https://assetbase-trading.com/register/beansndgarri" readonly>
+                    <input type="text" name="text" class="form-control" id="referralURL" style="background-color: #000;"
+                      value="https://assetbase-trading.com/register/?ref=<?= $user['user_id'] ?>" readonly>
                     <div class="input-group-append">
                       <span class="input-group-text copytext copyBoard" id="copyBoard"> <i class="fa fa-copy"></i>
                       </span>
@@ -346,25 +346,6 @@
 
 
 
-    <!-- Smartsupp Live Chat script -->
-    <script type="text/javascript">
-      var _smartsupp = _smartsupp || {};
-      _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-      window.smartsupp || (function(d) {
-        var s, c, o = smartsupp = function() {
-          o._.push(arguments)
-        };
-        o._ = [];
-        s = d.getElementsByTagName('script')[0];
-        c = d.createElement('script');
-        c.type = 'text/javascript';
-        c.charset = 'utf-8';
-        c.async = true;
-        c.src = 'https://www.smartsuppchat.com/loader.js?';
-        s.parentNode.insertBefore(c, s);
-      })(document);
-    </script>
-    <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
 
     <script>
       (function() {

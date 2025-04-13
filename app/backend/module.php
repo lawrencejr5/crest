@@ -20,6 +20,18 @@ class Modules extends Connection
         return false;
     }
 
+    // New function to get a user by email
+    public function getUserByEmail($email)
+    {
+        $this->sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':email', $email);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
+
     // Function to verify if the email already exists
     public function emailExists($email)
     {
@@ -56,17 +68,7 @@ class Modules extends Connection
         }
     }
 
-    // New function to get a user by email
-    public function getUserByEmail($email)
-    {
-        $this->sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
-        $this->stmt = $this->conn->prepare($this->sql);
-        $this->stmt->bindParam(':email', $email);
-        if ($this->stmt->execute()) {
-            return $this->stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        return false;
-    }
+
 
     // New function for user login that checks if the user is verified
     public function login($email, $password)
@@ -90,7 +92,57 @@ class Modules extends Connection
         }
         return false;
     }
+
+
+    // Make deposit
+    public function makeDeposit($user_id, $amount, $dol_val, $currency, $type, $address, $status = 'pending')
+    {
+        $this->sql = "INSERT INTO deposits (user_id, amount, dol_val, currency, type, address, status) VALUES (:user_id, :amount, :dol_val, :currency, :type, :address, :status)";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        $this->stmt->bindParam(':amount', $amount);
+        $this->stmt->bindParam(':dol_val', $dol_val);
+        $this->stmt->bindParam(':currency', $currency);
+        $this->stmt->bindParam(':type', $type);
+        $this->stmt->bindParam(':address', $address);
+        $this->stmt->bindParam(':status', $status);
+        if ($this->stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Get user deposits
+    public function getUserDeposits($user_id)
+    {
+        $this->sql = "SELECT * FROM deposits WHERE user_id = :user_id ORDER BY id DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
+
+    // Make Withdrawal
+    public function makeWithdrawal($user_id, $amount, $currency, $address, $status = 'pending')
+    {
+        $this->sql = "INSERT INTO withdrawals (user_id, amount, currency, address, status) VALUES (:user_id, :amount, :currency, :address, :status)";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        $this->stmt->bindParam(':amount', $amount);
+        $this->stmt->bindParam(':currency', $currency);
+        $this->stmt->bindParam(':address', $address);
+        $this->stmt->bindParam(':status', $status);
+        if ($this->stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
+
 
 // Initializing class
 $modules = new Modules();
