@@ -174,23 +174,32 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td data-label="Date">11/04/2025</td>
-                          <td data-label="Transaction ID"><span
-                              class="text-primary">D1P92AYPK36W</span>
-                          </td>
-
-                          <td data-label="Amount">
-                            <span class="text-success">+
-                              $2</span>
-                          </td>
-                          <td data-label="Wallet">
-                            <span class="badge badge-info">Deposit Wallet</span>
-                          </td>
-                          <!--<td data-label="Details">You have got Sign Up Bonus</td>-->
-                          <td data-label="Post Balance"><span>
-                              $2</span></td>
-                        </tr>
+                        <?php if (isset($user_deposits) && count($user_deposits) > 0):
+                          // Get the most recent deposit from the deposits array
+                          $last_deposit = $user_deposits[0];
+                        ?>
+                          <tr>
+                            <td data-label="Date"><?= htmlspecialchars($last_deposit['datetime']) ?></td>
+                            <td data-label="Transaction ID">
+                              <span class="text-primary"><?= htmlspecialchars($last_deposit['transaction_id'] ?? 'N/A') ?></span>
+                            </td>
+                            <td data-label="Amount">
+                              <span class="text-success">
+                                <?= ($last_deposit['type'] === 'deposit' ? '+' : '-') . '$' . htmlspecialchars($last_deposit['dol_val']) ?>
+                              </span>
+                            </td>
+                            <td data-label="Wallet">
+                              <span class="badge badge-info">Deposit Wallet</span>
+                            </td>
+                            <td data-label="Post Balance">
+                              <span>$<?= htmlspecialchars($last_deposit['post_balance'] ?? 'N/A') ?></span>
+                            </td>
+                          </tr>
+                        <?php else: ?>
+                          <tr>
+                            <td colspan="5">No deposits found.</td>
+                          </tr>
+                        <?php endif; ?>
                       </tbody>
                     </table>
                   </div>
