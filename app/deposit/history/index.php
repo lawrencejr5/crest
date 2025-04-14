@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include "../../master/head.php" ?>
 <?php include "../../backend/udata.php" ?>
+<?php include "../../master/head.php" ?>
 
 
 <body>
@@ -70,11 +70,11 @@
                 <thead>
                   <tr>
                     <th scope="col">Transaction ID</th>
-                    <th scope="col">Gateway</th>
+                    <th scope="col">Currency</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Time</th>
-                    <th scope="col"> MORE</th>
+                    <th scope="col">Date/Time</th>
+                    <!-- <th scope="col"> MORE</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -88,10 +88,10 @@
                           echo htmlspecialchars($deposit['dol_val']); ?> USD (<?php echo htmlspecialchars($deposit['amount']); ?>)
                         </td>
                         <td><?php echo ucfirst(htmlspecialchars($deposit['status'])); ?></td>
-                        <td><?php echo isset($deposit['created_at']) ? htmlspecialchars($deposit['created_at']) : 'N/A'; ?></td>
-                        <td>
+                        <td><?php echo isset($deposit['datetime']) ? htmlspecialchars($deposit['datetime']) : 'N/A'; ?></td>
+                        <!-- <td>
                           <a href="details.php?id=<?php echo htmlspecialchars($deposit['id']); ?>" class="btn btn-sm btn-info">View</a>
-                        </td>
+                        </td> -->
                       </tr>
                     <?php endforeach; ?>
                   <?php else: ?>

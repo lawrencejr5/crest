@@ -1,6 +1,4 @@
 <?php
-// ini_set('display_errors', 0);
-// error_reporting(0);
 
 include 'conn.php';
 class Modules extends Connection
@@ -123,6 +121,19 @@ class Modules extends Connection
             return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         return false;
+    }
+
+    // Get total deposits for a user
+    public function getTotalDeposits($user_id)
+    {
+        $this->sql = "SELECT SUM(dol_val) as total FROM deposits WHERE user_id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            $result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'] ? $result['total'] : 0;
+        }
+        return 0;
     }
 
     // Make Withdrawal

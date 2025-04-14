@@ -2,16 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include "../master/head.php" ?>
 <?php include "../backend/udata.php" ?>
+<?php include "../master/head.php" ?>
 
 <body>
-
   <div class="mgm" style="display: none;">
     <div class="txt" style="color:#fbc013;">New trade from <b></b> just Now <a href="javascript:void(0);"
         onclick="javascript:void(0);"></a></div>
   </div>
-
   <style>
     .mgm {
       border-radius: 7px;
@@ -106,9 +104,9 @@
                   <div class="d-widget d-flex flex-wrap">
                     <div class="col-8">
                       <span class="caption">Deposit Wallet</span>
-                      <h4 class="currency-amount">$2</h4><br>
+                      <h4 class="currency-amount">$<?= $total_deposits ?></h4><br>
                       <hr>
-                      <h6>Total Deposits: $0</h6>
+                      <h6>Total Deposits: $<?= $total_deposits ?></h6>
                       <br><a href="../deposit" class="btn btn-success">Deposit</a>
                     </div>
                     <div class="col-4">
