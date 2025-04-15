@@ -159,7 +159,7 @@
               </div><!-- row end -->
               <div class="row mt-50">
                 <div class="col-lg-12">
-                  <div class="table-responsive--md">
+                  <div class="table-responsive">
                     <table class="table style--two">
                       <thead>
                         <tr>
@@ -167,35 +167,36 @@
                           <th>Transaction ID</th>
                           <th>Amount</th>
                           <th>Wallet</th>
-                          <!--<th>Details</th>-->
                           <th>Post Balance</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <?php if (isset($user_deposits) && count($user_deposits) > 0):
-                          // Get the most recent deposit from the deposits array
-                          $last_deposit = $user_deposits[0];
-                        ?>
-                          <tr>
-                            <td data-label="Date"><?= htmlspecialchars($last_deposit['datetime']) ?></td>
-                            <td data-label="Transaction ID">
-                              <span class="text-primary"><?= htmlspecialchars($last_deposit['transaction_id'] ?? 'N/A') ?></span>
-                            </td>
-                            <td data-label="Amount">
-                              <span class="text-success">
-                                <?= ($last_deposit['type'] === 'deposit' ? '+' : '-') . '$' . htmlspecialchars($last_deposit['dol_val']) ?>
-                              </span>
-                            </td>
-                            <td data-label="Wallet">
-                              <span class="badge badge-info">Deposit Wallet</span>
-                            </td>
-                            <td data-label="Post Balance">
-                              <span>$<?= htmlspecialchars($last_deposit['post_balance'] ?? 'N/A') ?></span>
-                            </td>
-                          </tr>
+                        <?php if (!empty($last_transactions)): ?>
+                          <?php foreach ($last_transactions as $trans): ?>
+                            <tr>
+                              <!-- Date: formatted from datetime (adjust format as needed) -->
+                              <td><?= htmlspecialchars(date("d M, Y h:i A", strtotime($trans['datetime']))) ?></td>
+                              <!-- Transaction ID -->
+                              <td><?= htmlspecialchars($trans['transac_id']) ?></td>
+                              <!-- Amount: show plus for deposits, minus for withdrawals -->
+                              <td>
+                                <?php if (strtolower($trans['type']) === 'deposit'): ?>
+                                  <span class="text-success">+ $<?= htmlspecialchars($trans['dol_val']) ?></span>
+                                <?php else: ?>
+                                  <span class="text-danger">- $<?= htmlspecialchars($trans['dol_val']) ?></span>
+                                <?php endif; ?>
+                              </td>
+                              <!-- Wallet: display based on type -->
+                              <td>
+                                <?= (strtolower($trans['type']) === 'deposit') ? 'Deposit' : 'Withdrawal' ?>
+                              </td>
+                              <!-- Post Balance: if available, otherwise show N/A -->
+                              <td><?= htmlspecialchars($trans['post_balance'] ?? 'N/A') ?></td>
+                            </tr>
+                          <?php endforeach; ?>
                         <?php else: ?>
                           <tr>
-                            <td colspan="5">No deposits found.</td>
+                            <td colspan="5" class="text-center text-muted">No transactions found.</td>
                           </tr>
                         <?php endif; ?>
                       </tbody>
@@ -203,6 +204,9 @@
                   </div>
                 </div>
               </div><!-- row end -->
+
+
+
             </div>
           </div>
         </div>
@@ -219,7 +223,7 @@
                   <p>Copy the link below, share with people and earn 10% on every deposit the make.</p>
                   <div class="input-group">
                     <input type="text" name="text" class="form-control" id="referralURL" style="background-color: #000;"
-                      value="https://assetbase-trading.com/register/?ref=<?= $user['user_id'] ?>" readonly>
+                      value="/crest/register/?ref=<?= $user['user_id'] ?>" readonly>
                     <div class="input-group-append">
                       <span class="input-group-text copytext copyBoard" id="copyBoard"> <i class="fa fa-copy"></i>
                       </span>

@@ -11,6 +11,7 @@ if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'
     $currency = $_POST['currency'];
     $type     = $_POST['type'];
     $address  = $_POST['address'];
+    $transac_id = uniqid("transac_", true);
 
     // Retrieve user id from session; ensure that your login script sets $_SESSION['id']
     $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
@@ -23,7 +24,7 @@ if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'
     }
 
     // Attempt to create a deposit record
-    $result = $modules->makeDeposit($user_id, $amount, $dol_val, $currency, $type, $address);
+    $result = $modules->makeDeposit($user_id, $transac_id, $amount, $dol_val, $currency, $type, $address);
     if ($result) {
         echo json_encode([
             'status'  => 'success',

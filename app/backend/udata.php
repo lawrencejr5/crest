@@ -48,5 +48,18 @@ if ($user_id) {
 // Calculate total user balance
 $total_user_balance = $total_deposits - $total_withdrawals;
 
+// Get all transactions (both deposits and withdrawals) for the user
+$all_transactions = [];
+if ($user_id) {
+    $allTransactions = $modules->getAllTransactions($user_id);
+    if ($allTransactions && is_array($allTransactions)) {
+        $all_transactions = $allTransactions;
+    }
+}
+
+$last_transactions = [];
+if (isset($all_transactions) && is_array($all_transactions)) {
+    $last_transactions = array_slice($all_transactions, 0, 5);
+}
 
 !$_SESSION['id'] && header('location: ../../login');

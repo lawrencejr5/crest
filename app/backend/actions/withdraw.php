@@ -10,6 +10,7 @@ if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'
     $currency = $_POST['currency'];
     $type     = $_POST['type'];
     $address  = $_POST['address'];
+    $transac_id = uniqid("transac_", true);
 
     // Retrieve user id from session - ensure your login script sets this
     $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
@@ -34,7 +35,7 @@ if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'
     // If your business logic is to deduct "little by little",
     // you might process a fraction of the withdrawal now and schedule the remainder.
     // For simplicity, we assume the requested amount is processed now.
-    $result = $modules->makeWithdrawal($user_id, $amount, $dol_val, $currency, $address, $type);
+    $result = $modules->makeWithdrawal($user_id, $transac_id, $amount, $dol_val, $currency, $address, $type);
     if ($result) {
         echo json_encode([
             'status'  => 'success',

@@ -92,12 +92,13 @@ class Modules extends Connection
     }
 
 
-    // Make deposit
-    public function makeDeposit($user_id, $amount, $dol_val, $currency, $type, $address, $status = 'pending')
+    // Make deposit with transaction ID
+    public function makeDeposit($user_id, $transac_id, $amount, $dol_val, $currency, $type, $address, $status = 'pending')
     {
-        $this->sql = "INSERT INTO deposits (user_id, amount, dol_val, currency, type, address, status) VALUES (:user_id, :amount, :dol_val, :currency, :type, :address, :status)";
+        $this->sql = "INSERT INTO deposits (user_id, transac_id, amount, dol_val, currency, type, address, status) VALUES (:user_id, :transac_id, :amount, :dol_val, :currency, :type, :address, :status)";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':user_id', $user_id);
+        $this->stmt->bindParam(':transac_id', $transac_id);
         $this->stmt->bindParam(':amount', $amount);
         $this->stmt->bindParam(':dol_val', $dol_val);
         $this->stmt->bindParam(':currency', $currency);
@@ -137,12 +138,13 @@ class Modules extends Connection
     }
 
 
-    // Make Withdrawal
-    public function makeWithdrawal($user_id, $amount, $dol_val, $currency, $address, $type, $status = 'pending')
+    // Make Withdrawal with transaction ID
+    public function makeWithdrawal($user_id, $transac_id, $amount, $dol_val, $currency, $address, $type, $status = 'pending')
     {
-        $this->sql = "INSERT INTO withdrawals (user_id, amount, dol_val, currency, address, type, status) VALUES (:user_id, :amount, :dol_val, :currency, :address, :type, :status)";
+        $this->sql = "INSERT INTO withdrawals (user_id, transac_id, amount, dol_val, currency, address, type, status) VALUES (:user_id, :transac_id, :amount, :dol_val, :currency, :address, :type, :status)";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':user_id', $user_id);
+        $this->stmt->bindParam(':transac_id', $transac_id);
         $this->stmt->bindParam(':amount', $amount);
         $this->stmt->bindParam(':dol_val', $dol_val);
         $this->stmt->bindParam(':currency', $currency);
@@ -187,6 +189,26 @@ class Modules extends Connection
         $totalDeposits = $this->getTotalDeposits($user_id);
         $totalWithdrawals = $this->getTotalWithdrawals($user_id);
         return $totalDeposits - $totalWithdrawals;
+    }
+
+    // Get all transactions (both deposits and withdrawals) for a user
+    public function getAllTransactions($user_id)
+    {
+        $this->sql = "SELECT * FROM (
+            SELECT id, transac_id, amount, dol_val, currency, address, type, status, datetime
+            FROM deposits WHERE user_id = :user_id
+            UNION ALL
+            SELECT id, transac_id, amount, dol_val, currency, address, type, status, datetime 
+            FROM withdrawals WHERE user_id = :user_id
+        ) AS transactions
+        ORDER BY datetime DESC";
+
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
     }
 }
 

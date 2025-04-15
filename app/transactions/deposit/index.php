@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include "../../backend/udata.php" ?>
 <?php include "../../master/head.php" ?>
 
 
@@ -54,20 +55,10 @@
         <div class="row justify-content-center mt-2">
           <div class="col-md-12">
             <div class="right float-right mb-5">
-              <a href="
-                                                javascript:void(0)
-                        
-                        " class="btn cmn-btn mb-md-0 mb-3 
-                                                btn-disabled
-                                                ">
+              <a href="javascript:void(0) " class="btn cmn-btn mb-md-0 mb-3 btn-disabled">
                 Deposit Wallet Transactions
               </a>
-              <a href="
-
-                                               /crest/app/transactions/interest
-                        
-                        " class="btn cmn-btn mb-md-0
-                                                ">
+              <a href="/crest/app/transactions/interest" class="btn cmn-btn mb-md-0">
                 Interest Wallet Transactions
               </a>
             </div>
@@ -80,25 +71,45 @@
                     <th scope="col">Date</th>
                     <th scope="col">Trx</th>
                     <th scope="col">Details</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Remaining balance</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td data-label="Date">
-                      11 Apr, 2025 11:40 AM
-                    </td>
-                    <td data-label="#Trx">D1P92AYPK36W</td>
-                    <td data-label="Details">You have got Sign Up Bonus</td>
-                    <td data-label="Amount">
-                      <strong class="text-success"> + 2 USD</strong>
-                    </td>
-                    <td data-label="Remaining balance">
-                      <strong>2 USD</strong>
-                    </td>
-                  </tr>
-
+                  <?php if (isset($all_transactions) && count($all_transactions) > 0): ?>
+                    <?php foreach ($all_transactions as $transaction): ?>
+                      <tr>
+                        <!-- Date: formatted from the created_at field -->
+                        <td data-label="Date">
+                          <?= date("d M, Y h:i A", strtotime($transaction['datetime'])) ?>
+                        </td>
+                        <!-- Transaction ID -->
+                        <td data-label="#Trx">
+                          <?= htmlspecialchars($transaction['transac_id']) ?>
+                        </td>
+                        <!-- Details: using the type column -->
+                        <td data-label="Details">
+                          <?= ucfirst(htmlspecialchars($transaction['type'])) ?>
+                        </td>
+                        <!-- Amount: show plus for deposits, minus for withdrawals -->
+                        <td data-label="Amount">
+                          <?php if (strtolower($transaction['type']) == 'deposit'): ?>
+                            <strong class="text-success">+ <?= htmlspecialchars($transaction['dol_val']) ?> USD</strong>
+                          <?php else: ?>
+                            <strong class="text-danger">- <?= htmlspecialchars($transaction['dol_val']) ?> USD</strong>
+                          <?php endif; ?>
+                        </td>
+                        <!-- Remaining balance: using the current user's total balance -->
+                        <td data-label="Remaining balance">
+                          <?= htmlspecialchars($total_user_balance) ?> USD
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <td colspan="5" class="text-muted text-center">No transactions found.</td>
+                    </tr>
+                  <?php endif; ?>
                 </tbody>
               </table>
 
@@ -109,8 +120,6 @@
         </div>
       </div>
     </section>
-
-
 
 
 
@@ -131,52 +140,6 @@
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
 
 
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-
-  <script>
-    (function() {
-      "use strict";
-      $(document).on("change", ".langSel", function() {
-        window.location.href = "https://assetbase-trading.com/change/" + $(this).val();
-      });
-
-      $('.policy').on('click', function() {
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        $.get('https://assetbase-trading.com/cookie/accept', function(response) {
-          iziToast.success({
-            message: response,
-            position: "topRight"
-          });
-          $('.cookie__wrapper').addClass('d-none');
-        });
-      });
-    })();
-  </script>
-
-
   <link rel="stylesheet" href="https://assetbase-trading.com/assets/templates/bit_gold/css/iziToast.min.css">
   <script src="https://assetbase-trading.com/assets/templates/bit_gold/js/iziToast.min.js"></script>
 
@@ -191,22 +154,6 @@
       });
     }
   </script>
-
-
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
-
 
   <script>
     (function() {
