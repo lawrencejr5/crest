@@ -413,11 +413,23 @@
         submitButton.prop('disabled', true).text("Processing...");
 
         // Get form values
-        var amount = $(this).find("input[name='amount']").val();
-        var currency = $(this).find("input[name='currency']").val();
-        var type = $(this).find("input[name='type']").val();
-        var address = $(this).find("input[name='address']").val();
-        var dol_val = $(this).find("input[name='dol_val']").val();
+        let dol_val = $(this).find("input[name='dol_val']").val();
+        let currency = $(this).find("input[name='currency']").val();
+        let type = $(this).find("input[name='type']").val();
+        let address = $(this).find("input[name='address']").val();
+        let amount = $(this).find("input[name='amount']").val();
+
+        // Mapping to ensure currency is in three-letter format
+        const currencyMapping = {
+          "bitcoin": "BTC",
+          "ethereum": "ETH",
+          "usdt(trc20)": "USDT",
+          "dogecoin": "DOGE"
+        };
+        // If the currency isn't already 3 letters, map it accordingly.
+        if (currency.length !== 3) {
+          currency = currencyMapping[currency.toLowerCase()] || currency.toUpperCase();
+        }
 
         $.ajax({
           type: "POST",
@@ -435,6 +447,14 @@
               notify("success", response.message);
               $("#withdrawForm")[0].reset();
               $('#withdrawModal').modal('hide');
+
+              window.setTimeout(() => {
+                window.location.href = "./preview/index.php?" +
+                  "address=" + encodeURIComponent(address) +
+                  "&currency=" + encodeURIComponent(currency) +
+                  "&usd=" + encodeURIComponent(dol_val) +
+                  "&converted=" + encodeURIComponent(amount);
+              }, 1500)
             } else {
               notify("error", response.message);
             }
@@ -443,51 +463,6 @@
           error: function(xhr, status, error) {
             notify("error", "Error: " + error);
             submitButton.prop('disabled', false).text("Confirm");
-          }
-        });
-      });
-
-      // When the deposit form is submitted…
-      $("#depositForm").on("submit", function(e) {
-        e.preventDefault();
-        const submitButton = $(this).find('button[type="submit"]');
-        submitButton.prop('disabled', true).text("Processing...");
-
-        // Get the USD value (dol_val) and the converted value (amount)
-        var dol_val = $(this).find("input[name='amount']").val();
-        var converted_amount = $(this).find("input[name='converted_amount']").val();
-        var currency = $(this).find("input[name='currency']").val();
-        var type = $(this).find("input[name='type']").val();
-        var address = $(this).find("input[name='address']").val();
-
-        $.ajax({
-          type: "POST",
-          url: "../backend/actions/deposit.php",
-          data: {
-            dol_val: dol_val,
-            amount: converted_amount,
-            currency: currency,
-            type: type,
-            address: address
-          },
-          dataType: "json",
-          success: function(response) {
-            if (response.status === "success") {
-              notify("success", response.message);
-              // Redirect to preview page or handle success accordingly
-              window.location.href = "../deposit/preview/index.php?" +
-                "address=" + encodeURIComponent(address) +
-                "&currency=" + encodeURIComponent(currency) +
-                "&usd=" + encodeURIComponent(dol_val) +
-                "&converted=" + encodeURIComponent(converted_amount);
-            } else {
-              notify("error", response.message);
-            }
-            submitButton.prop('disabled', false).text("Next");
-          },
-          error: function(xhr, status, error) {
-            notify("error", "Error: " + error);
-            submitButton.prop('disabled', false).text("Next");
           }
         });
       });
