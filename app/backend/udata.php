@@ -2,11 +2,9 @@
 session_start();
 include 'module.php';
 
-
 $user = [];
 $uID = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
-
 
 if ($uID) {
     $userData = $modules->getUserData($uID);
@@ -28,6 +26,14 @@ if ($user_id) {
     $totalDeposits = $modules->getTotalDeposits($user_id);
     if ($totalDeposits) {
         $total_deposits = $totalDeposits;
+    }
+}
+
+$user_withdrawals = [];
+if ($user_id) {
+    $userWithdrawals = $modules->getUserWithdrawals($user_id);
+    if ($userWithdrawals && is_array($userWithdrawals)) {
+        $user_withdrawals = $userWithdrawals;
     }
 }
 

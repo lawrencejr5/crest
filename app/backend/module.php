@@ -155,6 +155,18 @@ class Modules extends Connection
             return false;
         }
     }
+
+    // Get user withdrawals
+    public function getUserWithdrawals($user_id)
+    {
+        $this->sql = "SELECT * FROM withdrawals WHERE user_id = :user_id ORDER BY id DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
 }
 
 

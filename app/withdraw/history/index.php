@@ -73,10 +73,35 @@
                   </tr>
                 </thead>
                 <tbody>
-
-                  <tr>
-                    <td class="text-muted text-center" colspan="9">No Data Found!</td>
-                  </tr>
+                  <?php if (isset($user_withdrawals) && count($user_withdrawals) > 0): ?>
+                    <?php foreach ($user_withdrawals as $withdrawal): ?>
+                      <tr>
+                        <!-- Display the original USD amount -->
+                        <td><?= htmlspecialchars($withdrawal['dol_val']) ?> USD</td>
+                        <!-- If you have a rate column, otherwise adjust or remove -->
+                        <td><?= htmlspecialchars($withdrawal['rate'] ?? 'N/A') ?></td>
+                        <!-- Display any charge, or default to 0 if not set -->
+                        <td><?= htmlspecialchars($withdrawal['charge'] ?? '0') ?> USD</td>
+                        <!-- Display the receivable amount in converted currency -->
+                        <td><?= htmlspecialchars($withdrawal['amount']) ?> <?= strtoupper(htmlspecialchars($withdrawal['currency'])) ?></td>
+                        <!-- Status (e.g., pending, approved) -->
+                        <td><?= ucfirst(htmlspecialchars($withdrawal['status'])) ?></td>
+                        <!-- More details button (assumes a modal is used) -->
+                        <td>
+                          <button class="btn btn-sm btn-info approveBtn"
+                            data-transactions="<?= htmlspecialchars($withdrawal['transaction_id'] ?? 'N/A') ?>"
+                            data-admin_feedback="<?= htmlspecialchars($withdrawal['feedback'] ?? 'None') ?>"
+                            data-info='<?= json_encode($withdrawal); ?>'>
+                            More
+                          </button>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <td class="text-muted text-center" colspan="9">No Data Found!</td>
+                    </tr>
+                  <?php endif; ?>
                 </tbody>
               </table>
 
@@ -134,27 +159,6 @@
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
 
 
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-
   <script>
     (function() {
       "use strict";
@@ -196,19 +200,6 @@
   </script>
 
 
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
   <script>
     $(document).ready(function() {
       "use strict";
