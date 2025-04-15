@@ -136,15 +136,18 @@ class Modules extends Connection
         return 0;
     }
 
+
     // Make Withdrawal
-    public function makeWithdrawal($user_id, $amount, $currency, $address, $status = 'pending')
+    public function makeWithdrawal($user_id, $amount, $dol_val, $currency, $address, $type, $status = 'pending')
     {
-        $this->sql = "INSERT INTO withdrawals (user_id, amount, currency, address, status) VALUES (:user_id, :amount, :currency, :address, :status)";
+        $this->sql = "INSERT INTO withdrawals (user_id, amount, dol_val, currency, address, type, status) VALUES (:user_id, :amount, :dol_val, :currency, :address, :type, :status)";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':user_id', $user_id);
         $this->stmt->bindParam(':amount', $amount);
+        $this->stmt->bindParam(':dol_val', $dol_val);
         $this->stmt->bindParam(':currency', $currency);
         $this->stmt->bindParam(':address', $address);
+        $this->stmt->bindParam(':type', $type);
         $this->stmt->bindParam(':status', $status);
         if ($this->stmt->execute()) {
             return true;
