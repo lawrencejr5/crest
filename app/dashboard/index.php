@@ -123,7 +123,7 @@
                       <h4 class="currency-amount">$0</h4>
                       <br>
                       <hr>
-                      <h6>Total Withdrawal: $0
+                      <h6>Total Withdrawal: $<?= $total_withdrawals ?>
                       </h6><br><a href="../withdraw" class="btn btn-success">Withdraw</a>
                     </div>
                     <div class="col-4">

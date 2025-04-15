@@ -37,4 +37,12 @@ if ($user_id) {
     }
 }
 
+$total_withdrawals = 0;
+if ($user_id) {
+    $totalWithdrawals = $modules->getTotalWithdrawals($user_id);
+    if ($totalWithdrawals) {
+        $total_withdrawals = $totalWithdrawals;
+    }
+}
+
 !$_SESSION['id'] && header('location: ../../login');
