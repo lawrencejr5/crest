@@ -45,4 +45,8 @@ if ($user_id) {
     }
 }
 
+// Calculate total user balance
+$total_user_balance = $total_deposits - $total_withdrawals;
+
+
 !$_SESSION['id'] && header('location: ../../login');

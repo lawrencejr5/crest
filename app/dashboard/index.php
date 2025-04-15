@@ -98,13 +98,11 @@
           <div class="row justify-content-center">
             <div class="col-lg-12 pl-lg-5 mt-lg-0 mt-5">
               <div class="row mb-none-30">
-
-
                 <div class="col-xl-4 col-sm-6 mb-30">
                   <div class="d-widget d-flex flex-wrap">
                     <div class="col-8">
                       <span class="caption">Deposit Wallet</span>
-                      <h4 class="currency-amount">$<?= $total_deposits ?></h4><br>
+                      <h4 class="currency-amount">$<?= $total_user_balance ?></h4><br>
                       <hr>
                       <h6>Total Deposits: $<?= $total_deposits ?></h6>
                       <br><a href="../deposit" class="btn btn-success">Deposit</a>

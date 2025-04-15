@@ -180,6 +180,14 @@ class Modules extends Connection
         }
         return 0;
     }
+
+    // Get available deposit balance for a user (total deposits minus total withdrawals)
+    public function getAvailableDepositBalance($user_id)
+    {
+        $totalDeposits = $this->getTotalDeposits($user_id);
+        $totalWithdrawals = $this->getTotalWithdrawals($user_id);
+        return $totalDeposits - $totalWithdrawals;
+    }
 }
 
 
