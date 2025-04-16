@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include "../../backend/udata.php" ?>
 <?php include "../../master/head.php" ?>
 
 
@@ -67,16 +68,43 @@
               <table class="table style--two">
                 <thead>
                   <tr>
+                    <th scope="col">Ticket ID</th>
                     <th scope="col" class="text-left">Subject</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Last Reply</th>
+                    <th scope="col">Date created</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td colspan="4">No Data Found!</td>
-                  </tr>
+                  <?php if (!empty($user_tickets)): ?>
+                    <?php foreach ($user_tickets as $ticket): ?>
+                      <tr>
+                        <td><?= htmlspecialchars($ticket['ticket_id']) ?></td>
+                        <td><?= htmlspecialchars($ticket['subject']) ?></td>
+                        <?php
+                        $status = strtolower($ticket['status']);
+                        if ($status === 'pending') {
+                          $statusClass = 'text-warning'; // Amber
+                        } elseif ($status === 'opened') {
+                          $statusClass = 'text-primary'; // Blue
+                        } elseif ($status === 'closed') {
+                          $statusClass = 'text-secondary'; // Grey
+                        } else {
+                          $statusClass = '';
+                        }
+                        ?>
+                        <td><span class="<?= $statusClass ?>"><?= htmlspecialchars($ticket['status']) ?></span></td>
+                        <td><?= isset($ticket['datetime']) ? htmlspecialchars($ticket['datetime']) : 'N/A' ?></td>
+                        <td>
+                          <a href="/crest/app/account/ticket/view.php?ticket_id=<?= urlencode($ticket['ticket_id']) ?>" class="btn btn-sm btn-info">View</a>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <td colspan="5" class="text-center">No Tickets Found!</td>
+                    </tr>
+                  <?php endif; ?>
                 </tbody>
               </table>
 
@@ -106,27 +134,6 @@
   <!-- dashboard custom js -->
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
 
-
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
 
   <script>
     (function() {

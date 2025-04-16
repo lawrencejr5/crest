@@ -62,4 +62,13 @@ if (isset($all_transactions) && is_array($all_transactions)) {
     $last_transactions = array_slice($all_transactions, 0, 5);
 }
 
+// Get all tickets for the user
+$user_tickets = [];
+if ($user_id) {
+    $allUserTickets = $modules->getAllUserTickets($user_id);
+    if ($allUserTickets && is_array($allUserTickets)) {
+        $user_tickets = $allUserTickets;
+    }
+}
+
 !$_SESSION['id'] && header('location: ../../login');

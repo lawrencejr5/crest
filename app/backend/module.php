@@ -251,7 +251,37 @@ class Modules extends Connection
         }
         return false;
     }
+
+    // Create new ticket
+    public function createTicket($user_id, $ticket_id, $fullname, $email, $subject, $file, $status, $message)
+    {
+        $this->sql = "INSERT INTO tickets (user_id, ticket_id, fullname, email, subject, file, status, message) 
+                      VALUES (:user_id, :ticket_id, :fullname, :email, :subject, :file, :status, :message)";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        $this->stmt->bindParam(':ticket_id', $ticket_id);
+        $this->stmt->bindParam(':fullname', $fullname);
+        $this->stmt->bindParam(':email', $email);
+        $this->stmt->bindParam(':subject', $subject);
+        $this->stmt->bindParam(':file', $file);
+        $this->stmt->bindParam(':status', $status);
+        $this->stmt->bindParam(':message', $message);
+        return $this->stmt->execute();
+    }
+
+    // Get all tickets for a user
+    public function getAllUserTickets($user_id)
+    {
+        $this->sql = "SELECT * FROM tickets WHERE user_id = :user_id ORDER BY id DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
 }
+
 
 
 // Initializing class
