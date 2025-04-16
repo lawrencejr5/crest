@@ -121,6 +121,18 @@ class Modules extends Connection
         return $this->stmt->execute();
     }
 
+    // Update password for a user
+    public function updatePassword($user_id, $new_password)
+    {
+        // Hash the new password using BCRYPT
+        $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
+        $this->sql = "UPDATE users SET password = :password WHERE id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':password', $hashed_password);
+        $this->stmt->bindParam(':user_id', $user_id);
+        return $this->stmt->execute();
+    }
+
     // Make deposit with transaction ID
     public function makeDeposit($user_id, $transac_id, $amount, $dol_val, $currency, $type, $address, $status = 'pending')
     {
