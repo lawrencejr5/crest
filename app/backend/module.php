@@ -91,6 +91,35 @@ class Modules extends Connection
         return false;
     }
 
+    // Update user data with all fields from register (minus otp, ref, and password) plus address, zip, city, state, and pic
+    public function updateUserData($user_id, $fname, $lname, $email, $phone, $country, $address, $zip, $city, $state, $pic)
+    {
+        $this->sql = "UPDATE users 
+                      SET fname = :fname, 
+                          lname = :lname, 
+                          email = :email, 
+                          phone = :phone, 
+                          country = :country, 
+                          address = :address, 
+                          zip = :zip, 
+                          city = :city, 
+                          state = :state, 
+                          pic = :pic
+                      WHERE id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':fname', $fname);
+        $this->stmt->bindParam(':lname', $lname);
+        $this->stmt->bindParam(':email', $email);
+        $this->stmt->bindParam(':phone', $phone);
+        $this->stmt->bindParam(':country', $country);
+        $this->stmt->bindParam(':address', $address);
+        $this->stmt->bindParam(':zip', $zip);
+        $this->stmt->bindParam(':city', $city);
+        $this->stmt->bindParam(':state', $state);
+        $this->stmt->bindParam(':pic', $pic);
+        $this->stmt->bindParam(':user_id', $user_id);
+        return $this->stmt->execute();
+    }
 
     // Make deposit with transaction ID
     public function makeDeposit($user_id, $transac_id, $amount, $dol_val, $currency, $type, $address, $status = 'pending')

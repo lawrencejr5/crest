@@ -1,12 +1,23 @@
-<!-- meta tags and other links -->
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include "../../backend/udata.php" ?>
 <?php include "../../master/head.php" ?>
-
 
 <body>
 
+  <style>
+    .imagePreview {
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background-size: cover;
+      border: 2px solid #ddd;
+      margin: 1rem 0;
+    }
+  </style>
 
   <!-- scroll-to-top start -->
   <div class="scroll-to-top">
@@ -19,23 +30,21 @@
   <div class="full-wh">
     <!-- STAR ANIMATION -->
     <div class="bg-animation">
-      <div id='stars'></div>
-      <div id='stars2'></div>
-      <div id='stars3'></div>
-      <div id='stars4'></div>
-    </div><!-- / STAR ANIMATION -->
+      <div id="stars"></div>
+      <div id="stars2"></div>
+      <div id="stars3"></div>
+      <div id="stars4"></div>
+    </div>
+    <!-- / STAR ANIMATION -->
   </div>
+
   <div class="page-wrapper">
     <!-- header-section start  -->
     <?php include "../../master/nav.php" ?>
-
     <!-- header-section end  -->
-
 
     <!-- inner hero start -->
     <section class="inner-hero bg_img" data-background="black">
-
-
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
@@ -49,93 +58,113 @@
       </div>
     </section>
     <!-- inner hero end -->
+
+    <!-- Profile Form -->
     <section class="cmn-section">
       <div class="container">
         <div class="card">
-          <form action="" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="_token" value="v0QlAVhKtAuRzkedf8cRKcXDWi5QXYEAoRmRB7FZ">
+          <form id="profileForm" action="../../backend/actions/updateUser.php" method="post" enctype="multipart/form-data">
             <div class="card-body">
               <div class="row">
+                <!-- Avatar Upload -->
                 <div class="col-md-4">
                   <div class="avatar-upload">
                     <div class="avatar-edit">
-                      <input type='file' name="image" id="imageUpload" class="upload" accept=".png, .jpg, .jpeg" />
+                      <input type="file" name="pic" id="imageUpload" class="upload" accept=".png, .jpg, .jpeg" />
                       <label for="imageUpload" class="imgUp"></label>
                     </div>
                     <div class="avatar-preview">
-                      <div class="imagePreview" style="background-image: url(https://assetbase-trading.com/assets/images/default.png)">
+                      <div class=" imagePreview" style="background-image: url(<?php echo isset($user['pic']) && !empty($user['pic']) ? ('../../uploads/profile/' . $user['pic']) : 'https://assetbase-trading.com/assets/images/default.png'; ?>)">
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <!-- Profile Data -->
                 <div class="col-md-8">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>First Name</label>
-                        <input type="text" name="firstname" class="form-control form-control-lg" placeholder="First Name" value="Beans">
+                        <input type="text" name="fname" class="form-control form-control-lg" placeholder="First Name" value="<?= htmlspecialchars($user['fname']) ?>">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" name="lastname" class="form-control form-control-lg" placeholder="Last Name" value="Garri">
+                        <input type="text" name="lname" class="form-control form-control-lg" placeholder="Last Name" value="<?= htmlspecialchars($user['lname']) ?>">
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <!-- Read-only: Username -->
+                    <!-- <div class="col-md-6">
                       <div class="form-group">
                         <label>Username</label>
-                        <input type="text" name="username" class="form-control form-control-lg" placeholder="Username" value="beansndgarri" readonly>
+                        <input type="text" name="usernameDisplay" class="form-control form-control-lg" placeholder="Username" value="<?= htmlspecialchars($user['username'] ?? '') ?>" readonly>
                       </div>
-                    </div>
-                    <div class="col-md-6">
+                    </div> -->
+                    <!-- Read-only: Email (with hidden input) -->
+                    <div class="col-md-12">
                       <div class="form-group">
                         <label>Email</label>
-                        <input type="text" name="email" class="form-control form-control-lg" placeholder="Email" value="beansndgarri@gmail.com" readonly>
+                        <input type="text" name="emailDisplay" class="form-control form-control-lg" placeholder="Email" value="<?= htmlspecialchars($user['email'] ?? '') ?>" readonly>
+                        <input type="hidden" name="email" value="<?= htmlspecialchars($user['email'] ?? '') ?>">
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <!-- Additional Data -->
                 <div class="col-md-12">
                   <div class="row">
+                    <!-- Read-only Mobile (with hidden input) -->
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Mobile</label>
-                        <input type="text" name="mobile" class="form-control form-control-lg" placeholder="Mobile" value="23408012345678" disabled>
+                        <input type="text" name="mobileDisplay" class="form-control form-control-lg" placeholder="Mobile" value="<?= htmlspecialchars($user['phone'] ?? '') ?>" disabled>
+                        <input type="hidden" name="phone" value="<?= htmlspecialchars($user['phone'] ?? '') ?>">
                       </div>
                     </div>
+                    <!-- Read-only Country (with hidden input) -->
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Country</label>
-                        <input type="text" class="form-control" value="Nigeria" disabled>
+                        <input type="text" class="form-control" value="<?= htmlspecialchars($user['country'] ?? 'Nigeria') ?>" disabled>
+                        <input type="hidden" name="country" value="<?= htmlspecialchars($user['country'] ?? 'Nigeria') ?>">
                       </div>
                     </div>
+                    <!-- Updatable Address -->
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Address</label>
-                        <input type="text" name="address" class="form-control form-control-lg" placeholder="Address" value="">
+                        <input type="text" name="address" class="form-control form-control-lg" placeholder="Address" value="<?= htmlspecialchars($user['address'] ?? '') ?>">
                       </div>
                     </div>
+                    <!-- Updatable State -->
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>State</label>
-                        <input type="text" name="state" class="form-control form-control-lg" placeholder="State" value="">
+                        <input type="text" name="state" class="form-control form-control-lg" placeholder="State" value="<?= htmlspecialchars($user['state'] ?? '') ?>">
                       </div>
                     </div>
+                    <!-- Updatable Zip -->
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Zip</label>
-                        <input type="text" name="zip" class="form-control form-control-lg" placeholder="Zip" value="">
+                        <input type="text" name="zip" class="form-control form-control-lg" placeholder="Zip" value="<?= htmlspecialchars($user['zip'] ?? '') ?>">
                       </div>
                     </div>
+                    <!-- Updatable City -->
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>City</label>
-                        <input type="text" name="city" class="form-control form-control-lg" placeholder="City" value="">
+                        <input type="text" name="city" class="form-control form-control-lg" placeholder="City" value="<?= htmlspecialchars($user['city'] ?? '') ?>">
                       </div>
                     </div>
+                    <!-- Hidden: current_pic (if no new file is uploaded) -->
+                    <input type="hidden" name="current_pic" value="<?= htmlspecialchars($user['pic'] ?? '') ?>">
                   </div>
                 </div>
+
               </div>
             </div>
             <div class="card-footer">
@@ -146,74 +175,23 @@
       </div>
     </section>
 
-
-
     <!-- footer section start -->
     <?php include "../../master/footer.php" ?>
-
     <!-- footer section end -->
   </div> <!-- page-wrapper end -->
+
+  <!-- Scripts -->
   <!-- jQuery library -->
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/jquery-3.5.1.min.js"></script>
   <!-- bootstrap js -->
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/bootstrap.bundle.min.js"></script>
-
   <!-- slick slider js -->
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/slick.min.js"></script>
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/wow.min.js"></script>
   <!-- dashboard custom js -->
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
-
-
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-
-  <script>
-    (function() {
-      "use strict";
-      $(document).on("change", ".langSel", function() {
-        window.location.href = "https://assetbase-trading.com/change/" + $(this).val();
-      });
-
-      $('.policy').on('click', function() {
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        $.get('https://assetbase-trading.com/cookie/accept', function(response) {
-          iziToast.success({
-            message: response,
-            position: "topRight"
-          });
-          $('.cookie__wrapper').addClass('d-none');
-        });
-      });
-    })();
-  </script>
-
-
   <link rel="stylesheet" href="https://assetbase-trading.com/assets/templates/bit_gold/css/iziToast.min.css">
   <script src="https://assetbase-trading.com/assets/templates/bit_gold/js/iziToast.min.js"></script>
-
 
   <script>
     "use strict";
@@ -226,47 +204,21 @@
     }
   </script>
 
-
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
   <script>
     (function($) {
       "use strict";
-      $('.imgUp').click(function() {
-        upload();
-      });
-
-      function upload() {
-        $(".upload").change(function() {
-          readURL(this);
-        });
-      }
-
-      function readURL(input) {
-        if (input.files && input.files[0]) {
+      // Bind change event directly to the file input
+      $("#imageUpload").on("change", function() {
+        if (this.files && this.files[0]) {
           var reader = new FileReader();
-
           reader.onload = function(e) {
-            var preview = $(input).parents('.avatar-upload').find('.imagePreview');
-            $(preview).css('background-image', 'url(' + e.target.result + ')');
-            $(preview).hide();
-            $(preview).fadeIn(650);
+            // Update the background image of the preview container
+            $(".avatar-upload .imagePreview").css("background-image", "url(" + e.target.result + ")");
+            $(".avatar-upload .imagePreview").hide().fadeIn(650);
           }
-          reader.readAsDataURL(input.files[0]);
+          reader.readAsDataURL(this.files[0]);
         }
-      }
-      $('select[name=country]').val('Nigeria');
+      });
     })(jQuery);
   </script>
 
@@ -279,13 +231,35 @@
     })();
   </script>
 
+  <script>
+    "use strict";
+    $(document).ready(function() {
+      $("#profileForm").on("submit", function(e) {
+        e.preventDefault();
+        var submitButton = $(this).find('button[type="submit"]');
+        submitButton.prop('disabled', true).text("Updating...");
 
-
-
-
-</body>
-
-</html>
+        var formData = new FormData(this);
+        $.ajax({
+          url: $(this).attr("action"),
+          type: "POST",
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function(resp) {
+            var data = (typeof resp === "object") ? resp : JSON.parse(resp);
+            notify(data.status, data.message);
+            // Reset button after update
+            submitButton.prop('disabled', false).text("Update");
+          },
+          error: function(xhr, status, error) {
+            notify("error", "Error: " + error);
+            submitButton.prop('disabled', false).text("Update");
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 
