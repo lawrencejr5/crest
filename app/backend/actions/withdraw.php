@@ -10,7 +10,7 @@ if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'
     $currency = $_POST['currency'];
     $type     = $_POST['type'];
     $address  = $_POST['address'];
-    $transac_id = uniqid("transac_", true);
+    $transac_id = uniqid("wid_");
 
     // Retrieve user id from session - ensure your login script sets this
     $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;

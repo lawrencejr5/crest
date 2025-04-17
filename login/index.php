@@ -22,8 +22,8 @@
               <div class="account-card__body">
                 <form id="loginForm" action="" method="post">
                   <div class="form-group">
-                    <label>User Name</label>
-                    <input type="text" class="form-control" name="email" placeholder="Enter email" required>
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter email" required>
                   </div>
                   <div class="form-group">
                     <label>Password</label>

@@ -300,6 +300,10 @@
                     <label>Confirm Password</label>
                     <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
                   </div>
+                  <div class="form-group">
+                    <label>Referral Id</label>
+                    <input type="text" name="ref" class="form-control" placeholder="Referral id" value="<?= isset($_GET['ref']) ? $_GET['ref'] : "" ?>" readonly>
+                  </div>
                   <div class="form-row mt-2">
                     <div class="col-md-12">
                       <input type="checkbox" name="terms" required> <span class="f-size-14 ml-2">
@@ -384,6 +388,7 @@
         const email = $("input[name='email']").val();
         const password = $("input[name='password']").val();
         const password_confirmation = $("input[name='password_confirmation']").val();
+        const ref = $("input[name='ref']").val();
 
         $.ajax({
           type: "POST",
@@ -395,7 +400,8 @@
             country: country,
             phone: mobile_code + phone,
             email: email,
-            password: password
+            password: password,
+            ref: ref
           },
           success: function(res) {
             // Process the response here and show messages via notify()
@@ -417,21 +423,6 @@
         });
       });
     });
-  </script>
-
-  <!-- Other scripts like Tawk.to & Smartsupp -->
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
   </script>
 
   <script>

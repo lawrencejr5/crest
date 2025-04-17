@@ -81,7 +81,7 @@
                   <?php if (isset($user_deposits) && count($user_deposits) > 0): ?>
                     <?php foreach ($user_deposits as $deposit): ?>
                       <tr>
-                        <td>#<?php echo htmlspecialchars($deposit['id']); ?></td>
+                        <td>#<?php echo htmlspecialchars($deposit['transac_id']); ?></td>
                         <td><?php echo htmlspecialchars($deposit['currency']); ?></td>
                         <td>
                           <?php

@@ -77,9 +77,13 @@
                 </thead>
                 <tbody>
                   <?php if (isset($all_transactions) && count($all_transactions) > 0): ?>
+                    <?php
+                    // Define deposit types that should show as positive deposits
+                    $depositTypes = ['deposit', 'ref bonus', 'signup bonus', 'registration_bonus'];
+                    ?>
                     <?php foreach ($all_transactions as $transaction): ?>
                       <tr>
-                        <!-- Date: formatted from the created_at field -->
+                        <!-- Date: formatted from the datetime field -->
                         <td data-label="Date">
                           <?= date("d M, Y h:i A", strtotime($transaction['datetime'])) ?>
                         </td>
@@ -87,19 +91,21 @@
                         <td data-label="#Trx">
                           <?= htmlspecialchars($transaction['transac_id']) ?>
                         </td>
-                        <!-- Details: using the type column -->
+                        <!-- Details: capitalized type -->
                         <td data-label="Details">
                           <?= ucfirst(htmlspecialchars($transaction['type'])) ?>
                         </td>
-                        <!-- Amount: show plus for deposits, minus for withdrawals -->
+                        <!-- Amount: plus sign for deposit types, minus sign otherwise -->
                         <td data-label="Amount">
-                          <?php if (strtolower($transaction['type']) == 'deposit'): ?>
+                          <?php
+                          $typeLower = strtolower($transaction['type']);
+                          if (in_array($typeLower, $depositTypes)) : ?>
                             <strong class="text-success">+ <?= htmlspecialchars($transaction['dol_val']) ?> USD</strong>
                           <?php else: ?>
                             <strong class="text-danger">- <?= htmlspecialchars($transaction['dol_val']) ?> USD</strong>
                           <?php endif; ?>
                         </td>
-                        <!-- Remaining balance: using the current user's total balance -->
+                        <!-- Remaining balance -->
                         <td data-label="Remaining balance">
                           <?= htmlspecialchars($total_user_balance) ?> USD
                         </td>

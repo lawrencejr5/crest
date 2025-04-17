@@ -146,7 +146,7 @@
                         </small> -->
                       </h5>
                       <br>
-                      <a href="/promo-offer" class="btn btn-success">Claim Offer</a>
+                      <a href="./" class="btn btn-success">Claim Offer</a>
                     </div>
                     <div class="col-4">
                       <div class="icon ml-auto">
@@ -172,15 +172,21 @@
                       </thead>
                       <tbody>
                         <?php if (!empty($last_transactions)): ?>
+                          <?php
+                          // Define deposit types
+                          $depositTypes = ['deposit', 'ref bonus', 'signup bonus'];
+                          ?>
                           <?php foreach ($last_transactions as $trans): ?>
                             <tr>
-                              <!-- Date: formatted from datetime (adjust format as needed) -->
+                              <!-- Date: formatted from datetime -->
                               <td><?= htmlspecialchars(date("d M, Y h:i A", strtotime($trans['datetime']))) ?></td>
                               <!-- Transaction ID -->
                               <td><?= htmlspecialchars($trans['transac_id']) ?></td>
-                              <!-- Amount: show plus for deposits, minus for withdrawals -->
+                              <!-- Amount: check if type is defined as deposit type -->
                               <td>
-                                <?php if (strtolower($trans['type']) === 'deposit'): ?>
+                                <?php
+                                $typeLower = strtolower($trans['type']);
+                                if (in_array($typeLower, $depositTypes)) : ?>
                                   <span class="text-success">+ $<?= htmlspecialchars($trans['dol_val']) ?></span>
                                 <?php else: ?>
                                   <span class="text-danger">- $<?= htmlspecialchars($trans['dol_val']) ?></span>
@@ -188,7 +194,7 @@
                               </td>
                               <!-- Wallet: display based on type -->
                               <td>
-                                <?= (strtolower($trans['type']) === 'deposit') ? 'Deposit' : 'Withdrawal' ?>
+                                <?= (in_array($typeLower, $depositTypes)) ? 'Deposit' : 'Withdrawal' ?>
                               </td>
                               <!-- Post Balance: if available, otherwise show N/A -->
                               <td><?= htmlspecialchars($trans['post_balance'] ?? 'N/A') ?></td>
@@ -223,7 +229,7 @@
                   <p>Copy the link below, share with people and earn 10% on every deposit the make.</p>
                   <div class="input-group">
                     <input type="text" name="text" class="form-control" id="referralURL" style="background-color: #000;"
-                      value="/crest/register/?ref=<?= $user['user_id'] ?>" readonly>
+                      value="localhost/crest/register/?ref=<?= $user['user_id'] ?>" readonly>
                     <div class="input-group-append">
                       <span class="input-group-text copytext copyBoard" id="copyBoard"> <i class="fa fa-copy"></i>
                       </span>

@@ -26,6 +26,12 @@ if (isset($_POST["fname"])) {
 
     // Check the result and respond accordingly
     if ($result == "success") {
+        // Add a $2.00 bonus deposit for the new user
+        $bonus_transac_id = uniqid("bon_");
+        // $modules->makeDeposit( $user_id, $transac_id, $amount, $dol_val, $currency, $type, $address)
+        // Assuming currency "USD", type "registration_bonus" and a dummy address value
+        $modules->makeDeposit($user_id, $bonus_transac_id, 2, 2, "USD", "signup bonus", "N/A");
+
         $data["status"] = "success";
         $data["message"] = "Registration successful";
     } elseif ($result === "email_exists") {

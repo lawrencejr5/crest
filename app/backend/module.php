@@ -280,6 +280,18 @@ class Modules extends Connection
         }
         return false;
     }
+
+    // Get all users referred by a given user
+    public function getUserReferrals($user_id)
+    {
+        $this->sql = "SELECT * FROM users WHERE ref = :ref ORDER BY id DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':ref', $user_id);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
 }
 
 
