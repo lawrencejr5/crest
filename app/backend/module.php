@@ -9,14 +9,16 @@ class Modules extends Connection
     // Function to get user data based on user_id
     public function getUserData($uid)
     {
-        $this->sql = "SELECT * FROM users WHERE id = :id LIMIT 1";
+        $this->sql = "SELECT * FROM users WHERE id = :id OR user_id = :user_id LIMIT 1";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':id', $uid);
+        $this->stmt->bindParam(':user_id', $uid);
         if ($this->stmt->execute()) {
             return $this->stmt->fetch(PDO::FETCH_ASSOC);
         }
         return false;
     }
+
 
     // New function to get a user by email
     public function getUserByEmail($email)
@@ -157,6 +159,18 @@ class Modules extends Connection
     public function getUserDeposits($user_id)
     {
         $this->sql = "SELECT * FROM deposits WHERE user_id = :user_id ORDER BY id DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
+
+    // Get referral bonus deposits for a user from deposits table
+    public function getRefBonusDeposits($user_id)
+    {
+        $this->sql = "SELECT * FROM deposits WHERE user_id = :user_id AND type = 'ref bonus' ORDER BY datetime DESC";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':user_id', $user_id);
         if ($this->stmt->execute()) {

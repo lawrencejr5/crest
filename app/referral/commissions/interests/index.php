@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include "../../../backend/udata.php" ?>
 <?php include "../../../master/head.php" ?>
 
 <body>
@@ -49,34 +50,19 @@
     <section class="cmn-section pt-60">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
+          <!-- <div class="col-md-12">
             <div class="right float-md-right float-none text-md-right text-center mb-5">
-              <a href="
-                                               /crest/app/referral/commissions/interests
-                        
-                        " class="btn cmn-btn mb-md-0 mb-2 
-                                                ">
+              <a href="/crest/app/referral/commissions/interests" class="btn cmn-btn mb-md-0 mb-2">
                 Deposit Commission
               </a>
-              <a href="
-
-                                                javascript:void(0)
-                        
-                        " class="btn cmn-btn mb-md-0 mb-2
-                                                btn-disabled
-                                                ">
+              <a href="javascript:void(0)" class="btn cmn-btn mb-md-0 mb-2 btn-disabled">
                 Interest Commission
               </a>
-              <a href="
-
-                                                /crest/app/referral/commissions/invest
-                        
-                        " class="btn cmn-btn mb-md-0
-                                                ">
+              <a href="/crest/app/referral/commissions/invest" class="btn cmn-btn mb-md-0">
                 Invest Commission
               </a>
             </div>
-          </div>
+          </div> -->
           <div class="col-md-12">
             <div class="table-responsive--md">
               <table class="table style--two">
@@ -84,16 +70,50 @@
                   <tr>
                     <th scope="col">Date</th>
                     <th scope="col">From</th>
-                    <th scope="col">Level</th>
-                    <th scope="col">Percent</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Bonus</th>
                     <th scope="col">Amount</th>
-                    <th scope="col">Type</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="text-right" colspan="100%">No result found</td>
-                  </tr>
+                  <?php if (!empty($user_ref_bonus_deposits) && is_array($user_ref_bonus_deposits)): ?>
+                    <?php foreach ($user_ref_bonus_deposits as $deposit): ?>
+                      <tr>
+                        <!-- Date -->
+                        <td data-label="Date">
+                          <?= htmlspecialchars(date("d M, Y h:i A", strtotime($deposit['datetime']))) ?>
+                        </td>
+                        <!-- From -->
+                        <td data-label="From">
+                          <?php
+                          // $deposit['address'] now contains the user id for the referrer
+                          $fromUser = $modules->getUserData($deposit['address']);
+                          if ($fromUser) {
+                            echo htmlspecialchars($fromUser['fname'] . ' ' . $fromUser['lname']);
+                          } else {
+                            echo htmlspecialchars($deposit['address']);
+                          }
+                          ?>
+                        </td>
+                        <!-- Details / Description -->
+                        <td data-label="Details">
+                          Referral Bonus Deposit
+                        </td>
+                        <!-- Amount: referral bonus deposits always appear as positive -->
+                        <td data-label="Amount">
+                          <strong class="text-success">+ $<?= htmlspecialchars($deposit['dol_val']) ?></strong>
+                        </td>
+                        <!-- Post Balance -->
+                        <td data-label="Remaining Balance">
+                          <?= htmlspecialchars($deposit['amount'] ?? 'N/A') ?> <?= $deposit['currency'] ?>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <td colspan="5" class="text-center text-muted">No referral bonus deposits found.</td>
+                    </tr>
+                  <?php endif; ?>
                 </tbody>
               </table>
 
@@ -119,28 +139,6 @@
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/wow.min.js"></script>
   <!-- dashboard custom js -->
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
-
-
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
 
   <script>
     (function() {
@@ -180,21 +178,6 @@
         position: "topRight"
       });
     }
-  </script>
-
-
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
   </script>
 
   <script>

@@ -45,6 +45,14 @@ if ($user_id) {
     }
 }
 
+$user_referrals = [];
+if ($user_id) {
+    $userReferrals = $modules->getUserReferrals($user_id);
+    if ($userReferrals && is_array($userReferrals)) {
+        $user_referrals = $userReferrals;
+    }
+}
+
 // Calculate total user balance
 $total_user_balance = $total_deposits - $total_withdrawals;
 
@@ -57,6 +65,16 @@ if ($user_id) {
     }
 }
 
+// Get referral bonus deposits for the user
+$user_ref_bonus_deposits = [];
+if ($user_id) {
+    $refBonusDeposits = $modules->getRefBonusDeposits($user_id);
+    if ($refBonusDeposits && is_array($refBonusDeposits)) {
+        $user_ref_bonus_deposits = $refBonusDeposits;
+    }
+}
+
+// Prepare last transactions if needed
 $last_transactions = [];
 if (isset($all_transactions) && is_array($all_transactions)) {
     $last_transactions = array_slice($all_transactions, 0, 5);

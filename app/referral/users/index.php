@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include "../../backend/udata.php" ?>
 <?php include "../../master/head.php" ?>
 
 <body>
@@ -38,7 +39,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Welcome Back!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="https://assetbase-trading.com">User</a></li>
+              <li><a href="./">User</a></li>
               <li>My referred Users</li>
             </ul>
           </div>
@@ -60,7 +61,24 @@
                   </tr>
                 </thead>
                 <tbody class="list">
-
+                  <?php if (!empty($user_referrals)): ?>
+                    <?php foreach ($user_referrals as $index => $referral): ?>
+                      <tr>
+                        <td><?= $index + 1 ?></td>
+                        <td><?= htmlspecialchars($referral['fname'] . ' ' . $referral['lname']) ?></td>
+                        <td>
+                          <?php
+                          // Adjust "created_at" to your actual field name for when the user joined
+                          echo htmlspecialchars(date("d M, Y h:i A", strtotime($referral['datetime'])));
+                          ?>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <td colspan="3" class="text-center">No referrals found.</td>
+                    </tr>
+                  <?php endif; ?>
                 </tbody>
               </table>
             </div>
@@ -87,27 +105,6 @@
   <!-- dashboard custom js -->
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
 
-
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
 
   <script>
     (function() {
@@ -147,21 +144,6 @@
         position: "topRight"
       });
     }
-  </script>
-
-
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
   </script>
 
   <script>

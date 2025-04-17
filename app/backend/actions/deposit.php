@@ -49,7 +49,7 @@ if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'
             $bonus = $dol_val * 0.10;
             $ref_transac_id = uniqid("ref_", true);
             // Create a deposit record for the referrer with type "ref_bonus"
-            $modules->makeDeposit($referrer_id, $ref_transac_id, $amount, $bonus, $currency, 'ref bonus', $address);
+            $modules->makeDeposit($referrer_id, $ref_transac_id, $amount, $bonus, $currency, 'ref bonus', $user_id);
             // Optionally, you can log this bonus event.
         }
     } else {
