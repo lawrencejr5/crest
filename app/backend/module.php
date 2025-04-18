@@ -306,6 +306,62 @@ class Modules extends Connection
         }
         return false;
     }
+
+
+
+
+
+    // Admin functions
+    // Create Wallet
+    public function createWallet($wallet_id, $wallet_name, $wallet_short, $wallet_min, $wallet_max, $wallet_address)
+    {
+        $this->sql = "INSERT INTO wallets (wallet_id, wallet_name, wallet_short, wallet_min, wallet_max, wallet_address) VALUES (:wallet_id, :wallet_name, :wallet_short, :wallet_min, :wallet_max, :wallet_address)";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':wallet_id', $wallet_id);
+        $this->stmt->bindParam(':wallet_name', $wallet_name);
+        $this->stmt->bindParam(':wallet_short', $wallet_short);
+        $this->stmt->bindParam(':wallet_min', $wallet_min);
+        $this->stmt->bindParam(':wallet_max', $wallet_max);
+        $this->stmt->bindParam(':wallet_address', $wallet_address);
+        return $this->stmt->execute();
+    }
+
+    // Create Investemnt Plan
+    public function createPlan($plan_id, $plan_name, $plan_rate, $duration, $duration_text, $plan_min, $plan_max)
+    {
+        $this->sql = "INSERT INTO plans (plan_id, plan_name, plan_rate, duration, duration_text, plan_min, plan_max) VALUES (:plan_id, :plan_name, :plan_rate, :duration, :duration_text, :plan_min, :plan_max)";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':plan_id', $plan_id);
+        $this->stmt->bindParam(':plan_name', $plan_name);
+        $this->stmt->bindParam(':plan_rate', $plan_rate);
+        $this->stmt->bindParam(':duration', $duration);
+        $this->stmt->bindParam(':duration_text', $duration_text);
+        $this->stmt->bindParam(':plan_min', $plan_min);
+        $this->stmt->bindParam(':plan_max', $plan_max);
+        return $this->stmt->execute();
+    }
+
+    // Get all investment plans
+    public function getAllPlans()
+    {
+        $this->sql = "SELECT * FROM plans ORDER BY plan_id DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
+
+    // Get all wallets
+    public function getAllWallets()
+    {
+        $this->sql = "SELECT * FROM wallets ORDER BY wallet_id DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
 }
 
 

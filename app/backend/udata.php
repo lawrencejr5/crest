@@ -89,4 +89,18 @@ if ($user_id) {
     }
 }
 
+// Get all investment plans
+$user_plans = [];
+$allPlans = $modules->getAllPlans();
+if ($allPlans && is_array($allPlans)) {
+    $user_plans = $allPlans;
+}
+
+// Get all wallets
+$wallets = [];
+$allWallets = $modules->getAllWallets();
+if ($allWallets && is_array($allWallets)) {
+    $wallets = $allWallets;
+}
+
 !$_SESSION['id'] && header('location: ../../login');
