@@ -307,11 +307,16 @@ class Modules extends Connection
         return false;
     }
 
-
-
-
-
-    // Admin functions
+    // Get all wallets
+    public function getAllWallets()
+    {
+        $this->sql = "SELECT * FROM wallets ORDER BY wallet_id DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
     // Create Wallet
     public function createWallet($wallet_id, $wallet_name, $wallet_short, $wallet_min, $wallet_max, $wallet_address)
     {
@@ -327,12 +332,13 @@ class Modules extends Connection
     }
 
     // Create Investemnt Plan
-    public function createPlan($plan_id, $plan_name, $plan_rate, $duration, $duration_text, $plan_min, $plan_max)
+    public function createPlan($plan_id, $plan_name, $plan_type, $plan_rate, $duration, $duration_text, $plan_min, $plan_max)
     {
-        $this->sql = "INSERT INTO plans (plan_id, plan_name, plan_rate, duration, duration_text, plan_min, plan_max) VALUES (:plan_id, :plan_name, :plan_rate, :duration, :duration_text, :plan_min, :plan_max)";
+        $this->sql = "INSERT INTO plans (plan_id, plan_name, plan_type, plan_rate, duration, duration_text, plan_min, plan_max) VALUES (:plan_id, :plan_name, :plan_type, :plan_rate, :duration, :duration_text, :plan_min, :plan_max)";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':plan_id', $plan_id);
         $this->stmt->bindParam(':plan_name', $plan_name);
+        $this->stmt->bindParam(':plan_type', $plan_type);
         $this->stmt->bindParam(':plan_rate', $plan_rate);
         $this->stmt->bindParam(':duration', $duration);
         $this->stmt->bindParam(':duration_text', $duration_text);
@@ -344,7 +350,7 @@ class Modules extends Connection
     // Get all investment plans
     public function getAllPlans()
     {
-        $this->sql = "SELECT * FROM plans ORDER BY plan_id DESC";
+        $this->sql = "SELECT * FROM plans";
         $this->stmt = $this->conn->prepare($this->sql);
         if ($this->stmt->execute()) {
             return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -352,15 +358,36 @@ class Modules extends Connection
         return false;
     }
 
-    // Get all wallets
-    public function getAllWallets()
+    // Get a single plan by plan_id
+    public function getPlan($plan_id)
     {
-        $this->sql = "SELECT * FROM wallets ORDER BY wallet_id DESC";
+        $this->sql = "SELECT * FROM plans WHERE plan_id = :plan_id LIMIT 1";
         $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':plan_id', $plan_id);
         if ($this->stmt->execute()) {
-            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $this->stmt->fetch(PDO::FETCH_ASSOC);
         }
         return false;
+    }
+
+    // Start an investment
+    public function startInvestment($invest_id, $user_id, $plan_id, $amount, $start_date, $end_date, $to_earn, $earned, $expected, $num_of_days, $status)
+    {
+        $this->sql = "INSERT INTO investments (invest_id, user_id, plan_id, amount, start_date, end_date, to_earn, earned, expected, num_of_days, status) 
+                      VALUES (:invest_id, :user_id, :plan_id, :amount, :start_date, :end_date, :to_earn, :earned, :expected, :num_of_days, :status)";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':invest_id', $invest_id);
+        $this->stmt->bindParam(':user_id', $user_id);
+        $this->stmt->bindParam(':plan_id', $plan_id);
+        $this->stmt->bindParam(':amount', $amount);
+        $this->stmt->bindParam(':start_date', $start_date);
+        $this->stmt->bindParam(':end_date', $end_date);
+        $this->stmt->bindParam(':to_earn', $to_earn);
+        $this->stmt->bindParam(':earned', $earned);
+        $this->stmt->bindParam(':expected', $expected);
+        $this->stmt->bindParam(':num_of_days', $num_of_days);
+        $this->stmt->bindParam(':status', $status);
+        return $this->stmt->execute();
     }
 }
 

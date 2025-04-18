@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include "../backend/udata.php" ?>
 <?php include "../master/head.php" ?>
 
 
@@ -51,123 +52,39 @@
     <section class="pt-60 pb-120">
       <div class="container">
         <div class="row mb-none-30 justify-content-center">
-          <div class="col-md-12">
-            <div class="right float-right mb-5">
-              <a href="./investments/" class="btn cmn-btn">
-                My Investments
-              </a>
+          <?php if (!empty($user_plans)): ?>
+            <?php foreach ($user_plans as $plan): ?>
+              <div class="col-lg-4 mb-30">
+                <div class="package-card text-center bg_img" data-background="https://assetbase-trading.com/assets/templates/bit_gold/images/bg/bg-4.png">
+                  <h4 class="package-card__title base--color mb-2" style="text-transform: capitalize;"><?= htmlspecialchars($plan['plan_name']) ?></h4>
+                  <ul class="package-card__features mt-4">
+                    <li>Return <?= htmlspecialchars($plan['plan_rate']) ?>%</li>
+                    <li><?= htmlspecialchars($plan['plan_type']) ?></li>
+                    <li>For <?= htmlspecialchars($plan['duration_text']) ?></li>
+                    <li>Total <?= htmlspecialchars($plan['total']) ?>%</li>
+                  </ul>
+                  <div class="package-card__range mt-5 base--color">
+                    $<?= htmlspecialchars($plan['plan_min']) ?> - $<?= htmlspecialchars($plan['plan_max']) ?>
+                  </div>
+                  <a href="javascript:void(0)" data-toggle="modal" data-target="#depoModal" data-resource='{ 
+                      "id": "<?= htmlspecialchars($plan['plan_id']) ?>", 
+                      "name": "<?= htmlspecialchars($plan['plan_name']) ?>", 
+                      "minimum": "<?= htmlspecialchars($plan['plan_min']) ?>", 
+                      "maximum": "<?= htmlspecialchars($plan['plan_max']) ?>", 
+                      "interest": "<?= htmlspecialchars($plan['plan_rate']) ?>", 
+                      "duration": "<?= htmlspecialchars($plan['duration_text']) ?>",
+                      "type": "<?= htmlspecialchars($plan['plan_type']) ?>"
+                    }' class="cmn-btn btn-md mt-4 investButton">
+                    Invest Now
+                  </a>
+                </div><!-- package-card end -->
+              </div>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <div class="col-12">
+              <p>No plans available.</p>
             </div>
-          </div>
-          <div class="col-lg-4 mb-30">
-            <div class="package-card text-center bg_img" data-background="https://assetbase-trading.com/assets/templates/bit_gold//images/bg/bg-4.png">
-              <h4 class="package-card__title base--color mb-2">BASIC</h4>
-
-              <ul class="package-card__features mt-4">
-                <li>Return 3%</li>
-
-                <li>
-                  Every Day
-                </li>
-                <li>For 30 Days </li>
-                <li>
-                  Total 90%
-
-
-                </li>
-              </ul>
-              <div class="package-card__range mt-5 base--color"> $100 - $1500
-              </div>
-              <a href="javascript:void(0)" data-toggle="modal" data-target="#depoModal" data-resource="{&quot;id&quot;:1,&quot;name&quot;:&quot;BASIC&quot;,&quot;minimum&quot;:&quot;100&quot;,&quot;maximum&quot;:&quot;1500&quot;,&quot;fixed_amount&quot;:&quot;0&quot;,&quot;interest&quot;:&quot;3&quot;,&quot;interest_status&quot;:1,&quot;times&quot;:&quot;24&quot;,&quot;status&quot;:1,&quot;featured&quot;:1,&quot;capital_back_status&quot;:1,&quot;lifetime_status&quot;:0,&quot;repeat_time&quot;:&quot;30&quot;,&quot;created_at&quot;:&quot;2021-09-04T17:21:17.000000Z&quot;,&quot;updated_at&quot;:&quot;2023-02-01T16:39:44.000000Z&quot;}" class="cmn-btn btn-md mt-4 investButton">Invest Now</a>
-            </div><!-- package-card end -->
-          </div>
-          <div class="col-lg-4 mb-30">
-            <div class="package-card text-center bg_img" data-background="https://assetbase-trading.com/assets/templates/bit_gold//images/bg/bg-4.png">
-              <h4 class="package-card__title base--color mb-2">GOLD/STOCK</h4>
-
-              <ul class="package-card__features mt-4">
-                <li>Return 19%</li>
-
-                <li>
-                  Every Week
-                </li>
-                <li>For 6 Weeks </li>
-                <li>
-                  Total 114%
-
-
-                </li>
-              </ul>
-              <div class="package-card__range mt-5 base--color"> $2500 - $50000
-              </div>
-              <a href="javascript:void(0)" data-toggle="modal" data-target="#depoModal" data-resource="{&quot;id&quot;:2,&quot;name&quot;:&quot;GOLD\/STOCK&quot;,&quot;minimum&quot;:&quot;2500&quot;,&quot;maximum&quot;:&quot;50000&quot;,&quot;fixed_amount&quot;:&quot;0&quot;,&quot;interest&quot;:&quot;19&quot;,&quot;interest_status&quot;:1,&quot;times&quot;:&quot;168&quot;,&quot;status&quot;:1,&quot;featured&quot;:1,&quot;capital_back_status&quot;:1,&quot;lifetime_status&quot;:0,&quot;repeat_time&quot;:&quot;6&quot;,&quot;created_at&quot;:&quot;2021-09-04T17:27:43.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-11-09T11:18:24.000000Z&quot;}" class="cmn-btn btn-md mt-4 investButton">Invest Now</a>
-            </div><!-- package-card end -->
-          </div>
-          <div class="col-lg-4 mb-30">
-            <div class="package-card text-center bg_img" data-background="https://assetbase-trading.com/assets/templates/bit_gold//images/bg/bg-4.png">
-              <h4 class="package-card__title base--color mb-2">REAL ESTATE</h4>
-
-              <ul class="package-card__features mt-4">
-                <li>Return 25%</li>
-
-                <li>
-                  Every Week
-                </li>
-                <li>For 6 Weeks </li>
-                <li>
-                  Total 150%
-
-
-                </li>
-              </ul>
-              <div class="package-card__range mt-5 base--color"> $5500 - $100000
-              </div>
-              <a href="javascript:void(0)" data-toggle="modal" data-target="#depoModal" data-resource="{&quot;id&quot;:3,&quot;name&quot;:&quot;REAL ESTATE&quot;,&quot;minimum&quot;:&quot;5500&quot;,&quot;maximum&quot;:&quot;100000&quot;,&quot;fixed_amount&quot;:&quot;0&quot;,&quot;interest&quot;:&quot;25&quot;,&quot;interest_status&quot;:1,&quot;times&quot;:&quot;168&quot;,&quot;status&quot;:1,&quot;featured&quot;:1,&quot;capital_back_status&quot;:1,&quot;lifetime_status&quot;:0,&quot;repeat_time&quot;:&quot;6&quot;,&quot;created_at&quot;:&quot;2021-09-04T17:28:58.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-11-09T11:18:26.000000Z&quot;}" class="cmn-btn btn-md mt-4 investButton">Invest Now</a>
-            </div><!-- package-card end -->
-          </div>
-          <div class="col-lg-4 mb-30">
-            <div class="package-card text-center bg_img" data-background="https://assetbase-trading.com/assets/templates/bit_gold//images/bg/bg-4.png">
-              <h4 class="package-card__title base--color mb-2">OIL AND GAS</h4>
-
-              <ul class="package-card__features mt-4">
-                <li>Return 15%</li>
-
-                <li>
-                  Every Day
-                </li>
-                <li>For 6 Days </li>
-                <li>
-                  Total 90%
-
-
-                </li>
-              </ul>
-              <div class="package-card__range mt-5 base--color"> $10000 - $1000000
-              </div>
-              <a href="javascript:void(0)" data-toggle="modal" data-target="#depoModal" data-resource="{&quot;id&quot;:4,&quot;name&quot;:&quot;OIL AND GAS&quot;,&quot;minimum&quot;:&quot;10000&quot;,&quot;maximum&quot;:&quot;1000000&quot;,&quot;fixed_amount&quot;:&quot;0&quot;,&quot;interest&quot;:&quot;15&quot;,&quot;interest_status&quot;:1,&quot;times&quot;:&quot;24&quot;,&quot;status&quot;:1,&quot;featured&quot;:1,&quot;capital_back_status&quot;:1,&quot;lifetime_status&quot;:0,&quot;repeat_time&quot;:&quot;6&quot;,&quot;created_at&quot;:&quot;2021-09-04T17:30:12.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-11-09T11:34:21.000000Z&quot;}" class="cmn-btn btn-md mt-4 investButton">Invest Now</a>
-            </div><!-- package-card end -->
-          </div>
-          <div class="col-lg-4 mb-30">
-            <div class="package-card text-center bg_img" data-background="https://assetbase-trading.com/assets/templates/bit_gold//images/bg/bg-4.png">
-              <h4 class="package-card__title base--color mb-2">FARM AND SHARES</h4>
-
-              <ul class="package-card__features mt-4">
-                <li>Return 18%</li>
-
-                <li>
-                  Every Day
-                </li>
-                <li>For 7 Days </li>
-                <li>
-                  Total 126%
-
-
-                </li>
-              </ul>
-              <div class="package-card__range mt-5 base--color"> $25000 - $1000000
-              </div>
-              <a href="javascript:void(0)" data-toggle="modal" data-target="#depoModal" data-resource="{&quot;id&quot;:5,&quot;name&quot;:&quot;FARM AND SHARES&quot;,&quot;minimum&quot;:&quot;25000&quot;,&quot;maximum&quot;:&quot;1000000&quot;,&quot;fixed_amount&quot;:&quot;0&quot;,&quot;interest&quot;:&quot;18&quot;,&quot;interest_status&quot;:1,&quot;times&quot;:&quot;24&quot;,&quot;status&quot;:1,&quot;featured&quot;:1,&quot;capital_back_status&quot;:1,&quot;lifetime_status&quot;:0,&quot;repeat_time&quot;:&quot;7&quot;,&quot;created_at&quot;:&quot;2022-11-09T07:28:13.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-11-09T10:21:49.000000Z&quot;}" class="cmn-btn btn-md mt-4 investButton">Invest Now</a>
-            </div><!-- package-card end -->
-          </div>
+          <?php endif; ?>
         </div>
       </div>
     </section>
@@ -180,13 +97,13 @@
         <div class="modal-content modal-content-bg">
           <div class="modal-header">
             <strong class="modal-title text-white" id="ModalLabel">
-              Confirm to invest on <span class="planName"></span>
+              Confirm to invest on <span class="planName" style="text-transform: capitalize;"></span> Plan
             </strong>
             <a href="javascript:void(0)" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </a>
           </div>
-          <form action="https://assetbase-trading.com/user/plans" method="post" class="register">
+          <form id="depositForm" action="https://assetbase-trading.com/user/plans" method="post" class="register">
             <input type="hidden" name="_token" value="v0QlAVhKtAuRzkedf8cRKcXDWi5QXYEAoRmRB7FZ">
             <div class="modal-body">
 
@@ -199,12 +116,13 @@
                 <div class="form-group ">
                   <strong class="text-white mb-2 d-block">Select wallet</strong>
                   <select class="form-control" name="wallet_type">
-                    <option value="deposit_wallet">Deposit Wallet - $2</option>
+                    <option value="deposit_wallet">Deposit Wallet - $<?= $total_user_balance ?></option>
                     <option value="interest_wallet">Interest Wallet -$0</option>
-                    <option value="checkout">Checkout</option>
                   </select>
                 </div>
                 <input type="hidden" name="plan_id" class="plan_id">
+                <input type="hidden" name="dep_wallet" id="" value="<?= $total_user_balance ?>">
+                <input type="hidden" name="int_wallet" id="" value="0">
 
                 <div class="form-group">
                   <strong class="text-white mb-2 d-block">Invest Amount</strong>
@@ -243,28 +161,6 @@
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/wow.min.js"></script>
   <!-- dashboard custom js -->
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
-
-
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
 
   <script>
     (function() {
@@ -306,60 +202,97 @@
     }
   </script>
 
-
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
   <script>
     (function($) {
       "use strict";
       $(document).on('click', '.investButton', function() {
-        var data = $(this).data('resource');
+        // Parse the JSON from the data-resource attribute
+        var resourceString = $(this).attr('data-resource');
+        var data = JSON.parse(resourceString); // Parse the string to JSON object
         var symbol = "$";
-        var currency = "USD";
 
-        $('#mySelect').empty();
-
-        if (data.fixed_amount == '0') {
-          $('.investAmountRenge').text(`invest: ${symbol}${data.minimum} - ${symbol}${data.maximum}`);
-          $('.fixedAmount').val('');
-          $('#fixedAmount').attr('readonly', false);
-
-
-        } else {
-          $('.investAmountRenge').text(`invest: ${symbol}${data.fixed_amount}`);
-          $('.fixedAmount').val(data.fixed_amount);
-          $('#fixedAmount').attr('readonly', true);
-
-        }
-
-        if (data.interest_status == '1') {
-          $('.interestDetails').html(`<strong> Interest: ${data.interest} % </strong>`);
-        } else {
-          $('.interestDetails').html(`<strong> Interest: ${data.interest} ${currency}  </strong>`);
-        }
-        if (data.lifetime_status == '0') {
-          $('.interestValidaty').html(`<strong>  per ${data.times} hours ,  ${data.repeat_time} times</strong>`);
-        } else {
-          $('.interestValidaty').html(`<strong>  per ${data.times} hours,  life time </strong>`);
-        }
-
+        // Set the range text
+        $('.investAmountRenge').text(`Invest: ${symbol}${data.minimum} - ${symbol}${data.maximum}`);
+        $('.interestDetails').html(`<strong> Interest: ${data.interest} % ${data.type} for ${data.duration}</strong>`);
         $('.planName').text(data.name);
         $('.plan_id').val(data.id);
+
+        // Store min and max on the modal for later validation
+        $("#depoModal").data('min', parseFloat(data.minimum));
+        $("#depoModal").data('max', parseFloat(data.maximum));
       });
+    })(jQuery);
+  </script>
 
+  <script>
+    (function($) {
+      "use strict";
+      $(document).on('submit', '#depositForm', function(e) {
+        e.preventDefault();
 
+        // Retrieve the invest amount entered by the user
+        var investAmount = parseFloat($('.fixedAmount').val());
+        if (isNaN(investAmount)) {
+          notify("error", "Please enter a valid amount");
+          return;
+        }
 
+        // Get the minimum and maximum values stored on the modal
+        var minAmount = $("#depoModal").data('min');
+        var maxAmount = $("#depoModal").data('max');
+
+        // Validate the invested amount is within the range
+        if (investAmount < minAmount) {
+          notify("error", "Investment amount cannot be less than $" + minAmount);
+          return;
+        }
+        if (investAmount > maxAmount) {
+          notify("error", "Investment amount cannot exceed $" + maxAmount);
+          return;
+        }
+
+        // Check the wallet balance based on selected wallet
+        var walletType = $("select[name='wallet_type']").val();
+        if (walletType === "deposit_wallet") {
+          var walletBalance = parseFloat($("input[name='dep_wallet']").val());
+          if (investAmount > walletBalance) {
+            notify("error", "Insufficient deposit wallet balance");
+            return;
+          }
+        } else if (walletType === "interest_wallet") {
+          var walletBalance = parseFloat($("input[name='int_wallet']").val());
+          if (investAmount > walletBalance) {
+            notify("error", "Insufficient interest wallet balance");
+            return;
+          }
+        }
+
+        // Everything is good; disable the submit button and send the AJAX request
+        var submitButton = $(this).find('button[type="submit"]');
+        submitButton.prop('disabled', true).text("Processing...");
+
+        $.ajax({
+          type: "POST",
+          url: "../backend/actions/invest.php",
+          data: $(this).serialize(),
+          dataType: "json",
+          success: function(response) {
+            if (response.status === "success") {
+              notify("success", response.message);
+              window.setTimeout(() => {
+                window.location.href = "./";
+              }, 2000)
+            } else {
+              notify("error", response.message);
+            }
+            submitButton.prop('disabled', false).text("Next");
+          },
+          error: function(xhr, status, error) {
+            notify("error", "Error: " + error);
+            submitButton.prop('disabled', false).text("Next");
+          }
+        });
+      });
     })(jQuery);
   </script>
 
