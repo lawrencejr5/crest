@@ -389,6 +389,18 @@ class Modules extends Connection
         $this->stmt->bindParam(':status', $status);
         return $this->stmt->execute();
     }
+
+    // Get all investments for a user
+    public function getAllInvestments($user_id)
+    {
+        $this->sql = "SELECT * FROM investments WHERE user_id = :user_id ORDER BY start_date DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
 }
 
 

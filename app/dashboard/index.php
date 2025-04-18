@@ -166,7 +166,7 @@
                           <th>Date</th>
                           <th>Transaction ID</th>
                           <th>Amount</th>
-                          <th>Wallet</th>
+                          <th>Type</th>
                           <th>Post Balance</th>
                         </tr>
                       </thead>
@@ -175,6 +175,7 @@
                           <?php
                           // Define deposit types
                           $depositTypes = ['deposit', 'ref bonus', 'signup bonus'];
+                          $withdrawalTypes = ['deposit', 'investement'];
                           ?>
                           <?php foreach ($last_transactions as $trans): ?>
                             <tr>
@@ -193,8 +194,8 @@
                                 <?php endif; ?>
                               </td>
                               <!-- Wallet: display based on type -->
-                              <td>
-                                <?= (in_array($typeLower, $depositTypes)) ? 'Deposit' : 'Withdrawal' ?>
+                              <td style="text-transform: capitalize;">
+                                <?= $trans['type'] ?>
                               </td>
                               <!-- Post Balance: if available, otherwise show N/A -->
                               <td><?= htmlspecialchars($trans['post_balance'] ?? 'N/A') ?></td>

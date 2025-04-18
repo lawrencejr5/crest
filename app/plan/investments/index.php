@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include "../../backend/udata.php" ?>
 <?php include "../../master/head.php" ?>
 
 
@@ -27,7 +28,7 @@
   </div>
   <div class="page-wrapper">
     <!-- header-section start  -->
-    <?php include "../../master/head.php" ?>
+    <?php include "../../master/nav.php" ?>
 
     <!-- header-section end  -->
 
@@ -87,20 +88,67 @@
                 <thead>
                   <tr>
                     <th scope="col">Plan</th>
-                    <th scope="col">Return</th>
-                    <th scope="col">Received</th>
-                    <th scope="col">Next payment</th>
+                    <th scope="col">Amount Invested</th>
+                    <th scope="col">Net Profit</th>
+                    <th scope="col">Amount Earned</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Days Invested</th>
+                    <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td colspan="8">No result found</td>
-                  </tr>
+                  <?php if (!empty($user_investments) && is_array($user_investments)): ?>
+                    <?php foreach ($user_investments as $investment): ?>
+                      <?php
+                      // Retrieve plan details for this investment
+                      $planDetails = $modules->getPlan($investment['plan_id']);
+                      // Calculate net profit (expected minus the invested amount)
+                      $netProfit = $investment['expected'];
+                      // Determine status color
+                      $statusColor = 'inherit';
+                      if (strtolower($investment['status']) === 'active') {
+                        $statusColor = 'green';
+                      } elseif (strtolower($investment['status']) === 'ended') {
+                        $statusColor = 'grey';
+                      }
+                      ?>
+                      <tr>
+                        <!-- Plan Name -->
+                        <td style="text-transform: capitalize;">
+                          <?= htmlspecialchars(isset($planDetails['plan_name']) ? $planDetails['plan_name'] : "N/A") ?> plan
+                        </td>
 
+                        <!-- Amount Invested -->
+                        <td>$<?= htmlspecialchars(number_format($investment['amount'], 2)) ?></td>
+
+                        <!-- Net Profit -->
+                        <td>$<?= htmlspecialchars(number_format($netProfit, 2)) ?></td>
+
+                        <!-- Amount Earned So Far -->
+                        <td>$<?= htmlspecialchars(number_format($investment['earned'], 2)) ?></td>
+
+                        <!-- Duration: Start Date to End Date -->
+                        <td>
+                          <?= htmlspecialchars(date("d M, Y", strtotime($investment['start_date']))) ?> -
+                          <?= htmlspecialchars(date("d M, Y", strtotime($investment['end_date']))) ?>
+                        </td>
+
+                        <!-- Number of Days Invested -->
+                        <td><?= htmlspecialchars($investment['num_of_days']) ?></td>
+
+                        <!-- Status -->
+                        <td style="color: <?= $statusColor; ?>;">
+                          <?= htmlspecialchars(ucfirst($investment['status'])) ?>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <td colspan="7" class="text-center">No result found</td>
+                    </tr>
+                  <?php endif; ?>
                 </tbody>
               </table>
-
-
             </div>
           </div>
         </div>
@@ -126,28 +174,6 @@
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/wow.min.js"></script>
   <!-- dashboard custom js -->
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
-
-
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
 
   <script>
     (function() {
@@ -189,20 +215,6 @@
     }
   </script>
 
-
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
 
 
   <script>

@@ -52,6 +52,13 @@
     <section class="pt-60 pb-120">
       <div class="container">
         <div class="row mb-none-30 justify-content-center">
+          <div class="col-md-12">
+            <div class="right float-right mb-5">
+              <a href="./investments/" class="btn cmn-btn">
+                My Investments
+              </a>
+            </div>
+          </div>
           <?php if (!empty($user_plans)): ?>
             <?php foreach ($user_plans as $plan): ?>
               <div class="col-lg-4 mb-30">
@@ -103,7 +110,7 @@
               <span aria-hidden="true">&times;</span>
             </a>
           </div>
-          <form id="depositForm" action="https://assetbase-trading.com/user/plans" method="post" class="register">
+          <form id="depositForm" action="" method="post" class="register">
             <input type="hidden" name="_token" value="v0QlAVhKtAuRzkedf8cRKcXDWi5QXYEAoRmRB7FZ">
             <div class="modal-body">
 
