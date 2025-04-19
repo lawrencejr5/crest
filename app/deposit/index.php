@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include "../backend/udata.php" ?>
 <?php include "../master/head.php" ?>
 
 
@@ -61,138 +62,41 @@
             </div>
           </div>
 
-          <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-            <div class="card">
-              <div class="card-body b-primary">
-                <div class="row justify-content-center">
-                  <div class="col-md-5 col-sm-12">
-                    <img src="https://assetbase-trading.com/assets/images/gateway/6133c91c170d51630783772.png" class="card-img-top w-100" alt="Bitcoin">
-                  </div>
-                  <div class="col-md-7 col-sm-12">
-                    <ul class="list-group text-center">
-
-
-                      <li class="list-group-item">
-                        Bitcoin</li>
-
-                      <li class="list-group-item">Limit : 100
-                        - 1000000 USD</li>
-
-                      <li class="list-group-item"> Charge - 0 USD
-                        + 0%
-                      </li>
-
-                      <li class="list-group-item">
-                        <button type="button" data-id="1" data-resource="{&quot;id&quot;:1,&quot;name&quot;:&quot;Bitcoin&quot;,&quot;currency&quot;:&quot;USD&quot;,&quot;symbol&quot;:&quot;&quot;,&quot;method_code&quot;:1000,&quot;gateway_alias&quot;:&quot;bitcoin&quot;,&quot;min_amount&quot;:&quot;100.00000000&quot;,&quot;max_amount&quot;:&quot;1000000.00000000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;1.00000000&quot;,&quot;image&quot;:&quot;6133c91c170d51630783772.png&quot;,&quot;gateway_parameter&quot;:&quot;{\&quot;payment_proof\&quot;:{\&quot;field_name\&quot;:\&quot;payment_proof\&quot;,\&quot;field_level\&quot;:\&quot;Payment Proof\&quot;,\&quot;type\&quot;:\&quot;text\&quot;,\&quot;validation\&quot;:\&quot;required\&quot;}}&quot;,&quot;created_at&quot;:&quot;2021-09-04T14:29:33.000000Z&quot;,&quot;updated_at&quot;:&quot;2025-02-15T00:41:38.000000Z&quot;,&quot;method&quot;:{&quot;id&quot;:32,&quot;code&quot;:&quot;1000&quot;,&quot;alias&quot;:&quot;bitcoin&quot;,&quot;image&quot;:&quot;6133c91c170d51630783772.png&quot;,&quot;name&quot;:&quot;Bitcoin&quot;,&quot;status&quot;:true,&quot;parameters&quot;:&quot;[]&quot;,&quot;supported_currencies&quot;:&quot;[]&quot;,&quot;crypto&quot;:0,&quot;extra&quot;:null,&quot;description&quot;:&quot;bc1q8kgs7amrmdre4z3y4vylaud5380rgx3wd06u2a&quot;,&quot;input_form&quot;:{&quot;payment_proof&quot;:{&quot;field_name&quot;:&quot;payment_proof&quot;,&quot;field_level&quot;:&quot;Payment Proof&quot;,&quot;type&quot;:&quot;text&quot;,&quot;validation&quot;:&quot;required&quot;}},&quot;created_at&quot;:&quot;2021-09-04T14:29:32.000000Z&quot;,&quot;updated_at&quot;:&quot;2025-02-15T00:41:16.000000Z&quot;}}"
-                          data-base_symbol=""
-                          class=" btn deposit cmn-btn w-100" data-toggle="modal" data-target="#exampleModal">
-                          Deposit</button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-            <div class="card">
-              <div class="card-body b-primary">
-                <div class="row justify-content-center">
-                  <div class="col-md-5 col-sm-12">
-                    <img src="https://assetbase-trading.com/assets/images/gateway/614af5fcd3f291632302588.png" class="card-img-top w-100" alt="Ethereum">
-                  </div>
-                  <div class="col-md-7 col-sm-12">
-                    <ul class="list-group text-center">
-
-
-                      <li class="list-group-item">
-                        Ethereum</li>
-
-                      <li class="list-group-item">Limit : 100
-                        - 1000000 USD</li>
-
-                      <li class="list-group-item"> Charge - 0 USD
-                        + 0%
-                      </li>
-
-                      <li class="list-group-item">
-                        <button type="button" data-id="2" data-resource="{&quot;id&quot;:2,&quot;name&quot;:&quot;Ethereum&quot;,&quot;currency&quot;:&quot;$&quot;,&quot;symbol&quot;:&quot;&quot;,&quot;method_code&quot;:1001,&quot;gateway_alias&quot;:&quot;ethereum&quot;,&quot;min_amount&quot;:&quot;100.00000000&quot;,&quot;max_amount&quot;:&quot;1000000.00000000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;1.00000000&quot;,&quot;image&quot;:&quot;614af5fcd3f291632302588.png&quot;,&quot;gateway_parameter&quot;:&quot;{\&quot;payment_proof\&quot;:{\&quot;field_name\&quot;:\&quot;payment_proof\&quot;,\&quot;field_level\&quot;:\&quot;Payment Proof\&quot;,\&quot;type\&quot;:\&quot;file\&quot;,\&quot;validation\&quot;:\&quot;required\&quot;}}&quot;,&quot;created_at&quot;:&quot;2021-09-22T09:23:09.000000Z&quot;,&quot;updated_at&quot;:&quot;2024-02-20T10:31:09.000000Z&quot;,&quot;method&quot;:{&quot;id&quot;:33,&quot;code&quot;:&quot;1001&quot;,&quot;alias&quot;:&quot;ethereum&quot;,&quot;image&quot;:&quot;614af5fcd3f291632302588.png&quot;,&quot;name&quot;:&quot;Ethereum&quot;,&quot;status&quot;:true,&quot;parameters&quot;:&quot;[]&quot;,&quot;supported_currencies&quot;:&quot;[]&quot;,&quot;crypto&quot;:0,&quot;extra&quot;:null,&quot;description&quot;:&quot;0xCdaAab960E93968F3Acab578FB1a9246Ccb2859e&quot;,&quot;input_form&quot;:{&quot;payment_proof&quot;:{&quot;field_name&quot;:&quot;payment_proof&quot;,&quot;field_level&quot;:&quot;Payment Proof&quot;,&quot;type&quot;:&quot;file&quot;,&quot;validation&quot;:&quot;required&quot;}},&quot;created_at&quot;:&quot;2021-09-22T09:23:09.000000Z&quot;,&quot;updated_at&quot;:&quot;2024-02-20T10:31:08.000000Z&quot;}}"
-                          data-base_symbol=""
-                          class=" btn deposit cmn-btn w-100" data-toggle="modal" data-target="#exampleModal">
-                          Deposit</button>
-                      </li>
-                    </ul>
+          <?php if (!empty($wallets) && is_array($wallets)): ?>
+            <?php foreach ($wallets as $wallet): ?>
+              <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                <div class="card">
+                  <div class="card-body b-primary">
+                    <div class="row justify-content-center">
+                      <div class="col-md-5 col-sm-12">
+                        <img src="https://assetbase-trading.com/assets/images/gateway/<?= htmlspecialchars($wallet['wallet_img']) ?>" class="card-img-top w-100" alt="<?= htmlspecialchars($wallet['wallet_name']) ?>">
+                      </div>
+                      <div class="col-md-7 col-sm-12">
+                        <ul class="list-group text-center">
+                          <li class="list-group-item">
+                            <?= htmlspecialchars($wallet['wallet_name']) ?>
+                          </li>
+                          <li class="list-group-item">
+                            Limit : <?= htmlspecialchars($wallet['wallet_min']) ?> - <?= htmlspecialchars($wallet['wallet_max']) ?> USD
+                          </li>
+                          <li class="list-group-item">
+                            Charge - 0 USD + 0%
+                          </li>
+                          <li class="list-group-item">
+                            <button type="button" data-id="<?= htmlspecialchars($wallet['wallet_id']) ?>"
+                              data-resource='<?php echo json_encode($wallet); ?>'
+                              class="btn deposit cmn-btn w-100" data-toggle="modal" data-target="#exampleModal">
+                              Deposit
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-            <div class="card">
-              <div class="card-body b-primary">
-                <div class="row justify-content-center">
-                  <div class="col-md-5 col-sm-12">
-                    <img src="https://assetbase-trading.com/assets/images/gateway/636ba134bccc51667998004.png" class="card-img-top w-100" alt="USDT(TRC20)">
-                  </div>
-                  <div class="col-md-7 col-sm-12">
-                    <ul class="list-group text-center">
-
-
-                      <li class="list-group-item">
-                        USDT(TRC20)</li>
-
-                      <li class="list-group-item">Limit : 100
-                        - 1000000 USD</li>
-
-                      <li class="list-group-item"> Charge - 0 USD
-                        + 0%
-                      </li>
-
-                      <li class="list-group-item">
-                        <button type="button" data-id="4" data-resource="{&quot;id&quot;:4,&quot;name&quot;:&quot;USDT(TRC20)&quot;,&quot;currency&quot;:&quot;$&quot;,&quot;symbol&quot;:&quot;&quot;,&quot;method_code&quot;:1003,&quot;gateway_alias&quot;:&quot;usdt(trc20)&quot;,&quot;min_amount&quot;:&quot;100.00000000&quot;,&quot;max_amount&quot;:&quot;1000000.00000000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;1.00000000&quot;,&quot;image&quot;:&quot;636ba134bccc51667998004.png&quot;,&quot;gateway_parameter&quot;:&quot;{\&quot;payment_proof\&quot;:{\&quot;field_name\&quot;:\&quot;payment_proof\&quot;,\&quot;field_level\&quot;:\&quot;Payment Proof\&quot;,\&quot;type\&quot;:\&quot;text\&quot;,\&quot;validation\&quot;:\&quot;required\&quot;}}&quot;,&quot;created_at&quot;:&quot;2021-09-22T09:31:39.000000Z&quot;,&quot;updated_at&quot;:&quot;2024-11-21T19:32:36.000000Z&quot;,&quot;method&quot;:{&quot;id&quot;:35,&quot;code&quot;:&quot;1003&quot;,&quot;alias&quot;:&quot;usdt(trc20)&quot;,&quot;image&quot;:&quot;636ba134bccc51667998004.png&quot;,&quot;name&quot;:&quot;USDT(TRC20)&quot;,&quot;status&quot;:true,&quot;parameters&quot;:&quot;[]&quot;,&quot;supported_currencies&quot;:&quot;[]&quot;,&quot;crypto&quot;:0,&quot;extra&quot;:null,&quot;description&quot;:&quot;TFEzH8kZz2Wp6zg1xQsYDrZwaTiTFLntbp&quot;,&quot;input_form&quot;:{&quot;payment_proof&quot;:{&quot;field_name&quot;:&quot;payment_proof&quot;,&quot;field_level&quot;:&quot;Payment Proof&quot;,&quot;type&quot;:&quot;text&quot;,&quot;validation&quot;:&quot;required&quot;}},&quot;created_at&quot;:&quot;2021-09-22T09:31:39.000000Z&quot;,&quot;updated_at&quot;:&quot;2024-11-21T19:32:36.000000Z&quot;}}"
-                          data-base_symbol=""
-                          class=" btn deposit cmn-btn w-100" data-toggle="modal" data-target="#exampleModal">
-                          Deposit</button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-            <div class="card">
-              <div class="card-body b-primary">
-                <div class="row justify-content-center">
-                  <div class="col-md-5 col-sm-12">
-                    <img src="https://assetbase-trading.com/assets/images/gateway/614af8b9220dc1632303289.png" class="card-img-top w-100" alt="Dogecoin">
-                  </div>
-                  <div class="col-md-7 col-sm-12">
-                    <ul class="list-group text-center">
-
-
-                      <li class="list-group-item">
-                        Dogecoin</li>
-
-                      <li class="list-group-item">Limit : 800
-                        - 1000000 USD</li>
-
-                      <li class="list-group-item"> Charge - 0 USD
-                        + 0%
-                      </li>
-
-                      <li class="list-group-item">
-                        <button type="button" data-id="5" data-resource="{&quot;id&quot;:5,&quot;name&quot;:&quot;Dogecoin&quot;,&quot;currency&quot;:&quot;$&quot;,&quot;symbol&quot;:&quot;&quot;,&quot;method_code&quot;:1004,&quot;gateway_alias&quot;:&quot;dogecoin&quot;,&quot;min_amount&quot;:&quot;800.00000000&quot;,&quot;max_amount&quot;:&quot;1000000.00000000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;1.00000000&quot;,&quot;image&quot;:&quot;614af8b9220dc1632303289.png&quot;,&quot;gateway_parameter&quot;:&quot;{\&quot;payment_proof\&quot;:{\&quot;field_name\&quot;:\&quot;payment_proof\&quot;,\&quot;field_level\&quot;:\&quot;Payment Proof\&quot;,\&quot;type\&quot;:\&quot;file\&quot;,\&quot;validation\&quot;:\&quot;required\&quot;}}&quot;,&quot;created_at&quot;:&quot;2021-09-22T09:34:49.000000Z&quot;,&quot;updated_at&quot;:&quot;2024-02-20T10:30:56.000000Z&quot;,&quot;method&quot;:{&quot;id&quot;:36,&quot;code&quot;:&quot;1004&quot;,&quot;alias&quot;:&quot;dogecoin&quot;,&quot;image&quot;:&quot;614af8b9220dc1632303289.png&quot;,&quot;name&quot;:&quot;Dogecoin&quot;,&quot;status&quot;:true,&quot;parameters&quot;:&quot;[]&quot;,&quot;supported_currencies&quot;:&quot;[]&quot;,&quot;crypto&quot;:0,&quot;extra&quot;:null,&quot;description&quot;:&quot;DBMRuqJqhLpNudChSi5sgSuUeSfRWwpxhX&quot;,&quot;input_form&quot;:{&quot;payment_proof&quot;:{&quot;field_name&quot;:&quot;payment_proof&quot;,&quot;field_level&quot;:&quot;Payment Proof&quot;,&quot;type&quot;:&quot;file&quot;,&quot;validation&quot;:&quot;required&quot;}},&quot;created_at&quot;:&quot;2021-09-22T09:34:49.000000Z&quot;,&quot;updated_at&quot;:&quot;2024-02-20T10:30:56.000000Z&quot;}}"
-                          data-base_symbol=""
-                          class=" btn deposit cmn-btn w-100" data-toggle="modal" data-target="#exampleModal">
-                          Deposit</button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </div>
       </div>
     </section>
@@ -213,7 +117,7 @@
               <div class="form-group">
                 <input type="hidden" name="currency" class="edit-currency" value="">
                 <input type="hidden" name="type" value="deposit">
-                <input type="hidden" name="address" value="2x0sahda89b3w8ewjd9x73vxhs">
+                <input type="hidden" name="address" value="">
                 <!-- New hidden field for the converted amount -->
                 <input type="hidden" name="converted_amount" id="convertedAmountInput" value="">
               </div>
@@ -226,7 +130,7 @@
                   </div>
                 </div>
                 <br>
-                <small style="float: right;" id="convertedAmount">0</small>
+                <small style="float: right;" id="convertedAmount"></small>
               </div>
             </div>
             <div class="modal-footer">
@@ -262,8 +166,9 @@
     $(document).ready(function() {
       // Reset the deposit form when the modal is closed
       $('#exampleModal').on('hidden.bs.modal', function() {
+        let currency = $("input[name='currency']").val();
         $("#depositForm")[0].reset();
-        $("#convertedAmount").text("0");
+        $("#convertedAmount").text(`You will pay 0 ${currency}`);
         $("#convertedAmountInput").val("");
       });
 
@@ -271,15 +176,11 @@
       $(".deposit").on("click", function() {
         let resourceStr = $(this).attr("data-resource");
         let depositMethod = JSON.parse(resourceStr);
-        let alias = depositMethod.gateway_alias.toLowerCase();
-        const currencyMapping = {
-          "bitcoin": "BTC",
-          "ethereum": "ETH",
-          "usdt(trc20)": "USDT",
-          "dogecoin": "DOGE"
-        };
-        let targetCurrency = currencyMapping[alias] || alias.toUpperCase();
+
+        let targetCurrency = depositMethod.wallet_short;
+        let targetAddress = depositMethod.wallet_address;
         $("input[name='currency']").val(targetCurrency);
+        $("input[name='address']").val(targetAddress);
         $("#exampleModalLabel").text("Depositing with " + targetCurrency);
       });
 
@@ -312,7 +213,7 @@
 
         const convertedVal = await convert("USD", targetCurrency, amountVal);
 
-        $("#convertedAmount").text(convertedVal + " " + targetCurrency);
+        $("#convertedAmount").text(`You will pay ${convertedVal} ${targetCurrency}`);
         // Update the hidden field with the converted amount
         $("#convertedAmountInput").val(convertedVal);
         submitButton.prop("disabled", false);
@@ -338,7 +239,6 @@
             currency: currency,
             type: type,
             address: address,
-            // Pass the converted amount under a parameter name of your choosing
             amount: converted_amount
           },
           dataType: "json",
@@ -346,11 +246,13 @@
             if (response.status === "success") {
               notify("success", response.message);
               // Redirect to the preview page with all necessary parameters (URL encoded)
-              window.location.href = "../deposit/preview/index.php?" +
-                "address=" + encodeURIComponent(address) +
-                "&currency=" + encodeURIComponent(currency) +
-                "&usd=" + encodeURIComponent(dol_val) +
-                "&converted=" + encodeURIComponent(converted_amount);
+              window.setTimeout(() => {
+                window.location.href = "../deposit/preview/index.php?" +
+                  "address=" + encodeURIComponent(address) +
+                  "&currency=" + encodeURIComponent(currency) +
+                  "&usd=" + encodeURIComponent(dol_val) +
+                  "&converted=" + encodeURIComponent(converted_amount);
+              }, 2000)
             } else {
               notify("error", response.message);
             }

@@ -60,139 +60,45 @@
               </a>
             </div>
           </div>
-
-          <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-            <div class="card card-deposit b-primary">
-              <div class="card-body card-body-deposit">
-                <div class="row">
-                  <div class="col-md-5 col-sm-12">
-                    <img src="https://assetbase-trading.com/assets/images/withdraw/method/6133389eb75251630746782.png" class="card-img-top w-100" alt="Bitcoin">
-                  </div>
-                  <div class="col-md-7 col-sm-12">
-                    <ul class="list-group text-center">
-                      <li class="list-group-item">
-                        Bitcoin</li>
-                      <li class="list-group-item">Limit : 10
-                        - 1000000 USD</li>
-
-                      <li class="list-group-item"> Charge - 0 USD
-                        + 0%
-                      </li>
-
-                      <li class="list-group-item">
-                        <a href="javascript:void(0)" data-id="1"
-                          data-resource="{&quot;id&quot;:1,&quot;name&quot;:&quot;Bitcoin&quot;,&quot;image&quot;:&quot;6133389eb75251630746782.png&quot;,&quot;min_limit&quot;:&quot;10.00000000&quot;,&quot;max_limit&quot;:&quot;1000000.00000000&quot;,&quot;delay&quot;:&quot;24hrs&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;1.00000000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;currency&quot;:&quot;USD&quot;,&quot;user_data&quot;:{&quot;wallet_address&quot;:{&quot;field_name&quot;:&quot;wallet_address&quot;,&quot;field_level&quot;:&quot;Wallet Address&quot;,&quot;type&quot;:&quot;textarea&quot;,&quot;validation&quot;:&quot;required&quot;}},&quot;description&quot;:&quot;&lt;span style=\&quot;color: rgb(33, 37, 41);\&quot;&gt;Kindly input your wallet address below to process your withdrawal!&lt;\/span&gt;&lt;br&gt;&lt;span style=\&quot;color: rgb(33, 37, 41);\&quot;&gt;&lt;i&gt;&lt;b&gt;please input the correct as we won&#039;t be responsible for payment failure due to wrong wallet address.&lt;\/b&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;br&gt;&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2021-09-04T04:13:03.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-11-09T07:47:13.000000Z&quot;}"
-                          class="btn btn-block  cmn-btn withdraw" data-toggle="modal" data-target="#withdrawModal">
-                          Withdraw Now</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-            <div class="card card-deposit b-primary">
-              <div class="card-body card-body-deposit">
-                <div class="row">
-                  <div class="col-md-5 col-sm-12">
-                    <img src="https://assetbase-trading.com/assets/images/withdraw/method/636ba1dcf40631667998172.png" class="card-img-top w-100" alt="Ethereum">
-                  </div>
-                  <div class="col-md-7 col-sm-12">
-                    <ul class="list-group text-center">
-                      <li class="list-group-item">
-                        Ethereum</li>
-                      <li class="list-group-item">Limit : 10
-                        - 100000000 USD</li>
-
-                      <li class="list-group-item"> Charge - 0 USD
-                        + 0%
-                      </li>
-
-                      <li class="list-group-item">
-                        <a href="javascript:void(0)" data-id="2"
-                          data-resource="{&quot;id&quot;:2,&quot;name&quot;:&quot;Ethereum&quot;,&quot;image&quot;:&quot;636ba1dcf40631667998172.png&quot;,&quot;min_limit&quot;:&quot;10.00000000&quot;,&quot;max_limit&quot;:&quot;100000000.00000000&quot;,&quot;delay&quot;:&quot;24hrs&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;1.00000000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;currency&quot;:&quot;USD&quot;,&quot;user_data&quot;:{&quot;wallet_address&quot;:{&quot;field_name&quot;:&quot;wallet_address&quot;,&quot;field_level&quot;:&quot;Wallet Address&quot;,&quot;type&quot;:&quot;text&quot;,&quot;validation&quot;:&quot;required&quot;}},&quot;description&quot;:&quot;&lt;span style=\&quot;color: rgb(33, 37, 41);\&quot;&gt;Kindly input your wallet address below to process your withdrawal!&lt;\/span&gt;&lt;br&gt;&lt;span style=\&quot;color: rgb(33, 37, 41);\&quot;&gt;&lt;i&gt;&lt;span style=\&quot;font-weight: bolder;\&quot;&gt;please input the correct as we won&#039;t be responsible for payment failure due to wrong wallet address.&lt;\/span&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;br&gt;&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2022-11-09T07:49:33.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-11-09T07:49:43.000000Z&quot;}"
-                          class="btn btn-block  cmn-btn withdraw" data-toggle="modal" data-target="#withdrawModal">
-                          Withdraw Now</a>
-                      </li>
-                    </ul>
+        </div>
+        <div class="container">
+          <div class="row mb-60-80 justify-content-center">
+            <?php if (!empty($wallets) && is_array($wallets)): ?>
+              <?php foreach ($wallets as $wallet): ?>
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                  <div class="card card-deposit b-primary">
+                    <div class="card-body card-body-deposit">
+                      <div class="row">
+                        <div class="col-md-5 col-sm-12">
+                          <img src="https://assetbase-trading.com/assets/images/gateway/<?= htmlspecialchars($wallet['wallet_img']) ?>" class="card-img-top w-100" alt="<?= htmlspecialchars($wallet['wallet_name']) ?>">
+                        </div>
+                        <div class="col-md-7 col-sm-12">
+                          <ul class="list-group text-center">
+                            <li class="list-group-item">
+                              <?= htmlspecialchars($wallet['wallet_name']) ?>
+                            </li>
+                            <li class="list-group-item">
+                              Limit : <?= htmlspecialchars($wallet['wallet_min']) ?> - <?= htmlspecialchars($wallet['wallet_max']) ?> USD
+                            </li>
+                            <li class="list-group-item">
+                              Charge - 0 USD + 0%
+                            </li>
+                            <li class="list-group-item">
+                              <button type="button" data-id="<?= htmlspecialchars($wallet['wallet_id']) ?>"
+                                data-resource='<?php echo json_encode($wallet); ?>'
+                                class="btn btn-block cmn-btn withdraw" data-toggle="modal" data-target="#withdrawModal">
+                                Withdraw Now
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-
-              </div>
-            </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
           </div>
-
-          <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-            <div class="card card-deposit b-primary">
-              <div class="card-body card-body-deposit">
-                <div class="row">
-                  <div class="col-md-5 col-sm-12">
-                    <img src="https://assetbase-trading.com/assets/images/withdraw/method/636ba213ced641667998227.png" class="card-img-top w-100" alt="Doge">
-                  </div>
-                  <div class="col-md-7 col-sm-12">
-                    <ul class="list-group text-center">
-                      <li class="list-group-item">
-                        Doge</li>
-                      <li class="list-group-item">Limit : 10
-                        - 100000000 USD</li>
-
-                      <li class="list-group-item"> Charge - 0 USD
-                        + 0%
-                      </li>
-
-                      <li class="list-group-item">
-                        <a href="javascript:void(0)" data-id="3"
-                          data-resource="{&quot;id&quot;:3,&quot;name&quot;:&quot;Doge&quot;,&quot;image&quot;:&quot;636ba213ced641667998227.png&quot;,&quot;min_limit&quot;:&quot;10.00000000&quot;,&quot;max_limit&quot;:&quot;100000000.00000000&quot;,&quot;delay&quot;:&quot;24hrs&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;1.00000000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;currency&quot;:&quot;USD&quot;,&quot;user_data&quot;:{&quot;wallet_address&quot;:{&quot;field_name&quot;:&quot;wallet_address&quot;,&quot;field_level&quot;:&quot;Wallet Address&quot;,&quot;type&quot;:&quot;text&quot;,&quot;validation&quot;:&quot;required&quot;}},&quot;description&quot;:&quot;&lt;span style=\&quot;color: rgb(33, 37, 41);\&quot;&gt;Kindly input your wallet address below to process your withdrawal!&lt;\/span&gt;&lt;br&gt;&lt;span style=\&quot;color: rgb(33, 37, 41);\&quot;&gt;&lt;i&gt;&lt;span style=\&quot;font-weight: bolder;\&quot;&gt;please input the correct as we won&#039;t be responsible for payment failure due to wrong wallet address.&lt;\/span&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;br&gt;&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2022-11-09T07:50:28.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-11-09T07:50:28.000000Z&quot;}"
-                          class="btn btn-block  cmn-btn withdraw" data-toggle="modal" data-target="#withdrawModal">
-                          Withdraw Now</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-            <div class="card card-deposit b-primary">
-              <div class="card-body card-body-deposit">
-                <div class="row">
-                  <div class="col-md-5 col-sm-12">
-                    <img src="https://assetbase-trading.com/assets/images/withdraw/method/636ba244144be1667998276.png" class="card-img-top w-100" alt="USDT(TRC20)">
-                  </div>
-                  <div class="col-md-7 col-sm-12">
-                    <ul class="list-group text-center">
-                      <li class="list-group-item">
-                        USDT(TRC20)</li>
-                      <li class="list-group-item">Limit : 10
-                        - 100000000 USD</li>
-
-                      <li class="list-group-item"> Charge - 0 USD
-                        + 0%
-                      </li>
-
-                      <li class="list-group-item">
-                        <a href="javascript:void(0)" data-id="4"
-                          data-resource="{&quot;id&quot;:4,&quot;name&quot;:&quot;USDT(TRC20)&quot;,&quot;image&quot;:&quot;636ba244144be1667998276.png&quot;,&quot;min_limit&quot;:&quot;10.00000000&quot;,&quot;max_limit&quot;:&quot;100000000.00000000&quot;,&quot;delay&quot;:&quot;24hrs&quot;,&quot;fixed_charge&quot;:&quot;0.00000000&quot;,&quot;rate&quot;:&quot;1.00000000&quot;,&quot;percent_charge&quot;:&quot;0.00&quot;,&quot;currency&quot;:&quot;USD&quot;,&quot;user_data&quot;:{&quot;wallet_address&quot;:{&quot;field_name&quot;:&quot;wallet_address&quot;,&quot;field_level&quot;:&quot;Wallet Address&quot;,&quot;type&quot;:&quot;text&quot;,&quot;validation&quot;:&quot;required&quot;}},&quot;description&quot;:&quot;&lt;span style=\&quot;color: rgb(33, 37, 41);\&quot;&gt;Kindly input your wallet address below to process your withdrawal!&lt;\/span&gt;&lt;br&gt;&lt;span style=\&quot;color: rgb(33, 37, 41);\&quot;&gt;&lt;i&gt;&lt;span style=\&quot;font-weight: bolder;\&quot;&gt;please input the correct as we won&#039;t be responsible for payment failure due to wrong wallet address.&lt;\/span&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;br&gt;&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2022-11-09T07:51:16.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-11-09T07:51:16.000000Z&quot;}"
-                          class="btn btn-block  cmn-btn withdraw" data-toggle="modal" data-target="#withdrawModal">
-                          Withdraw Now</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
@@ -226,14 +132,13 @@
                 </div>
               </div>
               <br>
-              <small style="float: right;" id="convertedAmount">0</small>
+              <small style="float: right;" id="convertedAmount"></small>
               <!-- Hidden field for convertedAmount – here, we assume no conversion so equals the input amount -->
               <input type="hidden" autocomplete="nope" name="amount" id="convertedAmountInput" value="">
               <div class="form-group">
                 <label>Enter Your Withdrawal Address:</label>
                 <input type="text" class="form-control" name="address" placeholder="Enter your wallet address" required autocomplete="nope">
               </div>
-
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-md btn-danger" data-dismiss="modal">Close</button>
@@ -303,21 +208,6 @@
     }
   </script>
 
-  <script>
-    (function($) {
-      "use strict";
-      $(document).ready(function() {
-        $('.deposit').on('click', function() {
-          var result = $(this).data('resource');
-
-          $('.method-name').text(`Withdraw Via  ${result.name}`);
-
-
-          $('.edit-method-code').val(result.id);
-        });
-      });
-    })(jQuery);
-  </script>
 
   <script>
     (function() {
@@ -331,13 +221,6 @@
   <script>
     "use strict";
     $(document).ready(function() {
-
-      const currencyMapping = {
-        "bitcoin": "BTC",
-        "ethereum": "ETH",
-        "usdt(trc20)": "USDT",
-        "dogecoin": "DOGE"
-      };
 
       // Convert function remains unchanged
       const convert = async (curr1, curr2, amount) => {
@@ -356,14 +239,16 @@
       // Function to update the conversion result
       async function updateConversion() {
         let usdVal = $("#dol_val").val();
+        // Retrieve raw currency string and convert to three-letter format
+        let rawCurrency = $("input[name='currency']").val() || "USD";
+        let targetCurrency = rawCurrency;
+
         if (isNaN(usdVal) || usdVal === "") {
-          $("#convertedAmount").text("0");
+          $("#convertedAmount").text(`You will receive 0 ${targetCurrency}`);
           $("#convertedAmountInput").val("0");
           return;
         }
-        // Retrieve raw currency string and convert to three-letter format
-        let rawCurrency = $("input[name='currency']").val() || "USD";
-        let targetCurrency = currencyMapping[rawCurrency.toLowerCase()] || rawCurrency.toUpperCase();
+
 
         // Show loading text and disable button during conversion
         $("#convertedAmount").text("...");
@@ -371,7 +256,7 @@
         submitButton.prop("disabled", true);
 
         const convertedVal = await convert("USD", targetCurrency, usdVal);
-        let displayText = convertedVal + " " + targetCurrency;
+        let displayText = `You will receive ${convertedVal} ${targetCurrency}`;
         $("#convertedAmount").text(displayText);
         // Set only the number (without currency) in the hidden field
         $("#convertedAmountInput").val(convertedVal);
@@ -397,11 +282,10 @@
         let resourceStr = $(this).attr('data-resource');
         let withdrawMethod = JSON.parse(resourceStr);
         // Use the method name or alias – adjust as needed
-        let alias = withdrawMethod.name ? withdrawMethod.name.toLowerCase() : withdrawMethod.gateway_alias.toLowerCase();
-        let targetCurrency = alias.toUpperCase();
+        let targetCurrency = withdrawMethod.wallet_short;
         // Update the hidden currency field and modal title
         $("input[name='currency']").val(targetCurrency);
-        $("#withdrawModalLabel").text("Withdraw Via " + targetCurrency);
+        $("#withdrawModalLabel").text("Withdraw Via " + withdrawMethod.wallet_name);
         // Reset the form
         $("#withdrawForm")[0].reset();
       });
@@ -418,18 +302,6 @@
         let type = $(this).find("input[name='type']").val();
         let address = $(this).find("input[name='address']").val();
         let amount = $(this).find("input[name='amount']").val();
-
-        // Mapping to ensure currency is in three-letter format
-        const currencyMapping = {
-          "bitcoin": "BTC",
-          "ethereum": "ETH",
-          "usdt(trc20)": "USDT",
-          "dogecoin": "DOGE"
-        };
-        // If the currency isn't already 3 letters, map it accordingly.
-        if (currency.length !== 3) {
-          currency = currencyMapping[currency.toLowerCase()] || currency.toUpperCase();
-        }
 
         $.ajax({
           type: "POST",

@@ -310,7 +310,7 @@ class Modules extends Connection
     // Get all wallets
     public function getAllWallets()
     {
-        $this->sql = "SELECT * FROM wallets ORDER BY wallet_id DESC";
+        $this->sql = "SELECT * FROM wallets";
         $this->stmt = $this->conn->prepare($this->sql);
         if ($this->stmt->execute()) {
             return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
