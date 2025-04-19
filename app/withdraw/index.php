@@ -123,6 +123,13 @@
                 <input type="hidden" name="type" value="withdraw">
               </div>
               <div class="form-group">
+                <label>Balance (USD):</label>
+                <div class="input-group">
+                  <input id="balance" type="text" class="form-control form-control-lg" name="balance" value="$<?= $total_user_balance ?>" placeholder="" required autocomplete="nope" readonly>
+
+                </div>
+              </div>
+              <div class="form-group">
                 <label>Enter Amount (in USD):</label>
                 <div class="input-group">
                   <input id="dol_val" type="text" class="form-control form-control-lg" name="dol_val" placeholder="0.00" required autocomplete="nope">
@@ -169,27 +176,145 @@
 
 
   <script>
-    (function() {
-      "use strict";
-      $(document).on("change", ".langSel", function() {
-        window.location.href = "https://assetbase-trading.com/change/" + $(this).val();
+    "use strict";
+    $(document).ready(function() {
+
+      // Convert function remains unchanged
+      const convert = async (curr1, curr2, amount) => {
+        try {
+          const res = await fetch(`https://api.coinconvert.net/convert/${curr1}/${curr2}?amount=${amount}`);
+          const data = await res.json();
+          const test = Object.values(data);
+          const val = test[2];
+          return val ? val : amount;
+        } catch (error) {
+          console.error(error);
+          return amount;
+        }
+      };
+
+      // Function to update the conversion result for withdrawal (if needed)
+      async function updateWithdrawConversion() {
+        let usdVal = $("#dol_val").val();
+        let rawCurrency = $("input[name='currency']").val() || "USD";
+        let targetCurrency = rawCurrency;
+
+        if (isNaN(usdVal) || usdVal === "") {
+          $("#convertedAmount").text(`You will receive 0 ${targetCurrency}`);
+          $("#convertedAmountInput").val("0");
+          return;
+        }
+
+        $("#convertedAmount").text("...");
+        const submitButton = $("#withdrawForm button[type='submit']");
+        submitButton.prop("disabled", true);
+
+        const convertedVal = await convert("USD", targetCurrency, usdVal);
+        $("#convertedAmount").text(`You will receive ${convertedVal} ${targetCurrency}`);
+        $("#convertedAmountInput").val(convertedVal);
+        submitButton.prop("disabled", false);
+      }
+
+      $("#dol_val").on("input change", updateWithdrawConversion);
+
+      // When a withdrawal button is clicked…
+      $(".withdraw").on("click", function() {
+        let resourceStr = $(this).attr("data-resource");
+        let withdrawMethod = JSON.parse(resourceStr);
+        let targetCurrency = withdrawMethod.wallet_short;
+        $("input[name='currency']").val(targetCurrency);
+        $("#withdrawModalLabel").text("Withdraw Via " + withdrawMethod.wallet_name);
+        // Store the wallet limits on the modal for later validation
+        $("#withdrawModal").data("walletMin", withdrawMethod.wallet_min);
+        $("#withdrawModal").data("walletMax", withdrawMethod.wallet_max);
+        // Reset the form
+        $("#withdrawForm")[0].reset();
       });
 
-      $('.policy').on('click', function() {
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      // When the withdrawal form is submitted…
+      $("#withdrawForm").on("submit", function(e) {
+        e.preventDefault();
+        const submitButton = $(this).find("button[type='submit']");
+        submitButton.prop("disabled", true).text("Processing...");
+
+        // Get and parse the available balance (strip any non-numeric chars)
+        let availableBalance = parseFloat($("#balance").val().replace(/[^0-9.]/g, ''));
+        // Get the withdrawal amount entered
+        let withdrawAmount = parseFloat($(this).find("input[name='dol_val']").val());
+
+        // Validate sufficient balance
+        if (withdrawAmount > availableBalance) {
+          notify("error", "Insufficient balance to withdraw that amount.");
+          submitButton.prop("disabled", false).text("Confirm");
+          return;
+        }
+
+        // Retrieve the wallet limits stored on the modal
+        let minWithdrawal = parseFloat($("#withdrawModal").data("walletMin"));
+        let maxWithdrawal = parseFloat($("#withdrawModal").data("walletMax"));
+
+        // Validate against wallet limits
+        if (withdrawAmount < minWithdrawal) {
+          notify("error", "Withdrawal amount cannot be less than " + minWithdrawal + " USD");
+          submitButton.prop("disabled", false).text("Confirm");
+          return;
+        } else if (withdrawAmount > maxWithdrawal) {
+          notify("error", "Withdrawal amount cannot exceed " + maxWithdrawal + " USD");
+          submitButton.prop("disabled", false).text("Confirm");
+          return;
+        }
+
+        // Get form values
+        let currency = $(this).find("input[name='currency']").val();
+        let type = $(this).find("input[name='type']").val();
+        let address = $(this).find("input[name='address']").val();
+        let amount = $(this).find("input[name='amount']").val(); // converted amount
+
+        $.ajax({
+          type: "POST",
+          url: "../backend/actions/withdraw.php",
+          data: {
+            amount: amount,
+            dol_val: withdrawAmount,
+            currency: currency,
+            type: type,
+            address: address
+          },
+          dataType: "json",
+          success: function(response) {
+            if (response.status === "success") {
+              notify("success", response.message);
+              $("#withdrawForm")[0].reset();
+              $('#withdrawModal').modal("hide");
+              window.setTimeout(() => {
+                window.location.href = "./preview/index.php?" +
+                  "address=" + encodeURIComponent(address) +
+                  "&currency=" + encodeURIComponent(currency) +
+                  "&usd=" + encodeURIComponent(withdrawAmount) +
+                  "&converted=" + encodeURIComponent(amount);
+              }, 1500);
+            } else {
+              notify("error", response.message);
+            }
+            submitButton.prop("disabled", false).text("Confirm");
+          },
+          error: function(xhr, status, error) {
+            notify("error", "Error: " + error);
+            submitButton.prop("disabled", false).text("Confirm");
           }
         });
-        $.get('https://assetbase-trading.com/cookie/accept', function(response) {
-          iziToast.success({
-            message: response,
-            position: "topRight"
-          });
-          $('.cookie__wrapper').addClass('d-none');
-        });
       });
-    })();
+
+      // When any modal is hidden, reset its form and conversion fields
+      $('#withdrawModal, #exampleModal').on("hidden.bs.modal", function() {
+        let form = $(this).find("form");
+        if (form.length) {
+          form[0].reset();
+        }
+        $(this).find("#convertedAmount").text("0");
+        $(this).find("#convertedAmountInput").val("");
+      });
+    });
   </script>
 
 
@@ -216,142 +341,6 @@
         window.location.href = "https://assetbase-trading.com/change/" + $(this).val();
       });
     })();
-  </script>
-
-  <script>
-    "use strict";
-    $(document).ready(function() {
-
-      // Convert function remains unchanged
-      const convert = async (curr1, curr2, amount) => {
-        try {
-          const res = await fetch(`https://api.coinconvert.net/convert/${curr1}/${curr2}?amount=${amount}`);
-          const data = await res.json();
-          const test = Object.values(data);
-          const val = test[2];
-          return val ? val : amount;
-        } catch (error) {
-          console.error(error);
-          return amount;
-        }
-      };
-
-      // Function to update the conversion result
-      async function updateConversion() {
-        let usdVal = $("#dol_val").val();
-        // Retrieve raw currency string and convert to three-letter format
-        let rawCurrency = $("input[name='currency']").val() || "USD";
-        let targetCurrency = rawCurrency;
-
-        if (isNaN(usdVal) || usdVal === "") {
-          $("#convertedAmount").text(`You will receive 0 ${targetCurrency}`);
-          $("#convertedAmountInput").val("0");
-          return;
-        }
-
-
-        // Show loading text and disable button during conversion
-        $("#convertedAmount").text("...");
-        const submitButton = $("#depositForm button[type='submit'], #withdrawForm button[type='submit']");
-        submitButton.prop("disabled", true);
-
-        const convertedVal = await convert("USD", targetCurrency, usdVal);
-        let displayText = `You will receive ${convertedVal} ${targetCurrency}`;
-        $("#convertedAmount").text(displayText);
-        // Set only the number (without currency) in the hidden field
-        $("#convertedAmountInput").val(convertedVal);
-        submitButton.prop("disabled", false);
-      }
-
-      // Bind updateConversion to both input and change events for #dol_val
-      $("#dol_val").on("input", updateConversion);
-      $("#dol_val").on("change", updateConversion);
-
-      // When any modal is hidden, reset its form and conversion fields
-      $('#withdrawModal, #exampleModal').on('hidden.bs.modal', function() {
-        let form = $(this).find('form');
-        if (form.length) {
-          form[0].reset();
-        }
-        $(this).find("#convertedAmount").text("0");
-        $(this).find("#convertedAmountInput").val("");
-      });
-
-      // When a withdrawal button is clicked…
-      $(".withdraw").on("click", function() {
-        let resourceStr = $(this).attr('data-resource');
-        let withdrawMethod = JSON.parse(resourceStr);
-        // Use the method name or alias – adjust as needed
-        let targetCurrency = withdrawMethod.wallet_short;
-        // Update the hidden currency field and modal title
-        $("input[name='currency']").val(targetCurrency);
-        $("#withdrawModalLabel").text("Withdraw Via " + withdrawMethod.wallet_name);
-        // Reset the form
-        $("#withdrawForm")[0].reset();
-      });
-
-      // When the withdrawal form is submitted…
-      $("#withdrawForm").on("submit", function(e) {
-        e.preventDefault();
-        const submitButton = $(this).find('button[type="submit"]');
-        submitButton.prop('disabled', true).text("Processing...");
-
-        // Get form values
-        let dol_val = $(this).find("input[name='dol_val']").val();
-        let currency = $(this).find("input[name='currency']").val();
-        let type = $(this).find("input[name='type']").val();
-        let address = $(this).find("input[name='address']").val();
-        let amount = $(this).find("input[name='amount']").val();
-
-        $.ajax({
-          type: "POST",
-          url: "../backend/actions/withdraw.php",
-          data: {
-            amount: amount,
-            dol_val: dol_val,
-            currency: currency,
-            type: type,
-            address: address
-          },
-          dataType: "json",
-          success: function(response) {
-            if (response.status === "success") {
-              notify("success", response.message);
-              $("#withdrawForm")[0].reset();
-              $('#withdrawModal').modal('hide');
-
-              window.setTimeout(() => {
-                window.location.href = "./preview/index.php?" +
-                  "address=" + encodeURIComponent(address) +
-                  "&currency=" + encodeURIComponent(currency) +
-                  "&usd=" + encodeURIComponent(dol_val) +
-                  "&converted=" + encodeURIComponent(amount);
-              }, 1500)
-            } else {
-              notify("error", response.message);
-            }
-            submitButton.prop('disabled', false).text("Confirm");
-          },
-          error: function(xhr, status, error) {
-            notify("error", "Error: " + error);
-            submitButton.prop('disabled', false).text("Confirm");
-          }
-        });
-      });
-
-      // When any modal (e.g., #withdrawModal or #exampleModal) is hidden, reset its form and converted amount
-      $('#withdrawModal, #exampleModal').on('hidden.bs.modal', function() {
-        // Reset the form (if there's a form inside the modal)
-        let form = $(this).find('form');
-        if (form.length) {
-          form[0].reset();
-        }
-        // Clear the displayed converted amount text (if exists)
-        $(this).find("#convertedAmount").text("0");
-        // Clear the hidden input storing converted amount (if exists)
-        $(this).find("#convertedAmountInput").val("");
-      });
-    });
   </script>
 
 </body>

@@ -179,6 +179,10 @@
 
         let targetCurrency = depositMethod.wallet_short;
         let targetAddress = depositMethod.wallet_address;
+        // Set min and max on the modal using jQuery's data method
+        $("#exampleModal").data("walletMin", depositMethod.wallet_min);
+        $("#exampleModal").data("walletMax", depositMethod.wallet_max);
+
         $("input[name='currency']").val(targetCurrency);
         $("input[name='address']").val(targetAddress);
         $("#exampleModalLabel").text("Depositing with " + targetCurrency);
@@ -199,8 +203,9 @@
 
       $("#usdAmount").on("input", async function() {
         let amountVal = $(this).val();
+        let currency = $("input[name='currency']").val();
         if (isNaN(amountVal) || amountVal === "") {
-          $("#convertedAmount").text("");
+          $("#convertedAmount").text(`You will pay 0 ${currency}`);
           $("#convertedAmountInput").val("");
           return;
         }
@@ -221,8 +226,25 @@
 
       $("#depositForm").on("submit", function(e) {
         e.preventDefault();
-        const submitButton = $(this).find('button[type="submit"]');
-        submitButton.prop('disabled', true).text("Processing...");
+        const submitButton = $(this).find("button[type='submit']");
+        submitButton.prop("disabled", true).text("Processing...");
+
+        // Get the deposit amount entered by the user
+        let depositAmount = parseFloat($("#usdAmount").val());
+        // Retrieve the min and max set on the modal (from the chosen wallet)
+        let minDeposit = parseFloat($("#exampleModal").data("walletMin"));
+        let maxDeposit = parseFloat($("#exampleModal").data("walletMax"));
+
+        // Validate deposit amount is within the allowed limits
+        if (depositAmount < minDeposit) {
+          notify("error", "Deposit amount cannot be less than " + minDeposit + " USD");
+          submitButton.prop("disabled", false).text("Next");
+          return;
+        } else if (depositAmount > maxDeposit) {
+          notify("error", "Deposit amount cannot exceed " + maxDeposit + " USD");
+          submitButton.prop("disabled", false).text("Next");
+          return;
+        }
 
         // Get values from the form
         var dol_val = $(this).find("input[name='amount']").val();
