@@ -401,6 +401,22 @@ class Modules extends Connection
         }
         return false;
     }
+
+    // Update investment profit
+    public function updateInvestmentProfit($invest_id, $newEarned, $newNumOfDays, $newStatus)
+    {
+        $this->sql = "UPDATE investments 
+                      SET earned = :earned, 
+                          num_of_days = :num_of_days, 
+                          status = :status 
+                      WHERE invest_id = :invest_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':earned', $newEarned);
+        $this->stmt->bindParam(':num_of_days', $newNumOfDays);
+        $this->stmt->bindParam(':status', $newStatus);
+        $this->stmt->bindParam(':invest_id', $invest_id);
+        return $this->stmt->execute();
+    }
 }
 
 
