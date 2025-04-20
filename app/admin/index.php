@@ -1,5 +1,18 @@
 <?php include "../backend/adminData.php" ?>
 
+<?php
+
+function getFullname($uid)
+{
+    global $modules;
+    $userData = $modules->getUserData($uid);
+    if (!$userData || !is_array($userData)) {
+        return "None";
+    }
+    return $userData['fname'] . " " . $userData['lname'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +24,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <!-- Main css -->
     <link rel="stylesheet" href="style.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -101,6 +116,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Referral</th>
+                                <th>Date joined</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -111,7 +127,8 @@
                                     <td><?= $user['user_id'] ?></td>
                                     <td><?= $user['fname'] . " " . $user['lname'] ?></td>
                                     <td><?= $user['email'] ?></td>
-                                    <td><?= $user['ref'] ?></td>
+                                    <td><?= getFullname($user['ref']) ?></td>
+                                    <td><?= $user['datetime'] ?></td>
                                     <td>
                                         <!-- Toggle status button with conditional classes -->
                                         <button class="btn btn-sm toggle-status <?= ($user['status'] == 'active') ? 'btn-success' : 'btn-danger' ?>"
@@ -122,6 +139,7 @@
                                     </td>
                                     <td>
                                         <!-- Edit and Delete buttons remain the same -->
+                                        <button class="btn btn-sm btn-info view-user" data-user='<?= htmlspecialchars(json_encode($user), ENT_QUOTES, 'UTF-8') ?>'>View</button>
                                         <button class="btn btn-sm btn-primary edit-user" data-user='<?= htmlspecialchars(json_encode($user), ENT_QUOTES, 'UTF-8') ?>'>Edit</button>
                                         <button class="btn btn-sm btn-danger delete-user" data-user-id="<?= $user['id'] ?>">Delete</button>
                                     </td>
@@ -195,9 +213,48 @@
                     </div>
                 </div>
 
+                <!-- View User Modal -->
+                <div class="modal fade" id="viewUserModal" tabindex="-1" role="dialog" aria-labelledby="viewUserModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 id="viewUserModalLabel" class="modal-title" style="color: #222;">User Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="color: #222;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="color: #222;">
+                                <p><strong>User ID:</strong> <span id="view_user_id"></span></p>
+                                <p><strong>First Name:</strong> <span id="view_fname"></span></p>
+                                <p><strong>Last Name:</strong> <span id="view_lname"></span></p>
+                                <p><strong>Email:</strong> <span id="view_email"></span></p>
+                                <p><strong>Phone:</strong> <span id="view_phone"></span></p>
+                                <p><strong>Country:</strong> <span id="view_country"></span></p>
+                                <p><strong>Address:</strong> <span id="view_address"></span></p>
+                                <p><strong>ZIP:</strong> <span id="view_zip"></span></p>
+                                <p><strong>City:</strong> <span id="view_city"></span></p>
+                                <p><strong>State:</strong> <span id="view_state"></span></p>
+                                <p><strong>Picture URL:</strong> <span id="view_pic"></span></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #b58e43; border: none;">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Transactions Management -->
                 <section id="transactions">
                     <h2>Transactions</h2>
+                    <!-- Transactions Filter -->
+                    <div class="form-group" style="max-width: 200px;">
+                        <label for="filterTransacType">Filter by type:</label>
+                        <select id="filterTransacType" class="form-control">
+                            <option value="all">All</option>
+                            <option value="deposit">Deposits</option>
+                            <option value="withdrawal">Withdrawals</option>
+                        </select>
+                    </div>
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
@@ -215,7 +272,7 @@
                             <?php foreach ($all_transactions as $transac) : ?>
                                 <tr data-transac-id="<?= $transac['id'] ?>" data-trans-type="<?= $transac['transaction_type'] ?>">
                                     <td><?= $transac['transac_id'] ?></td>
-                                    <td><?= $transac['user_id'] ?></td>
+                                    <td><?= getFullname($transac['user_id']) ?></td>
                                     <td><?= ucfirst($transac['type']) ?></td>
                                     <td><?= number_format($transac['amount'], 5) ?> <?= $transac['currency'] ?></td>
                                     <td>
@@ -275,7 +332,7 @@
 
                                     <!-- Separate Amount field -->
                                     <div class="form-group">
-                                        <label for="edit_amount">Amount</label>
+                                        <label for="edit_amount">Amount <span id="edit_currency_span">()</span></label>
                                         <input type="text" class="form-control" id="edit_amount" name="amount">
                                     </div>
 
@@ -314,51 +371,23 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 id="viewTransacModalLabel" class="modal-title">Transaction Details</h5>
+                                <h5 id="viewTransacModalLabel" class="modal-title" style="color: #222;">Transaction Details</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true" style="color: #222;">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <!-- Display every data field in a table layout -->
-                                <table class="table table-borderless">
-                                    <tr>
-                                        <th>Transaction ID:</th>
-                                        <td id="view_transac_id"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Type:</th>
-                                        <td id="view_trans_type"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Status:</th>
-                                        <td id="view_status"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Date:</th>
-                                        <td id="view_datetime"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Amount:</th>
-                                        <td>$<span id="view_amount"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>User ID:</th>
-                                        <td id="view_user_id"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Currency:</th>
-                                        <td id="view_currency"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Address:</th>
-                                        <td id="view_address"></td>
-                                    </tr>
-                                    <!-- Add more rows if you have additional fields -->
-                                </table>
+                            <div class="modal-body" style="color: #222;">
+                                <p><strong>Transaction ID:</strong> <span id="view_transac_id"></span></p>
+                                <p><strong>Type:</strong> <span id="view_trans_type"></span></p>
+                                <p><strong>Status:</strong> <span id="view_status"></span></p>
+                                <p><strong>Date:</strong> <span id="view_datetime"></span></p>
+                                <p><strong>Amount:</strong> $<span id="view_amount"></span></p>
+                                <p><strong>User ID:</strong> <span id="view_user_id"></span></p>
+                                <p><strong>Currency:</strong> <span id="view_currency"></span></p>
+                                <p><strong>Address:</strong> <span id="view_address"></span></p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #b58e43; border: none;">Close</button>
                             </div>
                         </div>
                     </div>
@@ -481,8 +510,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Initialize DataTables on all tables on the page
+            $('table').DataTable({
+                pageLength: 10,
+                // Optional: add more DataTables settings here, e.g., language customization, ordering, etc.
+            });
+
             // --- Toggle Status ---
             $('.toggle-status').click(function() {
                 var btn = $(this);
@@ -531,6 +568,25 @@
                 $('#editUserModal').modal('show');
             });
 
+            // --- Open View User Modal and Fill Data ---
+            $('.view-user').click(function() {
+                var userData = $(this).data('user');
+                // Fill modal fields using userData
+                $('#view_user_id').text(userData.id);
+                $('#view_fname').text(userData.fname);
+                $('#view_lname').text(userData.lname);
+                $('#view_email').text(userData.email);
+                $('#view_phone').text(userData.phone);
+                $('#view_country').text(userData.country);
+                $('#view_address').text(userData.address);
+                $('#view_zip').text(userData.zip);
+                $('#view_city').text(userData.city);
+                $('#view_state').text(userData.state);
+                $('#view_pic').text(userData.pic);
+                // Show modal
+                $('#viewUserModal').modal('show');
+            });
+
             // --- Submit Edit Form with AJAX ---
             $('#editUserForm').submit(function(e) {
                 e.preventDefault();
@@ -563,7 +619,7 @@
             });
 
             // --- Open View Transaction Modal and populate every field ---
-            $('.view-transac').click(function() {
+            $(document).on('click', '.view-transac', function() {
                 var transac = $(this).data('transac');
                 $('#view_transac_id').text(transac.transac_id);
                 $('#view_trans_type').text(transac.transaction_type);
@@ -577,15 +633,15 @@
             });
 
             // --- Open Edit Transaction Modal and populate fields ---
-            $('.edit-transac').click(function() {
+            $(document).on('click', '.edit-transac', function() {
                 var transac = $(this).data('transac');
                 $('#edit_trans_id').val(transac.id);
                 $('#edit_trans_type').val(transac.transaction_type);
                 $('#edit_transac_id').val(transac.transac_id);
                 $('#edit_amount').val(transac.amount);
+                $('#edit_currency_span').text(`(${transac.currency})`);
                 $('#edit_dol_val').val(transac.dol_val);
                 $('#edit_address').val(transac.address);
-                // Set the select value based on the transaction status (converted to lowercase)
                 $('#edit_status').val(transac.status.toLowerCase());
                 $('#editTransacModal').modal('show');
             });
@@ -604,7 +660,7 @@
             });
 
             // --- Delete Transaction with confirmation ---
-            $('.delete-transac').click(function() {
+            $(document).on('click', '.delete-transac', function() {
                 var trans_id = $(this).data('transac-id');
                 var trans_type = $(this).data('trans-type');
                 if (confirm("Are you sure you want to delete this transaction?")) {
@@ -620,6 +676,20 @@
                         }
                     }, 'json');
                 }
+            });
+
+            // Filter transactions by type
+            $('#filterTransacType').change(function() {
+                var selectedType = $(this).val();
+                // Loop through each row in the transactions table
+                $('#transactions tbody tr').each(function() {
+                    var rowType = $(this).data('trans-type'); // Should be 'deposit' or 'withdrawal'
+                    if (selectedType === 'all' || selectedType === rowType) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
             });
         });
     </script>

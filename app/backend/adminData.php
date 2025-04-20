@@ -39,4 +39,6 @@ $total_withdrawals_amount = $modules->getTotal('withdrawals', 'dol_val');
 $all_users = $modules->getAllUsers();
 $all_transactions = $modules->getAllTransactions();
 
+
+
 (!$_SESSION['admin'] || $_SESSION['admin'] == "false") && header('location: ../dashboard/');

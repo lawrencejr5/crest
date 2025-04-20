@@ -59,3 +59,32 @@ section {
 .table td {
   color: #eee !important;
 }
+
+/* Modal styles */
+.modal-header .modal-title {
+  color: #b58e43;
+}
+
+.modal-body {
+  color: #b58e43;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #b58e43;
+  border: none;
+}
+
+/* DataTables filter input styles */
+.dataTables_filter input {
+  color: white;
+  background-color: #333; /* adjust background if needed */
+  border: 1px solid #ccc; /* adjust border if needed */
+}
+
+/* DataTables filter input and pagination dropdown styles */
+.dataTables_filter input,
+.dataTables_length select {
+  color: white;
+  background-color: #333;
+  border: 1px solid #ccc;
+}
