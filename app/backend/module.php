@@ -449,11 +449,69 @@ class Modules extends Connection
         $this->stmt->bindParam(':wallet_address', $wallet_address);
         return $this->stmt->execute();
     }
+
+    // ************** ADMIN USER FUNCTIONS ************** //
+
+    // Update a user's status (e.g. active, blocked)
+    public function updateUserStatus($user_id, $status)
+    {
+        $this->sql = "UPDATE users SET status = :status WHERE id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':status', $status);
+        $this->stmt->bindParam(':user_id', $user_id);
+        return $this->stmt->execute();
+    }
+
+    // Update user information (this function can be used for editing all fields)
+    public function updateUserInfo($user_id, $fname, $lname, $email, $phone, $country, $address, $zip, $city, $state, $pic)
+    {
+        $this->sql = "UPDATE users 
+                      SET fname = :fname, 
+                          lname = :lname, 
+                          email = :email, 
+                          phone = :phone, 
+                          country = :country, 
+                          address = :address, 
+                          zip = :zip, 
+                          city = :city, 
+                          state = :state, 
+                          pic = :pic
+                      WHERE id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':fname', $fname);
+        $this->stmt->bindParam(':lname', $lname);
+        $this->stmt->bindParam(':email', $email);
+        $this->stmt->bindParam(':phone', $phone);
+        $this->stmt->bindParam(':country', $country);
+        $this->stmt->bindParam(':address', $address);
+        $this->stmt->bindParam(':zip', $zip);
+        $this->stmt->bindParam(':city', $city);
+        $this->stmt->bindParam(':state', $state);
+        $this->stmt->bindParam(':pic', $pic);
+        $this->stmt->bindParam(':user_id', $user_id);
+        return $this->stmt->execute();
+    }
+
+    // Delete a user from the system
+    public function deleteUser($user_id)
+    {
+        $this->sql = "DELETE FROM users WHERE id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        return $this->stmt->execute();
+    }
+
+    // Retrieve all user data
+    public function getAllUsers()
+    {
+        $this->sql = "SELECT * FROM users ORDER BY id DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
 }
-
-
-
-
 
 // Initializing class
 $modules = new Modules();

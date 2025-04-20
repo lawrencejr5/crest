@@ -101,28 +101,99 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Referral</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Example placeholder user rows -->
-                            <tr>
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>john@example.com</td>
-                                <td>None</td>
-                                <td><button class="btn btn-sm btn-primary">View/Edit</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jane Smith</td>
-                                <td>jane@example.com</td>
-                                <td>John Doe</td>
-                                <td><button class="btn btn-sm btn-primary">View/Edit</button></td>
-                            </tr>
+                            <?php foreach ($all_users as $user) : ?>
+                                <tr data-user-id="<?= $user['id'] ?>">
+                                    <td><?= $user['user_id'] ?></td>
+                                    <td><?= $user['fname'] . " " . $user['lname'] ?></td>
+                                    <td><?= $user['email'] ?></td>
+                                    <td><?= $user['ref'] ?></td>
+                                    <td>
+                                        <!-- Toggle status button with conditional classes -->
+                                        <button class="btn btn-sm toggle-status <?= ($user['status'] == 'active') ? 'btn-success' : 'btn-danger' ?>"
+                                            data-status="<?= $user['status'] ?>"
+                                            data-user-id="<?= $user['id'] ?>">
+                                            <?= ($user['status'] == 'active') ? 'Active' : 'Blocked' ?>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <!-- Edit and Delete buttons remain the same -->
+                                        <button class="btn btn-sm btn-primary edit-user" data-user='<?= htmlspecialchars(json_encode($user), ENT_QUOTES, 'UTF-8') ?>'>Edit</button>
+                                        <button class="btn btn-sm btn-danger delete-user" data-user-id="<?= $user['id'] ?>">Delete</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </section>
+
+                <!-- User Edit Modal -->
+                <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form id="editUserForm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editUserModalLabel">Edit User Info</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Hidden field for user id -->
+                                    <input type="hidden" name="user_id" id="user_id">
+                                    <div class="form-group">
+                                        <label for="fname">First Name</label>
+                                        <input type="text" name="fname" id="fname" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lname">Last Name</label>
+                                        <input type="text" name="lname" id="lname" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" id="email" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" name="phone" id="phone" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <input type="text" name="country" id="country" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" name="address" id="address" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="zip">ZIP</label>
+                                        <input type="text" name="zip" id="zip" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input type="text" name="city" id="city" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="state">State</label>
+                                        <input type="text" name="state" id="state" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pic">Picture URL</label>
+                                        <input type="text" name="pic" id="pic" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
                 <!-- Transactions Management -->
                 <section id="transactions">
@@ -272,6 +343,90 @@
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // --- Toggle Status ---
+            $('.toggle-status').click(function() {
+                var btn = $(this);
+                var userId = btn.data('user-id');
+                var currentStatus = btn.data('status');
+                // Decide new status based on the current one
+                var newStatus = (currentStatus === 'active') ? 'blocked' : 'active';
+
+                $.post('../backend/adminActions.php/updateUser.php', {
+                    action: 'updateStatus',
+                    user_id: userId,
+                    status: newStatus
+                }, function(response) {
+                    if (response.status === 'success') {
+                        btn.data('status', newStatus);
+                        // Update button text and classes accordingly
+                        if (newStatus === 'active') {
+                            btn.removeClass('btn-danger').addClass('btn-success');
+                            btn.text('Active');
+                        } else {
+                            btn.removeClass('btn-success').addClass('btn-danger');
+                            btn.text('Blocked');
+                        }
+                    } else {
+                        alert(response.message);
+                    }
+                }, 'json');
+            });
+
+            // --- Open Edit Modal and Fill Data ---
+            $('.edit-user').click(function() {
+                var userData = $(this).data('user');
+                // Fill modal form fields using userData
+                $('#user_id').val(userData.id);
+                $('#fname').val(userData.fname);
+                $('#lname').val(userData.lname);
+                $('#email').val(userData.email);
+                $('#phone').val(userData.phone);
+                $('#country').val(userData.country);
+                $('#address').val(userData.address);
+                $('#zip').val(userData.zip);
+                $('#city').val(userData.city);
+                $('#state').val(userData.state);
+                $('#pic').val(userData.pic);
+                // Show modal
+                $('#editUserModal').modal('show');
+            });
+
+            // --- Submit Edit Form with AJAX ---
+            $('#editUserForm').submit(function(e) {
+                e.preventDefault();
+                $.post('../backend/adminActions.php/updateUser.php', $(this).serialize() + '&action=updateInfo', function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        // Optionally, refresh the page or update the table row with new info without reloading
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                }, 'json');
+            });
+
+            // --- Delete User with Confirmation ---
+            $('.delete-user').click(function() {
+                var userId = $(this).data('user-id');
+                if (confirm("Are you sure you want to delete this user?")) {
+                    $.post('../backend/adminActions.php/deleteUser.php', {
+                        user_id: userId
+                    }, function(response) {
+                        if (response.status === 'success') {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    }, 'json');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
