@@ -59,7 +59,7 @@ $total_user_balance = $total_deposits - $total_withdrawals;
 // Get all transactions (both deposits and withdrawals) for the user
 $all_transactions = [];
 if ($user_id) {
-    $allTransactions = $modules->getAllTransactions($user_id);
+    $allTransactions = $modules->getAllUserTransactions($user_id);
     if ($allTransactions && is_array($allTransactions)) {
         $all_transactions = $allTransactions;
     }

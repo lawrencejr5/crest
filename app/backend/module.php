@@ -247,7 +247,7 @@ class Modules extends Connection
     }
 
     // Get all transactions (both deposits and withdrawals) for a user
-    public function getAllTransactions($user_id)
+    public function getAllUserTransactions($user_id)
     {
         $this->sql = "SELECT * FROM (
             SELECT id, transac_id, amount, dol_val, currency, address, type, status, datetime
@@ -510,6 +510,51 @@ class Modules extends Connection
             return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         return false;
+    }
+
+    // Retrieve all transactions (both deposits and withdrawals) for admin view
+    public function getAllTransactions()
+    {
+        $this->sql = "SELECT 'deposit' as transaction_type, id, user_id, transac_id, amount, dol_val, currency, address, type, status, datetime 
+                      FROM deposits 
+                      UNION ALL 
+                      SELECT 'withdrawal' as transaction_type, id, user_id, transac_id, amount, dol_val, currency, address, type, status, datetime 
+                      FROM withdrawals 
+                      ORDER BY datetime DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
+
+    // Update a transaction based on its type (deposit or withdrawal)
+    // $fields is an associative array of columns to update, e.g. ['status' => 'completed']
+    public function updateTransaction($trans_type, $trans_id, $fields)
+    {
+        $table = ($trans_type === 'deposit') ? 'deposits' : 'withdrawals';
+        $set_fields = [];
+        foreach ($fields as $column => $value) {
+            $set_fields[] = "$column = :$column";
+        }
+        $set_str = implode(", ", $set_fields);
+        $this->sql = "UPDATE $table SET $set_str WHERE id = :trans_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        foreach ($fields as $column => $value) {
+            $this->stmt->bindValue(":$column", $value);
+        }
+        $this->stmt->bindParam(':trans_id', $trans_id);
+        return $this->stmt->execute();
+    }
+
+    // Delete a transaction based on its type (deposit or withdrawal)
+    public function deleteTransaction($trans_type, $trans_id)
+    {
+        $table = ($trans_type === 'deposit') ? 'deposits' : 'withdrawals';
+        $this->sql = "DELETE FROM $table WHERE id = :trans_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':trans_id', $trans_id);
+        return $this->stmt->execute();
     }
 }
 

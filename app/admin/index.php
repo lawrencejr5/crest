@@ -201,32 +201,168 @@
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
-                                <th>Date</th>
                                 <th>Transaction ID</th>
+                                <th>User</th>
                                 <th>Type</th>
                                 <th>Amount</th>
+                                <th>Dollar value</th>
                                 <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Placeholder transactions -->
-                            <tr>
-                                <td>2025-01-01</td>
-                                <td>TX123456</td>
-                                <td>Deposit</td>
-                                <td>$100.00</td>
-                                <td>Completed</td>
-                            </tr>
-                            <tr>
-                                <td>2025-01-02</td>
-                                <td>TX123457</td>
-                                <td>Withdrawal</td>
-                                <td>$50.00</td>
-                                <td>Pending</td>
-                            </tr>
+                            <?php foreach ($all_transactions as $transac) : ?>
+                                <tr data-transac-id="<?= $transac['id'] ?>" data-trans-type="<?= $transac['transaction_type'] ?>">
+                                    <td><?= $transac['transac_id'] ?></td>
+                                    <td><?= $transac['user_id'] ?></td>
+                                    <td><?= ucfirst($transac['type']) ?></td>
+                                    <td><?= number_format($transac['amount'], 5) ?> <?= $transac['currency'] ?></td>
+                                    <td>
+                                        <?php if ($transac['transaction_type'] === 'withdrawal'): ?>
+                                            <span style="color:red;">- $<?= number_format($transac['dol_val'], 2) ?></span>
+                                        <?php else: ?>
+                                            <span style="color:green;">$<?= number_format($transac['dol_val'], 2) ?></span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $status = strtolower($transac['status']);
+                                        if ($status == 'success') {
+                                            $badgeClass = 'badge badge-success';
+                                        } elseif ($status == 'pending') {
+                                            $badgeClass = 'badge badge-warning';
+                                        } elseif ($status == 'failed') {
+                                            $badgeClass = 'badge badge-danger';
+                                        } else {
+                                            $badgeClass = 'badge badge-secondary';
+                                        }
+                                        ?>
+                                        <span class="<?= $badgeClass ?>"><?= ucfirst($status) ?></span>
+                                    </td>
+                                    <td><?= date("Y-m-d H:i:s", strtotime($transac['datetime'])) ?></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info view-transac" data-transac='<?= htmlspecialchars(json_encode($transac), ENT_QUOTES, "UTF-8") ?>'>View</button>
+                                        <button class="btn btn-sm btn-primary edit-transac" data-transac='<?= htmlspecialchars(json_encode($transac), ENT_QUOTES, "UTF-8") ?>'>Edit</button>
+                                        <button class="btn btn-sm btn-danger delete-transac" data-transac-id="<?= $transac['id'] ?>" data-trans-type="<?= $transac['transaction_type'] ?>">Delete</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </section>
+
+                <!-- Edit Transaction Modal -->
+                <div class="modal fade" id="editTransacModal" tabindex="-1" role="dialog" aria-labelledby="editTransacModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form id="editTransacForm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editTransacModalLabel">Edit Transaction</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Hidden fields for transaction ID and type -->
+                                    <input type="hidden" name="trans_id" id="edit_trans_id">
+                                    <input type="hidden" name="trans_type" id="edit_trans_type">
+
+                                    <div class="form-group">
+                                        <label for="edit_transac_id">Transaction ID</label>
+                                        <input type="text" class="form-control" id="edit_transac_id" name="transac_id" readonly>
+                                    </div>
+
+                                    <!-- Separate Amount field -->
+                                    <div class="form-group">
+                                        <label for="edit_amount">Amount</label>
+                                        <input type="text" class="form-control" id="edit_amount" name="amount">
+                                    </div>
+
+                                    <!-- Separate Dollar Value field -->
+                                    <div class="form-group">
+                                        <label for="edit_dol_val">Dollar Value</label>
+                                        <input type="text" class="form-control" id="edit_dol_val" name="dol_val">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="edit_address">Address</label>
+                                        <input type="text" class="form-control" id="edit_address" name="address">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="edit_status">Status</label>
+                                        <select class="form-control" id="edit_status" name="status">
+                                            <option value="pending">pending</option>
+                                            <option value="success">approve</option>
+                                            <option value="failed">decline</option>
+                                        </select>
+                                    </div>
+                                    <!-- Add additional fields as necessary -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- View Transaction Modal -->
+                <div class="modal fade" id="viewTransacModal" tabindex="-1" role="dialog" aria-labelledby="viewTransacModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 id="viewTransacModalLabel" class="modal-title">Transaction Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Display every data field in a table layout -->
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <th>Transaction ID:</th>
+                                        <td id="view_transac_id"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Type:</th>
+                                        <td id="view_trans_type"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Status:</th>
+                                        <td id="view_status"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date:</th>
+                                        <td id="view_datetime"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Amount:</th>
+                                        <td>$<span id="view_amount"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>User ID:</th>
+                                        <td id="view_user_id"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Currency:</th>
+                                        <td id="view_currency"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address:</th>
+                                        <td id="view_address"></td>
+                                    </tr>
+                                    <!-- Add more rows if you have additional fields -->
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Investments Management -->
                 <section id="investments">
@@ -415,6 +551,66 @@
                 if (confirm("Are you sure you want to delete this user?")) {
                     $.post('../backend/adminActions.php/deleteUser.php', {
                         user_id: userId
+                    }, function(response) {
+                        if (response.status === 'success') {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    }, 'json');
+                }
+            });
+
+            // --- Open View Transaction Modal and populate every field ---
+            $('.view-transac').click(function() {
+                var transac = $(this).data('transac');
+                $('#view_transac_id').text(transac.transac_id);
+                $('#view_trans_type').text(transac.transaction_type);
+                $('#view_status').text(transac.status);
+                $('#view_datetime').text(transac.datetime);
+                $('#view_amount').text(parseFloat(transac.dol_val).toFixed(2));
+                $('#view_user_id').text(transac.user_id);
+                $('#view_currency').text(transac.currency);
+                $('#view_address').text(transac.address);
+                $('#viewTransacModal').modal('show');
+            });
+
+            // --- Open Edit Transaction Modal and populate fields ---
+            $('.edit-transac').click(function() {
+                var transac = $(this).data('transac');
+                $('#edit_trans_id').val(transac.id);
+                $('#edit_trans_type').val(transac.transaction_type);
+                $('#edit_transac_id').val(transac.transac_id);
+                $('#edit_amount').val(transac.amount);
+                $('#edit_dol_val').val(transac.dol_val);
+                $('#edit_address').val(transac.address);
+                // Set the select value based on the transaction status (converted to lowercase)
+                $('#edit_status').val(transac.status.toLowerCase());
+                $('#editTransacModal').modal('show');
+            });
+
+            // --- Submit Edit Transaction Form via AJAX ---
+            $('#editTransacForm').submit(function(e) {
+                e.preventDefault();
+                $.post('../backend/adminActions.php/updateTransac.php', $(this).serialize(), function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                }, 'json');
+            });
+
+            // --- Delete Transaction with confirmation ---
+            $('.delete-transac').click(function() {
+                var trans_id = $(this).data('transac-id');
+                var trans_type = $(this).data('trans-type');
+                if (confirm("Are you sure you want to delete this transaction?")) {
+                    $.post('../backend/adminActions.php/deleteTransac.php', {
+                        trans_type: trans_type,
+                        trans_id: trans_id
                     }, function(response) {
                         if (response.status === 'success') {
                             alert(response.message);
