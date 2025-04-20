@@ -1,0 +1,61 @@
+/* Custom theme: light black and #b58e43 */
+.sidebar {
+  background: #333;
+  /* light black background */
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-top: 1rem;
+}
+
+.sidebar .nav-link {
+  color: #ddd;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar .nav-link.active,
+.sidebar .nav-link:hover {
+  background: #b58e43;
+  color: #fff;
+}
+
+main {
+  margin-left: 220px;
+  padding: 20px;
+  background: #222;
+  /* dark background for main area */
+  color: #b58e43;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+/* Card adjustments for the dark theme */
+.card {
+  background-color: #444;
+  border: none;
+}
+
+.card .card-title,
+.card .card-text {
+  color: #eee;
+}
+
+/* Table styles */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #3a3a3a;
+}
+
+.table thead th {
+  background-color: #333;
+  color: #eee;
+}
+
+/* Ensure table header and cell text is visible */
+.table,
+.table th,
+.table td {
+  color: #eee !important;
+}
