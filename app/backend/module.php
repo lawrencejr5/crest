@@ -317,35 +317,7 @@ class Modules extends Connection
         }
         return false;
     }
-    // Create Wallet
-    public function createWallet($wallet_id, $wallet_name, $wallet_short, $wallet_min, $wallet_max, $wallet_address)
-    {
-        $this->sql = "INSERT INTO wallets (wallet_id, wallet_name, wallet_short, wallet_min, wallet_max, wallet_address) VALUES (:wallet_id, :wallet_name, :wallet_short, :wallet_min, :wallet_max, :wallet_address)";
-        $this->stmt = $this->conn->prepare($this->sql);
-        $this->stmt->bindParam(':wallet_id', $wallet_id);
-        $this->stmt->bindParam(':wallet_name', $wallet_name);
-        $this->stmt->bindParam(':wallet_short', $wallet_short);
-        $this->stmt->bindParam(':wallet_min', $wallet_min);
-        $this->stmt->bindParam(':wallet_max', $wallet_max);
-        $this->stmt->bindParam(':wallet_address', $wallet_address);
-        return $this->stmt->execute();
-    }
 
-    // Create Investemnt Plan
-    public function createPlan($plan_id, $plan_name, $plan_type, $plan_rate, $duration, $duration_text, $plan_min, $plan_max)
-    {
-        $this->sql = "INSERT INTO plans (plan_id, plan_name, plan_type, plan_rate, duration, duration_text, plan_min, plan_max) VALUES (:plan_id, :plan_name, :plan_type, :plan_rate, :duration, :duration_text, :plan_min, :plan_max)";
-        $this->stmt = $this->conn->prepare($this->sql);
-        $this->stmt->bindParam(':plan_id', $plan_id);
-        $this->stmt->bindParam(':plan_name', $plan_name);
-        $this->stmt->bindParam(':plan_type', $plan_type);
-        $this->stmt->bindParam(':plan_rate', $plan_rate);
-        $this->stmt->bindParam(':duration', $duration);
-        $this->stmt->bindParam(':duration_text', $duration_text);
-        $this->stmt->bindParam(':plan_min', $plan_min);
-        $this->stmt->bindParam(':plan_max', $plan_max);
-        return $this->stmt->execute();
-    }
 
     // Get all investment plans
     public function getAllPlans()
@@ -417,7 +389,69 @@ class Modules extends Connection
         $this->stmt->bindParam(':invest_id', $invest_id);
         return $this->stmt->execute();
     }
+
+
+
+    // ************** ADMIN SECTION ************** //
+
+    // Get rowcount data
+    public function getRowCount($table, $condition = '')
+    {
+        $where = $condition ? " WHERE $condition" : "";
+        $this->sql = "SELECT COUNT(*) AS count FROM $table" . $where;
+        $this->stmt = $this->conn->prepare($this->sql);
+        if ($this->stmt->execute()) {
+            $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            return isset($row['count']) ? $row['count'] : 0;
+        }
+        return 0;
+    }
+
+    // Get total sum of a column in a table
+    public function getTotal($table, $column, $condition = '')
+    {
+        $where = $condition ? " WHERE $condition" : "";
+        $this->sql = "SELECT SUM($column) as total FROM $table" . $where;
+        $this->stmt = $this->conn->prepare($this->sql);
+        if ($this->stmt->execute()) {
+            $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['total'] ? $row['total'] : 0;
+        }
+        return 0;
+    }
+
+    // Create Investemnt Plan
+    public function createPlan($plan_id, $plan_name, $plan_type, $plan_rate, $duration, $duration_text, $plan_min, $plan_max)
+    {
+        $this->sql = "INSERT INTO plans (plan_id, plan_name, plan_type, plan_rate, duration, duration_text, plan_min, plan_max) VALUES (:plan_id, :plan_name, :plan_type, :plan_rate, :duration, :duration_text, :plan_min, :plan_max)";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':plan_id', $plan_id);
+        $this->stmt->bindParam(':plan_name', $plan_name);
+        $this->stmt->bindParam(':plan_type', $plan_type);
+        $this->stmt->bindParam(':plan_rate', $plan_rate);
+        $this->stmt->bindParam(':duration', $duration);
+        $this->stmt->bindParam(':duration_text', $duration_text);
+        $this->stmt->bindParam(':plan_min', $plan_min);
+        $this->stmt->bindParam(':plan_max', $plan_max);
+        return $this->stmt->execute();
+    }
+
+    // Create Wallet
+    public function createWallet($wallet_id, $wallet_name, $wallet_short, $wallet_min, $wallet_max, $wallet_address)
+    {
+        $this->sql = "INSERT INTO wallets (wallet_id, wallet_name, wallet_short, wallet_min, wallet_max, wallet_address) VALUES (:wallet_id, :wallet_name, :wallet_short, :wallet_min, :wallet_max, :wallet_address)";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':wallet_id', $wallet_id);
+        $this->stmt->bindParam(':wallet_name', $wallet_name);
+        $this->stmt->bindParam(':wallet_short', $wallet_short);
+        $this->stmt->bindParam(':wallet_min', $wallet_min);
+        $this->stmt->bindParam(':wallet_max', $wallet_max);
+        $this->stmt->bindParam(':wallet_address', $wallet_address);
+        return $this->stmt->execute();
+    }
 }
+
+
 
 
 

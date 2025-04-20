@@ -15,5 +15,24 @@ if ($uID) {
     }
 }
 
+// Rowcount data
+$total_users = $modules->getRowCount('users');
+$total_investments = $modules->getRowCount('investments');
+$total_tickets = $modules->getRowCount('tickets');
+
+// Total transactions = deposits count + withdrawals count (if still needed)
+$total_deposits_count = $modules->getRowCount('deposits');
+$total_withdrawals_count = $modules->getRowCount('withdrawals');
+$total_transactions = $total_deposits_count + $total_withdrawals_count;
+
+// New: Active Investments (assuming status = 'active')
+$active_investments = $modules->getRowCount('investments', 'status = "active"');
+
+// New: Open Tickets (assuming tickets that are not closed have status different than "closed")
+$open_tickets = $modules->getRowCount('tickets', 'status <> "closed"');
+
+// New: Total deposit and withdrawal amounts (summing the 'dol_val' column)
+$total_deposits_amount = $modules->getTotal('deposits', 'dol_val');
+$total_withdrawals_amount = $modules->getTotal('withdrawals', 'dol_val');
 
 (!$_SESSION['admin'] || $_SESSION['admin'] == "false") && header('location: ../dashboard/');

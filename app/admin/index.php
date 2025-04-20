@@ -57,7 +57,7 @@
                             <div class="card text-white bg-primary mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title">Total Users</h5>
-                                    <p class="card-text">1,234</p>
+                                    <p class="card-text"><?= $total_users ?></p>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                             <div class="card text-white bg-success mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title">Total Deposits</h5>
-                                    <p class="card-text">$56,789</p>
+                                    <p class="card-text">$<?= number_format($total_deposits_amount) ?></p>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                             <div class="card text-white bg-danger mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title">Total Withdrawals</h5>
-                                    <p class="card-text">$12,345</p>
+                                    <p class="card-text">$<?= number_format($total_withdrawals_amount) ?></p>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                             <div class="card text-white bg-info mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title">Active Investments</h5>
-                                    <p class="card-text">67</p>
+                                    <p class="card-text"><?= $active_investments ?></p>
                                 </div>
                             </div>
                         </div>
