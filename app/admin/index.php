@@ -8,9 +8,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <style>
-        /* Custom styles for admin page */
+        /* Custom theme: light black and #b58e43 */
         .sidebar {
-            background: #f8f9fa;
+            background: #333;
+            /* light black background */
             height: 100vh;
             position: fixed;
             left: 0;
@@ -19,21 +20,54 @@
         }
 
         .sidebar .nav-link {
-            color: #333;
+            color: #ddd;
+            transition: background 0.3s, color 0.3s;
         }
 
-        .sidebar .nav-link.active {
-            background: #007bff;
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
+            background: #b58e43;
             color: #fff;
         }
 
         main {
             margin-left: 220px;
             padding: 20px;
+            background: #222;
+            /* dark background for main area */
+            color: #b58e43;
         }
 
         section {
             margin-bottom: 40px;
+        }
+
+        /* Card adjustments for the dark theme */
+        .card {
+            background-color: #444;
+            border: none;
+        }
+
+        .card .card-title,
+        .card .card-text {
+            color: #eee;
+        }
+
+        /* Table styles */
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #3a3a3a;
+        }
+
+        .table thead th {
+            background-color: #333;
+            color: #eee;
+        }
+
+        /* Ensure table header and cell text is visible */
+        .table,
+        .table th,
+        .table td {
+            color: #eee !important;
         }
     </style>
 </head>
@@ -44,10 +78,10 @@
             <!-- Sidebar -->
             <nav class="col-md-2 d-none d-md-block sidebar">
                 <div class="sidebar-sticky">
-                    <h5 class="text-center mb-4">Admin Panel</h5>
+                    <h5 class="text-center mb-4" style="color:#eee;">Admin Panel</h5>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#dashboard">Dashboard</a>
+                            <a class="nav-link" href="#dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#users">Users</a>
