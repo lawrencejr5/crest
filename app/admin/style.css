@@ -1,4 +1,12 @@
 /* Custom theme: light black and #b58e43 */
+
+body {
+  background-color: #222;
+  color: #b58e43;
+  margin: 0;
+  padding: 0;
+}
+
 .sidebar {
   background: #333;
   /* light black background */
