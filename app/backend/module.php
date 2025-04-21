@@ -363,7 +363,7 @@ class Modules extends Connection
     }
 
     // Get all investments for a user
-    public function getAllInvestments($user_id)
+    public function getAllUserInvestments($user_id)
     {
         $this->sql = "SELECT * FROM investments WHERE user_id = :user_id ORDER BY start_date DESC";
         $this->stmt = $this->conn->prepare($this->sql);
@@ -554,6 +554,46 @@ class Modules extends Connection
         $this->sql = "DELETE FROM $table WHERE id = :trans_id";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':trans_id', $trans_id);
+        return $this->stmt->execute();
+    }
+
+    // ************** ADMIN INVESTMENTS FUNCTIONS ************** //
+
+    // Retrieve all investments (admin view)
+    public function getAllInvestments()
+    {
+        $this->sql = "SELECT * FROM investments ORDER BY start_date DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
+
+    // Update an investment (admin function)
+    // $fields is an associative array of columns to update, e.g. ['status' => 'active']
+    public function updateInvestment($invest_id, $fields)
+    {
+        $set_fields = [];
+        foreach ($fields as $column => $value) {
+            $set_fields[] = "$column = :$column";
+        }
+        $set_str = implode(", ", $set_fields);
+        $this->sql = "UPDATE investments SET $set_str WHERE invest_id = :invest_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        foreach ($fields as $column => $value) {
+            $this->stmt->bindValue(":$column", $value);
+        }
+        $this->stmt->bindParam(':invest_id', $invest_id);
+        return $this->stmt->execute();
+    }
+
+    // Delete an investment (admin function)
+    public function deleteInvestment($invest_id)
+    {
+        $this->sql = "DELETE FROM investments WHERE invest_id = :invest_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':invest_id', $invest_id);
         return $this->stmt->execute();
     }
 }

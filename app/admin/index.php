@@ -11,6 +11,16 @@ function getFullname($uid)
     }
     return $userData['fname'] . " " . $userData['lname'];
 }
+
+function getPlanName($pid)
+{
+    global $modules;
+    $planData = $modules->getPlan($pid);
+    if (!$planData || !is_array($planData)) {
+        return '';
+    }
+    return $planData['plan_name'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -393,41 +403,134 @@ function getFullname($uid)
                     </div>
                 </div>
 
-                <!-- Investments Management -->
+                <!-- Investments Management Section -->
                 <section id="investments">
                     <h2>Investments</h2>
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
+                                <th>Investment ID</th>
                                 <th>Plan</th>
+                                <th>Investor</th>
                                 <th>Invested</th>
                                 <th>Net Profit</th>
                                 <th>Earned</th>
                                 <th>Status</th>
                                 <th>Duration</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Placeholder investments -->
-                            <tr>
-                                <td>Plan A</td>
-                                <td>$1,000.00</td>
-                                <td>$200.00</td>
-                                <td>$150.00</td>
-                                <td>Active</td>
-                                <td>30 days</td>
-                            </tr>
-                            <tr>
-                                <td>Plan B</td>
-                                <td>$2,000.00</td>
-                                <td>$500.00</td>
-                                <td>$500.00</td>
-                                <td>Ended</td>
-                                <td>60 days</td>
-                            </tr>
+                            <?php foreach ($all_investments as $invest) :
+                                // Calculate net profit, if available (expected minus invested)
+                                $netProfit = $invest['expected'] - $invest['amount'];
+                                $status = strtolower($invest['status']);
+                                $invest['plan_name'] = getPlanName($invest['plan_id']);
+                                $invest['user'] = getFullname($invest['user_id']);
+                            ?>
+                                <tr data-invest-id="<?= $invest['invest_id'] ?>" data-invest='<?= htmlspecialchars(json_encode($invest), ENT_QUOTES, "UTF-8") ?>'>
+                                    <td><?= $invest['invest_id'] ?></td>
+                                    <td style="text-transform: capitalize;"><?= $invest['plan_name'] ?></td>
+                                    <td><?= $invest['user'] ?></td>
+                                    <td>$<?= number_format($invest['amount'], 2) ?></td>
+                                    <td>$<?= number_format($invest['expected'], 2) ?></td>
+                                    <td>$<?= number_format($invest['earned'], 2) ?></td>
+                                    <td>
+                                        <?php if ($status == 'active'): ?>
+                                            <span style="color:green;"><?= ucfirst($status) ?></span>
+                                        <?php elseif ($status == 'ended'): ?>
+                                            <span style="color:grey;"><?= ucfirst($status) ?></span>
+                                        <?php else: ?>
+                                            <span><?= ucfirst($status) ?></span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $invest['num_of_days'] ?> days</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info view-invest" data-invest='<?= htmlspecialchars(json_encode($invest), ENT_QUOTES, "UTF-8") ?>'>View</button>
+                                        <button class="btn btn-sm btn-primary edit-invest" data-invest='<?= htmlspecialchars(json_encode($invest), ENT_QUOTES, "UTF-8") ?>'>Edit</button>
+                                        <button class="btn btn-sm btn-danger delete-invest" data-invest-id="<?= $invest['invest_id'] ?>">Delete</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </section>
+
+                <!-- View Investment Modal -->
+                <div class="modal fade" id="viewInvestModal" tabindex="-1" role="dialog" aria-labelledby="viewInvestModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 id="viewInvestModalLabel" class="modal-title" style="color: #222;">Investment Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="color: #222;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="color: #222;">
+                                <p><strong>Investment ID:</strong> <span id="viewInvest_id"></span></p>
+                                <p><strong>User:</strong> <span id="viewInvest_user"></span></p>
+                                <p><strong>Plan:</strong> <span id="viewInvest_plan" style="text-transform: capitalize;"></span></p>
+                                <p><strong>Invested:</strong> $<span id="viewInvest_amount"></span></p>
+                                <p><strong>Earned:</strong> $<span id="viewInvest_earned"></span></p>
+                                <p><strong>Net Profit:</strong> $<span id="viewInvest_expected"></span></p>
+                                <p><strong>Duration:</strong> <span id="viewInvest_duration"></span> days</p>
+                                <p><strong>Start Date:</strong> <span id="viewInvest_start_date"></span></p>
+                                <p><strong>End Date:</strong> <span id="viewInvest_end_date"></span></p>
+                                <p><strong>Status:</strong> <span id="viewInvest_status"></span></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #b58e43; border: none;">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Investment Modal -->
+                <div class="modal fade" id="editInvestModal" tabindex="-1" role="dialog" aria-labelledby="editInvestModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form id="editInvestForm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editInvestModalLabel">Edit Investment</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Hidden field for investment ID -->
+                                    <input type="hidden" name="invest_id" id="editInvest_id">
+                                    <div class="form-group">
+                                        <label for="editInvest_amount">Invested Amount (USD)</label>
+                                        <input type="text" class="form-control" id="editInvest_amount" name="amount" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editInvest_earned">Earned (USD)</label>
+                                        <input type="text" class="form-control" id="editInvest_earned" name="earned" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editInvest_expected">Expected (USD)</label>
+                                        <input type="text" class="form-control" id="editInvest_expected" name="expected" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editInvest_status">Status</label>
+                                        <select class="form-control" id="editInvest_status" name="status">
+                                            <option value="active">Active</option>
+                                            <option value="ended">Ended</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editInvest_num_of_days">Number of Days</label>
+                                        <input type="text" class="form-control" id="editInvest_num_of_days" name="num_of_days" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
                 <!-- Wallet Management -->
                 <section id="wallets">
@@ -506,8 +609,6 @@ function getFullname($uid)
     </div>
 
     <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables JS -->
@@ -528,7 +629,7 @@ function getFullname($uid)
                 // Decide new status based on the current one
                 var newStatus = (currentStatus === 'active') ? 'blocked' : 'active';
 
-                $.post('../backend/adminActions.php/updateUser.php', {
+                $.post('../backend/adminActions/updateUser.php', {
                     action: 'updateStatus',
                     user_id: userId,
                     status: newStatus
@@ -590,7 +691,7 @@ function getFullname($uid)
             // --- Submit Edit Form with AJAX ---
             $('#editUserForm').submit(function(e) {
                 e.preventDefault();
-                $.post('../backend/adminActions.php/updateUser.php', $(this).serialize() + '&action=updateInfo', function(response) {
+                $.post('../backend/adminActions/updateUser.php', $(this).serialize() + '&action=updateInfo', function(response) {
                     if (response.status === 'success') {
                         alert(response.message);
                         // Optionally, refresh the page or update the table row with new info without reloading
@@ -605,7 +706,7 @@ function getFullname($uid)
             $('.delete-user').click(function() {
                 var userId = $(this).data('user-id');
                 if (confirm("Are you sure you want to delete this user?")) {
-                    $.post('../backend/adminActions.php/deleteUser.php', {
+                    $.post('../backend/adminActions/deleteUser.php', {
                         user_id: userId
                     }, function(response) {
                         if (response.status === 'success') {
@@ -649,7 +750,7 @@ function getFullname($uid)
             // --- Submit Edit Transaction Form via AJAX ---
             $('#editTransacForm').submit(function(e) {
                 e.preventDefault();
-                $.post('../backend/adminActions.php/updateTransac.php', $(this).serialize(), function(response) {
+                $.post('../backend/adminActions/updateTransac.php', $(this).serialize(), function(response) {
                     if (response.status === 'success') {
                         alert(response.message);
                         location.reload();
@@ -664,7 +765,7 @@ function getFullname($uid)
                 var trans_id = $(this).data('transac-id');
                 var trans_type = $(this).data('trans-type');
                 if (confirm("Are you sure you want to delete this transaction?")) {
-                    $.post('../backend/adminActions.php/deleteTransac.php', {
+                    $.post('../backend/adminActions/deleteTransac.php', {
                         trans_type: trans_type,
                         trans_id: trans_id
                     }, function(response) {
@@ -690,6 +791,64 @@ function getFullname($uid)
                         $(this).hide();
                     }
                 });
+            });
+
+            // --- Open View Investment Modal and populate fields ---
+            $(document).on('click', '.view-invest', function() {
+                var invest = $(this).data('invest');
+                $('#viewInvest_id').text(invest.invest_id);
+                $('#viewInvest_plan').text(`${invest.plan_name} plan`);
+                $('#viewInvest_user').text(invest.user);
+                $('#viewInvest_amount').text(parseFloat(invest.amount).toFixed(2));
+                $('#viewInvest_earned').text(parseFloat(invest.earned).toFixed(2));
+                $('#viewInvest_expected').text(parseFloat(invest.expected).toFixed(2));
+                $('#viewInvest_duration').text(invest.num_of_days);
+                $('#viewInvest_start_date').text(invest.start_date);
+                $('#viewInvest_end_date').text(invest.end_date);
+                $('#viewInvest_status').text(invest.status);
+                $('#viewInvestModal').modal('show');
+            });
+
+            // --- Open Edit Investment Modal and populate fields ---
+            $(document).on('click', '.edit-invest', function() {
+                var invest = $(this).data('invest');
+                $('#editInvest_id').val(invest.invest_id);
+                $('#editInvest_amount').val(invest.amount);
+                $('#editInvest_earned').val(invest.earned);
+                $('#editInvest_expected').val(invest.expected);
+                $('#editInvest_status').val(invest.status.toLowerCase());
+                $('#editInvest_num_of_days').val(invest.num_of_days);
+                $('#editInvestModal').modal('show');
+            });
+
+            // --- Submit Edit Investment Form via AJAX ---
+            $('#editInvestForm').submit(function(e) {
+                e.preventDefault();
+                $.post('../backend/adminActions/updateInvest.php', $(this).serialize(), function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                }, 'json');
+            });
+
+            // --- Delete Investment with Confirmation ---
+            $(document).on('click', '.delete-invest', function() {
+                var invest_id = $(this).data('invest-id');
+                if (confirm("Are you sure you want to delete this investment?")) {
+                    $.post('../backend/adminActions/deleteInvest.php', {
+                        invest_id: invest_id
+                    }, function(response) {
+                        if (response.status === 'success') {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    }, 'json');
+                }
             });
         });
     </script>

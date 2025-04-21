@@ -106,7 +106,7 @@ if ($allWallets && is_array($allWallets)) {
 // Get all investments for the user
 $user_investments = [];
 if ($user_id) {
-    $allInvestments = $modules->getAllInvestments($user_id);
+    $allInvestments = $modules->getAllUserInvestments($user_id);
     if ($allInvestments && is_array($allInvestments)) {
         $user_investments = $allInvestments;
     }
