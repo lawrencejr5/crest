@@ -41,6 +41,7 @@ $all_transactions = $modules->getAllTransactions();
 $all_investments = $modules->getAllInvestments();
 $all_tickets = $modules->getAllTickets();
 $all_wallets = $modules->getAllWallets();
+$all_investment_plans = $modules->getAllPlans();
 
 
 (!$_SESSION['admin'] || $_SESSION['admin'] == "false") && header('location: ../dashboard/');

@@ -760,34 +760,142 @@ function getPlanName($pid)
 
                 <!-- Plan Management -->
                 <section id="plans">
-                    <h2>Investement Plans</h2>
+                    <h2>Investment Plans</h2>
+                    <!-- Button to trigger Create Plan Modal -->
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createPlanModal">Create New Plan</button>
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Plan ID</th>
                                 <th>Name</th>
+                                <th>Type</th>
+                                <th>Rate</th>
+                                <th>Duration</th>
                                 <th>Limits</th>
-                                <th>Address</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Placeholder wallets -->
-                            <tr>
-                                <td>1</td>
-                                <td>Deposit Wallet</td>
-                                <td>$10 - $10,000</td>
-                                <td>addr_001</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Withdrawal Wallet</td>
-                                <td>$20 - $5,000</td>
-                                <td>addr_002</td>
-                            </tr>
+                            <?php foreach ($all_investment_plans as $plan) : ?>
+                                <tr data-plan='<?= htmlspecialchars(json_encode($plan), ENT_QUOTES, "UTF-8") ?>'>
+                                    <td><?= $plan['plan_id'] ?></td>
+                                    <td style="text-transform: capitalize;"><?= $plan['plan_name'] ?> plan</td>
+                                    <td><?= $plan['plan_type'] ?></td>
+                                    <td><?= $plan['plan_rate'] ?>%</td>
+                                    <td><?= $plan['duration_text'] ?></td>
+                                    <td>$<?= number_format($plan['plan_min']) ?> - $<?= number_format($plan['plan_max']) ?></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary edit-plan" data-plan='<?= htmlspecialchars(json_encode($plan), ENT_QUOTES, "UTF-8") ?>'>Edit</button>
+                                        <button class="btn btn-sm btn-danger delete-plan" data-plan-id="<?= $plan['plan_id'] ?>">Delete</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </section>
 
+                <!-- Create Plan Modal -->
+                <div class="modal fade" id="createPlanModal" tabindex="-1" role="dialog" aria-labelledby="createPlanModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form id="createPlanForm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="createPlanModalLabel">Create New Plan</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Note: The plan_id is generated in the createPlan.php so it is not a field here -->
+                                    <div class="form-group">
+                                        <label for="createPlan_name">Plan Name</label>
+                                        <input type="text" class="form-control" id="createPlan_name" name="plan_name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="createPlan_type">Plan Type</label>
+                                        <input type="text" class="form-control" id="createPlan_type" name="plan_type" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="createPlan_rate">Plan Rate</label>
+                                        <input type="text" class="form-control" id="createPlan_rate" name="plan_rate" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="createPlan_duration">Duration</label>
+                                        <input type="text" class="form-control" id="createPlan_duration" name="duration" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="createPlan_duration_text">Duration Text</label>
+                                        <input type="text" class="form-control" id="createPlan_duration_text" name="duration_text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="createPlan_min">Minimum Limit</label>
+                                        <input type="text" class="form-control" id="createPlan_min" name="plan_min" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="createPlan_max">Maximum Limit</label>
+                                        <input type="text" class="form-control" id="createPlan_max" name="plan_max" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Create Plan</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Edit Plan Modal -->
+                <div class="modal fade" id="editPlanModal" tabindex="-1" role="dialog" aria-labelledby="editPlanModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form id="editPlanForm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editPlanModalLabel">Edit Plan</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Hidden field for plan_id -->
+                                    <input type="hidden" name="plan_id" id="editPlan_id">
+                                    <div class="form-group">
+                                        <label for="editPlan_name">Plan Name</label>
+                                        <input type="text" class="form-control" id="editPlan_name" name="plan_name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPlan_type">Plan Type</label>
+                                        <input type="text" class="form-control" id="editPlan_type" name="plan_type" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPlan_rate">Plan Rate</label>
+                                        <input type="text" class="form-control" id="editPlan_rate" name="plan_rate" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPlan_duration">Duration</label>
+                                        <input type="text" class="form-control" id="editPlan_duration" name="duration" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPlan_duration_text">Duration Text</label>
+                                        <input type="text" class="form-control" id="editPlan_duration_text" name="duration_text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPlan_min">Minimum Limit</label>
+                                        <input type="text" class="form-control" id="editPlan_min" name="plan_min" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPlan_max">Maximum Limit</label>
+                                        <input type="text" class="form-control" id="editPlan_max" name="plan_max" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
                 <!-- Reports & Logs -->
                 <section id="reports">
@@ -1153,6 +1261,64 @@ function getPlanName($pid)
                 if (confirm("Are you sure you want to delete this wallet?")) {
                     $.post('../backend/adminActions/deleteWallet.php', {
                         wallet_id: wallet_id
+                    }, function(response) {
+                        if (response.status === 'success') {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    }, 'json');
+                }
+            });
+
+            // Plan Management AJAX
+            // Create Plan AJAX
+            $(document).on('submit', '#createPlanForm', function(e) {
+                e.preventDefault();
+                $.post('../backend/adminActions/createPlan.php', $(this).serialize(), function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                }, 'json');
+            });
+
+            // Open Edit Plan Modal and populate fields
+            $(document).on('click', '.edit-plan', function() {
+                var plan = $(this).data('plan');
+                $('#editPlan_id').val(plan.plan_id);
+                $('#editPlan_name').val(plan.plan_name);
+                $('#editPlan_type').val(plan.plan_type);
+                $('#editPlan_rate').val(plan.plan_rate);
+                $('#editPlan_duration').val(plan.duration);
+                $('#editPlan_duration_text').val(plan.duration_text);
+                $('#editPlan_min').val(plan.plan_min);
+                $('#editPlan_max').val(plan.plan_max);
+                $('#editPlanModal').modal('show');
+            });
+
+            // Edit Plan AJAX
+            $(document).on('submit', '#editPlanForm', function(e) {
+                e.preventDefault();
+                $.post('../backend/adminActions/updatePlan.php', $(this).serialize(), function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                }, 'json');
+            });
+
+            // Delete Plan AJAX
+            $(document).on('click', '.delete-plan', function() {
+                var plan_id = $(this).data('plan-id');
+                if (confirm("Are you sure you want to delete this plan?")) {
+                    $.post('../backend/adminActions/deletePlan.php', {
+                        plan_id: plan_id
                     }, function(response) {
                         if (response.status === 'success') {
                             alert(response.message);

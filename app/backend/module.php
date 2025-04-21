@@ -370,6 +370,33 @@ class Modules extends Connection
         return false;
     }
 
+    // Update an investment plan (admin function)
+    // $fields is an associative array of columns to update, e.g. ['plan_name' => 'New Name', 'plan_rate' => 5]
+    public function updatePlan($plan_id, $fields)
+    {
+        $set_fields = [];
+        foreach ($fields as $column => $value) {
+            $set_fields[] = "$column = :$column";
+        }
+        $set_str = implode(", ", $set_fields);
+        $this->sql = "UPDATE plans SET $set_str WHERE plan_id = :plan_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        foreach ($fields as $column => $value) {
+            $this->stmt->bindValue(":$column", $value);
+        }
+        $this->stmt->bindParam(':plan_id', $plan_id);
+        return $this->stmt->execute();
+    }
+
+    // Delete an investment plan (admin function)
+    public function deletePlan($plan_id)
+    {
+        $this->sql = "DELETE FROM plans WHERE plan_id = :plan_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':plan_id', $plan_id);
+        return $this->stmt->execute();
+    }
+
     // Start an investment
     public function startInvestment($invest_id, $user_id, $plan_id, $amount, $start_date, $end_date, $to_earn, $earned, $expected, $num_of_days, $status)
     {
