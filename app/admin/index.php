@@ -643,6 +643,8 @@ function getPlanName($pid)
                 <!-- Wallet Management -->
                 <section id="wallets">
                     <h2>Wallets</h2>
+                    <!-- Button to trigger Create Wallet Modal -->
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createWalletModal">Create New Wallet</button>
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
@@ -650,25 +652,111 @@ function getPlanName($pid)
                                 <th>Name</th>
                                 <th>Limits</th>
                                 <th>Address</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Placeholder wallets -->
-                            <tr>
-                                <td>1</td>
-                                <td>Deposit Wallet</td>
-                                <td>$10 - $10,000</td>
-                                <td>addr_001</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Withdrawal Wallet</td>
-                                <td>$20 - $5,000</td>
-                                <td>addr_002</td>
-                            </tr>
+                            <?php foreach ($all_wallets as $wallet) : ?>
+                                <tr data-wallet='<?= htmlspecialchars(json_encode($wallet), ENT_QUOTES, "UTF-8") ?>'>
+                                    <td><?= $wallet['wallet_id'] ?></td>
+                                    <td><?= $wallet['wallet_name'] ?></td>
+                                    <td>$<?= number_format($wallet['wallet_min']) ?> - $<?= number_format($wallet['wallet_max']) ?></td>
+                                    <td><?= $wallet['wallet_address'] ?></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary edit-wallet" data-wallet='<?= htmlspecialchars(json_encode($wallet), ENT_QUOTES, "UTF-8") ?>'>Edit</button>
+                                        <button class="btn btn-sm btn-danger delete-wallet" data-wallet-id="<?= $wallet['wallet_id'] ?>">Delete</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </section>
+
+                <!-- Create Wallet Modal -->
+                <div class="modal fade" id="createWalletModal" tabindex="-1" role="dialog" aria-labelledby="createWalletModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form id="createWalletForm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="createWalletModalLabel">Create New Wallet</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="createWallet_name">Wallet Name</label>
+                                        <input type="text" class="form-control" id="createWallet_name" name="wallet_name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="createWallet_short">Wallet Short</label>
+                                        <input type="text" class="form-control" id="createWallet_short" name="wallet_short" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="createWallet_min">Wallet Minimum Limit</label>
+                                        <input type="text" class="form-control" id="createWallet_min" name="wallet_min" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="createWallet_max">Wallet Maximum Limit</label>
+                                        <input type="text" class="form-control" id="createWallet_max" name="wallet_max" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="createWallet_address">Wallet Address</label>
+                                        <input type="text" class="form-control" id="createWallet_address" name="wallet_address" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Create Wallet</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Edit Wallet Modal -->
+                <div class="modal fade" id="editWalletModal" tabindex="-1" role="dialog" aria-labelledby="editWalletModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form id="editWalletForm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editWalletModalLabel">Edit Wallet</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Hidden field for wallet ID -->
+                                    <input type="hidden" name="wallet_id" id="editWallet_id">
+                                    <div class="form-group">
+                                        <label for="editWallet_name">Wallet Name</label>
+                                        <input type="text" class="form-control" id="editWallet_name" name="wallet_name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editWallet_short">Wallet Short</label>
+                                        <input type="text" class="form-control" id="editWallet_short" name="wallet_short" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editWallet_min">Wallet Minimum Limit</label>
+                                        <input type="text" class="form-control" id="editWallet_min" name="wallet_min" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editWallet_max">Wallet Maximum Limit</label>
+                                        <input type="text" class="form-control" id="editWallet_max" name="wallet_max" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editWallet_address">Wallet Address</label>
+                                        <input type="text" class="form-control" id="editWallet_address" name="wallet_address" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
                 <!-- Plan Management -->
                 <section id="plans">
@@ -1010,6 +1098,61 @@ function getPlanName($pid)
                 if (confirm("Are you sure you want to delete this ticket?")) {
                     $.post('../backend/adminActions/deleteTicket.php', {
                         ticket_id: ticket_id
+                    }, function(response) {
+                        if (response.status === 'success') {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    }, 'json');
+                }
+            });
+
+            // Create Wallet AJAX
+            $(document).on('submit', '#createWalletForm', function(e) {
+                e.preventDefault();
+                $.post('../backend/adminActions/createWallet.php', $(this).serialize(), function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                }, 'json');
+            });
+
+            // Open Edit Wallet Modal and populate fields
+            $(document).on('click', '.edit-wallet', function() {
+                var wallet = $(this).data('wallet');
+                $('#editWallet_id').val(wallet.wallet_id);
+                $('#editWallet_name').val(wallet.wallet_name);
+                $('#editWallet_short').val(wallet.wallet_short);
+                $('#editWallet_min').val(wallet.wallet_min);
+                $('#editWallet_max').val(wallet.wallet_max);
+                $('#editWallet_address').val(wallet.wallet_address);
+                $('#editWalletModal').modal('show');
+            });
+
+            // Edit Wallet AJAX
+            $(document).on('submit', '#editWalletForm', function(e) {
+                e.preventDefault();
+                $.post('../backend/adminActions/updateWallet.php', $(this).serialize(), function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                }, 'json');
+            });
+
+            // Delete Wallet AJAX
+            $(document).on('click', '.delete-wallet', function() {
+                var wallet_id = $(this).data('wallet-id');
+                if (confirm("Are you sure you want to delete this wallet?")) {
+                    $.post('../backend/adminActions/deleteWallet.php', {
+                        wallet_id: wallet_id
                     }, function(response) {
                         if (response.status === 'success') {
                             alert(response.message);
