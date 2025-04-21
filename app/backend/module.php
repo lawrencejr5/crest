@@ -318,6 +318,34 @@ class Modules extends Connection
         return false;
     }
 
+    // Update a wallet (admin function)
+    public function updateWallet($wallet_id, $wallet_name, $wallet_short, $wallet_min, $wallet_max, $wallet_address)
+    {
+        $this->sql = "UPDATE wallets 
+                      SET wallet_name = :wallet_name, 
+                          wallet_short = :wallet_short, 
+                          wallet_min = :wallet_min, 
+                          wallet_max = :wallet_max, 
+                          wallet_address = :wallet_address 
+                      WHERE wallet_id = :wallet_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':wallet_name', $wallet_name);
+        $this->stmt->bindParam(':wallet_short', $wallet_short);
+        $this->stmt->bindParam(':wallet_min', $wallet_min);
+        $this->stmt->bindParam(':wallet_max', $wallet_max);
+        $this->stmt->bindParam(':wallet_address', $wallet_address);
+        $this->stmt->bindParam(':wallet_id', $wallet_id);
+        return $this->stmt->execute();
+    }
+
+    // Delete a wallet (admin function)
+    public function deleteWallet($wallet_id)
+    {
+        $this->sql = "DELETE FROM wallets WHERE wallet_id = :wallet_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':wallet_id', $wallet_id);
+        return $this->stmt->execute();
+    }
 
     // Get all investment plans
     public function getAllPlans()
@@ -449,6 +477,7 @@ class Modules extends Connection
         $this->stmt->bindParam(':wallet_address', $wallet_address);
         return $this->stmt->execute();
     }
+
 
     // ************** ADMIN USER FUNCTIONS ************** //
 
@@ -594,6 +623,46 @@ class Modules extends Connection
         $this->sql = "DELETE FROM investments WHERE invest_id = :invest_id";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':invest_id', $invest_id);
+        return $this->stmt->execute();
+    }
+
+    // ************** ADMIN SUPPORT TICKET FUNCTIONS ************** //
+
+    // Retrieve all tickets (admin view)
+    public function getAllTickets()
+    {
+        $this->sql = "SELECT * FROM tickets ORDER BY datetime DESC";
+        $this->stmt = $this->conn->prepare($this->sql);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
+
+    // Update a ticket (admin function)
+    // $fields is an associative array of columns to update, e.g. ['status' => 'closed']
+    public function updateTicket($ticket_id, $fields)
+    {
+        $set_fields = [];
+        foreach ($fields as $column => $value) {
+            $set_fields[] = "$column = :$column";
+        }
+        $set_str = implode(", ", $set_fields);
+        $this->sql = "UPDATE tickets SET $set_str WHERE id = :ticket_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        foreach ($fields as $column => $value) {
+            $this->stmt->bindValue(":$column", $value);
+        }
+        $this->stmt->bindParam(':ticket_id', $ticket_id);
+        return $this->stmt->execute();
+    }
+
+    // Delete a ticket (admin function)
+    public function deleteTicket($ticket_id)
+    {
+        $this->sql = "DELETE FROM tickets WHERE id = :ticket_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':ticket_id', $ticket_id);
         return $this->stmt->execute();
     }
 }

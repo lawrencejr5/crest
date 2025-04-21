@@ -39,6 +39,7 @@ $total_withdrawals_amount = $modules->getTotal('withdrawals', 'dol_val');
 $all_users = $modules->getAllUsers();
 $all_transactions = $modules->getAllTransactions();
 $all_investments = $modules->getAllInvestments();
+$all_tickets = $modules->getAllTickets();
 
 
 

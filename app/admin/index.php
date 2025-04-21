@@ -59,10 +59,13 @@ function getPlanName($pid)
                             <a class="nav-link" href="#investments">Investments</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="#tickets">Support Tickets</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="#wallets">Wallets</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#tickets">Support Tickets</a>
+                            <a class="nav-link" href="#plans">Plans</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#reports">Reports & Logs</a>
@@ -532,6 +535,111 @@ function getPlanName($pid)
                     </div>
                 </div>
 
+                <!-- Support & Tickets -->
+                <section id="tickets">
+                    <h2>Support Tickets</h2>
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Subject</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($all_tickets as $ticket) :
+                                // Assume ticket has fields: id, user_id, subject, message, status, created, and optionally image
+                                $status = strtolower($ticket['status']);
+                                // Determine a badge class and text color for each status:
+                                if ($status == 'pending') {
+                                    $badgeClass = 'badge badge-warning';
+                                } elseif ($status == 'opened') {
+                                    $badgeClass = 'badge badge-success';
+                                } elseif ($status == 'closed') {
+                                    $badgeClass = 'badge badge-secondary';
+                                } else {
+                                    $badgeClass = 'badge badge-light';
+                                }
+                                $ticket['user_name'] = getFullname($ticket['user_id']);
+                            ?>
+                                <tr data-ticket-id="<?= $ticket['id'] ?>" data-ticket='<?= htmlspecialchars(json_encode($ticket), ENT_QUOTES, "UTF-8") ?>'>
+                                    <td><?= $ticket['ticket_id'] ?></td>
+                                    <td><?= $ticket['user_name'] ?></td>
+                                    <td><?= $ticket['subject'] ?></td>
+                                    <td><span class="<?= $badgeClass ?>"><?= ucfirst($status) ?></span></td>
+                                    <td><?= $ticket['datetime'] ?></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info view-ticket" data-ticket='<?= htmlspecialchars(json_encode($ticket), ENT_QUOTES, "UTF-8") ?>'>View</button>
+                                        <button class="btn btn-sm btn-primary edit-ticket" data-ticket='<?= htmlspecialchars(json_encode($ticket), ENT_QUOTES, "UTF-8") ?>'>Edit</button>
+                                        <button class="btn btn-sm btn-danger delete-ticket" data-ticket-id="<?= $ticket['id'] ?>">Delete</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- View Ticket Modal -->
+                <div class="modal fade" id="viewTicketModal" tabindex="-1" role="dialog" aria-labelledby="viewTicketModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 id="viewTicketModalLabel" class="modal-title" style="color: #222;">Ticket Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="color: #222;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="color: #222;">
+                                <p><strong>Ticket ID:</strong> <span id="viewTicket_id"></span></p>
+                                <p><strong>User:</strong> <span id="viewTicket_user"></span></p>
+                                <p><strong>Subject:</strong> <span id="viewTicket_subject"></span></p>
+                                <p><strong>Message:</strong> <span id="viewTicket_message"></span></p>
+                                <p><strong>Image:</strong> <span id="viewTicket_image"></span></p>
+                                <p><strong>Status:</strong> <span id="viewTicket_status"></span></p>
+                                <p><strong>Created:</strong> <span id="viewTicket_created"></span></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #b58e43; border: none;">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Ticket Modal -->
+                <div class="modal fade" id="editTicketModal" tabindex="-1" role="dialog" aria-labelledby="editTicketModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form id="editTicketForm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editTicketModalLabel">Edit Ticket Status</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Hidden field for ticket ID -->
+                                    <input type="hidden" name="ticket_id" id="editTicket_id">
+                                    <div class="form-group">
+                                        <label for="editTicket_status">Status</label>
+                                        <select class="form-control" id="editTicket_status" name="status" required>
+                                            <option value="pending">Pending</option>
+                                            <option value="opened">Open</option>
+                                            <option value="closed">Closed</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #b58e43; border: none;">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 <!-- Wallet Management -->
                 <section id="wallets">
                     <h2>Wallets</h2>
@@ -562,31 +670,36 @@ function getPlanName($pid)
                     </table>
                 </section>
 
-                <!-- Support & Tickets -->
-                <section id="tickets">
-                    <h2>Support Tickets</h2>
+                <!-- Plan Management -->
+                <section id="plans">
+                    <h2>Investement Plans</h2>
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>User</th>
-                                <th>Subject</th>
-                                <th>Status</th>
-                                <th>Created</th>
+                                <th>Name</th>
+                                <th>Limits</th>
+                                <th>Address</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Placeholder tickets -->
+                            <!-- Placeholder wallets -->
                             <tr>
-                                <td>101</td>
-                                <td>John Doe</td>
-                                <td>Issue with deposit</td>
-                                <td>Open</td>
-                                <td>2025-01-03</td>
+                                <td>1</td>
+                                <td>Deposit Wallet</td>
+                                <td>$10 - $10,000</td>
+                                <td>addr_001</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Withdrawal Wallet</td>
+                                <td>$20 - $5,000</td>
+                                <td>addr_002</td>
                             </tr>
                         </tbody>
                     </table>
                 </section>
+
 
                 <!-- Reports & Logs -->
                 <section id="reports">
@@ -840,6 +953,63 @@ function getPlanName($pid)
                 if (confirm("Are you sure you want to delete this investment?")) {
                     $.post('../backend/adminActions/deleteInvest.php', {
                         invest_id: invest_id
+                    }, function(response) {
+                        if (response.status === 'success') {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    }, 'json');
+                }
+            });
+
+            // --- Open View Ticket Modal and populate fields ---
+            $(document).on('click', '.view-ticket', function() {
+                var ticket = $(this).data('ticket');
+                $('#viewTicket_id').text(ticket.id);
+                $('#viewTicket_user').text(ticket.user_name);
+                $('#viewTicket_subject').text(ticket.subject);
+                $('#viewTicket_message').text(ticket.message);
+                if (ticket.image) {
+                    // Display image if available, adjust size as needed
+                    $('#viewTicket_image').html('<img src="' + ticket.image + '" alt="Ticket Image" style="max-width:100%;">');
+                } else {
+                    $('#viewTicket_image').text('No image');
+                }
+                // Set status with proper casing
+                $('#viewTicket_status').html(ticket.status ? ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1) : '');
+                $('#viewTicket_created').text(ticket.created);
+                $('#viewTicketModal').modal('show');
+            });
+
+            // --- Open Edit Ticket Modal and populate fields ---
+            $(document).on('click', '.edit-ticket', function() {
+                var ticket = $(this).data('ticket');
+                $('#editTicket_id').val(ticket.id);
+                $('#editTicket_status').val(ticket.status.toLowerCase());
+                $('#editTicketModal').modal('show');
+            });
+
+            // --- Submit Edit Ticket Form via AJAX ---
+            $('#editTicketForm').submit(function(e) {
+                e.preventDefault();
+                $.post('../backend/adminActions/updateTicket.php', $(this).serialize(), function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                }, 'json');
+            });
+
+            // --- Delete Ticket with confirmation ---
+            $(document).on('click', '.delete-ticket', function() {
+                var ticket_id = $(this).data('ticket-id');
+                if (confirm("Are you sure you want to delete this ticket?")) {
+                    $.post('../backend/adminActions/deleteTicket.php', {
+                        ticket_id: ticket_id
                     }, function(response) {
                         if (response.status === 'success') {
                             alert(response.message);
