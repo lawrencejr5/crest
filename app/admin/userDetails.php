@@ -44,7 +44,8 @@ $investments = $modules->getAllUserInvestments($user_id);
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.dataTables.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./style.css">
     <style>
@@ -264,7 +265,7 @@ $investments = $modules->getAllUserInvestments($user_id);
                     <option value="withdrawal">Withdrawals</option>
                 </select>
             </div>
-            <table class="table table-striped table-sm">
+            <table class="table table-striped table-sm dt-responsive">
                 <thead>
                     <tr>
                         <th>Transaction ID</th>
@@ -405,7 +406,7 @@ $investments = $modules->getAllUserInvestments($user_id);
         <!-- Investments Management Section -->
         <section id="investments">
             <h2>User Investments</h2>
-            <table class="table table-striped table-sm">
+            <table class="table table-striped table-sm dt-responsive">
                 <thead>
                     <tr>
                         <th>Investment ID</th>
@@ -534,7 +535,7 @@ $investments = $modules->getAllUserInvestments($user_id);
         <!-- Support & Tickets -->
         <section id="tickets">
             <h2>User Support Tickets</h2>
-            <table class="table table-striped table-sm">
+            <table class="table table-striped table-sm dt-responsive">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -642,8 +643,8 @@ $investments = $modules->getAllUserInvestments($user_id);
     <!-- jQuery, Bootstrap JS, and DataTables JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.min.js"></script>
     <script src="admin-ajax.js"></script>
 
 </body>

@@ -1,7 +1,9 @@
 $(document).ready(function () {
   // Initialize DataTables on all tables on the page
   $("table").DataTable({
-    pageLength: 10,
+    order: [],
+    language: "",
+    pageLength: "10",
     // Optional: add more DataTables settings here, e.g., language customization, ordering, etc.
   });
 

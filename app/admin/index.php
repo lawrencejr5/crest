@@ -28,6 +28,7 @@ function getPlanName($pid)
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin Dashboard</title>
     <link rel="shortcut icon" href="/crest/assets/images/logoIcon/crest-favicon.png" type="image/x-icon">
     <!-- Bootstrap CSS -->
@@ -35,7 +36,8 @@ function getPlanName($pid)
     <!-- Main css -->
     <link rel="stylesheet" href="style.css">
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.dataTables.min.css">
 </head>
 
 <body>
@@ -122,7 +124,7 @@ function getPlanName($pid)
                 <!-- User Management -->
                 <section id="users">
                     <h2>User Management</h2>
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped table-sm dt-responsive">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -268,7 +270,7 @@ function getPlanName($pid)
                             <option value="withdrawal">Withdrawals</option>
                         </select>
                     </div>
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped table-sm dt-responsive">
                         <thead>
                             <tr>
                                 <th>Transaction ID</th>
@@ -409,7 +411,7 @@ function getPlanName($pid)
                 <!-- Investments Management Section -->
                 <section id="investments">
                     <h2>Investments</h2>
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped table-sm dt-responsive">
                         <thead>
                             <tr>
                                 <th>Investment ID</th>
@@ -538,7 +540,7 @@ function getPlanName($pid)
                 <!-- Support & Tickets -->
                 <section id="tickets">
                     <h2>Support Tickets</h2>
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped table-sm dt-responsive">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -645,7 +647,7 @@ function getPlanName($pid)
                     <h2>Wallets</h2>
                     <!-- Button to trigger Create Wallet Modal -->
                     <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createWalletModal">Create New Wallet</button>
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped table-sm dt-responsive">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -763,7 +765,7 @@ function getPlanName($pid)
                     <h2>Investment Plans</h2>
                     <!-- Button to trigger Create Plan Modal -->
                     <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createPlanModal">Create New Plan</button>
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped table-sm dt-responsive">
                         <thead>
                             <tr>
                                 <th>Plan ID</th>
@@ -921,7 +923,8 @@ function getPlanName($pid)
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.min.js"></script>
     <script src="admin-ajax.js"></script>
 </body>
 
