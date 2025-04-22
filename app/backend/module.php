@@ -81,14 +81,7 @@ class Modules extends Connection
 
         if ($this->stmt->execute()) {
             $user = $this->stmt->fetch(PDO::FETCH_ASSOC);
-            if ($user) {
-                // Check if the user is verified
-                if ($user['verified'] === "1") {
-                    return $user;
-                } else {
-                    return "not_verified";
-                }
-            }
+            return $user;
         }
         return false;
     }
@@ -182,7 +175,7 @@ class Modules extends Connection
     // Get total deposits for a user
     public function getTotalDeposits($user_id)
     {
-        $this->sql = "SELECT SUM(dol_val) as total FROM deposits WHERE user_id = :user_id";
+        $this->sql = "SELECT SUM(dol_val) as total FROM deposits WHERE user_id = :user_id AND status = 'success'";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':user_id', $user_id);
         if ($this->stmt->execute()) {
@@ -228,7 +221,7 @@ class Modules extends Connection
     // Get total withdrawals for a user
     public function getTotalWithdrawals($user_id)
     {
-        $this->sql = "SELECT SUM(dol_val) as total FROM withdrawals WHERE user_id = :user_id";
+        $this->sql = "SELECT SUM(dol_val) as total FROM withdrawals WHERE user_id = :user_id AND status = 'success'";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':user_id', $user_id);
         if ($this->stmt->execute()) {

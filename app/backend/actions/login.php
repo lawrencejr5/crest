@@ -21,7 +21,13 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $response = [];
     if ($result === false) {
         $response['status']  = "error";
-        $response['message'] = "Invalid credentials";
+        $response['message'] = "Invalid Credentials";
+    } else if ($result['verified'] != 1) {
+        $response['status']  = "error";
+        $response['message'] = "User not verified";
+    } else if ($result['status'] === "blocked") {
+        $response['status']  = "error";
+        $response['message'] = "Your account has been blocked";
     } elseif (is_array($result)) {
         // Loop over the returned user data and store them in separate session variables
         foreach ($result as $key => $value) {
@@ -29,9 +35,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         }
         $response['status']  = "success";
         $response['message'] = "Login successful";
-    } else {
-        $response['status']  = "error";
-        $response['message'] = "User not verified";
     }
 
     echo json_encode($response);

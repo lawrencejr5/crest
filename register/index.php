@@ -398,7 +398,7 @@
             fname: firstname,
             lname: lastname,
             country: country,
-            phone: mobile_code + phone,
+            phone: "+" + mobile_code + phone,
             email: email,
             password: password,
             ref: ref
@@ -409,7 +409,9 @@
               notify("error", res.message);
             } else if (res.status === "success") {
               notify("success", res.message);
-              window.location.href = "../login"; // Redirect to the success page
+              window.setTimeout(function() {
+                window.location.href = "../login"; // Redirect to the success page
+              }, 2000);
             }
             // Reset the form
             $("#registerForm")[0].reset();

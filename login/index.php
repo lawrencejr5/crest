@@ -98,7 +98,9 @@
           success: function(res) {
             if (res.status === "success") {
               notify("success", res.message);
-              window.location.href = "../app/dashboard"; // Adjust the redirection URL as needed
+              window.setTimeout(() => {
+                window.location.href = "../app/dashboard"; // Adjust the redirection URL as needed
+              }, 2000)
             } else {
               notify("error", res.message);
             }
