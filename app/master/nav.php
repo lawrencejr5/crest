@@ -1,3 +1,9 @@
+<style>
+    li a {
+        font-size: 14px !important;
+    }
+</style>
+
 <header class="header">
     <div class="header__bottom">
         <div class="container">

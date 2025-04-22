@@ -28,21 +28,21 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <!-- bootstrap 4  -->
-    <link rel="stylesheet" href="./assets/templates/bit_gold//css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/templates/bit_gold/css/vendor/bootstrap.min.css">
     <!-- line-awesome webfont -->
-    <link rel="stylesheet" href="./assets/templates/bit_gold//css/line-awesome.min.css">
-    <link rel="stylesheet" href="./assets/templates/bit_gold//css/vendor/animate.min.css">
+    <link rel="stylesheet" href="/crest/app/dashboard/assets/templates/bit_gold/css/line-awesome.min.css">
+    <link rel="stylesheet" href="./assets/templates/bit_gold/css/vendor/animate.min.css">
     <!-- slick slider css -->
-    <link rel="stylesheet" href="./assets/templates/bit_gold//css/vendor/slick.css">
-    <link rel="stylesheet" href="./assets/templates/bit_gold//css/vendor/dots.css">
+    <link rel="stylesheet" href="./assets/templates/bit_gold/css/vendor/slick.css">
+    <link rel="stylesheet" href="./assets/templates/bit_gold/css/vendor/dots.css">
     <!-- dashdoard main css -->
-    <link rel="stylesheet" href="./assets/templates/bit_gold//css/main.css">
-    <link rel="stylesheet" href="./assets/templates/bit_gold//css/custom.css">
+    <link rel="stylesheet" href="./assets/templates/bit_gold/css/main.css">
+    <link rel="stylesheet" href="./assets/templates/bit_gold/css/custom.css">
     <link rel="stylesheet"
         href="https://assetbase-trading.com/assets/templates/bit_gold/css/color.php?color=b58e43&secondColor=000000">
     <!-- fontawesome 5  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">

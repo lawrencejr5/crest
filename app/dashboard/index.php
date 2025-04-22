@@ -46,8 +46,6 @@
       cursor: pointer;
     }
   </style>
-  <!-- fontawesome 5  -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
 
   <!-- scroll-to-top start -->
@@ -272,23 +270,23 @@
                     <h5 class="card-title">This is how to invest on Assetbase Trading</h5>
                     <div class="row">
                       <div class="col-md-4 text-center mb-2">
-                        <span class="fa fa-money-bill fa-3x text-white"></span>
+                        <i class="las la-money-bill-wave la-3x"></i>
                         <p>1) Fund you account using one of our deposit method(cryptocurrency is preferable).</p>
                       </div>
                       <div class="col-md-4 text-center mb-2">
-                        <span class="fa fa-list fa-3x text-white"></span>
+                        <i class="las la-list la-3x"></i>
                         <p>2) Choose a package/plan of your choice from our plan menu and activate(you will get a mail once your plans is active.)</p>
                       </div>
                       <div class="col-md-4 text-center mb-2">
-                        <span class="fa fa-desktop fa-3x text-white"></span>
+                        <i class="las la-desktop la-3x text-white"></i>
                         <p>3) Monitor your earning from your dashboard;once a plan expires you can request for a withdrawal.</p>
                       </div>
                       <div class="col-md-4 text-center mb-2">
-                        <span class="fa fa-circle-info fa-3x text-white"></span>
+                        <i class="las la-info-circle la-3x text-white"></i>
                         <p>4) Compunding of profits is allowed;profits can be compounded up to 6 Months.</p>
                       </div>
                       <div class="col-md-4 text-center mb-2">
-                        <span class="fa fa-headset fa-3x text-white"></span>
+                        <i class="las la-headset la-3x text-white"></i>
                         <p>5) If you face any issues or need any information our live support is always available to help you; click on the chat bubble located at them footer.</p>
                       </div>
                     </div>
