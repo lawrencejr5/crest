@@ -68,21 +68,17 @@
               <table class="table style--two">
                 <thead>
                   <tr>
-                    <th scope="col">Date</th>
                     <th scope="col">From</th>
                     <th scope="col">Details</th>
                     <th scope="col">Bonus</th>
                     <th scope="col">Amount</th>
+                    <th scope="col">Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php if (!empty($user_ref_bonus_deposits) && is_array($user_ref_bonus_deposits)): ?>
                     <?php foreach ($user_ref_bonus_deposits as $deposit): ?>
                       <tr>
-                        <!-- Date -->
-                        <td data-label="Date">
-                          <?= htmlspecialchars(date("d M, Y h:i A", strtotime($deposit['datetime']))) ?>
-                        </td>
                         <!-- From -->
                         <td data-label="From">
                           <?php
@@ -106,6 +102,11 @@
                         <!-- Post Balance -->
                         <td data-label="Remaining Balance">
                           <?= htmlspecialchars($deposit['amount'] ?? 'N/A') ?> <?= $deposit['currency'] ?>
+                        </td>
+
+                        <!-- Date -->
+                        <td data-label="Date">
+                          <?= htmlspecialchars(date("d M, Y h:i A", strtotime($deposit['datetime']))) ?>
                         </td>
                       </tr>
                     <?php endforeach; ?>

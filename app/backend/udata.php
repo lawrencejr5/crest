@@ -29,6 +29,24 @@ if ($user_id) {
     }
 }
 
+$total_investments = 0;
+if ($user_id) {
+    $totalInvestments = $modules->getTotalInvestments($user_id);
+    if ($totalInvestments) {
+        $total_investments = $totalInvestments;
+    }
+}
+
+$total_interest = 0;
+if ($user_id) {
+    $totalInterest = $modules->getTotalInterests($user_id);
+    if ($totalInterest) {
+        $total_interest = $totalInterest;
+    }
+}
+
+
+
 $user_withdrawals = [];
 if ($user_id) {
     $userWithdrawals = $modules->getUserWithdrawals($user_id);

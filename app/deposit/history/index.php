@@ -70,8 +70,9 @@
                 <thead>
                   <tr>
                     <th scope="col">Transaction ID</th>
-                    <th scope="col">Currency</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Amount</th>
+                    <th scope="col">Dollar Value</th>
                     <th scope="col">Status</th>
                     <th scope="col">Date/Time</th>
                     <!-- <th scope="col"> MORE</th> -->
@@ -82,12 +83,18 @@
                     <?php foreach ($user_deposits as $deposit): ?>
                       <tr>
                         <td>#<?php echo htmlspecialchars($deposit['transac_id']); ?></td>
-                        <td><?php echo htmlspecialchars($deposit['currency']); ?></td>
+                        <td><?php echo htmlspecialchars($deposit['type']); ?></td>
+                        <td> <?= htmlspecialchars($deposit['amount'] . $deposit['currency']) ?> </td>
+                        <td><span class="text-success">+ $<?= htmlspecialchars($deposit['dol_val']) ?></span></td>
                         <td>
-                          <?php
-                          echo htmlspecialchars($deposit['dol_val']); ?> USD (<?php echo htmlspecialchars($deposit['amount']); ?>)
+                          <?php if ($deposit['status'] == "success"): ?>
+                            <span class="text-success"><?= htmlspecialchars($deposit['status']) ?></span>
+                          <?php elseif ($deposit['status'] == "pending"): ?>
+                            <span class="text-warning"><?= htmlspecialchars($deposit['status']) ?></span>
+                          <?php else: ?>
+                            <span class="text-danger"><?= htmlspecialchars($deposit['status']) ?></span>
+                          <?php endif; ?>
                         </td>
-                        <td><?php echo ucfirst(htmlspecialchars($deposit['status'])); ?></td>
                         <td><?php echo isset($deposit['datetime']) ? htmlspecialchars($deposit['datetime']) : 'N/A'; ?></td>
                         <!-- <td>
                           <a href="details.php?id=<?php echo htmlspecialchars($deposit['id']); ?>" class="btn btn-sm btn-info">View</a>

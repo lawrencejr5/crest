@@ -124,12 +124,12 @@
                   <strong class="text-white mb-2 d-block">Select wallet</strong>
                   <select class="form-control" name="wallet_type">
                     <option value="deposit_wallet">Deposit Wallet - $<?= $total_user_balance ?></option>
-                    <option value="interest_wallet">Interest Wallet -$0</option>
+                    <option value="interest_wallet">Interest Wallet -$<?= $total_interest ?></option>
                   </select>
                 </div>
                 <input type="hidden" name="plan_id" class="plan_id">
                 <input type="hidden" name="dep_wallet" id="" value="<?= $total_user_balance ?>">
-                <input type="hidden" name="int_wallet" id="" value="0">
+                <input type="hidden" name="int_wallet" id="" value="<?= $total_interest ?>">
 
                 <div class="form-group">
                   <strong class="text-white mb-2 d-block">Invest Amount</strong>

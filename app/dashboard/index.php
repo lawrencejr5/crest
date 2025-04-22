@@ -118,7 +118,7 @@
                   <div class="d-widget d-flex flex-wrap">
                     <div class="col-8">
                       <span class="caption">Interest Wallet </span>
-                      <h4 class="currency-amount">$0</h4>
+                      <h4 class="currency-amount">$<?= $total_interest ?></h4>
                       <br>
                       <hr>
                       <h6>Total Withdrawal: $<?= $total_withdrawals ?>
@@ -136,7 +136,7 @@
                     <div class="col-8">
                       <span class="caption">Total Invested</span>
                       <h4 class="currency-amount">
-                        $0</h4><br>
+                        $<?= $total_investments ?></h4><br>
                       <hr>
                       <h5>Promo Offer: $0
                         <!-- <br> -->
@@ -163,11 +163,12 @@
                     <table class="table style--two">
                       <thead>
                         <tr>
-                          <th>Date</th>
                           <th>Transaction ID</th>
+                          <th>Dollar Value</th>
                           <th>Amount</th>
                           <th>Type</th>
-                          <th>Post Balance</th>
+                          <th>Date</th>
+                          <th>Status</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -179,8 +180,6 @@
                           ?>
                           <?php foreach ($last_transactions as $trans): ?>
                             <tr>
-                              <!-- Date: formatted from datetime -->
-                              <td><?= htmlspecialchars(date("d M, Y h:i A", strtotime($trans['datetime']))) ?></td>
                               <!-- Transaction ID -->
                               <td><?= htmlspecialchars($trans['transac_id']) ?></td>
                               <!-- Amount: check if type is defined as deposit type -->
@@ -193,12 +192,23 @@
                                   <span class="text-danger">- $<?= htmlspecialchars($trans['dol_val']) ?></span>
                                 <?php endif; ?>
                               </td>
+                              <td> <?= htmlspecialchars($trans['amount'] . $trans['currency']) ?> </td>
                               <!-- Wallet: display based on type -->
                               <td style="text-transform: capitalize;">
                                 <?= $trans['type'] ?>
                               </td>
-                              <!-- Post Balance: if available, otherwise show N/A -->
-                              <td><?= htmlspecialchars($trans['post_balance'] ?? 'N/A') ?></td>
+                              <!-- Date: formatted from datetime -->
+                              <td><?= htmlspecialchars(date("d M, Y h:i A", strtotime($trans['datetime']))) ?></td>
+                              <!-- Status -->
+                              <td>
+                                <?php if ($trans['status'] == "success"): ?>
+                                  <span class="text-success"><?= htmlspecialchars($trans['status']) ?></span>
+                                <?php elseif ($trans['status'] == "pending"): ?>
+                                  <span class="text-warning"><?= htmlspecialchars($trans['status']) ?></span>
+                                <?php else: ?>
+                                  <span class="text-danger"><?= htmlspecialchars($trans['status']) ?></span>
+                                <?php endif; ?>
+                              </td>
                             </tr>
                           <?php endforeach; ?>
                         <?php else: ?>

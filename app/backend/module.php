@@ -403,6 +403,32 @@ class Modules extends Connection
         return $this->stmt->execute();
     }
 
+    // Get total investments for a user
+    public function getTotalInvestments($user_id)
+    {
+        $this->sql = "SELECT SUM(amount) as total FROM investments WHERE user_id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            $result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'] ? $result['total'] : 0;
+        }
+        return 0;
+    }
+
+    // Get total investments for a user
+    public function getTotalInterests($user_id)
+    {
+        $this->sql = "SELECT SUM(earned) as total FROM investments WHERE user_id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            $result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'] ? $result['total'] : 0;
+        }
+        return 0;
+    }
+
     // Get all investments for a user
     public function getAllUserInvestments($user_id)
     {

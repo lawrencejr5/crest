@@ -64,37 +64,36 @@
               <table class="table style--two">
                 <thead>
                   <tr>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Amount</th>
-                    <th scope="col">Rate</th>
-                    <th scope="col">Charge</th>
-                    <th scope="col">Receivable</th>
+                    <th scope="col">Dollar Value</th>
                     <th scope="col">Status</th>
-                    <th scope="col">More</th>
+                    <th scope="col">Date/Time</th>
+                    <!-- <th scope="col"> MORE</th> -->
                   </tr>
                 </thead>
                 <tbody>
                   <?php if (isset($user_withdrawals) && count($user_withdrawals) > 0): ?>
                     <?php foreach ($user_withdrawals as $withdrawal): ?>
                       <tr>
-                        <!-- Display the original USD amount -->
-                        <td><?= htmlspecialchars($withdrawal['dol_val']) ?> USD</td>
-                        <!-- If you have a rate column, otherwise adjust or remove -->
-                        <td><?= htmlspecialchars($withdrawal['rate'] ?? 'N/A') ?></td>
-                        <!-- Display any charge, or default to 0 if not set -->
-                        <td><?= htmlspecialchars($withdrawal['charge'] ?? '0') ?> USD</td>
-                        <!-- Display the receivable amount in converted currency -->
-                        <td><?= htmlspecialchars($withdrawal['amount']) ?> <?= strtoupper(htmlspecialchars($withdrawal['currency'])) ?></td>
-                        <!-- Status (e.g., pending, approved) -->
-                        <td><?= ucfirst(htmlspecialchars($withdrawal['status'])) ?></td>
-                        <!-- More details button (assumes a modal is used) -->
+                        <td>#<?php echo htmlspecialchars($withdrawal['transac_id']); ?></td>
+                        <td><?php echo htmlspecialchars($withdrawal['type']); ?></td>
+                        <td> <?= htmlspecialchars($withdrawal['amount'] . $withdrawal['currency']) ?> </td>
+                        <td><span class="text-danger">- $<?= htmlspecialchars($withdrawal['dol_val']) ?></span></td>
                         <td>
-                          <button class="btn btn-sm btn-info approveBtn"
-                            data-transactions="<?= htmlspecialchars($withdrawal['transaction_id'] ?? 'N/A') ?>"
-                            data-admin_feedback="<?= htmlspecialchars($withdrawal['feedback'] ?? 'None') ?>"
-                            data-info='<?= json_encode($withdrawal); ?>'>
-                            More
-                          </button>
+                          <?php if ($withdrawal['status'] == "success"): ?>
+                            <span class="text-success"><?= htmlspecialchars($withdrawal['status']) ?></span>
+                          <?php elseif ($withdrawal['status'] == "pending"): ?>
+                            <span class="text-warning"><?= htmlspecialchars($withdrawal['status']) ?></span>
+                          <?php else: ?>
+                            <span class="text-danger"><?= htmlspecialchars($withdrawal['status']) ?></span>
+                          <?php endif; ?>
                         </td>
+                        <td><?php echo isset($withdrawal['datetime']) ? htmlspecialchars($withdrawal['datetime']) : 'N/A'; ?></td>
+                        <!-- <td>
+                          <a href="details.php?id=<?php echo htmlspecialchars($withdrawal['id']); ?>" class="btn btn-sm btn-info">View</a>
+                        </td> -->
                       </tr>
                     <?php endforeach; ?>
                   <?php else: ?>
