@@ -1,7 +1,7 @@
   <header class="header-section">
 
 
-      <div class="header-top">
+      <div class="header-top" style="background-color: #000;">
           <div class="container">
               <div class="row align-items-center">
                   <div class="col-lg-6">
@@ -91,18 +91,18 @@
                   <div class="col-lg-6">
 
                       <div
-                          style="height:62px; background-color: #1D2330; overflow:hidden; box-sizing: border-box; border: 1px solid #2468ef; border-radius: 4px; text-align: right; line-height:14px; block-size:62px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; box-shadow: inset 0 -20px 0 0 #262B38;padding:1px;padding: 0px; margin: 0px; width: 100%;">
+                          style="height:62px; background-color: #b58e43; overflow:hidden; box-sizing: border-box; border: 1px solid #000; border-radius: 4px; text-align: right; line-height:14px; block-size:62px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; box-shadow: inset 0 -20px 0 0 #b58e43;padding:1px;padding: 0px; margin: 0px; width: 100%;">
                           <div style="height:40px; padding:0px; margin:0px; width: 100%;"><iframe
-                                  src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no"
+                                  src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=light&pref_coin_id=1505&invert_hover=no"
                                   width="100%" height="36px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0"
                                   border="0" style="border:0;margin:0;padding:0;"></iframe></div>
                           <div
                               style="color: #626B7F; line-height: 14px; font-weight: 400; font-size: 11px; box-sizing: border-box; padding: 2px 6px; width: 100%;">
                               <a href="https://coinlib.io" target="_blank"
-                                  style="font-weight: 500; color: #fbc013; text-decoration:none; font-size:11px">CRYPTO PRICES</a>
+                                  style="font-weight: 500; color: #fff; text-decoration:none; font-size:11px">CRYPTO PRICES</a>
                           </div>
                       </div>
-                      <h1 class="title py-3">Invest <span id="typewriter"></span><br />With Assetbase Trading</h1>
+                      <h1 class="title py-3">Invest <span id="typewriter" style="color:#b58e43;"></span><br />With Crest-Asset Trading</h1>
                       <p class="pb-4">
                           A Global Full Reserve Equity Investment Management Built On Decentralized Ledgers
                       </p>

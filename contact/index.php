@@ -11,13 +11,13 @@
     <!-- header-section end  -->
 
     <!-- inner hero start -->
-    <section class="inner-hero bg_img" data-background="https://assetbase-trading.com/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
+    <section class="inner-hero bg_img" data-background="/crest/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <h2 class="page-title">Contact Us</h2>
             <ul class="page-breadcrumb">
-              <li><a href="https://assetbase-trading.com">Home</a></li>
+              <li><a href="/crest">Home</a></li>
               <li>Contact Us</li>
             </ul>
           </div>
@@ -29,7 +29,7 @@
       <div class="container">
         <div class="contact-wrapper">
           <div class="row">
-            <div class="col-lg-6 contact-thumb bg_img" data-background="https://assetbase-trading.com/assets/images/frontend/contact/5fce3861b2a1c1607350369.jpg"></div>
+            <div class="col-lg-6 contact-thumb bg_img" data-background="/crest/assets/images/frontend/contact/5fce3861b2a1c1607350369.jpg"></div>
             <div class="col-lg-6 contact-form-wrapper">
               <h2 class="font-weight-bold mb-2">Contact With Us</h2>
               <p class="font-weight-bold">If you have any questions or queries that are not answered on our website, please feel free to contact us. We will try to respond to you as soon as possible. Thank you so much.</p>
@@ -66,7 +66,7 @@
                   <i class="las la-envelope-open"></i>
                   <h5 class="mt-2">Email Address</h5>
                   <div class="mt-4">
-                    <p><a href="javascript:void(0)">support@assetvest-trading.com</a></p>
+                    <p><a href="javascript:void(0)">support@crest-assettrading.com</a></p>
                   </div>
                 </div><!-- contact-item end -->
               </div>
@@ -94,97 +94,11 @@
     <!-- footer section end -->
   </div> <!-- page-wrapper end -->
 
-  <!-- jQuery library -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/jquery-3.5.1.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/bootstrap.bundle.min.js"></script>
-
-  <!-- slick slider js -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/slick.min.js"></script>
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/wow.min.js"></script>
-  <!-- dashboard custom js -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
 
 
-  <link rel="stylesheet" href="https://assetbase-trading.com/assets/templates/bit_gold/css/iziToast.min.css">
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold/js/iziToast.min.js"></script>
-
-
-  <script>
-    "use strict";
-
-    function notify(status, message) {
-      iziToast[status]({
-        message: message,
-        position: "topRight"
-      });
-    }
-  </script>
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
   <script src="https://maps.google.com/maps/api/js?key="></script>
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold/js/map.js"></script>
+  <script src="/crest/assets/templates/bit_gold/js/map.js"></script>
 
-
-
-
-
-
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-
-  <script>
-    (function() {
-      "use strict";
-      $(document).on("change", ".langSel", function() {
-        window.location.href = "https://assetbase-trading.com/change/" + $(this).val();
-      });
-
-      $('.policy').on('click', function() {
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        $.get('https://assetbase-trading.com/cookie/accept', function(response) {
-          iziToast.success({
-            message: response,
-            position: "topRight"
-          });
-          $('.cookie__wrapper').addClass('d-none');
-        });
-      });
-    })();
-  </script>
 
 
 

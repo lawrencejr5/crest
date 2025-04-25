@@ -30,16 +30,19 @@
     <!-- bootstrap 4  -->
     <link rel="stylesheet" href="./assets/templates/bit_gold//css/vendor/bootstrap.min.css">
     <!-- fontawesome 5  -->
-    <link rel="stylesheet" href="./assets/templates/bit_gold//css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- line-awesome webfont -->
-    <link rel="stylesheet" href="./assets/templates/bit_gold//css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./assets/templates/bit_gold//css/vendor/animate.min.css">
     <!-- slick slider css -->
     <link rel="stylesheet" href="./assets/templates/bit_gold//css/vendor/slick.css">
     <link rel="stylesheet" href="./assets/templates/bit_gold//css/vendor/dots.css">
     <!-- dashdoard main css -->
     <link rel="stylesheet" href="./assets/templates/bit_gold//css/main.css">
+
     <link rel="stylesheet" href="./assets/templates/bit_gold//css/custom.css">
     <link rel="stylesheet"
         href="./assets/templates/bit_gold/css/color.php?color=c39c3b&secondColor=222222">
+
+
 </head>

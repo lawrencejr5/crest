@@ -29,10 +29,26 @@
                 </a>
 
                 <div class="alert alert-warning" role="alert">
-                    <p style="color:black"><small>Important note: Assetbase Trading is NOT a HYIP/Forex trading scheme and should
+                    <p style="color:black"><small>Important note: Crest-Asset Trading is NOT a HYIP/Forex trading scheme and should
                             not be viewed as such,let get you all setup join us today!</small></p>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+<script>
+    const swiper = new Swiper('.swiper-container', {
+        loop: true, // Enable looping
+        autoplay: {
+            delay: 3000, // Auto-swipe every 3 seconds
+            disableOnInteraction: false, // Auto-swipe continues even after interaction
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true, // Allow users to click pagination dots
+        },
+        slidesPerView: 1, // Display one testimonial at a time
+    });
+</script>

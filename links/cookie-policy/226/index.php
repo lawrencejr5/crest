@@ -13,13 +13,13 @@
     <!-- header-section end  -->
 
     <!-- inner hero start -->
-    <section class="inner-hero bg_img" data-background="https://assetbase-trading.com/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
+    <section class="inner-hero bg_img" data-background="/crest/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <h2 class="page-title">Cookie Policy</h2>
             <ul class="page-breadcrumb">
-              <li><a href="https://assetbase-trading.com">Home</a></li>
+              <li><a href="/crest">Home</a></li>
               <li>Cookie Policy</li>
             </ul>
           </div>
@@ -38,7 +38,7 @@
             <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;">
               <font color="#ffffff">Updated: 14 February 2020</font>
             </p>
-            <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:1rem;">Assetbase</span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:1rem;"> Trading</span>
+            <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:1rem;">Crest Asset</span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:1rem;"> Trading</span>
               <font color="#ffffff"> would like to offer a clear website with the most relevant content for you. To make this possible, we use technologies that can collect information about you and how you and other visitors use gatewaycapitalfinance.com (the “Website”). With this Cookie Notice, we want to create transparency and give you a complete overview of what the processing of your information includes, what you have to consider and which options you have to opt out of.</font>
             </p>
             <h2 style="margin-bottom:20px;padding:0px;border:0px;font-size:44px;vertical-align:baseline;font-family:'Proxima Nova', '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;letter-spacing:-0.01em;line-height:56px;">
@@ -71,7 +71,7 @@
               <font color="#ffffff">2. Consent</font>
             </h2>
             <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;">
-              <font color="#ffffff">By clicking on “Allow all cookies” in the cookie banner or using the Website, you consent to </font><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;">Assetbase</span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;"> Trading</span>
+              <font color="#ffffff">By clicking on “Allow all cookies” in the cookie banner or using the Website, you consent to </font><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;">Crest Asset</span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;"> Trading</span>
               <font color="#ffffff"> using cookies as described in the form below, unless you have opted out of cookies. If you do not deselect optional cookies at the time of consent, you can revoke the consent by blocking cookies in your web browser. More information on how to block and delete cookies can be found in Section 4 below.</font>
             </p>
             <h2 style="margin-bottom:20px;padding:0px;border:0px;font-size:44px;vertical-align:baseline;font-family:'Proxima Nova', '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;letter-spacing:-0.01em;line-height:56px;">
@@ -81,7 +81,7 @@
               <font color="#ffffff">Cookies are small text files that the Website can place on your computer’s hard drive, smartphone, or other electronic equipment. However, the term “Cookies” in this Notice and consent also means other forms of automatic data collection, e.g. Flash cookies (Local Shared Objects), Web Storage (HTML5), Javascript, or Cookies set using other software. “Cookies” also include IP and MAC address information and other information about your device.</font>
             </p>
             <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;">
-              <font color="#ffffff">Cookies can be used by both </font><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;">Assetbase</span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;"> Trading</span>
+              <font color="#ffffff">Cookies can be used by both </font><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;">Crest Asset</span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;"> Trading</span>
               <font color="#ffffff"> and by third parties.</font>
             </p>
             <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;">
@@ -115,97 +115,6 @@
 
     <!-- footer section end -->
   </div> <!-- page-wrapper end -->
-
-  <!-- jQuery library -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/jquery-3.5.1.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/bootstrap.bundle.min.js"></script>
-
-  <!-- slick slider js -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/slick.min.js"></script>
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/wow.min.js"></script>
-  <!-- dashboard custom js -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
-
-
-  <link rel="stylesheet" href="https://assetbase-trading.com/assets/templates/bit_gold/css/iziToast.min.css">
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold/js/iziToast.min.js"></script>
-
-
-  <script>
-    "use strict";
-
-    function notify(status, message) {
-      iziToast[status]({
-        message: message,
-        position: "topRight"
-      });
-    }
-  </script>
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
-
-
-
-
-
-
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-
-  <script>
-    (function() {
-      "use strict";
-      $(document).on("change", ".langSel", function() {
-        window.location.href = "https://assetbase-trading.com/change/" + $(this).val();
-      });
-
-      $('.policy').on('click', function() {
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        $.get('https://assetbase-trading.com/cookie/accept', function(response) {
-          iziToast.success({
-            message: response,
-            position: "topRight"
-          });
-          $('.cookie__wrapper').addClass('d-none');
-        });
-      });
-    })();
-  </script>
-
 
 
 </body>

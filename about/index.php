@@ -12,13 +12,13 @@
 
 
     <!-- inner hero start -->
-    <section class="inner-hero bg_img" data-background="https://assetbase-trading.com/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
+    <section class="inner-hero bg_img" data-background="/crest/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <h2 class="page-title">About</h2>
             <ul class="page-breadcrumb">
-              <li><a href="https://assetbase-trading.com">Home</a></li>
+              <li><a href="/crest">Home</a></li>
               <li>About</li>
             </ul>
           </div>
@@ -26,12 +26,12 @@
       </div>
     </section>
     <!-- inner hero end -->
-    <section class="pt-120 pb-120 bg_img" data-background="https://assetbase-trading.com/assets/images/frontend/how_work/5fce39883b22c1607350664.jpg">
+    <section class="pt-120 pb-120 bg_img" data-background="/crest/assets/images/frontend/how_work/5fce39883b22c1607350664.jpg">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center">
             <div class="section-header">
-              <h2 class="section-title"><span class="font-weight-normal">How</span> <b class="base--color">Assetvest Trading</b> <span class="font-weight-normal">Works</span></h2>
+              <h2 class="section-title"><span class="font-weight-normal">How</span> <b class="base--color">Crest-Asset Trading</b> <span class="font-weight-normal">Works</span></h2>
               <p>Get involved in our tremendous platform and Invest. We will utilize your money and give you profit in your wallet automatically.</p>
             </div>
           </div>
@@ -78,19 +78,19 @@
           <div class="col-lg-6 offset-lg-6">
             <div class="about-content">
               <h2 class="section-title mb-3"><span class="font-weight-normal">About</span> <b class="base--color">Us</b></h2>
-              <p>Assetvest Trading was created in 2009 with the sole purpose of ensuring that everyone has an insight into investments and has made sure that anyone that crosses our path has a genuine encounter with the investment market. Our aim is to help others achieve their aim in life, we saw the opportunity to help others and we took it, and so are we passionate about it. Investments are life savers and shouldn’t be rejected by anyone, you’re helping yourself and no one else, this goes to answer the question of “why do I invest?” Basically, all directions lead to this and a strong reason is having something in store for a rainy day, or making a life-changing decision that would require a lot of financial support and how to do this. This is where we come in, this is where we help you by investing your money in solid asset that will yield more dividends over a short period of time. We believe in empowering novice investors and also the experts (you are all important to us).<br />
+              <p>Crest-Asset Trading was created in 2009 with the sole purpose of ensuring that everyone has an insight into investments and has made sure that anyone that crosses our path has a genuine encounter with the investment market. Our aim is to help others achieve their aim in life, we saw the opportunity to help others and we took it, and so are we passionate about it. Investments are life savers and shouldn’t be rejected by anyone, you’re helping yourself and no one else, this goes to answer the question of “why do I invest?” Basically, all directions lead to this and a strong reason is having something in store for a rainy day, or making a life-changing decision that would require a lot of financial support and how to do this. This is where we come in, this is where we help you by investing your money in solid asset that will yield more dividends over a short period of time. We believe in empowering novice investors and also the experts (you are all important to us).<br />
                 <br />
-                       Assetvest Trading was a business built from the ground up, addressing a very sincere and genuine need in the market; to be a fund manager who can be trusted and relied upon by every trader. In 2014, the fund management services were offered internationally, after a year of only offering these services nationally. This was to achieve larger investor subscriptions and have a worldwide business in tandem with the changing cultures of the Twenty-first Century. As of 2014, our monthly volume flow was approximately 200 million USD (notional), for a collective AUM (Assets Under Management) of slightly under USD 80m.<br />
+                       Crest-Asset Trading was a business built from the ground up, addressing a very sincere and genuine need in the market; to be a fund manager who can be trusted and relied upon by every trader. In 2014, the fund management services were offered internationally, after a year of only offering these services nationally. This was to achieve larger investor subscriptions and have a worldwide business in tandem with the changing cultures of the Twenty-first Century. As of 2014, our monthly volume flow was approximately 200 million USD (notional), for a collective AUM (Assets Under Management) of slightly under USD 80m.<br />
                 <br />
-                     These amounts are ever-growing. As early as 2013, the founders of Assetvest Trading , LLC started promoting invention and innovation. Until 2014, the founding fund managers and active traders of Assetvest Trading were operating under their own individual operations, including a variety of private funds. In 2015 the infrastructure already in place was finally offered to retail market traders under the name Assetvest Trading. The entire institutional platform, liquidity, and clearance engine were leveraged to provide for retail market flow. Until 2014 the founding fund managers and active traders of Assetvest Tradingwere sailing their own ships. In 2014 they anchored and decided to sail together. From 2014 until 2015, the founders of Assetvest Trading started implementing collective structures. In early 2014, the Assetvest Trading founders ceased multiple fund offerings to the public and started practising under a single closed fund instead. Fund management services were still offered for public subscription but were moved under a closed fund with a private company. This achieved more prudent fund management practices and decreased commercialization by the various providers.<br />
+                     These amounts are ever-growing. As early as 2013, the founders of Crest-Asset Trading , LLC started promoting invention and innovation. Until 2014, the founding fund managers and active traders of Crest-Asset Trading were operating under their own individual operations, including a variety of private funds. In 2015 the infrastructure already in place was finally offered to retail market traders under the name Crest-Asset Trading. The entire institutional platform, liquidity, and clearance engine were leveraged to provide for retail market flow. Until 2014 the founding fund managers and active traders of Crest-Asset Tradingwere sailing their own ships. In 2014 they anchored and decided to sail together. From 2014 until 2015, the founders of Crest-Asset Trading started implementing collective structures. In early 2014, the Crest-Asset Trading founders ceased multiple fund offerings to the public and started practising under a single closed fund instead. Fund management services were still offered for public subscription but were moved under a closed fund with a private company. This achieved more prudent fund management practices and decreased commercialization by the various providers.<br />
                 <br />
-                Assetvest Trading Launched its new site and the primary colours chosen were White, Blue, and Green. The colours, in combination, complemented each other pretty well. White symbolizes purity, and transparency and gives an easy and minimalistic feel to the eyes and this reinforces the transparency we maintain in our business practices, customer support, payout procedure, etc. Blue represents the uniqueness that personifies trading, which appeals to a special few. Green represents wisdom applied to achieve successful trade results. We believe you should be comfortable around us, which is why we branded ourselves with friendly colours. Assetvest Trading has maintained regularly updated self-examination software which it uses to measure the satisfaction of its clients with its services. Since 2014, Assetvest Trading has maintained 100% satisfaction rate among its short-term and long-term clients. Assetvest Trading is a part of the Investors Compensation Fund in the USA, Asians and in Europe. As a signatory.<br />
-                Today both novice investors and professional participants of the foreign exchange market use services of the management company Assetvest Trading, because both understand the justifiability of using the most effective investment mechanism developed by our company. We are interested in long-term and productive cooperation with each investor. To appreciate the benefits we offer you, you should just open an account in Assetvest Trading and Assetvest Trading Software and ensure a high-level return and quality of our work.<br />
+                Crest-Asset Trading Launched its new site and the primary colours chosen were White, Blue, and Green. The colours, in combination, complemented each other pretty well. White symbolizes purity, and transparency and gives an easy and minimalistic feel to the eyes and this reinforces the transparency we maintain in our business practices, customer support, payout procedure, etc. Blue represents the uniqueness that personifies trading, which appeals to a special few. Green represents wisdom applied to achieve successful trade results. We believe you should be comfortable around us, which is why we branded ourselves with friendly colours. Crest-Asset Trading has maintained regularly updated self-examination software which it uses to measure the satisfaction of its clients with its services. Since 2014, Crest-Asset Trading has maintained 100% satisfaction rate among its short-term and long-term clients. Crest-Asset Trading is a part of the Investors Compensation Fund in the USA, Asians and in Europe. As a signatory.<br />
+                Today both novice investors and professional participants of the foreign exchange market use services of the management company Crest-Asset Trading, because both understand the justifiability of using the most effective investment mechanism developed by our company. We are interested in long-term and productive cooperation with each investor. To appreciate the benefits we offer you, you should just open an account in Crest-Asset Trading and Crest-Asset Trading Software and ensure a high-level return and quality of our work.<br />
                 <br />
                 <br />
-                Why choose Assetvest Trading?<br />
+                Why choose Crest-Asset Trading?<br />
                 <br />
-                At Assetvest Trading, we believe in keeping our word, our clients always have a good review to give to others about our trustworthiness. Our clients are our only reason for the business. You are important to us. We go the extra mile to ensure the client is satisfied. We are outstanding in these key areas:<br />
+                At Crest-Asset Trading, we believe in keeping our word, our clients always have a good review to give to others about our trustworthiness. Our clients are our only reason for the business. You are important to us. We go the extra mile to ensure the client is satisfied. We are outstanding in these key areas:<br />
                 - We provide a decent and remarkable profit margin in the business of fund management, all through the year, month after month up to 70%-95% returns.<br />
                 - We meet these targets on average every month.<br />
                 - We have a reliable financial department that handles issues of payout and initial investment and other monetary transactions.<br />
@@ -103,11 +103,11 @@
                 - We do not mismanage clients’ funds.<br />
                 - We always place carefully calculate trades for clients.<br />
                 <br />
-                However, in a rare case where Assetvest Trading loses your investment, you are protected by the money-back guarantee. We always keep clients updated with our regularly dispatched newsletters and emails.<br />
+                However, in a rare case where Crest-Asset Trading loses your investment, you are protected by the money-back guarantee. We always keep clients updated with our regularly dispatched newsletters and emails.<br />
                 <br />
                 OUR PHILOSOPHY<br />
                 <br />
-                Assetvest Trading's philosophy is that sincerity, honesty, reliability, and a genuine desire to serve the community are necessary for success, and these will provide blessings in abundance and in perpetuity. We take great pride in serving you in the best way possible, and in always being honest, sincere, and transparent. We are perfectionists and this is evident in everything we do, from the company name to the trading products, services, and platforms that we provide.<br />
+                Crest-Asset Trading's philosophy is that sincerity, honesty, reliability, and a genuine desire to serve the community are necessary for success, and these will provide blessings in abundance and in perpetuity. We take great pride in serving you in the best way possible, and in always being honest, sincere, and transparent. We are perfectionists and this is evident in everything we do, from the company name to the trading products, services, and platforms that we provide.<br />
                 Our drive and value proposition to you is our integrity, transparency, and privileged services that are secondary to none. We personify these values by Personifying good customer service to our clients. Payout execution in less than 48 hours. Trading only the most carefully studied options and commodities (currently at a 97% success rate). Hassle-free deposit process (local and international bank wire funding). Under 30 min customer service e-mail response time 24×7 customer live chat Sharing abundance of wealth with the needy.
               </p>
               <a href="about" class="cmn-btn mt-4">Learn more</a>
@@ -311,7 +311,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-8">
-            <div class="cta-wrapper bg_img border-radius--10 text-center" data-background="https://assetbase-trading.com/assets/images/frontend/cta/5fce38bab36371607350458.jpg">
+            <div class="cta-wrapper bg_img border-radius--10 text-center" data-background="/crest/assets/images/frontend/cta/5fce38bab36371607350458.jpg">
               <h2 class="title mb-3">Get Started Today With Us</h2>
               <p>This is a Revolutionary Money Making Platform! Invest for Future in Stable Platform and Make Fast Money. Not only we guarantee the fastest and the most exciting returns on your investments, but we also guarantee the security of your investment.</p>
               <a href="register" class="cmn-btn mt-4">Join Us</a>
@@ -326,96 +326,6 @@
     <?php include "../master/footer.php" ?>
     <!-- footer section end -->
   </div> <!-- page-wrapper end -->
-
-  <!-- jQuery library -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/jquery-3.5.1.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/bootstrap.bundle.min.js"></script>
-
-  <!-- slick slider js -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/slick.min.js"></script>
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/wow.min.js"></script>
-  <!-- dashboard custom js -->
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
-
-
-  <link rel="stylesheet" href="https://assetbase-trading.com/assets/templates/bit_gold/css/iziToast.min.css">
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold/js/iziToast.min.js"></script>
-
-
-  <script>
-    "use strict";
-
-    function notify(status, message) {
-      iziToast[status]({
-        message: message,
-        position: "topRight"
-      });
-    }
-  </script>
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
-
-
-
-
-
-
-
-  <!-- Smartsupp Live Chat script -->
-  <script type="text/javascript">
-    var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'a7019ddffb05d22ada67c29ad54e97b0183447dd';
-    window.smartsupp || (function(d) {
-      var s, c, o = smartsupp = function() {
-        o._.push(arguments)
-      };
-      o._ = [];
-      s = d.getElementsByTagName('script')[0];
-      c = d.createElement('script');
-      c.type = 'text/javascript';
-      c.charset = 'utf-8';
-      c.async = true;
-      c.src = 'https://www.smartsuppchat.com/loader.js?';
-      s.parentNode.insertBefore(c, s);
-    })(document);
-  </script>
-  <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-
-  <script>
-    (function() {
-      "use strict";
-      $(document).on("change", ".langSel", function() {
-        window.location.href = "https://assetbase-trading.com/change/" + $(this).val();
-      });
-
-      $('.policy').on('click', function() {
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        $.get('https://assetbase-trading.com/cookie/accept', function(response) {
-          iziToast.success({
-            message: response,
-            position: "topRight"
-          });
-          $('.cookie__wrapper').addClass('d-none');
-        });
-      });
-    })();
-  </script>
 
 
 

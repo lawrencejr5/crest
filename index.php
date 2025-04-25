@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
+<?php include "./app/backend/module.php" ?>
 <?php include "./master/head2.php" ?>
 
 <body class="body-page">
@@ -21,7 +21,7 @@
         <div class="col-8 text-center">
           <div class="section-header">
 
-            <h2 class="title">Why choose Assetbase Trading</h2>
+            <h2 class="title">Why choose Crest-Asset Trading</h2>
             <p>
             <h4>We set the Pace, others follow</h4>
 
@@ -123,13 +123,13 @@
       </div>
     </div>
   </div>
-  <div class="counter-section">
+  <div class="counter-section" style="background: #000">
     <div class="container">
       <div class="row justify-content-center ">
         <div class="col-10 text-center">
           <div class="section-header mb-5">
             <h2 class="title">Statistics </h2>
-            <p class="section-para">Assetbase Trading achieved an annual return of 132%, and for participants who took
+            <p class="section-para">Crest-Asset Trading achieved an annual return of 132%, and for participants who took
               advantage
               of the monthly compounding option, a gigantic 249.85%. This yield was achieved despite the global economic
               crisis caused by COVID-19.</p>
@@ -146,7 +146,7 @@
             </div>
             <div class="counter-content">
               <div class="odo-area">
-                <h3 class="odo-title odometer" data-odometer-final="6000">fvvcdv</h3>
+                <h3 class="odo-title odometer" data-odometer-final="6000">6000</h3>
               </div>
               <p>Masternodes Operated</p>
             </div>
@@ -157,7 +157,7 @@
             </div>
             <div class="counter-content">
               <div class="odo-area">
-                <h3 class="odo-title odometer" data-odometer-final="15400000">gdgd</h3>
+                <h3 class="odo-title odometer" data-odometer-final="15400000">15400000</h3>
               </div>
               <p>Total Deposited(updated weekly)</p>
             </div>
@@ -168,7 +168,7 @@
             </div>
             <div class="counter-content">
               <div class="odo-area">
-                <h3 class="odo-title odometer" data-odometer-final="7400">7000</h3>
+                <h3 class="odo-title odometer" data-odometer-final="7400">7400</h3>
               </div>
               <p>Active Users</p>
             </div>
@@ -196,9 +196,9 @@
       <div class="row justify-content-center">
         <div class="col-md-6 text-c nter">
           <div class="section-header">
-            <h2 class="title">About Assetbase Trading</h2>
+            <h2 class="title">About Crest-Asset Trading</h2>
             <p class="section-para text-left">
-              Assetbase Trading was created in 2009 with the sole purpose of ensuring that everyone has an insight
+              Crest-Asset Trading was created in 2009 with the sole purpose of ensuring that everyone has an insight
               on investments and has such made sure that anyone that crosses our path has a genuine encounter with the
               investment market. Our aim is to help others achieve their aim in life, we saw the opportunity to help
               others and we took it, and so are we passionate about it. Investments are life-savers and shouldn’t be
@@ -235,13 +235,13 @@
     </div>
   </div>
 
-  <section class="investment-plan-area">
+  <section class="investment-plan-area" style="background: #000;">
     <div id="plans"></div>
     <div class="container">
-      <div class="row justify-content-center ">
+      <div class="row justify-content-center">
         <div class="col-10 text-center">
           <div class="section-header mb-5">
-            <h2 class="title">Assetbase Trading Packages </h2>
+            <h2 class="title">Crest-Asset Trading Packages </h2>
             <p class="section-para">We have made it our mission to build a sustainable future for us all in this new
               economy.<br><b style="color:#fbc013">Compounding available for all plan.</b></p>
           </div>
@@ -250,180 +250,37 @@
 
       <div class="row">
 
+        <?php $data = $modules->getAllPlans(); ?>
+        <?php foreach ($data as $invest): ?>
 
-        <div class="col-md-4">
-          <div class="plan-area">
-            <div class="plan-item">
-              <div class="plan_name" style="font-size: 2rem;">BASIC</div><br>
-              <div class="plan_day">
-                3%
+          <div class="col-md-4">
+            <div class="plan-area">
+              <div class="plan-item">
+                <div class="plan_name" style="font-size: 1.3rem; text-transform:uppercase;"><?= $invest['plan_name'] ?></div><br><br>
+                <div class="plan-header">
+                  <div class="plan_day">
+                    <h2><?= $invest['plan_rate'] ?>%</h2>
+                    <span><?= $invest['plan_type'] ?></span>
+                  </div>
+                  <div class="plan_day">
+                    <h2><?= htmlspecialchars(explode(" ", $invest['duration_text'])[0]) ?></h2>
+                    <span><?= htmlspecialchars(explode(" ", $invest['duration_text'])[1]) ?></span>
+                  </div>
+                </div>
+                <div class="plan-details">
+                  <div class="item"><span>Min Deposit</span>-<span>$<?= number_format($invest['plan_min']) ?></span></div>
+                  <div class="item"><span>Max Deposit</span>-<span>$<?= number_format($invest['plan_max']) ?></span></div>
+                  <div class="item"><span>Capital Return</span>-<span>Yes</span></div>
+                  <div class="item"><span>Total Return</span>-<span><?= $invest['total'] ?>%</span></div>
+                </div>
+
+                <a href="#" data-toggle="modal" data-target="#depoModal"
+                  data-resource="{&quot;id&quot;:7,&quot;name&quot;:&quot;Basic Plan&quot;,&quot;minimum&quot;:&quot;200&quot;,&quot;maximum&quot;:&quot;7000&quot;,&quot;fixed_amount&quot;:&quot;0&quot;,&quot;interest&quot;:&quot;1.5&quot;,&quot;interest_status&quot;:&quot;1&quot;,&quot;times&quot;:&quot;24&quot;,&quot;status&quot;:&quot;1&quot;,&quot;featured&quot;:&quot;1&quot;,&quot;capital_back_status&quot;:&quot;0&quot;,&quot;lifetime_status&quot;:&quot;0&quot;,&quot;repeat_time&quot;:&quot;10&quot;,&quot;created_at&quot;:&quot;2021-04-23 03:31:13&quot;,&quot;updated_at&quot;:&quot;2021-05-17 22:53:56&quot;}"
+                  class="btn btn-success investButton">Invest Now</a>
               </div>
-              <div class="plan_pr">
-                Every Day <br>
-                For 30 Days </div>
-              <div>
-                <ul>
-                  <li>
-                    Total 90%
-
-
-                  </li>
-                  <li>24/7 Live Support</li>
-                </ul>
-              </div>
-
-              <div class="plan_min "> Min. $100
-                <span>Max:
-                  $1500</span>
-              </div>
-
-              <a href="#" data-toggle="modal" data-target="#depoModal"
-                data-resource="{&quot;id&quot;:7,&quot;name&quot;:&quot;Basic Plan&quot;,&quot;minimum&quot;:&quot;200&quot;,&quot;maximum&quot;:&quot;7000&quot;,&quot;fixed_amount&quot;:&quot;0&quot;,&quot;interest&quot;:&quot;1.5&quot;,&quot;interest_status&quot;:&quot;1&quot;,&quot;times&quot;:&quot;24&quot;,&quot;status&quot;:&quot;1&quot;,&quot;featured&quot;:&quot;1&quot;,&quot;capital_back_status&quot;:&quot;0&quot;,&quot;lifetime_status&quot;:&quot;0&quot;,&quot;repeat_time&quot;:&quot;10&quot;,&quot;created_at&quot;:&quot;2021-04-23 03:31:13&quot;,&quot;updated_at&quot;:&quot;2021-05-17 22:53:56&quot;}"
-                class="btn btn-success investButton">Invest Now</a>
             </div>
           </div>
-        </div>
-
-
-
-        <div class="col-md-4">
-          <div class="plan-area">
-            <div class="plan-item">
-              <div class="plan_name" style="font-size: 2rem;">GOLD/STOCK</div><br>
-              <div class="plan_day">
-                19%
-              </div>
-              <div class="plan_pr">
-                Every Week <br>
-                For 6 Weeks </div>
-              <div>
-                <ul>
-                  <li>
-                    Total 114%
-
-
-                  </li>
-                  <li>24/7 Live Support</li>
-                </ul>
-              </div>
-
-              <div class="plan_min "> Min. $2500
-                <span>Max:
-                  $50000</span>
-              </div>
-
-              <a href="#" data-toggle="modal" data-target="#depoModal"
-                data-resource="{&quot;id&quot;:7,&quot;name&quot;:&quot;Basic Plan&quot;,&quot;minimum&quot;:&quot;200&quot;,&quot;maximum&quot;:&quot;7000&quot;,&quot;fixed_amount&quot;:&quot;0&quot;,&quot;interest&quot;:&quot;1.5&quot;,&quot;interest_status&quot;:&quot;1&quot;,&quot;times&quot;:&quot;24&quot;,&quot;status&quot;:&quot;1&quot;,&quot;featured&quot;:&quot;1&quot;,&quot;capital_back_status&quot;:&quot;0&quot;,&quot;lifetime_status&quot;:&quot;0&quot;,&quot;repeat_time&quot;:&quot;10&quot;,&quot;created_at&quot;:&quot;2021-04-23 03:31:13&quot;,&quot;updated_at&quot;:&quot;2021-05-17 22:53:56&quot;}"
-                class="btn btn-success investButton">Invest Now</a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="col-md-4">
-          <div class="plan-area">
-            <div class="plan-item">
-              <div class="plan_name" style="font-size: 2rem;">REAL ESTATE</div><br>
-              <div class="plan_day">
-                25%
-              </div>
-              <div class="plan_pr">
-                Every Week <br>
-                For 6 Weeks </div>
-              <div>
-                <ul>
-                  <li>
-                    Total 150%
-
-
-                  </li>
-                  <li>24/7 Live Support</li>
-                </ul>
-              </div>
-
-              <div class="plan_min "> Min. $5500
-                <span>Max:
-                  $100000</span>
-              </div>
-
-              <a href="#" data-toggle="modal" data-target="#depoModal"
-                data-resource="{&quot;id&quot;:7,&quot;name&quot;:&quot;Basic Plan&quot;,&quot;minimum&quot;:&quot;200&quot;,&quot;maximum&quot;:&quot;7000&quot;,&quot;fixed_amount&quot;:&quot;0&quot;,&quot;interest&quot;:&quot;1.5&quot;,&quot;interest_status&quot;:&quot;1&quot;,&quot;times&quot;:&quot;24&quot;,&quot;status&quot;:&quot;1&quot;,&quot;featured&quot;:&quot;1&quot;,&quot;capital_back_status&quot;:&quot;0&quot;,&quot;lifetime_status&quot;:&quot;0&quot;,&quot;repeat_time&quot;:&quot;10&quot;,&quot;created_at&quot;:&quot;2021-04-23 03:31:13&quot;,&quot;updated_at&quot;:&quot;2021-05-17 22:53:56&quot;}"
-                class="btn btn-success investButton">Invest Now</a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="col-md-4">
-          <div class="plan-area">
-            <div class="plan-item">
-              <div class="plan_name" style="font-size: 2rem;">OIL AND GAS</div><br>
-              <div class="plan_day">
-                15%
-              </div>
-              <div class="plan_pr">
-                Every Day <br>
-                For 6 Days </div>
-              <div>
-                <ul>
-                  <li>
-                    Total 90%
-
-
-                  </li>
-                  <li>24/7 Live Support</li>
-                </ul>
-              </div>
-
-              <div class="plan_min "> Min. $10000
-                <span>Max:
-                  $1000000</span>
-              </div>
-
-              <a href="#" data-toggle="modal" data-target="#depoModal"
-                data-resource="{&quot;id&quot;:7,&quot;name&quot;:&quot;Basic Plan&quot;,&quot;minimum&quot;:&quot;200&quot;,&quot;maximum&quot;:&quot;7000&quot;,&quot;fixed_amount&quot;:&quot;0&quot;,&quot;interest&quot;:&quot;1.5&quot;,&quot;interest_status&quot;:&quot;1&quot;,&quot;times&quot;:&quot;24&quot;,&quot;status&quot;:&quot;1&quot;,&quot;featured&quot;:&quot;1&quot;,&quot;capital_back_status&quot;:&quot;0&quot;,&quot;lifetime_status&quot;:&quot;0&quot;,&quot;repeat_time&quot;:&quot;10&quot;,&quot;created_at&quot;:&quot;2021-04-23 03:31:13&quot;,&quot;updated_at&quot;:&quot;2021-05-17 22:53:56&quot;}"
-                class="btn btn-success investButton">Invest Now</a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="col-md-4">
-          <div class="plan-area">
-            <div class="plan-item">
-              <div class="plan_name" style="font-size: 2rem;">FARM AND SHARES</div><br>
-              <div class="plan_day">
-                18%
-              </div>
-              <div class="plan_pr">
-                Every Day <br>
-                For 7 Days </div>
-              <div>
-                <ul>
-                  <li>
-                    Total 126%
-
-
-                  </li>
-                  <li>24/7 Live Support</li>
-                </ul>
-              </div>
-
-              <div class="plan_min "> Min. $25000
-                <span>Max:
-                  $1000000</span>
-              </div>
-
-              <a href="#" data-toggle="modal" data-target="#depoModal"
-                data-resource="{&quot;id&quot;:7,&quot;name&quot;:&quot;Basic Plan&quot;,&quot;minimum&quot;:&quot;200&quot;,&quot;maximum&quot;:&quot;7000&quot;,&quot;fixed_amount&quot;:&quot;0&quot;,&quot;interest&quot;:&quot;1.5&quot;,&quot;interest_status&quot;:&quot;1&quot;,&quot;times&quot;:&quot;24&quot;,&quot;status&quot;:&quot;1&quot;,&quot;featured&quot;:&quot;1&quot;,&quot;capital_back_status&quot;:&quot;0&quot;,&quot;lifetime_status&quot;:&quot;0&quot;,&quot;repeat_time&quot;:&quot;10&quot;,&quot;created_at&quot;:&quot;2021-04-23 03:31:13&quot;,&quot;updated_at&quot;:&quot;2021-05-17 22:53:56&quot;}"
-                class="btn btn-success investButton">Invest Now</a>
-            </div>
-          </div>
-        </div>
-
+        <?php endforeach; ?>
       </div>
 
     </div>
@@ -440,7 +297,7 @@
     </div>
   </div>
 
-  <div class="profit-calc">
+  <div class="profit-calc" style="background: #000">
     <div class="shape"></div>
     <div class="circle-2" data-paroller-factor="-0.30" data-paroller-factor-lg="0.60"
       data-paroller-type="foreground" data-paroller-direction="horizontal">
@@ -520,28 +377,9 @@
   <section class="client-section padding-top">
     <div class="container mw-lg-100">
       <div class="client-area">
-        <div class="owl-thumbs" data-slider-id="1">
+        <div class="owl-thumbs" style="display: flex; justify-content: center;" data-slider-id="1">
 
-          <div class="owl-thumb-item">
-            <div class="thumb wow zoomIn" data-wow-duration="1s">
-              <img src="assetss/images/frontend/testimonial/60a2b3a10a5091621275553.jpg" alt="client">
-            </div>
-          </div>
-          <div class="owl-thumb-item">
-            <div class="thumb wow zoomIn" data-wow-duration="1s">
-              <img src="assetss/images/frontend/testimonial/60a2b11c6ffe91621274908.jpg" alt="client">
-            </div>
-          </div>
-          <div class="owl-thumb-item">
-            <div class="thumb wow zoomIn" data-wow-duration="1s">
-              <img src="assetss/images/frontend/testimonial/60a2ac52cbd761621273682.jpg" alt="client">
-            </div>
-          </div>
-          <div class="owl-thumb-item">
-            <div class="thumb wow zoomIn" data-wow-duration="1s">
-              <img src="assetss/images/frontend/testimonial/60a2a9b85e5ae1621273016.jpg" alt="client">
-            </div>
-          </div>
+          <img src="assetss/images/quotes.png" width="100%" height="100%" style="object-fit: cover;" alt="client">
 
 
         </div>
@@ -551,89 +389,75 @@
 
             <div class="client-slide-item">
               <blockquote>
-                As a fresh new mommy of a young demanding boy I needed to quit my job in logistics to become a full-time
-                mother and it is truly full-time watching over the little boy it&#039;s really a blessing that I found
-                Assetbase Trading about half a year ago already.
-
-                Despite cryptocurrency always swinging up and down and the Coronavirus wreaking havoc on the global
-                economy (and my ex colleges being either fired or sent home worrying if they have a job tomorrow) they
-                have continued to provide impeccable results in a transparent and efficient manner.
-
-                I&#039;m very happy and thanks to Yieldnodes &quot;independent&quot; young mom.
+                I was initially hesitant about diving into online investments, but Crest Asset Trading changed my perspective. Their user-friendly interface and insightful market data have given me the confidence to manage my portfolio during even the most volatile periods. Every month, I see steady growth, and the transparency in every transaction keeps me at ease. I feel empowered knowing my money is working smartly for me.
               </blockquote>
               <div class="author">
-                <div class="author-thumb">
-                  <img src="assetss/images/frontend/testimonial/60a2b3a10a5091621275553.jpg" alt="client">
-                </div>
                 <div class="author-content">
-                  <h6 class="sub-title"><a href="javascript:void(0)">Jane finch</a></h6>
-                  <span>Nursing mom</span>
+                  <h6 class="sub-title"><a href="javascript:void(0)">Malik Johnson</a></h6>
+                  <span>Entrepreneur & Investor</span>
                 </div>
               </div>
             </div>
+
             <div class="client-slide-item">
               <blockquote>
-                I used to invest some of my savings to higher yield investments both on and off the internet. However,
-                with the recent investment scams outbreak on the internet and even offline especially in our country, I
-                stayed away from it and stopped looking for similar ways to earn a passive income. I stopped trying to
-                make money work for me and get back on solely working for money.
-
-                One day, a long-time comrade from the other side of the world introduced me to Assetbase Trading. At
-                first,
-                sounds familiar and I thought it is just another quick scheme on the internet that usually lasted for a
-                month or two. But when they explained to me the details, I was convinced that this cannot be another
-                gimmick. It&#039;s not only about something NEW but an investment medium that already exists and
-                profitable for many years now and yet only very few are taking advantage of it. I can boldly recommend
-                them.
+                Balancing a busy career and family life made it hard to find time to monitor investments—until I found Crest Asset Trading. Their platform simplifies the investment process with real-time updates and easy-to-read analytics. I appreciate the clear guidance and consistent support, which have helped me unlock new avenues for financial growth. It’s transformed the way I think about my future.
               </blockquote>
               <div class="author">
-                <div class="author-thumb">
-                  <img src="assetss/images/frontend/testimonial/60a2b11c6ffe91621274908.jpg" alt="client">
-                </div>
                 <div class="author-content">
-                  <h6 class="sub-title"><a href="javascript:void(0)">Haru kane</a></h6>
-                  <span>Web developer</span>
+                  <h6 class="sub-title"><a href="javascript:void(0)">Ebony Williams</a></h6>
+                  <span>Professional Investor</span>
                 </div>
               </div>
             </div>
+
             <div class="client-slide-item">
               <blockquote>
-                As an Entrepreneur, I come across a lot of opportunities. Few are legit and do what they preach but
-                Assetbase Trading has a solid business model that is tapping an unknown market and analytics and past
-                performance showed me that it&#039;s a valid opportunity. Now the only weak point as with every legit
-                operation is strong and dependable management.
-
-                I&#039;ve known the decision-makers behind Assetbase Trading for quite some time from past different
-                ventures
-                and I can credit them with honesty and a solid moral compass.
+                After facing setbacks with other investment platforms, Crest Asset Trading has been a breath of fresh air. Their innovative tools and dedicated support team helped me turn uncertainty into clear, actionable strategies. I now see a positive trend in my portfolio with reliable, transparent updates that I can trust. This platform has become an essential part of my financial plan.
               </blockquote>
               <div class="author">
-                <div class="author-thumb">
-                  <img src="assetss/images/frontend/testimonial/60a2ac52cbd761621273682.jpg" alt="client">
-                </div>
                 <div class="author-content">
-                  <h6 class="sub-title"><a href="javascript:void(0)">Michael Cole</a></h6>
-                  <span>Opportunist</span>
+                  <h6 class="sub-title"><a href="javascript:void(0)">Darnell Smith</a></h6>
+                  <span>Business Owner & Investor</span>
                 </div>
               </div>
             </div>
+
             <div class="client-slide-item">
               <blockquote>
-                I had never heard of Masternoding before. It turned out to be a total no-brainer, a secret, and a very
-                lucrative niche. Thought the best time to start is now.
-                It have been awesome using them.
+                Since joining Crest Asset Trading, my approach to investments has evolved dramatically. Their intuitive platform and detailed analytics empower me to take bold steps while staying informed about market trends. The continuous support and clear, honest updates have been invaluable, making every decision feel well-founded. I’m excited to see the long-term benefits on my financial roadmap.
               </blockquote>
               <div class="author">
-                <div class="author-thumb">
-                  <img src="assetss/images/frontend/testimonial/60a2a9b85e5ae1621273016.jpg" alt="client">
-                </div>
                 <div class="author-content">
-                  <h6 class="sub-title"><a href="javascript:void(0)">Jürgen Hans</a></h6>
-                  <span>Business Man</span>
+                  <h6 class="sub-title"><a href="javascript:void(0)">Keisha Brown</a></h6>
+                  <span>Independent Trader</span>
                 </div>
               </div>
             </div>
 
+            <div class="client-slide-item">
+              <blockquote>
+                Investing used to feel intimidating, but Crest Asset Trading has turned it into a truly rewarding experience. Their platform’s sophisticated yet accessible tools offer real-time insights that help me navigate complex market conditions with ease. I’ve seen consistent returns and feel more secure with every smart move I make. This service has redefined my approach to building wealth.
+              </blockquote>
+              <div class="author">
+                <div class="author-content">
+                  <h6 class="sub-title"><a href="javascript:void(0)">Andre Davis</a></h6>
+                  <span>Tech Professional & Investor</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="client-slide-item">
+              <blockquote>
+                Crest Asset Trading has been a game-changer for my financial journey. The platform’s robust analytics and proactive customer service have helped simplify the world of investments. I now receive strategic insights that guide me through market ups and downs, allowing for consistent growth throughout the year. I couldn’t be happier with how my portfolio is performing.
+              </blockquote>
+              <div class="author">
+                <div class="author-content">
+                  <h6 class="sub-title"><a href="javascript:void(0)">Tanisha Moore</a></h6>
+                  <span>Consultant & Investor</span>
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -653,178 +477,7 @@
   </div>
 
 
-  <div class="team-section">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-12 text-center">
-          <div class="team-header">
-            <h2 class="title">Masterminds Behind Assetbase Trading</h2>
-            <p class="section-para mt-2">Team that works together with a common purpose!</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row justify-content-center mb-30-none">
-
-        <div class="col-lg-4 col-md-6 col-sm-8 text-center mb-30">
-          <div class="team-item">
-            <div class="team-thumb">
-              <img src="assetss/images/frontend/team/pm.jpeg" alt="team">
-              <!--<div class="team-thumb-overlay">
-                                <ul class="team-social">
-
-                                    <li>
-                                        <a href="dd"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="dd"><i class="fab fa-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="dd"><i class="fab fa-pinterest-p"></i></a>
-                                    </li>
-                                </ul>
-                            </div>-->
-            </div>
-            <div class="team-content">
-              <h3 class="title">John. D</h3>
-              <span class="sub-title">Project Manager</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-8 text-center mb-30">
-          <div class="team-item">
-            <div class="team-thumb">
-              <img src="assetss/images/frontend/team/cto.jpeg" alt="team">
-              <!--<div class="team-thumb-overlay">
-                                <ul class="team-social">
-
-                                    <li>
-                                        <a href="ee"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="ee"><i class="fab fa-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="ee"><i class="fab fa-pinterest-p"></i></a>
-                                    </li>
-                                </ul>
-                            </div>-->
-            </div>
-            <div class="team-content">
-              <h3 class="title">George. R</h3>
-              <span class="sub-title">CTO</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-8 text-center mb-30">
-          <div class="team-item">
-            <div class="team-thumb">
-              <img src="assetss/images/frontend/team/ceo.jpeg" alt="team">
-              <!--<div class="team-thumb-overlay">
-                                <ul class="team-social">
-
-                                    <li>
-                                        <a href="nn"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="nn"><i class="fab fa-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="nn"><i class="fab fa-pinterest-p"></i></a>
-                                    </li>
-                                </ul>
-                            </div>-->
-            </div>
-            <div class="team-content">
-              <h3 class="title">Aiguo. C</h3>
-              <span class="sub-title">CEO &amp; CMO</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <section class="investetor-section padding-top padding-bottom">
-    <div class="container">
-
-
-      <div class="row justify-content-center ">
-        <div class="col-10 text-center">
-          <div class="section-header mb-5">
-            <h2 class="title">Top investors on Assetbase Trading </h2>
-            <p class="section-para">Top people who trust and believe in our system.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row justify-content-center mb-30-none">
-
-        <div class="col-md-6 col-lg-4 col-xl-3 col-sm-10">
-          <div class="investor-item">
-            <div class="investor-thumb">
-
-
-              <img src="assetss/images/frontend/team/investor.jpeg" alt="username">
-              <a href="assetss/images/frontend/team/investor.jpeg" class="img-pop">
-                <i class="flaticon-plus"></i>
-              </a>
-            </div>
-            <div class="investor-content">
-              <h5 class="title">
-                <a href="javascript:void(0)">Ephraim Jackson</a>
-              </h5>
-              <span class="total">Total Commitment: </span><span class="amount">$150,000</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 col-xl-3 col-sm-10">
-          <div class="investor-item">
-            <div class="investor-thumb">
-
-
-              <img src="assetss/images/frontend/team/investor2.jpeg" alt="alexroger">
-              <a href="assetss/images/frontend/team/investor2.jpeg" class="img-pop">
-                <i class="flaticon-plus"></i>
-              </a>
-            </div>
-            <div class="investor-content">
-              <h5 class="title">
-                <a href="javascript:void(0)">McKenzie</a>
-              </h5>
-              <span class="total">Total Commitment : </span><span class="amount">$80,000</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 col-xl-3 col-sm-10">
-          <div class="investor-item">
-            <div class="investor-thumb">
-
-
-              <img src="assetss/images/frontend/team/investor3.jpeg" alt="testuser">
-              <a href="assetss/images/frontend/team/investor3.jpeg" class="img-pop">
-                <i class="flaticon-plus"></i>
-              </a>
-            </div>
-            <div class="investor-content">
-              <h5 class="title">
-                <a href="javascript:void(0)">Rajash</a>
-              </h5>
-              <span class="total">Total Commitment : </span><span class="amount">$65,000</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-
-
-
-
-  <div class="call-to-action-section">
+  <div class="call-to-action-section" style="background: #000">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-12 text-center">
@@ -833,7 +486,7 @@
             <p>Open a free account today(zero commission) and join our team in earning passive income through this
               untapped opportunity.</p>
             <div class="call-to-action-btn">
-              <a href="register" class="btn btn-primary btn-lg ">SIGN UP</a>
+              <a href="register" class="btn  btn-primary btn-lg ">SIGN UP</a>
             </div>
           </div>
         </div>
@@ -856,7 +509,7 @@
         <div class="col-lg-12 text-center">
           <div class="team-header">
             <h2 class="title">Frequently Asked Questions</h2>
-            <p class="section-para mt-2">We answer some of your Frequently Asked Questions regarding Assetbase Trading. If
+            <p class="section-para mt-2">We answer some of your Frequently Asked Questions regarding Crest-Asset Trading. If
               you
               have a query that is not answered here, Please feel free to contact us.</p>
           </div>
@@ -864,20 +517,20 @@
       </div>
 
       <div class="row">
-        <div class="col-lg-12">
-          <div class="main-page">
-            <div class="accordion" id="accordionExample">
+        <div class="col-lg-12" style="background: #000">
+          <div class="main-page" style="background: #000">
+            <div class="accordion" id="accordionExample" style="background: #000">
               <div class="card">
                 <div class="card-header" id="heading31">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse31"
-                    aria-expanded="true" aria-controls="collapse31">When did Assetbase Trading start?</button>
+                    aria-expanded="true" aria-controls="collapse31">When did Crest-Asset Trading start?</button>
                 </div>
                 <div id="collapse31" class="collapse  show " aria-labelledby="heading31"
                   data-parent="#accordionExample">
-                  <div class="card-body">We started Assetbase Trading as a private project back in 2015 and went on to
+                  <div class="card-body">We started Crest-Asset Trading as a private project back in 2015 and went on to
                     carry out
                     our beta-testing in mid 2015 with some selected investors; We launched to the public early 2016 and
-                    adapted the name Assetbase Trading.com in 2016</div>
+                    adapted the name Crest-Asset Trading.com in 2016</div>
                 </div>
               </div>
               <div class="card">
@@ -900,7 +553,7 @@
                 </div>
                 <div id="collapse29" class="collapse " aria-labelledby="heading29" data-parent="#accordionExample">
                   <div class="card-body">Since starting the public program, an Affiliation program to reward our members
-                    has been a feature. After registering with Assetbase Trading you will get a Referral Link on you
+                    has been a feature. After registering with Crest-Asset Trading you will get a Referral Link on you
                     dashboard
                     that pays you 10% of whatever your referrals deposit …and not just for initial deposits – in
                     includes subsequent deposits, too! This is an excellent opportunity to quickly grow your funds with
@@ -1078,7 +731,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-9">
-            <p>&copy; 2025 Assetbase Trading. All rights reserved</p>
+            <p>&copy; 2025 Crest-Asset Trading. All rights reserved</p>
           </div>
 
           <div id="google_translate_element"></div>
@@ -1135,15 +788,15 @@
           "backgroundColor": "#4dc247",
           "ctaText": "",
           "borderRadius": "25",
-          "marginLeft": "0",
-          "marginBottom": "20",
-          "marginRight": "50",
+          "marginLeft": "30",
+          "marginBottom": "30",
+          "marginRight": "0",
           "position": "left"
         },
         "brandSetting": {
-          "brandName": "Assetbase Trading",
+          "brandName": "Crest Asset Trading",
           "brandSubTitle": "Typically replies within minutes",
-          "brandImg": "/assets/images/logoIcon/favicon.png",
+          "brandImg": "/crest/assets/images/logoIcon/crest-favicon.png",
           "welcomeText": "Hi, there!\nHow can I help you?",
           "messageText": "Hello, I have some questions!",
           "backgroundColor": "#0a5f54",
