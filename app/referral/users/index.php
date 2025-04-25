@@ -64,9 +64,9 @@
                   <?php if (!empty($user_referrals)): ?>
                     <?php foreach ($user_referrals as $index => $referral): ?>
                       <tr>
-                        <td><?= $index + 1 ?></td>
-                        <td><?= htmlspecialchars($referral['fname'] . ' ' . $referral['lname']) ?></td>
-                        <td>
+                        <td data-label="S/N"><?= $index + 1 ?></td>
+                        <td data-label="Fullname"><?= htmlspecialchars($referral['fname'] . ' ' . $referral['lname']) ?></td>
+                        <td data-label="Joined At">
                           <?php
                           // Adjust "created_at" to your actual field name for when the user joined
                           echo htmlspecialchars(date("d M, Y h:i A", strtotime($referral['datetime'])));

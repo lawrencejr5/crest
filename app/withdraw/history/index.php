@@ -8,7 +8,6 @@
 
 <body>
 
-
   <!-- scroll-to-top start -->
   <div class="scroll-to-top">
     <span class="scroll-icon">
@@ -40,7 +39,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Welcome Back!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="https://assetbase-trading.com">User</a></li>
+              <li><a href="../../dashboard">User</a></li>
               <li>Withdraw Log</li>
             </ul>
           </div>
@@ -53,7 +52,7 @@
         <div class="row justify-content-center mt-2">
           <div class="col-md-12">
             <div class="right float-right mb-5">
-              <a href="https://assetbase-trading.com/user/withdraw" class="btn cmn-btn">
+              <a href="/crest/app/withdraw" class="btn cmn-btn">
                 Withdraw Now
               </a>
             </div>
@@ -77,11 +76,11 @@
                   <?php if (isset($user_withdrawals) && count($user_withdrawals) > 0): ?>
                     <?php foreach ($user_withdrawals as $withdrawal): ?>
                       <tr>
-                        <td>#<?php echo htmlspecialchars($withdrawal['transac_id']); ?></td>
-                        <td><?php echo htmlspecialchars($withdrawal['type']); ?></td>
-                        <td> <?= htmlspecialchars($withdrawal['amount'] . $withdrawal['currency']) ?> </td>
-                        <td><span class="text-danger">- $<?= htmlspecialchars($withdrawal['dol_val']) ?></span></td>
-                        <td>
+                        <td data-label="Transaction ID">#<?php echo htmlspecialchars($withdrawal['transac_id']); ?></td>
+                        <td data-label="Type"><?php echo htmlspecialchars($withdrawal['type']); ?></td>
+                        <td data-label="Amount"> <?= htmlspecialchars($withdrawal['amount'] . $withdrawal['currency']) ?> </td>
+                        <td data-label="Dollar Value"><span class="text-danger">- $<?= htmlspecialchars($withdrawal['dol_val']) ?></span></td>
+                        <td data-label="Status">
                           <?php if ($withdrawal['status'] == "success"): ?>
                             <span class="text-success"><?= htmlspecialchars($withdrawal['status']) ?></span>
                           <?php elseif ($withdrawal['status'] == "pending"): ?>
@@ -90,7 +89,7 @@
                             <span class="text-danger"><?= htmlspecialchars($withdrawal['status']) ?></span>
                           <?php endif; ?>
                         </td>
-                        <td><?php echo isset($withdrawal['datetime']) ? htmlspecialchars($withdrawal['datetime']) : 'N/A'; ?></td>
+                        <td data-label="Date/Time"><?php echo isset($withdrawal['datetime']) ? htmlspecialchars($withdrawal['datetime']) : 'N/A'; ?></td>
                         <!-- <td>
                           <a href="details.php?id=<?php echo htmlspecialchars($withdrawal['id']); ?>" class="btn btn-sm btn-info">View</a>
                         </td> -->

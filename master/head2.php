@@ -70,13 +70,55 @@
 
     @media screen and (max-width: 768px) {
       .heading-nav-box {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         background: #000;
         width: 100%;
-        padding: .5rem;
-        margin: 0;
+      }
+
+      .heading-nav-box .heading-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+      }
+
+
+      .crest-logo img {
+        width: 270px;
+        height: 50px;
+      }
+
+      .testimonial-img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    @media screen and (max-width: 450px) {
+      .heading-nav-box {
+        background: #000;
+        width: 100%;
+      }
+
+      .heading-nav-box .heading-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+    }
+
+    @media screen and (max-width: 368px) {
+      .heading-nav-box {
+        background: #000;
+        width: 100%;
+      }
+
+      .heading-nav-box .heading-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
       }
 
 

@@ -77,7 +77,7 @@
         <div class="row justify-content-center mt-2">
           <div class="col-md-12">
             <div class="right float-right mb-5">
-              <a href="https://assetbase-trading.com/user/plan" class="btn cmn-btn">
+              <a href="" class="btn cmn-btn">
                 Investment Plan
               </a>
             </div>
@@ -114,30 +114,30 @@
                       ?>
                       <tr>
                         <!-- Plan Name -->
-                        <td style="text-transform: capitalize;">
+                        <td data-label="Plan" style="text-transform: capitalize;">
                           <?= htmlspecialchars(isset($planDetails['plan_name']) ? $planDetails['plan_name'] : "N/A") ?> plan
                         </td>
 
                         <!-- Amount Invested -->
-                        <td>$<?= htmlspecialchars(number_format($investment['amount'], 2)) ?></td>
+                        <td data-label="Amount Invested">$<?= htmlspecialchars(number_format($investment['amount'], 2)) ?></td>
 
                         <!-- Net Profit -->
-                        <td>$<?= htmlspecialchars(number_format($netProfit, 2)) ?></td>
+                        <td data-label="Net Profit">$<?= htmlspecialchars(number_format($netProfit, 2)) ?></td>
 
                         <!-- Amount Earned So Far -->
-                        <td>$<?= htmlspecialchars(number_format($investment['earned'], 2)) ?></td>
+                        <td data-label="Amount Earned">$<?= htmlspecialchars(number_format($investment['earned'], 2)) ?></td>
 
                         <!-- Duration: Start Date to End Date -->
-                        <td>
+                        <td data-label="Duration">
                           <?= htmlspecialchars(date("d M, Y", strtotime($investment['start_date']))) ?> -
                           <?= htmlspecialchars(date("d M, Y", strtotime($investment['end_date']))) ?>
                         </td>
 
                         <!-- Number of Days Invested -->
-                        <td><?= htmlspecialchars($investment['num_of_days']) ?></td>
+                        <td data-label="Days Invested"><?= htmlspecialchars($investment['num_of_days']) ?></td>
 
                         <!-- Status -->
-                        <td style="color: <?= $statusColor; ?>;">
+                        <td data-label="Status" style="color: <?= $statusColor; ?>;">
                           <?= htmlspecialchars(ucfirst($investment['status'])) ?>
                         </td>
                       </tr>

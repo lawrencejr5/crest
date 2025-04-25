@@ -85,6 +85,28 @@
         span {
             font-family: 'Poppins', sans-serif !important;
         }
+
+        .langSel {
+            display: none !important;
+        }
+
+        .crest-logo img {
+            width: 400px;
+            height: 70px;
+            object-fit: cover;
+        }
+
+        @media screen and (max-width: 768px) {
+            .crest-logo img {
+                width: 250px;
+                height: 50px;
+            }
+
+            .account-menu {
+                display: none !important;
+            }
+
+        }
     </style>
 
 </head>

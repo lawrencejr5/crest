@@ -25,7 +25,7 @@
 
       <div class="header-bottom  ">
           <div class=" container-fluid heading-nav-box">
-              <nav class="navbar navbar-expand-lg p-0   mx-5 ">
+              <nav class="navbar navbar-expand-lg p-0 mx-5 heading-nav">
                   <a href="/crest" class="crest-logo">
                       <img src="assets/images/logoIcon/crest2-nobg.png" alt="logo">
                   </a>

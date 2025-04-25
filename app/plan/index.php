@@ -6,7 +6,148 @@
 <?php include "../master/head.php" ?>
 
 
+
+
 <body>
+
+  <style>
+    .plan-area {
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: auto;
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    .plan-item {
+      padding-top: 10px;
+      width: 300px;
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px;
+      margin: 0 10px 0 0;
+      text-align: center;
+      transition: all 1s ease;
+      z-index: 9;
+      background-color: transparent;
+      border: 2px solid #b58e43;
+    }
+
+    .plan-item::before {
+      position: absolute;
+      content: "";
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: transparent;
+      z-index: -10;
+    }
+
+    .plan-item h3 {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+      text-shadow: 0 1px 0 #ccc;
+    }
+
+    .plan-item .dots-area {
+      position: absolute;
+      width: 100%;
+      bottom: 40%;
+      left: 0;
+    }
+
+    .plan-item .dots-area span {
+      width: 10px;
+      height: 10px;
+      border: 2px solid #b58e43;
+      background-color: #b58e43;
+      border-radius: 50%;
+    }
+
+    .plan_name {
+      font-size: 20px;
+      color: #fff;
+      font-weight: 700;
+      text-shadow: 0 1px 0 #ccc;
+    }
+
+    .plan-header {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      border-bottom: 2px solid #b58e43;
+    }
+
+    .plan-header h3 {
+      margin: 0;
+    }
+
+    .plan-details {
+      margin: 3rem 0;
+    }
+
+    .plan-details .item {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 1rem 0;
+    }
+
+    .plan-details .item span {
+      width: 100%;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .plan_day {
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 32px;
+      color: #b58e43;
+      margin: -17px 0 0 0;
+    }
+
+    .plan_day span {
+      font-size: 14px;
+      color: #858383;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .plan_pr {
+      font-weight: 300;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .plan_min {
+      font-size: 20px;
+      margin: 80px 0 15px 0;
+      color: #fff;
+    }
+
+    .plan_min span {
+      display: block;
+      font-weight: 700;
+      font-size: 24px;
+      color: #fff;
+    }
+
+    .plan-item .btn-primary {
+      font-size: 16px;
+    }
+
+    .plan-item:hover {
+      box-shadow: 0 0 40px rgba(18, 22, 34, 0.8);
+      transform: scale(1.1);
+      z-index: 2;
+    }
+  </style>
 
 
   <!-- scroll-to-top start -->
@@ -59,21 +200,33 @@
               </a>
             </div>
           </div>
-          <?php if (!empty($user_plans)): ?>
-            <?php foreach ($user_plans as $plan): ?>
-              <div class="col-lg-4 mb-30">
-                <div class="package-card text-center bg_img" data-background="https://assetbase-trading.com/assets/templates/bit_gold/images/bg/bg-4.png">
-                  <h4 class="package-card__title base--color mb-2" style="text-transform: capitalize;"><?= htmlspecialchars($plan['plan_name']) ?></h4>
-                  <ul class="package-card__features mt-4">
-                    <li>Return <?= htmlspecialchars($plan['plan_rate']) ?>%</li>
-                    <li><?= htmlspecialchars($plan['plan_type']) ?></li>
-                    <li>For <?= htmlspecialchars($plan['duration_text']) ?></li>
-                    <li>Total <?= htmlspecialchars($plan['total']) ?>%</li>
-                  </ul>
-                  <div class="package-card__range mt-5 base--color">
-                    $<?= htmlspecialchars($plan['plan_min']) ?> - $<?= htmlspecialchars($plan['plan_max']) ?>
-                  </div>
-                  <a href="javascript:void(0)" data-toggle="modal" data-target="#depoModal" data-resource='{ 
+          <div class="row mb-none-30 justify-content-center px-lg-5 px-md-0">
+
+            <?php $data = $modules->getAllPlans(); ?>
+            <?php foreach ($data as $plan): ?>
+
+              <div class="col-md-4 mb-30">
+                <div class="plan-area">
+                  <div class="plan-item">
+                    <div class="plan_name" style="font-size: 1.3rem; text-transform:uppercase;"><?= $plan['plan_name'] ?></div><br><br>
+                    <div class="plan-header">
+                      <div class="plan_day">
+                        <h2><?= $plan['plan_rate'] ?>%</h2>
+                        <span><?= $plan['plan_type'] ?></span>
+                      </div>
+                      <div class="plan_day">
+                        <h2><?= htmlspecialchars(explode(" ", $plan['duration_text'])[0]) ?></h2>
+                        <span><?= htmlspecialchars(explode(" ", $plan['duration_text'])[1]) ?></span>
+                      </div>
+                    </div>
+                    <div class="plan-details">
+                      <div class="item"><span>Min Deposit</span>-<span>$<?= number_format($plan['plan_min']) ?></span></div>
+                      <div class="item"><span>Max Deposit</span>-<span>$<?= number_format($plan['plan_max']) ?></span></div>
+                      <div class="item"><span>Capital Return</span>-<span>Yes</span></div>
+                      <div class="item"><span>Total Return</span>-<span><?= $plan['total'] ?>%</span></div>
+                    </div>
+
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#depoModal" data-resource='{ 
                       "id": "<?= htmlspecialchars($plan['plan_id']) ?>", 
                       "name": "<?= htmlspecialchars($plan['plan_name']) ?>", 
                       "minimum": "<?= htmlspecialchars($plan['plan_min']) ?>", 
@@ -82,16 +235,13 @@
                       "duration": "<?= htmlspecialchars($plan['duration_text']) ?>",
                       "type": "<?= htmlspecialchars($plan['plan_type']) ?>"
                     }' class="cmn-btn btn-md mt-4 investButton">
-                    Invest Now
-                  </a>
-                </div><!-- package-card end -->
+                      Invest Now
+                    </a>
+                  </div>
+                </div>
               </div>
             <?php endforeach; ?>
-          <?php else: ?>
-            <div class="col-12">
-              <p>No plans available.</p>
-            </div>
-          <?php endif; ?>
+          </div>
         </div>
       </div>
     </section>
