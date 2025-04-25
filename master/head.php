@@ -45,4 +45,20 @@
         href="./assets/templates/bit_gold/css/color.php?color=c39c3b&secondColor=222222">
 
 
+    <style>
+        .crest-logo img {
+            width: 400px;
+            height: 70px;
+            object-fit: cover;
+        }
+
+        @media screen and (max-width: 768px) {
+            .crest-logo img {
+                width: 250px;
+                height: 50px;
+            }
+
+        }
+    </style>
+
 </head>

@@ -202,16 +202,19 @@
           <div class="section-header">
             <h2 class="title">About Crest-Asset Trading</h2>
             <p class="section-para text-left">
-              Crest-Asset Trading was created in 2009 with the sole purpose of ensuring that everyone has an insight
-              on investments and has such made sure that anyone that crosses our path has a genuine encounter with the
-              investment market. Our aim is to help others achieve their aim in life, we saw the opportunity to help
-              others and we took it, and so are we passionate about it. Investments are life-savers and shouldn’t be
-              rejected by anyone, you’re helping yourself and no one else, this goes to answer the question of “why do I
-              invest?” Basically all directions leads to this and a strong reason is having something in store for a
-              rainy day, or making a life changing decision which would require a lot of financial support and how to do
-              this. This is where we come in, this is where we help you by investing your money in securities that will
-              yield more dividends over a short period of time. We believe in empowering novice investors and also the
-              experts (you are all important to us).</p>
+              About Crest Asset Trading Crest Asset trading was created in 2008
+              with the aim and purpose of ensuring that everyone has an insight on investments.
+              Our aim is to help investors achieve their financial goals in life,
+              we are passionate about it, guiding potential investors on the best
+              track of Investments to engage in and the best way to go about it.
+              This goes to answer the question of “why do I invest?”
+              Basically all directions leads to this and a strong reason is having
+              something in store for a rainy day, or making a life changing decision
+              which would require a lot of financial support and how to do this.
+              This is where we come in, this is where we help you by investing
+              your money in securities and assets that will yield more dividends over
+              a short period of time. We believe in empowering both infant and professional
+              investors. (you all are important to us).</p>
           </div>
         </div>
         <div class="col-md-6">
@@ -381,9 +384,9 @@
   <section class="client-section padding-top">
     <div class="container mw-lg-100">
       <div class="client-area">
-        <div class="owl-thumbs" style="display: flex; justify-content: center;" data-slider-id="1">
+        <div class="owl-thumbs" style="display: flex; height: 300px; justify-content: center;" data-slider-id="1">
 
-          <img src="assetss/images/quotes.png" width="100%" height="100%" style="object-fit: cover;" alt="client">
+          <img src="assetss/images/quotes.png" class="testimonial-img" alt="client">
 
 
         </div>

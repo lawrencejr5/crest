@@ -50,16 +50,45 @@
   <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 
   <!-- Swiper CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <!-- Swiper JS -->
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
   <style>
     .plan-item {
       padding-top: 10px;
       width: 406px;
+    }
+
+    .crest-logo img {
+      width: 250px;
+      height: 50px;
+      object-fit: cover;
+    }
+
+    .testimonial-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media screen and (max-width: 768px) {
+      .heading-nav-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #000;
+        width: 100%;
+        padding: .5rem;
+        margin: 0;
+      }
+
+
+      .crest-logo img {
+        width: 270px;
+        height: 50px;
+      }
+
+      .testimonial-img {
+        width: 100%;
+        height: 100%;
+      }
     }
   </style>
 </head>

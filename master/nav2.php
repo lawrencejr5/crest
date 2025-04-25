@@ -24,15 +24,15 @@
 
 
       <div class="header-bottom  ">
-          <div class=" container-fluid ">
+          <div class=" container-fluid heading-nav-box">
               <nav class="navbar navbar-expand-lg p-0   mx-5 ">
-                  <a href="/crest" class="text-center">
-                      <img src="assets/images/logoIcon/crest2-nobg.png" style="width: 400px; height: 200px; object-fit: cover;" class="logo-max" alt="logo">
+                  <a href="/crest" class="crest-logo">
+                      <img src="assets/images/logoIcon/crest2-nobg.png" alt="logo">
                   </a>
                   <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
                       data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                      aria-label="Toggle navigation">
-                      <span class="menu-toggle"></span>
+                      aria-label="Toggle navigation" style="padding: 0;">
+                      <i class="fa fa-bars" style="transform: scale(1.5); margin: 0; height: 100%; border-radius: 0; width: 40px; text-align: center; background: #222;"></i>
                   </button>
 
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -52,7 +52,7 @@
                                           <a class="d-block" href="/crest/services/masternode">Masternode</a>
                                           <a class="d-block" href="/crest/services/financial-services">Financial
                                               Services</a>
-                                          <a class="d-block" href="/crest/services/ipos">Mutual Funds and Initial Public
+                                          <a class="d-block" href="/crest/services/ipos">Initial Public
                                               Offerings
                                               (IPOs)</a>
                                           <a class="d-block" href="/crest/services/comodity-trading">Comodity Trading</a>
@@ -83,7 +83,7 @@
 
 
 
-      <div class="banner-area">
+      <div class="banner-area" style="background-image: none;">
           <div id="particles-js"></div>
 
           <div class="container">

@@ -2,14 +2,14 @@
     <div class="header__bottom">
         <div class="container">
             <nav class="navbar navbar-expand-xl p-0 align-items-center">
-                <a class="site-logo site-title" href="/crest"><img
-                        src="/crest/assets/images/logoIcon/crest2-nobg.png" style="width: 300px; height: 50px; object-fit: cover;" alt="site-logo"></a>
+                <a class="crest-logo" href="/crest">
+                    <img src="/crest/assets/images/logoIcon/crest2-nobg.png" alt="site-logo"></a>
                 <ul class="account-menu responsive-account-menu ml-3">
                     <li class="icon"><a href="/crest/login"><i class="las la-user"></i></a></li>
                 </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="menu-toggle"></span>
+                    <i class="fa fa-bars" style="transform: scale(1.5); color: #fff;"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 

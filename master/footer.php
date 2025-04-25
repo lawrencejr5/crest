@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-md-6 text-md-left text-center">
                     <p>
-                    <p>© 2025 <a href="/crest" class="base--color">Assetbase Trading</a>.
+                    <p>© 2025 <a href="/crest" class="base--color">Crest-Asset Trading</a>.
                         All
                         rights reserved</p>
                     </p>
@@ -47,7 +47,7 @@
 
 
 <!-- jQuery library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>bootstrap js
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- bootstrap js -->
 <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/bootstrap.bundle.min.js"></script>
 
