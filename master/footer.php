@@ -100,8 +100,8 @@
             "backgroundColor": "#4dc247",
             "ctaText": "",
             "borderRadius": "25",
-            "marginLeft": "30",
-            "marginBottom": "30",
+            "marginLeft": "10",
+            "marginBottom": "10",
             "marginRight": "0",
             "position": "left"
         },
