@@ -25,10 +25,12 @@
             <p>
             <h4>We set the Pace, others follow</h4>
 
-            As high-conviction investors, we refuse to follow the herd. Instead, we focus on stocks that are out of
-            favour with mainstream investors, as we believe that these offer the greatest potential for long-term
-            gains. This is because stocks that are popular tend to be overvalued – while out-of-favour stocks are
-            often too cheap. We aim to exploit this inefficiency for our shareholders.</p>
+            We refuse to follow the trend Instead, we focus on stocks that are out
+            of favour with mainstream investors, as we believe that these offers
+            the greatest potential for long-term gains. popular stocks tend
+            to be overvalued – while out-of-favour stocks are often too cheap.
+            We aim to exploit this inefficiency for our shareholders.
+            </p>
           </div>
         </div>
       </div>
@@ -46,7 +48,8 @@
           <div class="feature-item">
             <h5 class="subtitle">Mutual Funds</h5>
             <p>
-              Let the experts handle the work of making you rich</p>
+              Let the experts handle the work of making you huge returns on investment (ROI)
+            </p>
           </div>
 
         </div>
@@ -129,10 +132,11 @@
         <div class="col-10 text-center">
           <div class="section-header mb-5">
             <h2 class="title">Statistics </h2>
-            <p class="section-para">Crest-Asset Trading achieved an annual return of 132%, and for participants who took
-              advantage
-              of the monthly compounding option, a gigantic 249.85%. This yield was achieved despite the global economic
-              crisis caused by COVID-19.</p>
+            <p class="section-para">Crest Asset Trading achieved an annual return of 132%,
+              and for participants who took advantage of the monthly compounding option,
+              a gigantic 249.85%.
+              This yield was achieved despite the global economic crisis
+              caused by COVID-19..</p>
           </div>
         </div>
       </div>
@@ -520,104 +524,125 @@
         <div class="col-lg-12" style="background: #000">
           <div class="main-page" style="background: #000">
             <div class="accordion" id="accordionExample" style="background: #000">
+
+              <!-- Question 1 -->
               <div class="card">
                 <div class="card-header" id="heading31">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse31"
-                    aria-expanded="true" aria-controls="collapse31">When did Crest-Asset Trading start?</button>
+                    aria-expanded="true" aria-controls="collapse31">When did Crest Asset Trading start?</button>
                 </div>
-                <div id="collapse31" class="collapse  show " aria-labelledby="heading31"
-                  data-parent="#accordionExample">
-                  <div class="card-body">We started Crest-Asset Trading as a private project back in 2015 and went on to
-                    carry out
-                    our beta-testing in mid 2015 with some selected investors; We launched to the public early 2016 and
-                    adapted the name Crest-Asset Trading.com in 2016</div>
+                <div id="collapse31" class="collapse show" aria-labelledby="heading31" data-parent="#accordionExample">
+                  <div class="card-body">
+                    We started Crest Asset Trading as a private project back in 2008 and went on to carry out our beta-testing
+                    in mid 2010 with some selected investors; We launched to the public early 2012 and adapted the name
+                    CrestAssetTrading.com in 2013.
+                  </div>
                 </div>
               </div>
+
+              <!-- Question 2 -->
               <div class="card">
                 <div class="card-header" id="heading30">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse30"
-                    aria-expanded="true" aria-controls="collapse30"> How do i know this real?</button>
+                    aria-expanded="false" aria-controls="collapse30">How do I know this is real?</button>
                 </div>
-                <div id="collapse30" class="collapse " aria-labelledby="heading30" data-parent="#accordionExample">
-                  <div class="card-body">We have beta-tested our system for quite a while. Feel free to reach out to our
-                    beta testers (some of whom have put CONSIDERABLE sums into renting servers) and get paid regularly –
-                    on time… every time! Despite our headline rates, we are not trying to be a get-rich-quick scheme.
-                    Rather, we are a community of crypto enthusiasts looking to grow together. Become part of the
-                    family. Own a stake!.</div>
+                <div id="collapse30" class="collapse" aria-labelledby="heading30" data-parent="#accordionExample">
+                  <div class="card-body">
+                    We have beta-tested our system over the years. Feel free to reach out to our beta testers (some of whom
+                    have put CONSIDERABLE sums into renting servers) and get paid regularly – on time… every time! Despite our
+                    headline rates, we are not trying to be a get-rich-quick scheme. Rather, we are a community of crypto
+                    enthusiasts looking to grow together. Become part of the family. Own a stake!
+                  </div>
                 </div>
               </div>
+
+              <!-- Question 3 -->
               <div class="card">
                 <div class="card-header" id="heading29">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse29"
-                    aria-expanded="true" aria-controls="collapse29">Do you offer affiliate programs?</button>
+                    aria-expanded="false" aria-controls="collapse29">Do you offer Affiliate programs?</button>
                 </div>
-                <div id="collapse29" class="collapse " aria-labelledby="heading29" data-parent="#accordionExample">
-                  <div class="card-body">Since starting the public program, an Affiliation program to reward our members
-                    has been a feature. After registering with Crest-Asset Trading you will get a Referral Link on you
-                    dashboard
-                    that pays you 10% of whatever your referrals deposit …and not just for initial deposits – in
-                    includes subsequent deposits, too! This is an excellent opportunity to quickly grow your funds with
-                    us, as well as being an easy way to earn start-up funding if you are low on assets! If you have any
-                    questions please contact our live support team.</div>
+                <div id="collapse29" class="collapse" aria-labelledby="heading29" data-parent="#accordionExample">
+                  <div class="card-body">
+                    Since starting the public program, an Affiliation program to reward investors has always been a feature.
+                    After registering with Crest Asset Trading, you will be assigned a special Referral Link on your dashboard
+                    that pays you 10% bonus on your referrals’ deposits—and not just for initial deposits—it includes
+                    subsequent deposits, too. This is an excellent opportunity to quickly grow your funds with us, as well as
+                    being an easy way to earn start-up funding if you are low on assets! If you have any questions, please
+                    contact our live support team.
+                  </div>
                 </div>
               </div>
+
+              <!-- Question 4 -->
               <div class="card">
                 <div class="card-header" id="heading28">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse28"
-                    aria-expanded="true" aria-controls="collapse28"> How can i deposit money?</button>
+                    aria-expanded="false" aria-controls="collapse28">How can I make a deposit?</button>
                 </div>
-                <div id="collapse28" class="collapse " aria-labelledby="heading28" data-parent="#accordionExample">
-                  <div class="card-body">Since this is a crypto project, we prefer to accept deposits in Bitcoin.
-                    However, depending on your location, we can also accept money through perfect money and the likes.
+                <div id="collapse28" class="collapse" aria-labelledby="heading28" data-parent="#accordionExample">
+                  <div class="card-body">
+                    Since this is a crypto project, we prefer to accept deposits in Bitcoin. However, depending on your
+                    location, we can also accept money through Perfect Money and the likes.
                   </div>
                 </div>
               </div>
+
+              <!-- Question 5 -->
               <div class="card">
                 <div class="card-header" id="heading27">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse27"
-                    aria-expanded="true" aria-controls="collapse27"> What is limits for deposits?</button>
+                    aria-expanded="false" aria-controls="collapse27">What is the limit for deposits?</button>
                 </div>
-                <div id="collapse27" class="collapse " aria-labelledby="heading27" data-parent="#accordionExample">
-                  <div class="card-body">By default, the minimum to rent servers is USD 200 and the maximum is currently
-                    USD 250,000, but larger amounts are possible after direct consultation with our team. Remember:
-                    after the rental fee has been received, we use a 7-day “grace” period to purchase node stakes and
-                    setup the servers for you.
-                  </div>
-                </div>
-
-
-
-                <div class="card">
-                  <div class="card-header" id="heading49">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse49"
-                      aria-expanded="true" aria-controls="collapse49"> How can i withdraw my money?</button>
-                  </div>
-                  <div id="collapse49" class="collapse " aria-labelledby="heading49" data-parent="#accordionExample">
-                    <div class="card-body">Withdrawals can be initiated from you dashboard. Each withdrawal request are
-                      request are processed instantly and paid in Bitcoin. The minimum withdrawal is 10 USD.</div>
+                <div id="collapse27" class="collapse" aria-labelledby="heading27" data-parent="#accordionExample">
+                  <div class="card-body">
+                    By default, the minimum to rent servers is USD 200 and the maximum is currently USD 250,000, but larger
+                    amounts are possible after direct consultation with our team. Remember: after the rental fee has been
+                    received, we use a 7-day “grace” period to purchase node stakes and set up the servers for you.
                   </div>
                 </div>
-
-                <div class="card">
-                  <div class="card-header" id="heading50">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse50"
-                      aria-expanded="true" aria-controls="collapse50">How does compounding work?</button>
-                  </div>
-                  <div id="collapse50" class="collapse " aria-labelledby="heading50" data-parent="#accordionExample">
-                    <div class="card-body">Compounding allows your deposit to grow very fast. It depends on the plan you invested in. Each plan has its own duration. It is entirely up to you. Some like to withdraw all earnings, some compound upwards for
-                      a while and withdraw then, some go 50-50. Its your money so you decide!<br></div>
-                  </div>
-                </div>
-
               </div>
+
+              <!-- Question 6 -->
+              <div class="card">
+                <div class="card-header" id="heading49">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse49"
+                    aria-expanded="false" aria-controls="collapse49">How can I make a withdrawal?</button>
+                </div>
+                <div id="collapse49" class="collapse" aria-labelledby="heading49" data-parent="#accordionExample">
+                  <div class="card-body">
+                    Withdrawals can be initiated from your dashboard. Each withdrawal request is processed instantly and paid
+                    in Bitcoin. The minimum withdrawal is 10 USD.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 7 -->
+              <div class="card">
+                <div class="card-header" id="heading50">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse50"
+                    aria-expanded="false" aria-controls="collapse50">How does compounding work?</button>
+                </div>
+                <div id="collapse50" class="collapse" aria-labelledby="heading50" data-parent="#accordionExample">
+                  <div class="card-body">
+                    Compounding allows your deposit to grow very fast. It depends on the plan you invested in. Each plan has
+                    its own duration. It is entirely up to you. Some like to withdraw all earnings, some compound upwards for
+                    a while and withdraw then, some go 50-50. It’s your money, so you decide on the option that works best for
+                    you.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 8 -->
               <div class="card">
                 <div class="card-header" id="heading51">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse51"
-                    aria-expanded="true" aria-controls="collapse51"> How can i monitor my revenue?</button>
+                    aria-expanded="false" aria-controls="collapse51">How can I monitor my revenue?</button>
                 </div>
-                <div id="collapse51" class="collapse " aria-labelledby="heading51" data-parent="#accordionExample">
-                  <div class="card-body">Earnings and total balance information can be viewed at any time from your
-                    dashboard .</div>
+                <div id="collapse51" class="collapse" aria-labelledby="heading51" data-parent="#accordionExample">
+                  <div class="card-body">
+                    Earnings and total balance information can be viewed at any time from your dashboard.
+                  </div>
                 </div>
               </div>
 
