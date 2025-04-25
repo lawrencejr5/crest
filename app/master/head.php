@@ -91,8 +91,8 @@
         }
 
         .crest-logo img {
-            width: 400px;
-            height: 70px;
+            width: 300px;
+            height: 60px;
             object-fit: cover;
         }
 

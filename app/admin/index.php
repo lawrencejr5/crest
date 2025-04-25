@@ -33,6 +33,8 @@ function getPlanName($pid)
     <link rel="shortcut icon" href="/crest/assets/images/logoIcon/crest-favicon.png" type="image/x-icon">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Main css -->
     <link rel="stylesheet" href="style.css">
     <!-- DataTables CSS -->
@@ -44,10 +46,16 @@ function getPlanName($pid)
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-2 d-none d-md-block sidebar">
-                <div class="sidebar-sticky">
-                    <h5 class="text-center mb-4" style="color:#eee;">Admin Panel</h5>
-                    <ul class="nav flex-column">
+            <nav class="navbar navbar-expand-lg top-nav">
+                <a class="navbar-brand" href="#">
+                    <img src="/crest/assets/images/logoIcon/crest-favicon.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
+                    Admin
+                </a>
+                <button class="navbar-toggler" style="color: #b58e43;" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="#dashboard">Dashboard</a>
                         </li>
@@ -77,7 +85,7 @@ function getPlanName($pid)
             </nav>
 
             <!-- Main Content -->
-            <main role="main" class="col-md-10 ml-sm-auto">
+            <main role="main" class="col-md-12 ml-sm-auto">
                 <!-- Dashboard Summary -->
                 <section id="dashboard">
                     <h2>Dashboard</h2>
@@ -275,9 +283,9 @@ function getPlanName($pid)
                             <tr>
                                 <th>Transaction ID</th>
                                 <th>User</th>
-                                <th>Type</th>
-                                <th>Amount</th>
                                 <th>Dollar value</th>
+                                <th>Amount</th>
+                                <th>Type</th>
                                 <th>Status</th>
                                 <th>Date</th>
                                 <th>Actions</th>
@@ -288,15 +296,15 @@ function getPlanName($pid)
                                 <tr data-transac-id="<?= $transac['id'] ?>" data-trans-type="<?= $transac['transaction_type'] ?>">
                                     <td><?= $transac['transac_id'] ?></td>
                                     <td><a href="./userDetails.php?user_id=<?= $transac['user_id'] ?>"><?= getFullname($transac['user_id']) ?></a></td>
-                                    <td><?= ucfirst($transac['type']) ?></td>
-                                    <td><?= number_format($transac['amount'], 5) ?> <?= $transac['currency'] ?></td>
                                     <td>
                                         <?php if ($transac['transaction_type'] === 'withdrawal'): ?>
                                             <span style="color:red;">- $<?= number_format($transac['dol_val'], 2) ?></span>
                                         <?php else: ?>
-                                            <span style="color:green;">$<?= number_format($transac['dol_val'], 2) ?></span>
+                                            <span style="color:green;">+ $<?= number_format($transac['dol_val'], 2) ?></span>
                                         <?php endif; ?>
                                     </td>
+                                    <td><?= number_format($transac['amount'], 5) ?> <?= $transac['currency'] ?></td>
+                                    <td><?= ucfirst($transac['type']) ?></td>
                                     <td>
                                         <?php
                                         $status = strtolower($transac['status']);
@@ -436,7 +444,7 @@ function getPlanName($pid)
                                 <tr data-invest-id="<?= $invest['invest_id'] ?>" data-invest='<?= htmlspecialchars(json_encode($invest), ENT_QUOTES, "UTF-8") ?>'>
                                     <td><?= $invest['invest_id'] ?></td>
                                     <td><a href="./userDetails.php?user_id=<?= $invest['user_id'] ?>"><?= getFullname($invest['user_id']) ?></a></td>
-                                    <td><?= $invest['user'] ?></td>
+                                    <td><?= $invest['plan_name'] ?></td>
                                     <td>$<?= number_format($invest['amount'], 2) ?></td>
                                     <td>$<?= number_format($invest['expected'], 2) ?></td>
                                     <td>$<?= number_format($invest['earned'], 2) ?></td>
@@ -919,6 +927,8 @@ function getPlanName($pid)
         </div>
     </div>
 
+
+
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -926,6 +936,17 @@ function getPlanName($pid)
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.min.js"></script>
     <script src="admin-ajax.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.navbar-nav a').on('click', function() {
+                if ($('.navbar-toggler').is(':visible')) {
+                    $('.navbar-collapse').collapse('hide');
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>

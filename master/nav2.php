@@ -73,7 +73,6 @@
 
                       <div class="header-action d-flex flex-wrap align-items-center">
                           <a href="/crest/login" class="btn btn-default website-color  mr-1">Login</a>
-                          <a href="/crest/register" class="btn btn-default website-color  mr-1">Register</a>
                       </div>
 
                   </div>

@@ -182,7 +182,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Welcome Back!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="https://assetbase-trading.com">User</a></li>
+              <li><a href="">User</a></li>
               <li>Investment Plan</li>
             </ul>
           </div>
@@ -234,7 +234,7 @@
                       "interest": "<?= htmlspecialchars($plan['plan_rate']) ?>", 
                       "duration": "<?= htmlspecialchars($plan['duration_text']) ?>",
                       "type": "<?= htmlspecialchars($plan['plan_type']) ?>"
-                    }' class="cmn-btn btn-md mt-4 investButton">
+                    }' class="cmn-btn btn-md mt-4 investButton" style="margin-bottom: 1rem;">
                       Invest Now
                     </a>
                   </div>

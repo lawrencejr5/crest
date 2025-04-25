@@ -17,6 +17,119 @@
     #qrcode {
       margin-top: 20px;
     }
+
+
+    /* Main Content Section for Deposit Preview */
+    .cmn-section {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    .preview-container h2 {
+      color: #fff;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .deposit-details {
+      background-color: #222;
+      color: #f8f9fa;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .deposit-details p {
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    .deposit-details strong {
+      color: #b58e43;
+      /* Highlight important labels */
+      margin-right: 5px;
+    }
+
+    .copy-input {
+      width: calc(100% - 90px);
+      /* Adjust width for the button */
+      padding: 12px;
+      font-size: 1rem;
+      background-color: #2b3a4c;
+      color: #f8f9fa;
+      border: 1px solid #3a506b;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    .btn.btn-secondary {
+      background-color: #6c757d;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+      margin-left: 10px;
+    }
+
+    .btn.back-btn {
+      background-color: #b58e43;
+      border: none;
+      outline: none;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .btn.btn-secondary:hover {
+      background-color: #545b62;
+    }
+
+    #qrcode {
+      margin-top: 25px;
+      text-align: center;
+      background-color: #fff;
+      /* Ensure QR code is visible on dark background */
+      padding: 10px;
+      border-radius: 5px;
+      display: inline-block;
+      /* To contain the QR code size */
+    }
+
+    #qrcode canvas {
+      display: block;
+      /* Prevent extra bottom spacing */
+    }
+
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 767.98px) {
+
+      .deposit-details {
+        padding: 20px;
+      }
+
+      .copy-input {
+        width: calc(100% - 10px);
+        /* Full width on smaller screens */
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+
+      .btn.btn-secondary {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      #qrcode {
+        margin-top: 20px;
+      }
+    }
   </style>
 </head>
 
@@ -29,15 +142,14 @@
   </div>
   <!-- scroll-to-top end -->
 
-  <div class="full-wh">
-    <!-- STAR ANIMATION -->
-    <div class="bg-animation">
-      <div id='stars'></div>
-      <div id='stars2'></div>
-      <div id='stars3'></div>
-      <div id='stars4'></div>
-    </div><!-- / STAR ANIMATION -->
+  <!-- STAR ANIMATION -->
+  <div class="bg-animation" style="z-index: -5;">
+    <div id='stars'></div>
+    <div id='stars2'></div>
+    <div id='stars3'></div>
+    <div id='stars4'></div>
   </div>
+  <!-- / STAR ANIMATION -->
   <div class="page-wrapper">
     <!-- header-section start  -->
     <?php include "../../master/nav.php" ?>
@@ -50,7 +162,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Deposit Preview</h2>
             <ul class="page-breadcrumb">
-              <li><a href="https://assetbase-trading.com">User</a></li>
+              <li><a href="">User</a></li>
               <li>Deposit Preview</li>
             </ul>
           </div>
@@ -60,8 +172,7 @@
     <!-- inner hero end -->
 
     <section class="cmn-section">
-      <div class="container">
-        <h2>Deposit Preview</h2>
+      <div class="container preview-container">
         <?php
         // Retrieve parameters from the URL
         $address = isset($_GET['address']) ? htmlspecialchars($_GET['address']) : "N/A";
@@ -77,6 +188,9 @@
           <p><strong>Amount (USD):</strong> <?php echo $usdVal; ?></p>
           <p><strong>Converted Amount:</strong> <?php echo $converted . " " . $currency; ?></p>
           <div id="qrcode"></div>
+          <br>
+          <a href="../history/" class="btn btn-primary back-btn">Go to deposits history</a>
+
         </div>
       </div>
     </section>

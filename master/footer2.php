@@ -39,6 +39,43 @@
 
 
 <script>
+    var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?24514';
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = url;
+    var options = {
+        "enabled": true,
+        "chatButtonSetting": {
+            "backgroundColor": "#4dc247",
+            "ctaText": "",
+            "borderRadius": "25",
+            "marginLeft": "30",
+            "marginBottom": "30",
+            "marginRight": "0",
+            "position": "left"
+        },
+        "brandSetting": {
+            "brandName": "Crest Asset Trading",
+            "brandSubTitle": "Typically replies within minutes",
+            "brandImg": "/crest/assets/images/logoIcon/crest-favicon.png",
+            "welcomeText": "Hi, there!\nHow can I help you?",
+            "messageText": "Hello, I have some questions!",
+            "backgroundColor": "#0a5f54",
+            "ctaText": "Start Chat",
+            "borderRadius": "25",
+            "autoShow": false,
+            "phoneNumber": "+447438517893‬"
+        }
+    };
+    s.onload = function() {
+        CreateWhatsappChatWidget(options);
+    };
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+</script>
+
+<script>
     const swiper = new Swiper('.swiper-container', {
         loop: true, // Enable looping
         autoplay: {
