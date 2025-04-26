@@ -119,8 +119,8 @@
                       <h4 class="currency-amount">$<?= $total_interest ?></h4>
                       <br>
                       <hr>
-                      <h6>Total Withdrawal: $<?= $total_withdrawals ?>
-                      </h6><br><a href="../withdraw" class="btn btn-success">Withdraw</a>
+                      <h6>Interest Readings: $<?= $total_interest_readings ?>
+                      </h6><br><a href="../plan/investments" class="btn btn-success">Claim</a>
                     </div>
                     <div class="col-4">
                       <div class="icon ml-auto">
@@ -173,8 +173,8 @@
                         <?php if (!empty($last_transactions)): ?>
                           <?php
                           // Define deposit types
-                          $depositTypes = ['deposit', 'ref bonus', 'signup bonus'];
-                          $withdrawalTypes = ['deposit', 'investement'];
+                          $depositTypes = ['deposit', 'ref bonus', 'signup bonus', 'investment_returns'];
+                          $withdrawalTypes = ['withdrawal', 'investement'];
                           ?>
                           <?php foreach ($last_transactions as $trans): ?>
                             <tr>

@@ -415,6 +415,37 @@ class Modules extends Connection
         }
         return 0;
     }
+    // Get total interest wallet
+    public function getTotalInterestWallet($user_id)
+    {
+        $this->sql = "SELECT SUM(interest_wallet) as total FROM investments WHERE user_id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            $result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'] ? $result['total'] : 0;
+        }
+        return 0;
+    }
+    public function getTotalInterestReadings($user_id)
+    {
+        $this->sql = "SELECT SUM(earned) as total FROM investments WHERE user_id = :user_id AND status = 'active'";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            $result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'] ? $result['total'] : 0;
+        }
+        return 0;
+    }
+
+    public function resetInterestWallet($invest_id)
+    {
+        $this->sql = "UPDATE investments SET interest_wallet = 0 WHERE invest_id = :invest_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(":invest_id", $invest_id);
+        $this->stmt->execute();
+    }
 
     // Get total investments for a user
     public function getTotalInterests($user_id)
@@ -442,19 +473,21 @@ class Modules extends Connection
     }
 
     // Update investment profit
-    public function updateInvestmentProfit($invest_id, $newEarned, $newNumOfDays, $newStatus, $lastUpdated)
+    public function updateInvestmentProfit($invest_id, $newEarned, $newNumOfDays, $newStatus, $lastUpdated, $interest_wallet = 0)
     {
         $this->sql = "UPDATE investments 
                       SET earned = :earned, 
                           num_of_days = :num_of_days, 
                           status = :status,
-                          last_updated = :last_updated
+                          last_updated = :last_updated,
+                          interest_wallet = :interest_wallet
                       WHERE invest_id = :invest_id";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':earned', $newEarned);
         $this->stmt->bindParam(':num_of_days', $newNumOfDays);
         $this->stmt->bindParam(':status', $newStatus);
         $this->stmt->bindParam(':last_updated', $lastUpdated);
+        $this->stmt->bindParam(':interest_wallet', $interest_wallet);
         $this->stmt->bindParam(':invest_id', $invest_id);
         return $this->stmt->execute();
     }

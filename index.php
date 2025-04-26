@@ -739,10 +739,10 @@
           <div class="modal-header">
             <h5 class="modal-title" id="ModalLabel">Need Login </h5>
           </div>
-          <form action="https://assetbase-trading.com/user/plans" method="post">
+          <form action="" method="post">
             <input type="hidden" name="_token" value="0DI0kMOBNY3bUeI2Pt0ohYKyAlF44jwPb8z1eQjf">
             <div class="modal-footer">
-              <a href="https://assetbase-trading.com/login" type="button" class="btn btn-success custom-success">Please, Login
+              <a href="/crest/login" type="button" style="background-color: #b58e43;" class="btn btn-success custom-success">Please, Login
                 your
                 account at first</a>
             </div>

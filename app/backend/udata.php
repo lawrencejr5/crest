@@ -39,9 +39,17 @@ if ($user_id) {
 
 $total_interest = 0;
 if ($user_id) {
-    $totalInterest = $modules->getTotalInterests($user_id);
+    $totalInterest = $modules->getTotalInterestWallet($user_id);
     if ($totalInterest) {
         $total_interest = $totalInterest;
+    }
+}
+
+$total_interest_readings = 0;
+if ($user_id) {
+    $totalInterestReadings = $modules->getTotalInterestReadings($user_id);
+    if ($totalInterestReadings) {
+        $total_interest_readings = $totalInterestReadings;
     }
 }
 

@@ -54,14 +54,7 @@
       <div class="container">
         <div class="row justify-content-center mt-2">
           <div class="col-md-12">
-            <div class="right float-right mb-5">
-              <a href="javascript:void(0) " class="btn cmn-btn mb-md-0 mb-3 btn-disabled">
-                Deposit Wallet Transactions
-              </a>
-              <a href="/crest/app/transactions/interest" class="btn cmn-btn mb-md-0">
-                Interest Wallet Transactions
-              </a>
-            </div>
+
           </div>
           <div class="col-md-12">
             <div class="table-responsive--md">
@@ -79,7 +72,7 @@
                   <?php if (isset($all_transactions) && count($all_transactions) > 0): ?>
                     <?php
                     // Define deposit types that should show as positive deposits
-                    $depositTypes = ['deposit', 'ref bonus', 'signup bonus', 'registration_bonus'];
+                    $depositTypes = ['deposit', 'ref bonus', 'signup bonus', 'registration_bonus', 'investment_returns'];
                     ?>
                     <?php foreach ($all_transactions as $transaction): ?>
                       <tr>

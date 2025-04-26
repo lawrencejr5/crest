@@ -94,6 +94,8 @@
                     <th scope="col">Duration</th>
                     <th scope="col">Days Invested</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Last updated</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -140,6 +142,24 @@
                         <td data-label="Status" style="color: <?= $statusColor; ?>;">
                           <?= htmlspecialchars(ucfirst($investment['status'])) ?>
                         </td>
+                        <td data-label="Last Updated"><?= htmlspecialchars(date("d M, Y", strtotime($investment['last_updated']))) ?></td>
+
+                        <td data-label="Action">
+                          <?php if ($investment['status'] === "ended" &&  $investment['interest_wallet'] != 0): ?>
+                            <form class="claim_invest_form">
+                              <input type="hidden" class="invest_id" name="invest_id" value="<?= $investment['invest_id'] ?>">
+                              <input type="hidden" class="amount" name="amount" value="<?= $investment['interest_wallet'] ?>">
+                              <input type="hidden" class="dol_val" name="dol_val" value="<?= $investment['interest_wallet'] ?>">
+                              <input type="hidden" class="currency" name="currency" value="USD">
+                              <input type="hidden" class="type" name="type" value="investment_returns">
+                              <input type="hidden" class="address" name="address" value="N/A">
+                              <button class="btn btn-success btn-sm" class="claim-btn" id="claim-btn">Claim $<?= $investment['interest_wallet'] ?></button>
+                            </form>
+                          <?php else: ?>
+                            <button type="button" class="btn btn-secondary btn-sm">Claim</button>
+                          <?php endif; ?>
+
+                        </td>
                       </tr>
                     <?php endforeach; ?>
                   <?php else: ?>
@@ -174,7 +194,75 @@
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/vendor/wow.min.js"></script>
   <!-- dashboard custom js -->
   <script src="https://assetbase-trading.com/assets/templates/bit_gold//js/app.js"></script>
+  <script src="https://assetbase-trading.com/assets/templates/bit_gold/js/iziToast.min.js"></script>
 
+
+
+  <script>
+    "use strict";
+
+    function notify(status, message) {
+      iziToast[status]({
+        message: message,
+        position: "topRight"
+      });
+    }
+  </script>
+
+  <script>
+    $(document).ready(() => {
+
+
+      $(".claim_invest_form").on("submit", function(e) {
+        e.preventDefault()
+        const submitButton = $(this).find(".claim-btn")
+        submitButton.prop("disabled", true).text("Claiming...");
+
+        let amount = $(this).find(".amount").val();
+        let dol_val = $(this).find(".dol_val").val();
+        let type = $(this).find(".type").val();
+        let currency = $(this).find(".currency").val();
+        let address = $(this).find(".address").val();
+        let invest_id = $(this).find(".invest_id").val();
+
+        console.log(amount, dol_val, type, currency, address, invest_id)
+
+        $.ajax({
+          type: "POST",
+          url: "../../backend/actions/claimInvest.php",
+          data: {
+            invest_id,
+            dol_val,
+            currency,
+            type,
+            address,
+            amount
+          },
+          dataType: "json",
+          success: function(response) {
+            if (response.status === "success") {
+              notify("success", response.message);
+              submitButton.prop('disabled', false).text("Claimed");
+            } else {
+              notify("error", response.message);
+              submitButton.prop('disabled', false).text("Try again");
+            }
+          },
+          error: function(xhr, status, error) {
+            notify("error", "Error: " + error);
+            submitButton.prop('disabled', false).text("Next");
+          }
+        });
+
+      })
+
+
+
+
+
+    })
+  </script>
+  <!-- 
   <script>
     (function() {
       "use strict";
@@ -197,34 +285,21 @@
         });
       });
     })();
-  </script>
+  </script> -->
 
 
   <link rel="stylesheet" href="https://assetbase-trading.com/assets/templates/bit_gold/css/iziToast.min.css">
-  <script src="https://assetbase-trading.com/assets/templates/bit_gold/js/iziToast.min.js"></script>
-
-
-  <script>
-    "use strict";
-
-    function notify(status, message) {
-      iziToast[status]({
-        message: message,
-        position: "topRight"
-      });
-    }
-  </script>
 
 
 
-  <script>
+  <!-- <script>
     (function() {
       "use strict";
       $(document).on("change", ".langSel", function() {
         window.location.href = "https://assetbase-trading.com/change/" + $(this).val();
       });
     })();
-  </script>
+  </script> -->
 
 
 
