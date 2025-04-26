@@ -27,9 +27,9 @@ if (isset($_POST['plan_id'], $_POST['amount'])) {
                     <img src='" . ROOT . "/assets/images/logoIcon/crest2-nobg.png' height='auto' width='200px' />
                     <h1>Dear $fname, </h1>
                </center>
-               <p>We wish to inform you that you have made an investment of <b>$amt $curr</b>. 
-               You will earn <b>$to_earn $curr daily</b> for the next $dura days which would sum up to <b>$expected $curr</b>. 
-               Your investment is expected to end on <b>$end_date</b> and you will be informed when your investment has ended.</p>
+               <p>We wish to inform you that you have made an investment of <b>$amount USD</b>. 
+               You will earn <b>**** USD daily</b> for the next *** days which would sum up to <b>*** USD</b>. 
+               Your investment is expected to end on <b>***</b> and you will be informed when your investment has ended.</p>
                <p>Thank you for choosing " . NAME . ".</p>
                <p>You can <a href='" . ROOT . "/login'>login</a> to perform more actions on your account.</p>
                <br/>

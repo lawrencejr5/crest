@@ -26,7 +26,7 @@ if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'
                     <img src='" . ROOT . "/assets/images/logoIcon/crest2-nobg.png' height='auto' width='200px' />
                     <h1>Dear $fname, </h1>
                </center>
-               <p>We wish to inform you that you have made a withdrawal request of <b>$amt $wallet</b>, address: <b>$address</b>.</p>
+               <p>We wish to inform you that you have made a withdrawal request of <b>$amount USD</b>, address: <b>$address</b>.</p>
                <p>We would get back to you within the next 24 hrs and we would inform you when this withdrawal has been approved and you have been credited. Thank you.</p>
                <p>You can <a href='" . ROOT . "/login'>login</a> to perform more actions on your account.</p>
                <br/>

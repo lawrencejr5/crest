@@ -27,7 +27,7 @@ if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'
                     <img src='" . ROOT . "/assets/images/logoIcon/crest2-nobg.png' height='auto' width='200px' />
                     <h1>Dear $fname, </h1>
                </center>
-               <p>We wish to inform you that you have made a payment of <b>$amount $curr ($value $wallet)</b> in order to credit your <b>$wallet wallet</b>.</p>
+               <p>We wish to inform you that you have made a payment of <b>$amount $currency ($dol_val USD)</b> in order to credit your <b>$wallet wallet</b>.</p>
                <p>We would inform you when this deposit has been approved. Thank you.</p>
                <p>You can <a href='" . ROOT . "/login'>login</a> to perform more actions on your account.</p>
                <br/>
