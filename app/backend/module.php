@@ -442,17 +442,19 @@ class Modules extends Connection
     }
 
     // Update investment profit
-    public function updateInvestmentProfit($invest_id, $newEarned, $newNumOfDays, $newStatus)
+    public function updateInvestmentProfit($invest_id, $newEarned, $newNumOfDays, $newStatus, $lastUpdated)
     {
         $this->sql = "UPDATE investments 
                       SET earned = :earned, 
                           num_of_days = :num_of_days, 
-                          status = :status 
+                          status = :status,
+                          last_updated = :last_updated
                       WHERE invest_id = :invest_id";
         $this->stmt = $this->conn->prepare($this->sql);
         $this->stmt->bindParam(':earned', $newEarned);
         $this->stmt->bindParam(':num_of_days', $newNumOfDays);
         $this->stmt->bindParam(':status', $newStatus);
+        $this->stmt->bindParam(':last_updated', $lastUpdated);
         $this->stmt->bindParam(':invest_id', $invest_id);
         return $this->stmt->execute();
     }
@@ -655,6 +657,16 @@ class Modules extends Connection
         }
         return false;
     }
+
+    // public function getAllActiveInvestments()
+    // {
+    //     $this->sql = "SELECT * FROM investments WHERE status = 'active' ORDER BY start_date DESC";
+    //     $this->stmt = $this->conn->prepare($this->sql);
+    //     if ($this->stmt->execute()) {
+    //         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    //     }
+    //     return false;
+    // }
 
     // Update an investment (admin function)
     // $fields is an associative array of columns to update, e.g. ['status' => 'active']

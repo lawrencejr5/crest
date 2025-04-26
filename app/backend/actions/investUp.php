@@ -1,58 +1,48 @@
 <?php
-// This script should be triggered by a cron job or task scheduler
 
-include '../module.php';
-$modules = new Modules();
+include "../module.php";
 
-$currentDate = date('Y-m-d H:i:s');
 
-// Select all active investments
-$sql = "SELECT * FROM investments WHERE status = 'active'";
-$stmt = $modules->conn->prepare($sql);
-if ($stmt->execute()) {
-    $activeInvestments = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($activeInvestments as $inv) {
-        // Get plan details to determine profit frequency and duration
-        $plan = $modules->getPlan($inv['plan_id']);
-        if (!$plan) {
-            continue;
-        }
+$all_investments = $modules->getAllInvestments();
+$current_date = date('Y-m-d');
 
-        // Check if the investment period has ended
-        if (strtotime($currentDate) >= strtotime($inv['end_date'])) {
-            // Investment period ended: update status to 'ended'
-            $newStatus = 'ended';
-            $newEarned = $inv['expected']; // Fully credit the expected profit
-            // Set num_of_days to the plan duration
-            $newNumOfDays = $plan['duration'];
-        } else {
-            // Still active: always increment the number of days invested
-            $newNumOfDays = $inv['num_of_days'] + 1;
-            $newStatus = 'active';
+foreach ($all_investments as $i) {
+    $id = $i['invest_id'];
+    $status = $i['status'];
+    $to_earn = $i['to_earn'];
+    $earned = $i['earned'];
+    $new_earned = $i['earned'] + $to_earn;
+    $num_of_days = $i['num_of_days'];
+    $new_num_of_days = $num_of_days + 1;
+    $new_status = $i['status'];
+    $end_date = date("Y-m-d", strtotime($i['end_date']));
+    $last_updated = $i['last_updated'];
 
-            // Determine if profit should be added today based on profit frequency
-            $profitMethod = strtolower($plan['plan_type']); // Expected values: "daily", "weekly", etc.
-            $addProfit = false;
+    $plan = $modules->getPlan($i['plan_id']);
 
-            if ($profitMethod === 'daily') {
-                $addProfit = true; // Add profit every day
-            } elseif ($profitMethod === 'weekly') {
-                // For example, add profit only on Monday (ISO-8601: Monday = 1)
-                if (date('N') == 1) {
-                    $addProfit = true;
+    $plan_duration = $plan['duration'];
+    $plan_type = $plan['plan_type'];
+
+
+    if ($status == 'active' && $last_updated !== $current_date) {
+        if ($plan_type == "daily") {
+            if ($new_num_of_days == $plan_duration) {
+                $modules->updateInvestmentProfit($id, $new_earned, $new_num_of_days, "ended", $current_date);
+            } else {
+                $modules->updateInvestmentProfit($id, $new_earned, $new_num_of_days, "active", $current_date);
+            }
+        } else if ($plan_type == "weekly") {
+            if ($new_num_of_days == $plan_duration) {
+                $modules->updateInvestmentProfit($id, $new_earned, $new_num_of_days, "ended", $current_date);
+            } else {
+                if (($new_num_of_days % 7) == 0) {
+                    $modules->updateInvestmentProfit($id, $new_earned, $new_num_of_days, "active", $current_date);
+                } else {
+                    $modules->updateInvestmentProfit($id, $earned, $new_num_of_days, "active", $current_date);
                 }
             }
-            // Extend here for "monthly" or other frequency if needed
-
-            if ($addProfit) {
-                $newEarned = $inv['earned'] + $inv['to_earn'];
-            } else {
-                // Even if not adding profit, update the number of days invested
-                $newEarned = $inv['earned'];
-            }
+        } else {
+            return;
         }
-
-        // Update the investment record with the new earned amount, number of days, and status
-        $modules->updateInvestmentProfit($inv['invest_id'], $newEarned, $newNumOfDays, $newStatus);
     }
 }

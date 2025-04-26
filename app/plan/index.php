@@ -437,7 +437,7 @@
             if (response.status === "success") {
               notify("success", response.message);
               window.setTimeout(() => {
-                window.location.href = "./";
+                window.location.href = "./investments";
               }, 2000)
             } else {
               notify("error", response.message);
