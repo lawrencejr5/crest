@@ -410,7 +410,7 @@
             } else if (res.status === "success") {
               notify("success", res.message);
               window.setTimeout(function() {
-                window.location.href = "../login"; // Redirect to the success page
+                window.location = `./verify/?em_verify=${email}&fname=${firstname}`; // Redirect to the success page
               }, 2000);
             }
             // Reset the form

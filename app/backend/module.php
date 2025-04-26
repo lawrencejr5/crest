@@ -19,6 +19,53 @@ class Modules extends Connection
         return false;
     }
 
+    public function checkEmailExists($email)
+    {
+        $this->sql = "SELECT email FROM users WHERE email = :email";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':email', $email);
+        $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->stmt->execute();
+        return $this->stmt->rowCount();
+    }
+
+    public function checkVerifyCode($code, $email)
+    {
+        $this->sql = "SELECT otp FROM users WHERE otp = :otp AND email = :email";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':email', $email);
+        $this->stmt->bindParam(':otp', $code);
+        $this->stmt->execute();
+        $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->stmt->rowCount();
+    }
+
+    public function verifyEmail($email)
+    {
+        $this->sql = "UPDATE users SET verified = '1' WHERE email = :email";
+        try {
+            $this->stmt = $this->conn->prepare($this->sql);
+            $this->stmt->bindParam(':email', $email);
+            $this->stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function updateVerifyCode($code, $email)
+    {
+        $this->sql = "UPDATE users SET otp = :otp WHERE email = :email";
+        try {
+            $this->stmt = $this->conn->prepare($this->sql);
+            $this->stmt->bindParam(':email', $email);
+            $this->stmt->bindParam(':otp', $code);
+            $this->stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 
     // New function to get a user by email
     public function getUserByEmail($email)

@@ -21,8 +21,8 @@ class Mailer
         $mail->Password   = 'Yield123##00';                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
         $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-        $mail->setFrom('support@yfincs.com', 'Yield Financial Services');
-        $mail->addReplyTo('support@yfincs.com', 'Yield Financial Services');
+        $mail->setFrom('support@yfincs.com', 'Crest-Asset Trading');
+        $mail->addReplyTo('support@yfincs.com', 'Crest-Asset Trading');
         $mail->addAddress($toEmail, $toName);
         $mail->Subject = $subject;
         $mail->Body = $body;

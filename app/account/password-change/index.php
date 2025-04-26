@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include "../../backend/udata.php" ?>
 <?php include "../../master/head.php" ?>
 
 <body>
@@ -33,9 +34,9 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
-            <h2 class="page-title">Welcome Back!</h2>
+            <h2 class="page-title">Welcome Back, <?= ucfirst($user['fname']) ?>!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="https://assetbase-trading.com">User</a></li>
+              <li><a href="/crest/app/dashboard">User</a></li>
               <li>CHANGE PASSWORD</li>
             </ul>
           </div>
