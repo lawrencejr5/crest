@@ -1,3 +1,11 @@
+<?php
+
+$name = "Crest-Asset Trading";
+$root = "/crest";
+$email = "support@crestassets.com";
+
+?>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

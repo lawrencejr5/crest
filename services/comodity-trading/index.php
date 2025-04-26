@@ -13,13 +13,13 @@
     <!-- header-section end  -->
 
     <!-- inner hero start -->
-    <section class="inner-hero bg_img" data-background="/crest/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
+    <section class="inner-hero bg_img" data-background="<?= $root ?>/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <h2 class="page-title">Comodity Trading</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest">Home</a></li>
+              <li><a href="<?= $root ?>">Home</a></li>
               <li>Comodity Trading</li>
             </ul>
           </div>
@@ -33,8 +33,8 @@
       <div class="px-4">
         <p class="mb-3">
           We strive for excellence and our sole aim is to satisfy and fulfill the needs of our customers. As a trade
-          enabler, we offer single window clearance for quick order execution. Crest-Asset Trading also offers several
-          customized products to help the clients make smart trading decisions. At Crest-Asset Trading, we believe in
+          enabler, we offer single window clearance for quick order execution. <?= $name ?> also offers several
+          customized products to help the clients make smart trading decisions. At <?= $name ?>, we believe in
           our
           research abilities, based on technical and fundamental study of all major commodities, and clients can rely on us
           to get a clear picture of the market.

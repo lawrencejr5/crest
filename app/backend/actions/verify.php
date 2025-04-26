@@ -2,6 +2,7 @@
 
 include '../module.php';
 include '../mailer.php';
+include '../constants.php';
 
 if (isset($_POST['code'])) {
     $res = [];
@@ -22,21 +23,21 @@ if (isset($_POST['code'])) {
         <!DOCTYPE html>
         <html>
             <head>
-                <title>Welcome | Crest-Asset Trading</title>
+                <title>Welcome | " . NAME . "</title>
             </head>
             <body>
                 <center>
-                    <img src='/crest/assets/images/logoIcon/crest2-nobg.png' height='auto' width='200px' />
+                    <img src='" . ROOT . "/assets/images/logoIcon/crest2-nobg.png' height='auto' width='200px' />
                     <h1>You're welcome, $fname</h1>
                </center>
-               <p>Your email $email has been verified and the Crest-Asset Trading team officially welcomes you to our platform.</p>
-               <p>You can get started by Loging in <a href='https://yfincs.com/login'>here</a>. </p>
+               <p>Your email $email has been verified and the " . NAME . " team officially welcomes you to our platform.</p>
+               <p>You can get started by Loging in <a href='" . ROOT . "/login'>here</a>. </p>
                <br/>
                <br/>
                <p>Please, if this is not you, kindly reply this email saying it's not you so that we can terminate this account.</p>
-               <center>
-                    <a href='https://yfincs.com/t&c'>Terms and condtions</a> | 
-                    <a href='https://yfincs.com/policy'>Privacy Policy</a>
+                <center>
+                    <a href='" . ROOT . "/links/terms-amp-condition/181'>Terms and condtions</a> | 
+                    <a href='" . ROOT . "/links/privacy-amp-policy/180'>Terms and condtions</a> | 
                </center>
             </body>
         </html>
@@ -49,7 +50,7 @@ if (isset($_POST['code'])) {
     } else {
         if ($modules->verifyEmail($email)) {
             $res['header'] = 'verified';
-            $mailer->sendMyMail($email, $fname, 'Welcome to Crest-Asset Trading', $body);
+            $mailer->sendMyMail($email, $fname, 'Welcome to ' . NAME, $body);
         }
     }
 

@@ -16,8 +16,8 @@
           <div class="col-xl-5 col-lg-7">
             <div class="account-card">
               <div class="account-card__header bg_img overlay--one" data-background="black">
-                <img src="/crest/assets/images/logoIcon/crest2-nobg.png" alt="image">
-                <h2>Welcome To <span class="base--color">Crest Asset Trading</span></h2>
+                <img src="<?= $root ?>/assets/images/logoIcon/crest2-nobg.png" alt="image">
+                <h2>Welcome To <span class="base--color"><?= $name ?></span></h2>
               </div>
               <div class="account-card__body">
                 <form id="loginForm" action="" method="post">
@@ -34,10 +34,10 @@
                   </div>
                   <div class="form-row mt-2">
                     <div class="col-sm-6">
-                      <p class="f-size-14">Forgot Password? <a href="/crest/reset" class="base--color">Reset Now</a></p>
+                      <p class="f-size-14">Forgot Password? <a href="<?= $root ?>/reset" class="base--color">Reset Now</a></p>
                     </div>
                     <div class="col-sm-6 text-sm-right">
-                      <p class="f-size-14">Haven't an account? <a href="/crest/register" class="base--color">Sign Up</a></p>
+                      <p class="f-size-14">Haven't an account? <a href="<?= $root ?>/register" class="base--color">Sign Up</a></p>
                     </div>
                   </div>
                 </form>

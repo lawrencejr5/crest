@@ -11,13 +11,13 @@
     <!-- header-section end  -->
 
     <!-- inner hero start -->
-    <section class="inner-hero bg_img" data-background="/crest/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
+    <section class="inner-hero bg_img" data-background="<?= $root ?>/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <h2 class="page-title">Structured Finance</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest">Home</a></li>
+              <li><a href="<?= $root ?>">Home</a></li>
               <li>Structured Finance</li>
             </ul>
           </div>
@@ -30,7 +30,7 @@
 
       <div class="px-4">
         <p class="mb-3">
-          The Structured Finance team at Crest-Asset Trading works seamlessly with our Investment Banking and Global
+          The Structured Finance team at <?= $name ?> works seamlessly with our Investment Banking and Global
           Wealth
           Management Divisions to assist clients in raising capital through unconventional means and to create low risk
           investment products for our investors. Given the current credit dilemma, where risk aversion and non-direct

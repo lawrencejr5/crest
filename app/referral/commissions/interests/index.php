@@ -39,7 +39,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Welcome Back, <?= ucfirst($user['fname']) ?>!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest/app/dashboard">User</a></li>
+              <li><a href="<?= $root ?>/app/dashboard">User</a></li>
               <li>Interest Referral Commissions</li>
             </ul>
           </div>
@@ -52,13 +52,13 @@
         <div class="row">
           <!-- <div class="col-md-12">
             <div class="right float-md-right float-none text-md-right text-center mb-5">
-              <a href="/crest/app/referral/commissions/interests" class="btn cmn-btn mb-md-0 mb-2">
+              <a href="<?= $root ?>/app/referral/commissions/interests" class="btn cmn-btn mb-md-0 mb-2">
                 Deposit Commission
               </a>
               <a href="javascript:void(0)" class="btn cmn-btn mb-md-0 mb-2 btn-disabled">
                 Interest Commission
               </a>
-              <a href="/crest/app/referral/commissions/invest" class="btn cmn-btn mb-md-0">
+              <a href="<?= $root ?>/app/referral/commissions/invest" class="btn cmn-btn mb-md-0">
                 Invest Commission
               </a>
             </div>

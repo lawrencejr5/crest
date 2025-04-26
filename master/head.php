@@ -1,8 +1,16 @@
+<?php
+
+$name = "Crest-Asset Trading";
+$root = "/crest";
+$email = "support@crestassets.com";
+
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="0DI0kMOBNY3bUeI2Pt0ohYKyAlF44jwPb8z1eQjf">
-    <title>Crest Asset Trading</title>
+    <title><?= $name ?></title>
     <meta name="description" content="A Global Full Reserve Equity Investment Management Built On Decentralized Ledgers. We help people achieve their goals by providing the right funding, wealth management, and insurance advice.">
     <meta name="keywords" content="bitcoin,investment,trading,asset,assetbase-trading,assetbase trading,assetbase">
     <link rel="shortcut icon" href="/crest/assets/images/logoIcon/crest-favicon.png" type="image/x-icon">
@@ -11,9 +19,9 @@
     <link rel="apple-touch-icon" href="/crest/assets/images/logoIcon/crest2-nobg.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Crest Asset Trading">
+    <meta name="apple-mobile-web-app-title" content="<?= $name ?>">
 
-    <meta itemprop="name" content="Crest Asset Trading">
+    <meta itemprop="name" content="<?= $name ?>">
     <meta itemprop="description" content="">
     <meta itemprop="image" content="/crest/assets/images/seo/636b9388b9a611667994504.png">
 

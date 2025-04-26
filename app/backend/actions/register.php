@@ -4,6 +4,7 @@ header('Content-Type: application/json');
 
 include "../module.php";
 include "../mailer.php";
+include "../constants.php";
 
 if (isset($_POST["fname"])) {
     $fname = $_POST["fname"];
@@ -20,11 +21,11 @@ if (isset($_POST["fname"])) {
         <!DOCTYPE html>
         <html>
             <head>
-                <title>Email Verification | Crest-Asset Trading</title>
+                <title>Email Verification | " . NAME . "</title>
             </head>
             <body>
                 <center>
-                    <img src='/crest/assets/images/logoIcon/crest2-nobg.png' height='auto' width='200px' />
+                    <img src='" . ROOT . "/assets/images/logoIcon/crest2-nobg.png' height='auto' width='200px' />
                     <h1>Verify your email</h1>
                     <p>Do not share this code with any body</p>
                </center>
@@ -34,8 +35,8 @@ if (isset($_POST["fname"])) {
                <br/>
                <p>Please, if this is not you, kindly reply this email saying it's not you so that we can terminate this registration.</p>
                <center>
-                    <a href='https://yfincs.com/t&c'>Terms and condtions</a> | 
-                    <a href='https://yfincs.com/policy'>Privacy Policy</a>
+                    <a href='" . ROOT . "/links/terms-amp-condition/181'>Terms and condtions</a> | 
+                    <a href='" . ROOT . "/links/privacy-amp-policy/180'>Terms and condtions</a> | 
                </center>
             </body>
         </html>

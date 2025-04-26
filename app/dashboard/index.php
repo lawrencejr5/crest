@@ -79,7 +79,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Welcome Back, <?= ucfirst($user['fname']) ?>!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest/app/dashboard">User</a></li>
+              <li><a href="<?= $root ?>/app/dashboard">User</a></li>
               <li>Dashboard</li>
             </ul>
           </div>
@@ -291,7 +291,7 @@
                       </div>
                     </div>
                     <p class="text-center mt-3">
-                      <center>assetbase-trading.com</center>
+                      <center><?= $root ?></center>
                       <a href="../plan" class="btn btn-success">Choose Plan</a>
                     </p>
                   </div>

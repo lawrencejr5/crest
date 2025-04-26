@@ -43,7 +43,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Welcome Back, <?= ucfirst($user['fname']) ?>!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest/app/dashboard">User</a></li>
+              <li><a href="<?= $root ?>/app/dashboard">User</a></li>
               <li>Support Tickets</li>
             </ul>
           </div>
@@ -58,7 +58,7 @@
         <div class="row justify-content-center">
           <div class="col-md-12">
             <div class="right float-right mb-4">
-              <a href="/crest/app/account/ticket/new" class="btn cmn-btn">
+              <a href="<?= $root ?>/app/account/ticket/new" class="btn cmn-btn">
                 <i class="fa fa-plus"></i> New Ticket </a>
             </div>
           </div>
@@ -96,7 +96,7 @@
                         <td><span class="<?= $statusClass ?>"><?= htmlspecialchars($ticket['status']) ?></span></td>
                         <td><?= isset($ticket['datetime']) ? htmlspecialchars($ticket['datetime']) : 'N/A' ?></td>
                         <td>
-                          <a href="/crest/app/account/ticket/view.php?ticket_id=<?= urlencode($ticket['ticket_id']) ?>" class="btn btn-sm btn-info">View</a>
+                          <a href="<?= $root ?>/app/account/ticket/view.php?ticket_id=<?= urlencode($ticket['ticket_id']) ?>" class="btn btn-sm btn-info">View</a>
                         </td>
                       </tr>
                     <?php endforeach; ?>

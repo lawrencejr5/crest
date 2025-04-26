@@ -13,13 +13,13 @@
     <!-- header-section end  -->
 
     <!-- inner hero start -->
-    <section class="inner-hero bg_img" data-background="/crest/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
+    <section class="inner-hero bg_img" data-background="<?= $root ?>/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <h2 class="page-title">Cookie Policy</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest">Home</a></li>
+              <li><a href="<?= $root ?>">Home</a></li>
               <li>Cookie Policy</li>
             </ul>
           </div>
@@ -38,7 +38,7 @@
             <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;">
               <font color="#ffffff">Updated: 14 February 2020</font>
             </p>
-            <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:1rem;">Crest Asset</span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:1rem;"> Trading</span>
+            <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:1rem;"><?= $name ?></span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:1rem;"> Trading</span>
               <font color="#ffffff"> would like to offer a clear website with the most relevant content for you. To make this possible, we use technologies that can collect information about you and how you and other visitors use gatewaycapitalfinance.com (the “Website”). With this Cookie Notice, we want to create transparency and give you a complete overview of what the processing of your information includes, what you have to consider and which options you have to opt out of.</font>
             </p>
             <h2 style="margin-bottom:20px;padding:0px;border:0px;font-size:44px;vertical-align:baseline;font-family:'Proxima Nova', '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;letter-spacing:-0.01em;line-height:56px;">
@@ -71,7 +71,7 @@
               <font color="#ffffff">2. Consent</font>
             </h2>
             <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;">
-              <font color="#ffffff">By clicking on “Allow all cookies” in the cookie banner or using the Website, you consent to </font><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;">Crest Asset</span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;"> Trading</span>
+              <font color="#ffffff">By clicking on “Allow all cookies” in the cookie banner or using the Website, you consent to </font><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;"><?= $name ?></span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;"> Trading</span>
               <font color="#ffffff"> using cookies as described in the form below, unless you have opted out of cookies. If you do not deselect optional cookies at the time of consent, you can revoke the consent by blocking cookies in your web browser. More information on how to block and delete cookies can be found in Section 4 below.</font>
             </p>
             <h2 style="margin-bottom:20px;padding:0px;border:0px;font-size:44px;vertical-align:baseline;font-family:'Proxima Nova', '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;letter-spacing:-0.01em;line-height:56px;">
@@ -81,7 +81,7 @@
               <font color="#ffffff">Cookies are small text files that the Website can place on your computer’s hard drive, smartphone, or other electronic equipment. However, the term “Cookies” in this Notice and consent also means other forms of automatic data collection, e.g. Flash cookies (Local Shared Objects), Web Storage (HTML5), Javascript, or Cookies set using other software. “Cookies” also include IP and MAC address information and other information about your device.</font>
             </p>
             <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;">
-              <font color="#ffffff">Cookies can be used by both </font><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;">Crest Asset</span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;"> Trading</span>
+              <font color="#ffffff">Cookies can be used by both </font><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;"><?= $name ?></span><span style="color:rgb(255,255,255);font-family:Montserrat, sans-serif;font-size:16px;"> Trading</span>
               <font color="#ffffff"> and by third parties.</font>
             </p>
             <p style="margin-right:0px;margin-bottom:25px;margin-left:0px;padding:0px;border:0px;font-size:17px;vertical-align:baseline;font-family:Hind, '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;">

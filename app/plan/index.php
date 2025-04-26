@@ -182,7 +182,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Welcome Back, <?= ucfirst($user['fname']) ?>!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest/app/dashboard">User</a></li>
+              <li><a href="<?= $root ?>/app/dashboard">User</a></li>
               <li>Investment Plan</li>
             </ul>
           </div>

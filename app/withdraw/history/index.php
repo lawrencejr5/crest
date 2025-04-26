@@ -39,7 +39,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Welcome Back, <?= ucfirst($user['fname']) ?>!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest/app/dashboard">User</a></li>
+              <li><a href="<?= $root ?>/app/dashboard">User</a></li>
               <li>Withdraw Log</li>
             </ul>
           </div>
@@ -52,7 +52,7 @@
         <div class="row justify-content-center mt-2">
           <div class="col-md-12">
             <div class="right float-right mb-5">
-              <a href="/crest/app/withdraw" class="btn cmn-btn">
+              <a href="<?= $root ?>/app/withdraw" class="btn cmn-btn">
                 Withdraw Now
               </a>
             </div>

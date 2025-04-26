@@ -16,7 +16,7 @@
           <div class="col-xl-5 col-lg-7">
             <div class="account-card">
               <div class="account-card__header bg_img overlay--one" data-background="black">
-                <img src="/crest/assets/images/logoIcon/crest2-nobg.png" alt="image">
+                <img src="<?= $root ?>/assets/images/logoIcon/crest2-nobg.png" alt="image">
                 <h2 class="section-title">Create a <span class="base--color">Free Account</span></h2>
               </div>
               <div class="account-card__body">
@@ -307,9 +307,9 @@
                   <div class="form-row mt-2">
                     <div class="col-md-12">
                       <input type="checkbox" name="terms" required> <span class="f-size-14 ml-2">
-                        I agree with <a class="base--color" href="/crest/links/privacy-amp-policy/180">Privacy &amp; Policy</a>,
-                        <a class="base--color" href="/crest/links/terms-amp-condition/181">Terms &amp; Condition</a>,
-                        <a class="base--color" href="/crest/links/cookie-policy/226">Cookie Policy</a>
+                        I agree with <a class="base--color" href="<?= $root ?>/links/privacy-amp-policy/180">Privacy &amp; Policy</a>,
+                        <a class="base--color" href="<?= $root ?>/links/terms-amp-condition/181">Terms &amp; Condition</a>,
+                        <a class="base--color" href="<?= $root ?>/links/cookie-policy/226">Cookie Policy</a>
                       </span>
                     </div>
                   </div>
@@ -318,7 +318,7 @@
                   </div>
                   <div class="form-row mt-2">
                     <div class="col-sm-6">
-                      <p class="f-size-14">Have an account? <a href="/crest/login" class="base--color">Login</a></p>
+                      <p class="f-size-14">Have an account? <a href="<?= $root ?>/login" class="base--color">Login</a></p>
                     </div>
                   </div>
                 </form>
@@ -431,7 +431,7 @@
     (function() {
       "use strict";
       $(document).on("change", ".langSel", function() {
-        window.location.href = "/crest/change/" + $(this).val();
+        window.location.href = "<?= $root ?>/change/" + $(this).val();
       });
 
       $('.policy').on('click', function() {
@@ -440,7 +440,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
-        $.get('/crest/cookie/accept', function(response) {
+        $.get('<?= $root ?>/cookie/accept', function(response) {
           iziToast.success({
             message: response,
             position: "topRight"

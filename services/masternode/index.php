@@ -13,13 +13,13 @@
     <!-- header-section end  -->
 
     <!-- inner hero start -->
-    <section class="inner-hero bg_img" data-background="/crest/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
+    <section class="inner-hero bg_img" data-background="<?= $root ?>/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <h2 class="page-title">Masternode</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest">Home</a></li>
+              <li><a href="<?= $root ?>">Home</a></li>
               <li>Masternode</li>
             </ul>
           </div>

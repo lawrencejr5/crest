@@ -12,13 +12,13 @@
 
 
     <!-- inner hero start -->
-    <section class="inner-hero bg_img" data-background="/crest/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
+    <section class="inner-hero bg_img" data-background="<?= $root ?>/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <h2 class="page-title">About</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest">Home</a></li>
+              <li><a href="<?= $root ?>">Home</a></li>
               <li>About</li>
             </ul>
           </div>
@@ -26,12 +26,12 @@
       </div>
     </section>
     <!-- inner hero end -->
-    <section class="pt-120 pb-120 bg_img" data-background="/crest/assets/images/frontend/how_work/5fce39883b22c1607350664.jpg">
+    <section class="pt-120 pb-120 bg_img" data-background="<?= $root ?>/assets/images/frontend/how_work/5fce39883b22c1607350664.jpg">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center">
             <div class="section-header">
-              <h2 class="section-title"><span class="font-weight-normal">How</span> <b class="base--color">Crest-Asset Trading</b> <span class="font-weight-normal">Works</span></h2>
+              <h2 class="section-title"><span class="font-weight-normal">How</span> <b class="base--color"><?= $name ?></b> <span class="font-weight-normal">Works</span></h2>
               <p>Get involved in our tremendous platform and Invest. We will utilize your money and give you profit in your wallet automatically.</p>
             </div>
           </div>
@@ -78,7 +78,7 @@
           <div class="col-lg-6 offset-lg-6">
             <div class="about-content">
               <h2 class="section-title mb-3"><span class="font-weight-normal">About</span> <b class="base--color">Us</b></h2>
-              <p>About Crest Asset Trading Crest Asset trading was created in 2008
+              <p> <?= $name ?> was created in 2008
                 with the aim and purpose of ensuring that everyone has an insight on investments.
                 Our aim is to help investors achieve their financial goals in life,
                 we are passionate about it, guiding potential investors on the best
@@ -91,7 +91,7 @@
                 your money in securities and assets that will yield more dividends over
                 a short period of time. We believe in empowering both infant and professional
                 investors. (you all are important to us).</p>
-              <a href="/crest/about" class="cmn-btn mt-4">Learn more</a>
+              <a href="<?= $root ?>/about" class="cmn-btn mt-4">Learn more</a>
             </div>
           </div>
         </div>
@@ -121,13 +121,13 @@
                   <h2 class="mb-0">
                     <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse0" aria-expanded="false" aria-controls="collapse0">
                       <i class="las la-question-circle"></i>
-                      <span>When did Crest Asset Trading start?</span>
+                      <span>When did <?= $name ?> start?</span>
                     </button>
                   </h2>
                 </div>
                 <div id="collapse0" class="collapse" aria-labelledby="heading0" data-parent="#accordionExample" style="">
                   <div class="card-body">
-                    We started Crest Asset Trading as a private project back in 2008 and went on to carry out our beta-testing in mid 2010 with some selected investors; We launched to the public early 2012 and adapted the name CrestAssetTrading.com in 2013.
+                    We started <?= $name ?> as a private project back in 2008 and went on to carry out our beta-testing in mid 2010 with some selected investors; We launched to the public early 2012 and adapted the name <?= $name ?> in 2013.
                   </div>
                 </div>
               </div>
@@ -161,7 +161,7 @@
                 </div>
                 <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample" style="">
                   <div class="card-body">
-                    Since starting the public program, an Affiliation program to reward investors has always been a feature. After registering with Crest Asset Trading, you will be assigned a special Referral Link on your dashboard that pays you 10% bonus on your referrals’ deposits—and not just for initial deposits—it includes subsequent deposits, too. This is an excellent opportunity to quickly grow your funds with us, as well as being an easy way to earn start-up funding if you are low on assets! If you have any questions, please contact our live support team.
+                    Since starting the public program, an Affiliation program to reward investors has always been a feature. After registering with <?= $name ?>, you will be assigned a special Referral Link on your dashboard that pays you 10% bonus on your referrals’ deposits—and not just for initial deposits—it includes subsequent deposits, too. This is an excellent opportunity to quickly grow your funds with us, as well as being an easy way to earn start-up funding if you are low on assets! If you have any questions, please contact our live support team.
                   </div>
                 </div>
               </div>
@@ -260,10 +260,10 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-8">
-            <div class="cta-wrapper bg_img border-radius--10 text-center" data-background="/crest/assets/images/frontend/cta/5fce38bab36371607350458.jpg">
+            <div class="cta-wrapper bg_img border-radius--10 text-center" data-background="<?= $root ?>/assets/images/frontend/cta/5fce38bab36371607350458.jpg">
               <h2 class="title mb-3">Get Started Today With Us</h2>
               <p>This is a Revolutionary Money Making Platform! Invest for Future in Stable Platform and Make Fast Money. Not only we guarantee the fastest and the most exciting returns on your investments, but we also guarantee the security of your investment.</p>
-              <a href="/crest/register" class="cmn-btn mt-4">Join Us</a>
+              <a href="<?= $root ?>/register" class="cmn-btn mt-4">Join Us</a>
             </div>
           </div>
         </div>

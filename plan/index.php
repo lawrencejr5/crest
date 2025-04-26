@@ -153,13 +153,13 @@
     <!-- header-section end  -->
 
     <!-- inner hero start -->
-    <section class="inner-hero bg_img" data-background="/crest/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
+    <section class="inner-hero bg_img" data-background="<?= $root ?>/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <h2 class="page-title">Investment Plan</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest">Home</a></li>
+              <li><a href="<?= $root ?>">Home</a></li>
               <li>Investment Plan</li>
             </ul>
           </div>
@@ -228,10 +228,10 @@
               <span aria-hidden="true">&times;</span>
             </a>
           </div>
-          <form action="/crest/user/plans" method="post" class="register">
+          <form action="<?= $root ?>/user/plans" method="post" class="register">
             <input type="hidden" name="_token" value="0DI0kMOBNY3bUeI2Pt0ohYKyAlF44jwPb8z1eQjf">
             <div class="modal-footer">
-              <a href="/crest/login" type="button" class="cmn-btn btn-md w-100 text-center">At first
+              <a href="<?= $root ?>/login" type="button" class="cmn-btn btn-md w-100 text-center">At first
                 sign in your account</a>
             </div>
           </form>

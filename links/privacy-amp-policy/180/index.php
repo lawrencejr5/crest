@@ -11,13 +11,13 @@
     <!-- header-section end  -->
 
     <!-- inner hero start -->
-    <section class="inner-hero bg_img" data-background="/crest/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
+    <section class="inner-hero bg_img" data-background="<?= $root ?>/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <h2 class="page-title">Privacy &amp; Policy</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest">Home</a></li>
+              <li><a href="<?= $root ?>">Home</a></li>
               <li>Privacy & Policy</li>
             </ul>
           </div>
@@ -32,22 +32,22 @@
             <p>
             <h1>Privacy Policy</h1>
             <div><br /></div>
-            <div>Crest-Asset Trading will collect the company’s personal data. This privacy notice intends to show your company how their personal data is processed, for what purposes this will be done and what rights your company has in relation to the personal data that will be collected and used. Personal data is at all times processed in order for <span style="color:rgb(33,37,41);">Crest Asset</span> Trading to fulfil its legal obligations.</div>
+            <div><?= $name ?> will collect the company’s personal data. This privacy notice intends to show your company how their personal data is processed, for what purposes this will be done and what rights your company has in relation to the personal data that will be collected and used. Personal data is at all times processed in order for <span style="color:rgb(33,37,41);"><?= $name ?></span> Trading to fulfil its legal obligations.</div>
             <div><br /></div>
-            <div><span style="color:rgb(33,37,41);font-size:1rem;">Crest Asset</span> Trading is committed to ensuring that your privacy is protected at all times. Should we ask you to provide certain information by which you can be identified when using this website, then you can be assured that it will only be used in accordance with this privacy statement.</div>
+            <div><span style="color:rgb(33,37,41);font-size:1rem;"><?= $name ?></span> Trading is committed to ensuring that your privacy is protected at all times. Should we ask you to provide certain information by which you can be identified when using this website, then you can be assured that it will only be used in accordance with this privacy statement.</div>
             <div><br /></div>
             <div>We reserve the right to modify this privacy policy at any time, so please review it frequently. Changes and clarifications will take effect immediately upon their posting on the website. If we make material changes to this policy, we will notify you here that it has been updated, so that you are aware of what information we collect, how we use it, and under what circumstances, if any, we use and/or disclose it. This policy is effective from 22 February 2020.</div>
             <div><br /></div>
             <h2>Personal data</h2>
             <div><br /></div>
-            <div><span style="color:rgb(33,37,41);font-size:1rem;">Crest Asset</span> Trading complies with its GDPR obligations and ensures that personal data shall be processed lawfully and in a transparent manner in relation to your company; that the personal data shall be collected and processed for the purposes stated; that the personal data shall be accurate and at all times kept up to date; that the personal data shall be kept for no longer than is necessary for the purposes for which it is collected; that the personal data shall be adequately securitised and be protected against loss, unauthorised access or processing, and destruction or damage.</div>
+            <div><span style="color:rgb(33,37,41);font-size:1rem;"><?= $name ?></span> Trading complies with its GDPR obligations and ensures that personal data shall be processed lawfully and in a transparent manner in relation to your company; that the personal data shall be collected and processed for the purposes stated; that the personal data shall be accurate and at all times kept up to date; that the personal data shall be kept for no longer than is necessary for the purposes for which it is collected; that the personal data shall be adequately securitised and be protected against loss, unauthorised access or processing, and destruction or damage.</div>
             <div><br /></div>
-            <div>Your Company’s personal data will be treated as strictly confidential and will be shared only with <span style="color:rgb(33,37,41);">Crest Asset</span> Trading compliance department. Your Company’s personal data will only be shared with third parties if consent to do so has been given.</div>
-            <div>Where personal data has not been obtained directly from your Company, <span style="color:rgb(33,37,41);">Crest Asset</span> Trading shall provide your Company with the source from which certain personal data originates, and if applicable whether it came from publicly accessible sources.</div>
+            <div>Your Company’s personal data will be treated as strictly confidential and will be shared only with <span style="color:rgb(33,37,41);"><?= $name ?></span> Trading compliance department. Your Company’s personal data will only be shared with third parties if consent to do so has been given.</div>
+            <div>Where personal data has not been obtained directly from your Company, <span style="color:rgb(33,37,41);"><?= $name ?></span> Trading shall provide your Company with the source from which certain personal data originates, and if applicable whether it came from publicly accessible sources.</div>
             <div><br /></div>
             <h2>Data retention</h2>
             <div><br /></div>
-            <div>For audit trail purposes, <span style="color:rgb(33,37,41);">Crest Asset</span> Trading shall hold personal data for as long as required in order to fulfil our contractual and statutory duties. It should be noted that our business relationship is a contract of continuing obligation that may last for a number of years. This will enable us to comply with the record-keeping obligations under the Money Laundering Regulations 2017.</div>
+            <div>For audit trail purposes, <span style="color:rgb(33,37,41);"><?= $name ?></span> Trading shall hold personal data for as long as required in order to fulfil our contractual and statutory duties. It should be noted that our business relationship is a contract of continuing obligation that may last for a number of years. This will enable us to comply with the record-keeping obligations under the Money Laundering Regulations 2017.</div>
             <div><br /></div>
             <h2>Your Company’s personal data rights</h2>
             <div><br /></div>
@@ -59,7 +59,7 @@
                 <li><span style="font-size:0.875rem;">* The right to request that their personal data is erased where it is no longer necessary</span></li>
                 <li><span style="font-size:0.875rem;">* The right to request that processing is stopped at any time, where relevant</span></li>
                 <li><span style="font-size:0.875rem;">* The right to restrict processing where there is a dispute in relation to the accuracy or processing of the personal data</span></li>
-                <li><span style="font-size:0.875rem;">* The right to request that </span><span style="color:rgb(33,37,41);font-size:16px;">Crest Asset</span> Trading<span style="font-size:0.875rem;"> Capital Markets International Limited provide your Company with their personal data and where possible, transmit that data to another data controller. [applies only where the processing is for the performance of a contract with your Company and the data controller processes the data by automated means].</span></li>
+                <li><span style="font-size:0.875rem;">* The right to request that </span><span style="color:rgb(33,37,41);font-size:16px;"><?= $name ?></span> Trading<span style="font-size:0.875rem;"> Capital Markets International Limited provide your Company with their personal data and where possible, transmit that data to another data controller. [applies only where the processing is for the performance of a contract with your Company and the data controller processes the data by automated means].</span></li>
                 <li>* The right to object to the processing of personal data [only applies where processing is based on legitimate interest]</li>
                 <li>* The right not to be subject to a decision which is based solely on automated processing, including profiling which produces legal effects concerning them or similarly significantly affects them.</li>
               </ul>
@@ -94,7 +94,7 @@
             <div><br /></div>
             <h2>Who else may have access to your Personal data?</h2>
             <div><br /></div>
-            <div><span style="color:rgb(33,37,41);font-size:1rem;">Crest Asset</span> Trading may need to share personal data with third parties as may be required by law, or in order to fulfil contractual obligations. Where your personal data is shared with third parties, we will ensure that equivalent safeguards are offered in order to protect your personal data.</div>
+            <div><span style="color:rgb(33,37,41);font-size:1rem;"><?= $name ?></span> Trading may need to share personal data with third parties as may be required by law, or in order to fulfil contractual obligations. Where your personal data is shared with third parties, we will ensure that equivalent safeguards are offered in order to protect your personal data.</div>
             <div><br /></div>
             <h2>International transfers of Personal data</h2>
             <div><br /></div>
@@ -112,7 +112,7 @@
             <div><br /></div>
             <h2>Contact Details</h2>
             <div><br /></div>
-            <div>In order to exercise all rights, queries and complaints please contact support@Crest Asset-trading.com</div>
+            <div>In order to exercise all rights, queries and complaints please contact <?= $email ?></div>
             </p>
           </div>
         </div>

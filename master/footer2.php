@@ -6,15 +6,15 @@
                     <nav class="navbar navbar-expand-lg p-0">
                         <div class="footer-menu">
                             <ul class="navbar-nav mr-auto">
-                                <li><a href="/crest">Home</a></li>
+                                <li><a href="<?= $root ?>">Home</a></li>
                                 <li><a
-                                        href="/crest/links/privacy-amp-policy/180">Privacy &amp; Policy</a>
+                                        href="<?= $root ?>/links/privacy-amp-policy/180">Privacy &amp; Policy</a>
                                 </li>
                                 <li><a
-                                        href="/crest/links/terms-amp-condition/181">Terms &amp; Condition</a>
+                                        href="<?= $root ?>/links/terms-amp-condition/181">Terms &amp; Condition</a>
                                 </li>
                                 <li><a
-                                        href="/crest/links/cookie-policy/226">Cookie Policy</a>
+                                        href="<?= $root ?>/links/cookie-policy/226">Cookie Policy</a>
                                 </li>
                             </ul>
                         </div>
@@ -24,12 +24,12 @@
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">
-                <a href="/crest" class="text-center">
+                <a href="<?= $root ?>" class="text-center">
                     <img src="assets/images/logoIcon/crest2-nobg.png" class="logo-max" alt="logo">
                 </a>
 
                 <div class="alert alert-warning" role="alert">
-                    <p style="color:black"><small>Important note: Crest-Asset Trading is NOT a HYIP/Forex trading scheme and should
+                    <p style="color:black"><small>Important note: <?= $name ?> is NOT a HYIP/Forex trading scheme and should
                             not be viewed as such,let get you all setup join us today!</small></p>
                 </div>
             </div>
@@ -56,9 +56,9 @@
             "position": "left"
         },
         "brandSetting": {
-            "brandName": "Crest Asset Trading",
+            "brandName": "<?= $name ?>",
             "brandSubTitle": "Typically replies within minutes",
-            "brandImg": "/crest/assets/images/logoIcon/crest-favicon.png",
+            "brandImg": "<?= $root ?>/assets/images/logoIcon/crest-favicon.png",
             "welcomeText": "Hi, there!\nHow can I help you?",
             "messageText": "Hello, I have some questions!",
             "backgroundColor": "#0a5f54",

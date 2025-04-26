@@ -21,7 +21,7 @@
         <div class="col-8 text-center">
           <div class="section-header">
 
-            <h2 class="title">Why choose Crest-Asset Trading</h2>
+            <h2 class="title">Why choose <?= $name ?></h2>
             <p>
             <h4>We set the Pace, others follow</h4>
 
@@ -132,7 +132,7 @@
         <div class="col-10 text-center">
           <div class="section-header mb-5">
             <h2 class="title">Statistics </h2>
-            <p class="section-para">Crest Asset Trading achieved an annual return of 132%,
+            <p class="section-para"><?= $name ?> achieved an annual return of 132%,
               and for participants who took advantage of the monthly compounding option,
               a gigantic 249.85%.
               This yield was achieved despite the global economic crisis
@@ -200,9 +200,9 @@
       <div class="row justify-content-center">
         <div class="col-md-6 text-c nter">
           <div class="section-header">
-            <h2 class="title">About Crest-Asset Trading</h2>
+            <h2 class="title">About <?= $name ?></h2>
             <p class="section-para text-left">
-              About Crest Asset Trading Crest Asset trading was created in 2008
+              <?= $name ?> was created in 2008
               with the aim and purpose of ensuring that everyone has an insight on investments.
               Our aim is to help investors achieve their financial goals in life,
               we are passionate about it, guiding potential investors on the best
@@ -248,7 +248,7 @@
       <div class="row justify-content-center">
         <div class="col-10 text-center">
           <div class="section-header mb-5">
-            <h2 class="title">Crest-Asset Trading Packages </h2>
+            <h2 class="title"><?= $name ?> Packages </h2>
             <p class="section-para">We have made it our mission to build a sustainable future for us all in this new
               economy.<br><b style="color:#fbc013">Compounding available for all plan.</b></p>
           </div>
@@ -396,7 +396,7 @@
 
             <div class="client-slide-item">
               <blockquote>
-                I was initially hesitant about diving into online investments, but Crest Asset Trading changed my perspective. Their user-friendly interface and insightful market data have given me the confidence to manage my portfolio during even the most volatile periods. Every month, I see steady growth, and the transparency in every transaction keeps me at ease. I feel empowered knowing my money is working smartly for me.
+                I was initially hesitant about diving into online investments, but <?= $name ?> changed my perspective. Their user-friendly interface and insightful market data have given me the confidence to manage my portfolio during even the most volatile periods. Every month, I see steady growth, and the transparency in every transaction keeps me at ease. I feel empowered knowing my money is working smartly for me.
               </blockquote>
               <div class="author">
                 <div class="author-content">
@@ -408,7 +408,7 @@
 
             <div class="client-slide-item">
               <blockquote>
-                Balancing a busy career and family life made it hard to find time to monitor investments—until I found Crest Asset Trading. Their platform simplifies the investment process with real-time updates and easy-to-read analytics. I appreciate the clear guidance and consistent support, which have helped me unlock new avenues for financial growth. It’s transformed the way I think about my future.
+                Balancing a busy career and family life made it hard to find time to monitor investments—until I found <?= $name ?>. Their platform simplifies the investment process with real-time updates and easy-to-read analytics. I appreciate the clear guidance and consistent support, which have helped me unlock new avenues for financial growth. It’s transformed the way I think about my future.
               </blockquote>
               <div class="author">
                 <div class="author-content">
@@ -420,7 +420,7 @@
 
             <div class="client-slide-item">
               <blockquote>
-                After facing setbacks with other investment platforms, Crest Asset Trading has been a breath of fresh air. Their innovative tools and dedicated support team helped me turn uncertainty into clear, actionable strategies. I now see a positive trend in my portfolio with reliable, transparent updates that I can trust. This platform has become an essential part of my financial plan.
+                After facing setbacks with other investment platforms, <?= $name ?> has been a breath of fresh air. Their innovative tools and dedicated support team helped me turn uncertainty into clear, actionable strategies. I now see a positive trend in my portfolio with reliable, transparent updates that I can trust. This platform has become an essential part of my financial plan.
               </blockquote>
               <div class="author">
                 <div class="author-content">
@@ -432,7 +432,7 @@
 
             <div class="client-slide-item">
               <blockquote>
-                Since joining Crest Asset Trading, my approach to investments has evolved dramatically. Their intuitive platform and detailed analytics empower me to take bold steps while staying informed about market trends. The continuous support and clear, honest updates have been invaluable, making every decision feel well-founded. I’m excited to see the long-term benefits on my financial roadmap.
+                Since joining <?= $name ?>, my approach to investments has evolved dramatically. Their intuitive platform and detailed analytics empower me to take bold steps while staying informed about market trends. The continuous support and clear, honest updates have been invaluable, making every decision feel well-founded. I’m excited to see the long-term benefits on my financial roadmap.
               </blockquote>
               <div class="author">
                 <div class="author-content">
@@ -444,7 +444,7 @@
 
             <div class="client-slide-item">
               <blockquote>
-                Investing used to feel intimidating, but Crest Asset Trading has turned it into a truly rewarding experience. Their platform’s sophisticated yet accessible tools offer real-time insights that help me navigate complex market conditions with ease. I’ve seen consistent returns and feel more secure with every smart move I make. This service has redefined my approach to building wealth.
+                Investing used to feel intimidating, but <?= $name ?> has turned it into a truly rewarding experience. Their platform’s sophisticated yet accessible tools offer real-time insights that help me navigate complex market conditions with ease. I’ve seen consistent returns and feel more secure with every smart move I make. This service has redefined my approach to building wealth.
               </blockquote>
               <div class="author">
                 <div class="author-content">
@@ -456,7 +456,7 @@
 
             <div class="client-slide-item">
               <blockquote>
-                Crest Asset Trading has been a game-changer for my financial journey. The platform’s robust analytics and proactive customer service have helped simplify the world of investments. I now receive strategic insights that guide me through market ups and downs, allowing for consistent growth throughout the year. I couldn’t be happier with how my portfolio is performing.
+                <?= $name ?> has been a game-changer for my financial journey. The platform’s robust analytics and proactive customer service have helped simplify the world of investments. I now receive strategic insights that guide me through market ups and downs, allowing for consistent growth throughout the year. I couldn’t be happier with how my portfolio is performing.
               </blockquote>
               <div class="author">
                 <div class="author-content">
@@ -516,7 +516,7 @@
         <div class="col-lg-12 text-center">
           <div class="team-header">
             <h2 class="title">Frequently Asked Questions</h2>
-            <p class="section-para mt-2">We answer some of your Frequently Asked Questions regarding Crest-Asset Trading. If
+            <p class="section-para mt-2">We answer some of your Frequently Asked Questions regarding <?= $name ?>. If
               you
               have a query that is not answered here, Please feel free to contact us.</p>
           </div>
@@ -532,11 +532,11 @@
               <div class="card">
                 <div class="card-header" id="heading31">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse31"
-                    aria-expanded="true" aria-controls="collapse31">When did Crest Asset Trading start?</button>
+                    aria-expanded="true" aria-controls="collapse31">When did <?= $name ?> start?</button>
                 </div>
                 <div id="collapse31" class="collapse show" aria-labelledby="heading31" data-parent="#accordionExample">
                   <div class="card-body">
-                    We started Crest Asset Trading as a private project back in 2008 and went on to carry out our beta-testing
+                    We started <?= $name ?> as a private project back in 2008 and went on to carry out our beta-testing
                     in mid 2010 with some selected investors; We launched to the public early 2012 and adapted the name
                     CrestAssetTrading.com in 2013.
                   </div>
@@ -568,7 +568,7 @@
                 <div id="collapse29" class="collapse" aria-labelledby="heading29" data-parent="#accordionExample">
                   <div class="card-body">
                     Since starting the public program, an Affiliation program to reward investors has always been a feature.
-                    After registering with Crest Asset Trading, you will be assigned a special Referral Link on your dashboard
+                    After registering with <?= $name ?>, you will be assigned a special Referral Link on your dashboard
                     that pays you 10% bonus on your referrals’ deposits—and not just for initial deposits—it includes
                     subsequent deposits, too. This is an excellent opportunity to quickly grow your funds with us, as well as
                     being an easy way to earn start-up funding if you are low on assets! If you have any questions, please
@@ -707,7 +707,7 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-lg-10">
-            <form class="subscribe-form" action="https://assetbase-trading.com/subscribe" method="post">
+            <form class="subscribe-form" action="" method="post">
               <input type="hidden" name="_token" value="0DI0kMOBNY3bUeI2Pt0ohYKyAlF44jwPb8z1eQjf"> <input type="email" name="email" placeholder="Subscribe your email" required value="">
               <input type="submit" class="btn-default website-color " value="Subscribe">
             </form>
@@ -742,7 +742,7 @@
           <form action="" method="post">
             <input type="hidden" name="_token" value="0DI0kMOBNY3bUeI2Pt0ohYKyAlF44jwPb8z1eQjf">
             <div class="modal-footer">
-              <a href="/crest/login" type="button" style="background-color: #b58e43;" class="btn btn-success custom-success">Please, Login
+              <a href="<?= $root ?>/login" type="button" style="background-color: #b58e43;" class="btn btn-success custom-success">Please, Login
                 your
                 account at first</a>
             </div>
@@ -759,7 +759,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-9">
-            <p>&copy; 2025 Crest-Asset Trading. All rights reserved</p>
+            <p>&copy; 2025 <?= $name ?>. All rights reserved</p>
           </div>
 
           <div id="google_translate_element"></div>

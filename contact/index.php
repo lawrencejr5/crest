@@ -11,13 +11,13 @@
     <!-- header-section end  -->
 
     <!-- inner hero start -->
-    <section class="inner-hero bg_img" data-background="/crest/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
+    <section class="inner-hero bg_img" data-background="<?= $root ?>/assets/images/frontend/breadcrumb/60f9a423788ce1626973219.jpg">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <h2 class="page-title">Contact Us</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest">Home</a></li>
+              <li><a href="<?= $root ?>">Home</a></li>
               <li>Contact Us</li>
             </ul>
           </div>
@@ -29,7 +29,7 @@
       <div class="container">
         <div class="contact-wrapper">
           <div class="row">
-            <div class="col-lg-6 contact-thumb bg_img" data-background="/crest/assets/images/frontend/contact/5fce3861b2a1c1607350369.jpg"></div>
+            <div class="col-lg-6 contact-thumb bg_img" data-background="<?= $root ?>/assets/images/frontend/contact/5fce3861b2a1c1607350369.jpg"></div>
             <div class="col-lg-6 contact-form-wrapper">
               <h2 class="font-weight-bold mb-2">Contact With Us</h2>
               <p class="font-weight-bold">If you have any questions or queries that are not answered on our website, please feel free to contact us. We will try to respond to you as soon as possible. Thank you so much.</p>
@@ -66,7 +66,7 @@
                   <i class="las la-envelope-open"></i>
                   <h5 class="mt-2">Email Address</h5>
                   <div class="mt-4">
-                    <p><a href="javascript:void(0)">support@crest-assettrading.com</a></p>
+                    <p><a href="javascript:void(0)"><?= $email ?></a></p>
                   </div>
                 </div><!-- contact-item end -->
               </div>
@@ -97,7 +97,7 @@
 
 
   <script src="https://maps.google.com/maps/api/js?key="></script>
-  <script src="/crest/assets/templates/bit_gold/js/map.js"></script>
+  <script src="<?= $root ?>/assets/templates/bit_gold/js/map.js"></script>
 
 
 

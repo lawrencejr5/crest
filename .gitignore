@@ -1,3 +1,4 @@
 *backend_ref/
 *.sql
 *.vscode/
+*web-constants.php

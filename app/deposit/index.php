@@ -41,7 +41,7 @@
           <div class="col-lg-6">
             <h2 class="page-title">Welcome Back, <?= ucfirst($user['fname']) ?>!</h2>
             <ul class="page-breadcrumb">
-              <li><a href="/crest/app/dashboard">User</a></li>
+              <li><a href="<?= $root ?>/app/dashboard">User</a></li>
               <li>Deposit Methods</li>
             </ul>
           </div>
@@ -56,7 +56,7 @@
 
           <div class="col-md-12">
             <div class="right float-right mb-5">
-              <a href="/crest/app/deposit/history" class="btn cmn-btn">
+              <a href="<?= $root ?>/app/deposit/history" class="btn cmn-btn">
                 Deposit History
               </a>
             </div>

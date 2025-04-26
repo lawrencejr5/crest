@@ -5,17 +5,17 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12 text-center">
-                    <a href="/crest"><img
-                            src="/crest/assets/images/logoIcon/crest2-nobg.png" style="width: 500px; height: 100px; object-fit: cover;" alt="image"></a>
+                    <a href="<?= $root ?>"><img
+                            src="<?= $root ?>/assets/images/logoIcon/crest2-nobg.png" style="width: 500px; height: 100px; object-fit: cover;" alt="image"></a>
                     <ul class="footer-short-menu d-flex flex-wrap justify-content-center mt-3">
                         <li><a
-                                href="/crest/links/privacy-amp-policy/180">Privacy &amp; Policy</a>
+                                href="<?= $root ?>/links/privacy-amp-policy/180">Privacy &amp; Policy</a>
                         </li>
                         <li><a
-                                href="/crest/links/terms-amp-condition/181">Terms &amp; Condition</a>
+                                href="<?= $root ?>/links/terms-amp-condition/181">Terms &amp; Condition</a>
                         </li>
                         <li><a
-                                href="/crest/links/cookie-policy/226">Cookie Policy</a>
+                                href="<?= $root ?>/links/cookie-policy/226">Cookie Policy</a>
                         </li>
                     </ul>
                 </div>
@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-md-6 text-md-left text-center">
                     <p>
-                    <p>© 2025 <a href="/crest" class="base--color">Crest-Asset Trading</a>.
+                    <p>© 2025 <a href="<?= $root ?>" class="base--color"><?= $name ?></a>.
                         All
                         rights reserved</p>
                     </p>
@@ -106,9 +106,9 @@
             "position": "left"
         },
         "brandSetting": {
-            "brandName": "Crest Asset Trading",
+            "brandName": "<?= $name ?>",
             "brandSubTitle": "Typically replies within minutes",
-            "brandImg": "/crest/assets/images/logoIcon/crest-favicon.png",
+            "brandImg": "<?= $root ?>/assets/images/logoIcon/crest-favicon.png",
             "welcomeText": "Hi, there!\nHow can I help you?",
             "messageText": "Hello, I have some questions!",
             "backgroundColor": "#0a5f54",
