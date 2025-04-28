@@ -115,6 +115,7 @@
           <form id="depositForm" method="post" class="register">
             <div class="modal-body">
               <div class="form-group">
+                <input type="hidden" name="transac_id" value="<?= uniqid("dep_") ?>">
                 <input type="hidden" name="currency" class="edit-currency" value="">
                 <input type="hidden" name="type" value="deposit">
                 <input type="hidden" name="address" value="">
@@ -247,6 +248,7 @@
         }
 
         // Get values from the form
+        var transac_id = $(this).find("input[name='transac_id']").val();
         var dol_val = $(this).find("input[name='amount']").val();
         var currency = $(this).find("input[name='currency']").val();
         var type = $(this).find("input[name='type']").val();
@@ -257,6 +259,7 @@
           type: "POST",
           url: "../backend/actions/deposit.php",
           data: {
+            transac_id: transac_id,
             dol_val: dol_val,
             currency: currency,
             type: type,
@@ -271,6 +274,7 @@
               window.setTimeout(() => {
                 window.location.href = "../deposit/preview/index.php?" +
                   "address=" + encodeURIComponent(address) +
+                  "&transac_id=" + encodeURIComponent(transac_id) +
                   "&currency=" + encodeURIComponent(currency) +
                   "&usd=" + encodeURIComponent(dol_val) +
                   "&converted=" + encodeURIComponent(converted_amount);

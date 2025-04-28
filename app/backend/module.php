@@ -163,6 +163,7 @@ class Modules extends Connection
         return $this->stmt->execute();
     }
 
+
     // Update password for a user
     public function updatePassword($user_id, $new_password)
     {
@@ -194,6 +195,19 @@ class Modules extends Connection
             return false;
         }
     }
+
+    public function uploadProof($transac_id, $proof)
+    {
+        $this->sql = "UPDATE deposits 
+                      SET proof = :proof
+                      WHERE transac_id = :transac_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+
+        $this->stmt->bindParam(':proof', $proof);
+        $this->stmt->bindParam(':transac_id', $transac_id);
+        return $this->stmt->execute();
+    }
+
 
     // Get user deposits
     public function getUserDeposits($user_id)
@@ -665,10 +679,10 @@ class Modules extends Connection
     // Retrieve all transactions (both deposits and withdrawals) for admin view
     public function getAllTransactions()
     {
-        $this->sql = "SELECT 'deposit' as transaction_type, id, user_id, transac_id, amount, dol_val, currency, address, type, status, datetime 
+        $this->sql = "SELECT 'deposit' as transaction_type, id, user_id, transac_id, amount, dol_val, currency, address, type, proof, status, datetime 
                       FROM deposits 
                       UNION ALL 
-                      SELECT 'withdrawal' as transaction_type, id, user_id, transac_id, amount, dol_val, currency, address, type, status, datetime 
+                      SELECT 'withdrawal' as transaction_type, id, user_id, transac_id, amount, dol_val, currency, address, type, proof, status, datetime 
                       FROM withdrawals 
                       ORDER BY datetime DESC";
         $this->stmt = $this->conn->prepare($this->sql);

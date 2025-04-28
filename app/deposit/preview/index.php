@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include "../../backend/udata.php" ?>
 <?php include "../../master/head.php"; ?>
 <!-- Include the QRCodeJS library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -106,6 +107,16 @@
       /* Prevent extra bottom spacing */
     }
 
+    .imagePreview {
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background-size: cover;
+      border: 2px solid #ddd;
+      margin: 1rem 0;
+    }
 
     /* Responsive adjustments for smaller screens */
     @media (max-width: 767.98px) {
@@ -189,8 +200,15 @@
           <p><strong>Converted Amount:</strong> <?php echo $converted . " " . $currency; ?></p>
           <div id="qrcode"></div>
           <br>
-          <a href="../history/" class="btn btn-primary back-btn">Go to deposits history</a>
-
+          <br><br>
+          <form action="" id="proofForm" enctype="multipart/form-data">
+            <input type="hidden" value="<?= $_GET['transac_id'] ?>" name="transac_id" id="transac_id">
+            <div class="avatar-edit">
+              <label for="fileUpload" class="fileUp" style="color: #b58e43; font-size: 23px; margin-right: 1rem;">Proof of payment:</label>&nbsp;
+              <input type="file" name="proof" id="fileUpload" class="upload" accept=".png, .jpg, .jpeg, .pdf, .docx, .epub" />
+            </div>
+            <button type="submit" class="btn btn-primary back-btn">Upload proof of payment</button>
+          </form>
         </div>
       </div>
     </section>
@@ -214,25 +232,38 @@
 
   <script>
     "use strict";
-    $(document).on("change", ".langSel", function() {
-      window.location.href = "https://assetbase-trading.com/change/" + $(this).val();
-    });
+    $(document).ready(function() {
+      $("#proofForm").on("submit", function(e) {
+        e.preventDefault();
+        var submitButton = $(this).find('button[type="submit"]');
+        submitButton.prop('disabled', true).text("Uploading...");
 
-    $('.policy').on('click', function() {
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      $.get('https://assetbase-trading.com/cookie/accept', function(response) {
-        iziToast.success({
-          message: response,
-          position: "topRight"
+        var formData = new FormData(this);
+        $.ajax({
+          url: "../../backend/actions/uploadProof.php",
+          type: "POST",
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function(resp) {
+            var data = (typeof resp === "object") ? resp : JSON.parse(resp);
+            notify(data.status, data.message);
+            // Reset button after update
+            submitButton.prop('disabled', false).text("Done");
+
+            window.setTimeout(() => {
+              window.location = "../history"
+            }, 1500)
+          },
+          error: function(xhr, status, error) {
+            notify("error", "Error: " + error);
+            submitButton.prop('disabled', false).text("Try again");
+          }
         });
-        $('.cookie__wrapper').addClass('d-none');
       });
     });
   </script>
+
 
   <link rel="stylesheet" href="https://assetbase-trading.com/assets/templates/bit_gold/css/iziToast.min.css">
   <script src="https://assetbase-trading.com/assets/templates/bit_gold/js/iziToast.min.js"></script>
@@ -247,21 +278,6 @@
       });
     }
   </script>
-
-  <script>
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function() {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/61e18cf4b84f7301d32b08aa/1fpcgt7ka";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
-
   <script>
     "use strict";
     // Generate a QR code for the deposit address

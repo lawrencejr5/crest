@@ -2,7 +2,7 @@
 session_start();
 header('Content-Type: application/json');
 include "../module.php";
-include "../constants.php";
+include "../mailer.php";
 
 // Make sure required POST fields exist
 if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'], $_POST['address'])) {

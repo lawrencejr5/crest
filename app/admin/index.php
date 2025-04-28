@@ -2,6 +2,8 @@
 
 <?php
 
+$root = "/crest";
+
 function getFullname($uid)
 {
     global $modules;
@@ -287,6 +289,7 @@ function getPlanName($pid)
                                 <th>Amount</th>
                                 <th>Type</th>
                                 <th>Status</th>
+                                <th>Proof</th>
                                 <th>Date</th>
                                 <th>Actions</th>
                             </tr>
@@ -319,6 +322,11 @@ function getPlanName($pid)
                                         }
                                         ?>
                                         <span class="<?= $badgeClass ?>"><?= ucfirst($status) ?></span>
+                                    </td>
+                                    <td>
+                                        <?php if ($transac['proof']): ?>
+                                            <a href="<?= $root ?>/app/uploads/proof/<?= $transac['proof'] ?>">Proof</a>
+                                        <?php endif; ?>
                                     </td>
                                     <td><?= date("Y-m-d H:i:s", strtotime($transac['datetime'])) ?></td>
                                     <td>

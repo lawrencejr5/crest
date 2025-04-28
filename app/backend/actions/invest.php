@@ -3,7 +3,7 @@ session_start();
 header('Content-Type: application/json');
 
 include '../module.php';
-include '../constants.php';
+include '../mailer.php';
 
 if (isset($_POST['plan_id'], $_POST['amount'])) {
 

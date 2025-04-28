@@ -3,7 +3,7 @@ session_start();
 header('Content-Type: application/json');
 
 include "../module.php";
-include "../constants.php";
+include "../mailer.php";
 
 // Check that required POST parameters are present
 if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'], $_POST['address'])) {
@@ -12,7 +12,7 @@ if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'
     $currency  = $_POST['currency'];
     $type      = $_POST['type'];
     $address   = $_POST['address'];
-    $transac_id = uniqid("dep_");
+    $transac_id = $_POST['transac_id'];
     $email = $_SESSION['email'];
     $fname = $_SESSION['fname'];
 
@@ -27,7 +27,7 @@ if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'
                     <img src='" . ROOT . "/assets/images/logoIcon/crest2-nobg.png' height='auto' width='200px' />
                     <h1>Dear $fname, </h1>
                </center>
-               <p>We wish to inform you that you have made a payment of <b>$amount $currency ($dol_val USD)</b> in order to credit your <b>$wallet wallet</b>.</p>
+               <p>We wish to inform you that you have made a payment of <b>$amount $currency ($dol_val USD)</b> in order to credit your <b>deposit wallet</b>.</p>
                <p>We would inform you when this deposit has been approved. Thank you.</p>
                <p>You can <a href='" . ROOT . "/login'>login</a> to perform more actions on your account.</p>
                <br/>
@@ -62,7 +62,6 @@ if (isset($_POST['amount'], $_POST['dol_val'], $_POST['currency'], $_POST['type'
         ]);
 
         // Check if this user was referred by someone
-        // Assuming a function getUserData($user_id) exists that returns user details including the "ref" field
         $uid = isset($_SESSION['id']) ? $_SESSION['id'] : null;
         if (!$uid) {
             echo json_encode([
