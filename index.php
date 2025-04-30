@@ -345,11 +345,9 @@
             <h6 class="profil-title">Plan</h6>
             <select class="select-bar" id="changePlan">
               <option value="">Choose Plan</option>
-              <option value="1">BASIC</option>
-              <option value="2">GOLD/STOCK</option>
-              <option value="3">REAL ESTATE</option>
-              <option value="4">OIL AND GAS</option>
-              <option value="5">FARM AND SHARES</option>
+              <?php foreach ($data as $plan): ?>
+                <option value="<?= $plan['plan_name'] ?>" id="plan_option" data-type="<?= $plan['plan_type'] ?>" data-duration="<?= $plan['duration'] ?>" data-total="<?= $plan['total'] ?>" style="text-transform: uppercase;"><?= $plan['plan_name'] ?></option>
+              <?php endforeach; ?>
             </select>
 
           </div>
@@ -844,66 +842,37 @@
         });
       });
     </script>
+
     <script>
-      (function($) {
-        "use strict";
-        $(document).ready(function() {
-          $("#changePlan").on('change', function() {
-            var planId = $("#changePlan option:selected").val();
-            var investInput = $('.invest-input').val();
-            var profitInput = $('.profit-input').val('');
+      $(document).ready(function() {
+        $('#changePlan').on('change', function() {
+          var totalPercentage = parseFloat($(this).find(':selected').data('total'));
+          var investAmount = parseFloat($('.invest-input').val());
+          var profitInput = $('.profit-input');
 
-            $('.period').text('');
-
-            if (investInput != '' && planId != null) {
-              ajaxPlanCalc(planId, investInput)
-            }
-          });
-
-          $(".invest-input").on('change', function() {
-            var planId = $("#changePlan option:selected").val();
-            var investInput = $(this).val();
-            var profitInput = $('.profit-input').val('');
-            $('.period').text('');
-            if (investInput != '' && planId != null) {
-              ajaxPlanCalc(planId, investInput)
-            }
-          });
-        });
-      })(jQuery);
-
-      function ajaxPlanCalc(planId, investInput) {
-        $.ajax({
-          url: "https://assetbase-trading.com/planCalculator",
-          type: "post",
-          data: {
-            planId,
-            investAmount: investInput
-          },
-          success: function(response) {
-
-            var alertStatus = "1";
-            if (response.errors) {
-              if (alertStatus == '1') {
-                iziToast.error({
-                  message: response.errors,
-                  position: "topRight"
-                });
-              } else if (alertStatus == '2') {
-                toastr.error(response.errors);
-              }
-            }
-
-            console.log(response);
-
-            $('.profit-input').val(response.netProfit);
-            $('.period').text(response.description);
-
-
+          if (!isNaN(investAmount) && !isNaN(totalPercentage)) {
+            var profit = (investAmount * totalPercentage) / 100;
+            profitInput.val(profit.toFixed(2));
+          } else {
+            profitInput.val(''); // Clear profit if input is not a number
           }
         });
-      }
+
+        $('.invest-input').on('input', function() {
+          var totalPercentage = parseFloat($('#changePlan').find(':selected').data('total'));
+          var investAmount = parseFloat($(this).val());
+          var profitInput = $('.profit-input');
+
+          if (!isNaN(investAmount) && !isNaN(totalPercentage)) {
+            var profit = (investAmount * totalPercentage) / 100;
+            profitInput.val(profit.toFixed(2));
+          } else {
+            profitInput.val(''); // Clear profit if input is not a number
+          }
+        });
+      });
     </script>
+
     <script>
       $(document).on("change", ".langSel", function() {
         window.location.href = "/change-lang" + $(this).val();
@@ -920,46 +889,6 @@
     </script>
 
 
-
-    <div class="sec-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="sec"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="mgm" style="display: none;">
-      <div class="txt" style="color:#fbc013;">New trade from <b></b> just Now <a href="javascript:void(0);"
-          onclick="javascript:void(0);"></a></div>
-    </div>
-
-    <style>
-      .mgm {
-        border-radius: 7px;
-        position: fixed;
-        z-index: 90;
-        bottom: 80px;
-        right: 50px;
-        background: #000;
-        padding: 10px 27px;
-        box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, .3);
-      }
-
-      .mgm a {
-        font-weight: 700;
-        display: block;
-        color: #fff;
-      }
-
-      .mgm a,
-      .mgm a:active {
-        transition: all .2s ease;
-        color: #fff;
-      }
-    </style>
 
 
 

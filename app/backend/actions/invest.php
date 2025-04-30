@@ -69,11 +69,9 @@ if (isset($_POST['plan_id'], $_POST['amount'])) {
     $end_date = date('Y-m-d H:i:s', strtotime("+{$duration} days", strtotime($start_date)));
 
     $earned = 0; // Initial earned amount is zero
-    $expected = ($plan['plan_rate'] / 100) * $amount;  // Calculate expected earnings based on plan rate
+    $expected = ($plan['total'] / 100) * $amount;  // Calculate expected earnings based on plan rate
 
-    $daily_to_earn = $expected / $duration;
-    $weekly_to_earn = ($expected / $duration) * 7;
-    $to_earn = $plan['plan_type'] == "daily" ? $daily_to_earn : $weekly_to_earn; // Expected earnings per day, for example
+    $to_earn = $plan['plan_rate'] * $amount; // Expected earnings per day, for example
     $status = 'active';
 
     // Generate a unique investment ID
