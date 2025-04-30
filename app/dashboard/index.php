@@ -34,7 +34,6 @@
       color: #fff;
     }
   </style>
-  <script data-cfasync="false" src="#"></script>
 
   <style type="text/css">
     #copyBoard {

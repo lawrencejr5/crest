@@ -1,43 +1,59 @@
 <?php
 session_start();
+header('Content-Type: application/json');
 
 include "../module.php";
-header('Content-Type: application/json');
 
 if (isset($_POST['email']) && isset($_POST['password'])) {
     $email    = $_POST['email'];
     $password = $_POST['password'];
 
-    // Call the login method from your Modules class
+    // Fetch user by email
     $user = $modules->getUserByEmail($email);
 
     if ($user && password_verify($password, $user['password'])) {
-        // Password is correct – login success
-        $result = $user;
-    } else {
-        $result = false;
-    }
-
-    $response = [];
-    if ($result === false) {
-        $response['status']  = "error";
-        $response['message'] = "Invalid Credentials";
-    } else if ($result['verified'] != 1) {
-        $response['status']  = "error";
-        $response['message'] = "User not verified";
-    } else if ($result['status'] === "blocked") {
-        $response['status']  = "error";
-        $response['message'] = "Your account has been blocked";
-    } elseif (is_array($result)) {
-        // Loop over the returned user data and store them in separate session variables
-        foreach ($result as $key => $value) {
-            $_SESSION[$key] = $value;
+        // Check if user is verified and not blocked
+        if ($user['verified'] != 1) {
+            echo json_encode([
+                'status'  => "error",
+                'message' => "User not verified"
+            ]);
+            exit;
         }
-        $response['status']  = "success";
-        $response['message'] = "Login successful";
-    }
+        if ($user['status'] === "blocked") {
+            echo json_encode([
+                'status'  => "error",
+                'message' => "Your account has been blocked"
+            ]);
+            exit;
+        }
 
-    echo json_encode($response);
+        // If 2FA is enabled, store user data in temp session and return status 2fa_required.
+        if ($user['two_factor_enabled'] == 1) {
+            $_SESSION['temp_user'] = $user;
+            echo json_encode([
+                'status'  => "2fa_required",
+                'message' => "2FA is enabled. Please enter your OTP code."
+            ]);
+            exit;
+        } else {
+            // Otherwise, store user data in session and complete login.
+            foreach ($user as $key => $value) {
+                $_SESSION[$key] = $value;
+            }
+            echo json_encode([
+                'status'  => "success",
+                'message' => "Login successful"
+            ]);
+            exit;
+        }
+    } else {
+        echo json_encode([
+            'status'  => "error",
+            'message' => "Invalid Credentials"
+        ]);
+        exit;
+    }
 } else {
     echo json_encode([
         'status'  => "error",

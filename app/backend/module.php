@@ -1,6 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php'; // adjust path if necessary
+use OTPHP\TOTP;
+
 include 'conn.php';
+
 class Modules extends Connection
 {
     private $sql;
@@ -115,8 +119,6 @@ class Modules extends Connection
         }
     }
 
-
-
     // New function for user login that checks if the user is verified
     public function login($email, $password)
     {
@@ -163,7 +165,6 @@ class Modules extends Connection
         return $this->stmt->execute();
     }
 
-
     // Update password for a user
     public function updatePassword($user_id, $new_password)
     {
@@ -208,7 +209,6 @@ class Modules extends Connection
         return $this->stmt->execute();
     }
 
-
     // Get user deposits
     public function getUserDeposits($user_id)
     {
@@ -245,7 +245,6 @@ class Modules extends Connection
         }
         return 0;
     }
-
 
     // Make Withdrawal with transaction ID
     public function makeWithdrawal($user_id, $transac_id, $amount, $dol_val, $currency, $address, $type, $status = 'pending')
@@ -299,7 +298,6 @@ class Modules extends Connection
         $totalWithdrawals = $this->getTotalWithdrawals($user_id);
         return $totalDeposits - $totalWithdrawals;
     }
-
 
     // Create new ticket
     public function createTicket($user_id, $ticket_id, $fullname, $email, $subject, $file, $status, $message)
@@ -476,6 +474,7 @@ class Modules extends Connection
         }
         return 0;
     }
+
     // Get total interest wallet
     public function getTotalInterestWallet($user_id)
     {
@@ -488,6 +487,7 @@ class Modules extends Connection
         }
         return 0;
     }
+
     public function getTotalInterestReadings($user_id)
     {
         $this->sql = "SELECT SUM(earned) as total FROM investments WHERE user_id = :user_id AND status = 'active'";
@@ -553,7 +553,63 @@ class Modules extends Connection
         return $this->stmt->execute();
     }
 
+    // Generate and save a new 2FA secret for a user
+    public function generate2FASecret($user_id)
+    {
+        $totp = TOTP::create();  // You may customize period, digits, etc.
+        $secret = $totp->getSecret();
 
+        // Save the secret and set two_factor_enabled to false (0)
+        $this->sql = "UPDATE users SET two_factor_secret = :secret, two_factor_enabled = 1 WHERE id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':secret', $secret);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            return $secret;
+        }
+        return false;
+    }
+
+    // Verify a submitted TOTP code for a user
+    public function verify2FACode($user_id, $code)
+    {
+        $this->sql = "SELECT two_factor_secret FROM users WHERE id = :user_id LIMIT 1";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        if ($this->stmt->execute()) {
+            $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            if ($row && !empty($row['two_factor_secret'])) {
+                $secret = $row['two_factor_secret'];
+                $totp = TOTP::create($secret);
+                return $totp->verify($code);
+            }
+        }
+        return false;
+    }
+
+    // Enable 2FA for a user (if the code is valid)
+    public function enable2FA($user_id, $code)
+    {
+        if ($this->verify2FACode($user_id, $code)) {
+            $this->sql = "UPDATE users SET two_factor_enabled = '1' WHERE id = :user_id";
+            $this->stmt = $this->conn->prepare($this->sql);
+            $this->stmt->bindParam(':user_id', $user_id);
+            return $this->stmt->execute();
+        }
+        return false;
+    }
+
+    // Disable 2FA for a user (if the code is valid)
+    public function disable2FA($user_id, $code)
+    {
+        if ($this->verify2FACode($user_id, $code)) {
+            $this->sql = "UPDATE users SET two_factor_enabled = '0' WHERE id = :user_id";
+            $this->stmt = $this->conn->prepare($this->sql);
+            $this->stmt->bindParam(':user_id', $user_id);
+            return $this->stmt->execute();
+        }
+        return false;
+    }
 
     // ************** ADMIN SECTION ************** //
 
@@ -612,7 +668,6 @@ class Modules extends Connection
         $this->stmt->bindParam(':wallet_address', $wallet_address);
         return $this->stmt->execute();
     }
-
 
     // ************** ADMIN USER FUNCTIONS ************** //
 
@@ -751,16 +806,6 @@ class Modules extends Connection
         }
         return false;
     }
-
-    // public function getAllActiveInvestments()
-    // {
-    //     $this->sql = "SELECT * FROM investments WHERE status = 'active' ORDER BY start_date DESC";
-    //     $this->stmt = $this->conn->prepare($this->sql);
-    //     if ($this->stmt->execute()) {
-    //         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     }
-    //     return false;
-    // }
 
     // Update an investment (admin function)
     // $fields is an associative array of columns to update, e.g. ['status' => 'active']

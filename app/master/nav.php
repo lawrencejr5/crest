@@ -37,6 +37,7 @@
                                 <li><a href="<?= $root ?>/app/account/password-change">Change Password</a></li>
                                 <li><a href="<?= $root ?>/app/account/ticket">
                                         Support Ticket</a></li>
+                                <li><a href="<?= $root ?>/app/account/2fa"> 2fa</a></li>
                                 <li><a href="<?= $root ?>/app/logout"> Logout</a></li>
                             </ul>
                         </li>

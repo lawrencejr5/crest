@@ -49,6 +49,27 @@
     </div>
     <!-- account section end -->
 
+    <!-- Include this modal in your login page (index.php) -->
+    <div id="otpModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content modal-content-bg">
+          <div class="modal-header">
+            <h4 class="modal-title">Two Factor Authentication</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <form id="otpForm">
+            <div class="modal-body">
+              <p>Please enter the OTP code from your authenticator app.</p>
+              <input type="text" class="form-control" name="otp" placeholder="Enter OTP code">
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Verify OTP</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <!-- footer section start -->
     <?php include "../master/footer.php" ?>
     <!-- footer section end -->
@@ -77,20 +98,18 @@
       });
     }
 
-
     $(document).ready(function() {
       $("#loginForm").submit(function(e) {
         e.preventDefault();
         const submitButton = $("#loginForm button[type='submit']");
         submitButton.prop('disabled', true).text("Logging in...");
 
-        // Since the form uses "username" for the email, we extract its value accordingly
         const email = $("input[name='email']").val();
         const password = $("input[name='password']").val();
 
         $.ajax({
           type: "POST",
-          url: "../app/backend/actions/login.php", // Update the path if needed
+          url: "../app/backend/actions/login.php",
           data: {
             email: email,
             password: password
@@ -100,8 +119,12 @@
             if (res.status === "success") {
               notify("success", res.message);
               window.setTimeout(() => {
-                window.location.href = "../app/dashboard"; // Adjust the redirection URL as needed
-              }, 2000)
+                window.location.href = "../app/dashboard";
+              }, 2000);
+            } else if (res.status === "2fa_required") {
+              // Show OTP modal for additional verification
+              notify("info", res.message);
+              $("#otpModal").modal("show");
             } else {
               notify("error", res.message);
             }
@@ -110,6 +133,37 @@
           error: function(xhr, status, error) {
             notify("error", "Error: " + error);
             submitButton.prop('disabled', false).text("Login Now");
+          }
+        });
+      });
+
+      $("#otpForm").submit(function(e) {
+        e.preventDefault();
+        const otpBtn = $("#otpForm button[type='submit']");
+        otpBtn.prop('disabled', true).text("Verifying OTP...");
+        const otp = $("input[name='otp']").val();
+
+        $.ajax({
+          type: "POST",
+          url: "../app/backend/actions/login2fa.php",
+          data: {
+            code: otp
+          },
+          dataType: "json",
+          success: function(res) {
+            if (res.status === "success") {
+              notify("success", res.message);
+              window.setTimeout(() => {
+                window.location.href = "../app/dashboard";
+              }, 2000);
+            } else {
+              notify("error", res.message);
+            }
+            otpBtn.prop('disabled', false).text("Verify OTP");
+          },
+          error: function(xhr, status, error) {
+            notify("error", "Error: " + error);
+            otpBtn.prop('disabled', false).text("Verify OTP");
           }
         });
       });
