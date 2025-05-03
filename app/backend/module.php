@@ -873,6 +873,39 @@ class Modules extends Connection
         $this->stmt->bindParam(':ticket_id', $ticket_id);
         return $this->stmt->execute();
     }
+
+
+    // Set reset token and expiry (for reset_request)
+    public function setPasswordResetToken($user_id, $token, $expires)
+    {
+        $this->sql = "UPDATE users SET reset_token = :token, reset_expires = :expires WHERE id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':token', $token);
+        $this->stmt->bindParam(':expires', $expires);
+        $this->stmt->bindParam(':user_id', $user_id);
+        return $this->stmt->execute();
+    }
+
+    // Get user by reset token (for reset_password)
+    public function getUserByResetToken($token)
+    {
+        $this->sql = "SELECT * FROM users WHERE reset_token = :token LIMIT 1";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':token', $token);
+        if ($this->stmt->execute()) {
+            return $this->stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
+
+    // Clear reset token (optional)
+    public function clearResetToken($user_id)
+    {
+        $this->sql = "UPDATE users SET reset_token = NULL, reset_expires = NULL WHERE id = :user_id";
+        $this->stmt = $this->conn->prepare($this->sql);
+        $this->stmt->bindParam(':user_id', $user_id);
+        return $this->stmt->execute();
+    }
 }
 
 // Initializing class
