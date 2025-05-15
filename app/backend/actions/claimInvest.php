@@ -24,15 +24,14 @@ if (isset($_POST['amount'])) {
         exit();
     }
     // Attempt to create a deposit record for the user
-    $result = $modules->makeDeposit($user_id, $transac_id, $amount, $dol_val, $currency, $type, $address);
+    $result = $modules->makeDeposit($user_id, $transac_id, $amount, $dol_val, $currency, $type, $address, $status = "success");
     if ($result) {
-        if ($modules->resetInterestWallet($invest_id)) {
-            // Output success for user deposit
-            echo json_encode([
-                'status'  => 'success',
-                'message' => 'Investement returns claimed'
-            ]);
-        }
+        $modules->resetInterestWallet($invest_id);
+        // Output success for user deposit
+        echo json_encode([
+            'status'  => 'success',
+            'message' => 'Investement returns claimed'
+        ]);
     } else {
         echo json_encode([
             'status'  => 'error',

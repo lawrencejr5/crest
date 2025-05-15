@@ -215,7 +215,7 @@
 
       $(".claim_invest_form").on("submit", function(e) {
         e.preventDefault()
-        const submitButton = $(this).find(".claim-btn")
+        const submitButton = $(this).find("#claim-btn")
         submitButton.prop("disabled", true).text("Claiming...");
 
         let amount = $(this).find(".amount").val();
@@ -242,7 +242,7 @@
           success: function(response) {
             if (response.status === "success") {
               notify("success", response.message);
-              submitButton.prop('disabled', false).text("Claimed");
+              submitButton.prop('disabled', true).text("Claimed");
             } else {
               notify("error", response.message);
               submitButton.prop('disabled', false).text("Try again");
